@@ -15,13 +15,13 @@
     <div style="margin: auto"></div>
 
     <div class="header-part-right" style="color:#0B2B40;">
-      <router-link  style="color:#0B2B40;border: 1px solid #0B2B40;"
+      <!-- <router-link  style="color:#0B2B40;border: 1px solid #0B2B40;"
         v-if="currentUserPermissions && currentUserPermissions.includes('Pos_view')"
         class="btn btn-outline-primary tn-sm btn-rounded"
         to="/app/pos"
       >
       <span class="ul-btn__text ml-1" style="color: #0B2B40;">POS</span>
-      </router-link>
+      </router-link> -->
       <!-- Full screen toggle -->
       <i class="i-Full-Screen header-icon d-none d-sm-inline-block" @click="handleFullScreen"></i>
       <!-- Grid menu Dropdown -->
@@ -54,65 +54,12 @@
               <a @click="SetLocal('en')">
                 <i title="en" class="flag-icon flag-icon-squared flag-icon-gb"></i> English
               </a>
-              <a @click="SetLocal('fr')">
-                <i title="fr" class="flag-icon flag-icon-squared flag-icon-fr"></i>
-                <span class="title-lang">French</span>
-              </a>
+         
               <a @click="SetLocal('ar')">
                 <i title="sa" class="flag-icon flag-icon-squared flag-icon-sa"></i>
                 <span class="title-lang">Arabic</span>
               </a>
-              <a @click="SetLocal('tur')">
-                <i title="sa" class="flag-icon flag-icon-squared flag-icon-tr"></i>
-                <span class="title-lang">Turkish</span>
-              </a>
-
-              <a @click="SetLocal('sm_ch')">
-                <i title="sa" class="flag-icon flag-icon-squared flag-icon-cn"></i>
-                <span class="title-lang">Simplified Chinese</span>
-              </a>
-
-              <a @click="SetLocal('thai')">
-                <i title="sa" class="flag-icon flag-icon-squared flag-icon-th"></i>
-                <span class="title-lang">Thaï</span>
-              </a>
-
-              <a @click="SetLocal('hn')">
-                <i title="sa" class="flag-icon flag-icon-squared flag-icon-in"></i>
-                <span class="title-lang">Hindi</span>
-              </a>
-
-              <a @click="SetLocal('de')">
-                <i title="de" class="flag-icon flag-icon-squared flag-icon-de"></i>
-                <span class="title-lang">German</span>
-              </a>
-              <a @click="SetLocal('es')">
-                <i title="es" class="flag-icon flag-icon-squared flag-icon-es"></i>
-                <span class="title-lang">Spanish</span>
-              </a>
-              <a @click="SetLocal('it')">
-                <i title="it" class="flag-icon flag-icon-squared flag-icon-it"></i>
-                <span class="title-lang">Italien</span>
-              </a>
-              <a @click="SetLocal('Ind')">
-                <i title="sa" class="flag-icon flag-icon-squared flag-icon-id"></i>
-                <span class="title-lang">Indonesian</span>
-              </a>
-
-              <a @click="SetLocal('tr_ch')">
-                <i title="sa" class="flag-icon flag-icon-squared flag-icon-cn"></i>
-                <span class="title-lang">Traditional Chinese</span>
-              </a>
-
-              <a @click="SetLocal('ru')">
-                <i title="sa" class="flag-icon flag-icon-squared flag-icon-ru"></i>
-                <span class="title-lang">Russian</span>
-              </a>
-
-              <a @click="SetLocal('vn')">
-                <i title="sa" class="flag-icon flag-icon-squared flag-icon-vn"></i>
-                <span class="title-lang">Vietnamese</span>
-              </a>
+     
             </div>
           </vue-perfect-scrollbar>
         </b-dropdown>
