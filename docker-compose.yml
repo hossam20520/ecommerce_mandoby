@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:8000"
+      # - "443:443"
+    volumes:
+      # - ./eduz-app.com.crt:/etc/ssl/certs/eduz-app.com.crt
+      # - ./eduz-app.com.key:/etc/ssl/private/eduz-app.com.key
+      # - ./000-default.conf:/etc/apache2/sites-available/000-default.conf
+      # - ./default-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
+ 
+      
+
+      - .:/var/www/html
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ecommerce_prod
+      DB_USERNAME: root
+      DB_PASSWORD: root@8441144$vva
+    command: php artisan serve --host=0.0.0.0 --port=8000
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root@8441144$vva
+      MYSQL_DATABASE: ecommerce_prod
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 3020:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root@8441144$vva
+
+volumes:
+  db_data:
