@@ -72,6 +72,6 @@ RUN chown -R www-data:www-data /var/www/html \
     # && chown -R www-data:www-data storage/framework/sessions \
     # && chmod -R 775 storage/framework/sessions \
     # && chown -R www-data:www-data bootstrap/cache \
-    && php /var/www/html/artisan key:generate
+    # && php /var/www/html/artisan key:generate
 
 WORKDIR /var/www/html
