@@ -93,52 +93,52 @@ if ($installed === false) {
 
 
     
-    Route::get('/language/{lang}', function (Request $request , $lang) {
+    // Route::get('/language/{lang}', function (Request $request , $lang) {
 
-        if( $lang){
+    //     if( $lang){
             
-            if( $lang == "ar" ||  $lang == "en" ){
-            App::setLocale( $lang);
-            session()->put('locale',  $lang); 
+    //         if( $lang == "ar" ||  $lang == "en" ){
+    //         App::setLocale( $lang);
+    //         session()->put('locale',  $lang); 
 
-            }
-        }
-        return redirect()->route('home'); 
-        // return  redirect()->back(); 
-        // return back();   
-    })->name('change_lang');;
+    //         }
+    //     }
+    //     return redirect()->route('home'); 
+    //     // return  redirect()->back(); 
+    //     // return back();   
+    // })->name('change_lang');;
 
 
 
-    Route::get('/profile' ,     'HomeControllerFront@profile')->name('profile');
+    // Route::get('/profile' ,     'HomeControllerFront@profile')->name('profile');
 
-    Route::get('/vendor/{id}' ,     'HomeControllerFront@vendor')->name('vendor');
+    // Route::get('/vendor/{id}' ,     'HomeControllerFront@vendor')->name('vendor');
 
     
-    Route::get('/' ,     'HomeControllerFront@home')->name('home');
+    // Route::get('/' ,     'HomeControllerFront@home')->name('home');
 
-    Route::get('/cart' ,     'HomeControllerFront@cart')->name('cart');
+    // Route::get('/cart' ,     'HomeControllerFront@cart')->name('cart');
         
 
-    Route::get('/shop' ,     'HomeControllerFront@shop')->name('shop');
+    // Route::get('/shop' ,     'HomeControllerFront@shop')->name('shop');
 
 
-    Route::get('/product/{id}' ,     'HomeControllerFront@product')->name('product');
+    // Route::get('/product/{id}' ,     'HomeControllerFront@product')->name('product');
      
-    Route::get('/search' ,     'HomeControllerFront@search')->name('search');
+    // Route::get('/search' ,     'HomeControllerFront@search')->name('search');
                                                
-    Route::get('/wishlist' ,     'HomeControllerFront@wishlist')->name('wishlist');
+    // Route::get('/wishlist' ,     'HomeControllerFront@wishlist')->name('wishlist');
 
 
-    Route::get('/checkout' ,     'HomeControllerFront@checkout')->name('checkout');
+    // Route::get('/checkout' ,     'HomeControllerFront@checkout')->name('checkout');
 
-    Route::get('/contact' ,     'HomeControllerFront@contact')->name('contact');
-
-
-    Route::get('/auth/login' ,     'HomeControllerFront@login')->name('login');
+    // Route::get('/contact' ,     'HomeControllerFront@contact')->name('contact');
 
 
-       Route::get('/auth/register' ,     'HomeControllerFront@register')->name('register');
+    // Route::get('/auth/login' ,     'HomeControllerFront@login')->name('login');
+
+
+    //    Route::get('/auth/register' ,     'HomeControllerFront@register')->name('register');
 
 
     // Route::get('/cart', function () {
@@ -180,9 +180,9 @@ if ($installed === false) {
     //     return view("front.login");
     // })->name('login');
 
-    Route::get('/chat', function () {
-        return view("front_old.chat");
-    })->name('chat');
+    // Route::get('/chat', function () {
+    //     return view("front_old.chat");
+    // })->name('chat');
 
 
     // Route::get('/messages', function () {
