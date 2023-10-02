@@ -69,9 +69,9 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chown -R www-data:www-data public \
     && chmod -R 775 public \
-    && chown -R www-data:www-data storage/framework/sessions \
-    && chmod -R 775 storage/framework/sessions \
-    && chown -R www-data:www-data bootstrap/cache \
+    # && chown -R www-data:www-data storage/framework/sessions \
+    # && chmod -R 775 storage/framework/sessions \
+    # && chown -R www-data:www-data bootstrap/cache \
     && php /var/www/html/artisan key:generate
 
 WORKDIR /var/www/html
