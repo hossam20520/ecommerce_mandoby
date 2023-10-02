@@ -822,6 +822,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1575,50 +1581,6 @@ var render = function () {
                       value:
                         _vm.currentUserPermissions &&
                         (_vm.currentUserPermissions.includes(
-                          "Purchases_view"
-                        ) ||
-                          _vm.currentUserPermissions.includes("Purchases_add")),
-                      expression:
-                        "currentUserPermissions && (currentUserPermissions.includes('Purchases_view') \n                      || currentUserPermissions.includes('Purchases_add'))",
-                    },
-                  ],
-                  staticClass: "nav-item",
-                  class: { active: _vm.selectedParentMenu == "purchases" },
-                  attrs: { "data-item": "purchases", "data-submenu": true },
-                  on: { mouseenter: _vm.toggleSubMenu },
-                },
-                [
-                  _c(
-                    "a",
-                    { staticClass: "nav-item-hold", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        attrs: {
-                          src: "https://cdn-icons-png.flaticon.com/512/1019/1019607.png",
-                          width: "50%",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "nav-text" }, [
-                        _vm._v(_vm._s(_vm.$t("Purchases"))),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "triangle" }),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value:
-                        _vm.currentUserPermissions &&
-                        (_vm.currentUserPermissions.includes(
                           "Customers_view"
                         ) ||
                           _vm.currentUserPermissions.includes(
@@ -1700,79 +1662,6 @@ var render = function () {
                       _vm._v(" "),
                       _c("span", { staticClass: "nav-text" }, [
                         _vm._v(_vm._s(_vm.$t("Settings"))),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "triangle" }),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value:
-                        _vm.currentUserPermissions &&
-                        (_vm.currentUserPermissions.includes(
-                          "Reports_payments_Sales"
-                        ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Reports_payments_Purchases"
-                          ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Reports_payments_Sale_Returns"
-                          ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Reports_payments_purchase_Return"
-                          ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Warehouse_report"
-                          ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Reports_profit"
-                          ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Reports_purchase"
-                          ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Reports_quantity_alerts"
-                          ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Reports_sales"
-                          ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Reports_suppliers"
-                          ) ||
-                          _vm.currentUserPermissions.includes(
-                            "Reports_customers"
-                          )),
-                      expression:
-                        "currentUserPermissions && \n                   (currentUserPermissions.includes('Reports_payments_Sales') \n                   || currentUserPermissions.includes('Reports_payments_Purchases')\n                   || currentUserPermissions.includes('Reports_payments_Sale_Returns')\n                   || currentUserPermissions.includes('Reports_payments_purchase_Return')\n                   || currentUserPermissions.includes('Warehouse_report')\n                   || currentUserPermissions.includes('Reports_profit')\n                   || currentUserPermissions.includes('Reports_purchase') \n                   || currentUserPermissions.includes('Reports_quantity_alerts')\n                   || currentUserPermissions.includes('Reports_sales') \n                   || currentUserPermissions.includes('Reports_suppliers')\n                   || currentUserPermissions.includes('Reports_customers'))",
-                    },
-                  ],
-                  staticClass: "nav-item",
-                  class: { active: _vm.selectedParentMenu == "reports" },
-                  attrs: { "data-item": "reports", "data-submenu": true },
-                  on: { mouseenter: _vm.toggleSubMenu },
-                },
-                [
-                  _c(
-                    "a",
-                    { staticClass: "nav-item-hold", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        attrs: {
-                          src: "https://cdn-icons-png.flaticon.com/512/2912/2912794.png",
-                          width: "50%",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "nav-text" }, [
-                        _vm._v(_vm._s(_vm.$t("Reports"))),
                       ]),
                     ]
                   ),
@@ -2706,67 +2595,7 @@ var render = function () {
                           _c("i", { staticClass: "dd-arrow i-Arrow-Down" }),
                         ]),
                         _vm._v(" "),
-                        _c("ul", { staticClass: "submenu" }, [
-                          _vm.currentUserPermissions &&
-                          _vm.currentUserPermissions.includes(
-                            "Reports_payments_Purchases"
-                          )
-                            ? _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      attrs: {
-                                        tag: "a",
-                                        to: "/app/reports/payments_purchase",
-                                      },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "nav-icon i-ID-Card",
-                                      }),
-                                      _vm._v(" "),
-                                      _c("span", { staticClass: "item-name" }, [
-                                        _vm._v(_vm._s(_vm.$t("Purchases"))),
-                                      ]),
-                                    ]
-                                  ),
-                                ],
-                                1
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.currentUserPermissions &&
-                          _vm.currentUserPermissions.includes(
-                            "Reports_payments_Sales"
-                          )
-                            ? _c(
-                                "li",
-                                [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      attrs: {
-                                        tag: "a",
-                                        to: "/app/reports/payments_sale",
-                                      },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "nav-icon i-ID-Card",
-                                      }),
-                                      _vm._v(" "),
-                                      _c("span", { staticClass: "item-name" }, [
-                                        _vm._v(_vm._s(_vm.$t("Sales"))),
-                                      ]),
-                                    ]
-                                  ),
-                                ],
-                                1
-                              )
-                            : _vm._e(),
-                        ]),
+                        _c("ul", { staticClass: "submenu" }),
                       ]
                     )
                   : _vm._e(),

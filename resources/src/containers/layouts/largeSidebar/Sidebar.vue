@@ -97,7 +97,7 @@
             <div class="triangle"></div>
           </li>
          
-          <li
+          <!-- <li
             v-show="currentUserPermissions && (currentUserPermissions.includes('Purchases_view') 
                         || currentUserPermissions.includes('Purchases_add'))"
             @mouseenter="toggleSubMenu"
@@ -111,7 +111,7 @@
               <span class="nav-text">{{$t('Purchases')}}</span>
             </a>
             <div class="triangle"></div>
-          </li>
+          </li> -->
           <!-- <li
             v-show="currentUserPermissions && (currentUserPermissions.includes('Sale_Returns_view') 
                         || currentUserPermissions.includes('Sale_Returns_add'))"
@@ -166,7 +166,7 @@
           </li>
          
           
-          <li
+          <!-- <li
             v-show="currentUserPermissions && 
                      (currentUserPermissions.includes('Reports_payments_Sales') 
                      || currentUserPermissions.includes('Reports_payments_Purchases')
@@ -190,7 +190,10 @@
               <span class="nav-text">{{$t('Reports')}}</span>
             </a>
             <div class="triangle"></div>
-          </li>        
+          </li> -->
+          
+          
+
         </ul>
       </div>
     </vue-perfect-scrollbar>
@@ -600,10 +603,13 @@
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('backup')"
           >
+          
             <router-link tag="a" class to="/app/settings/Backup">
               <i class="nav-icon i-Data-Backup"></i>
               <span class="item-name">{{$t('Backup')}}</span>
             </router-link>
+
+
           </li>
 
            <!-- <li
@@ -637,22 +643,22 @@
               <i class="dd-arrow i-Arrow-Down"></i>
             </a>
             <ul class="submenu">
-              <li
+              <!-- <li
                 v-if="currentUserPermissions && currentUserPermissions.includes('Reports_payments_Purchases')"
               >
                 <router-link tag="a" class to="/app/reports/payments_purchase">
                   <i class="nav-icon i-ID-Card"></i>
                   <span class="item-name">{{$t('Purchases')}}</span>
                 </router-link>
-              </li>
-              <li
+              </li> -->
+              <!-- <li
                 v-if="currentUserPermissions && currentUserPermissions.includes('Reports_payments_Sales')"
               >
                 <router-link tag="a" class to="/app/reports/payments_sale">
                   <i class="nav-icon i-ID-Card"></i>
                   <span class="item-name">{{$t('Sales')}}</span>
                 </router-link>
-              </li>
+              </li> -->
               <!-- <li
                 v-if="currentUserPermissions && currentUserPermissions.includes('Reports_payments_Sale_Returns')"
               >

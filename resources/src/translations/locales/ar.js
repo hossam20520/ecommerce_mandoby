@@ -2,7 +2,7 @@
 
 
 export default {
-
+    Discount:'البرومو كود',
     AddShop:'اضافة متجر',
     en_Name_shop:'متجر بالانجليزية',
     ar_Name_shop:'اسم المتجر بالعربي',
@@ -412,7 +412,7 @@ export default {
     ReturnsInvoices: 'فواتير المرتجعات',
     ReturnsInvoicesData: 'بيانات فواتير المرتجعات',
     ShowAll: 'إظهار كافة سجلات كافة المستخدمين',
-    Discount: 'الخصم',
+    
     OrderTax: 'ضريبة الطلب',
     Shipping: 'الشحن',
     ManagementCurrencies: 'ادارة العملات',

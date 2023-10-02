@@ -1,6 +1,7 @@
 //Language Anglais
 
 export default {
+    Discount:'Promo Code',
     AddShop:'Add Shop',
     en_Name_shop:'En Shop Name',
     ar_Name_shop:'Ar Shop Name',
@@ -421,7 +422,7 @@ export default {
     ReturnsInvoices: 'Returns Invoices',
     ReturnsInvoicesData: 'Returns Invoices Data',
     ShowAll: 'View all records of all Users',
-    Discount: 'Discount',
+ 
     OrderTax: 'Order Tax',
     Shipping: 'Shipping',
     CompanyName: 'Company Name',
