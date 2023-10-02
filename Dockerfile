@@ -68,7 +68,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chown -R www-data:www-data /var/www/html/storage \
     && chmod -R 775 /var/www/html/storage \
     && chown -R www-data:www-data public \
-    && chmod -R 775 public \
+    && chmod -R 775 public 
     # && chown -R www-data:www-data storage/framework/sessions \
     # && chmod -R 775 storage/framework/sessions \
     # && chown -R www-data:www-data bootstrap/cache \
