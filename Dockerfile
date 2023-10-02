@@ -27,6 +27,8 @@ RUN apt-get update \
     && a2enmod \
         rewrite
 
+        
+RUN docker-php-ext-install bcmath
 # COPY eduz-app.com.crt /etc/ssl/certs/eduz-app.com.crt
 # COPY eduz-app.com.key /etc/ssl/private/eduz-app.com.key
 # COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
@@ -68,10 +70,10 @@ RUN chown -R www-data:www-data /var/www/html \
     && chown -R www-data:www-data /var/www/html/storage \
     && chmod -R 775 /var/www/html/storage \
     && chown -R www-data:www-data public \
-    && chmod -R 775 public 
+    && chmod -R 775 public \
     # && chown -R www-data:www-data storage/framework/sessions \
     # && chmod -R 775 storage/framework/sessions \
     # && chown -R www-data:www-data bootstrap/cache \
-    # && php /var/www/html/artisan key:generate
+    && php /var/www/html/artisan key:generate
 
 WORKDIR /var/www/html
