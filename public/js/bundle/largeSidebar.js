@@ -2701,7 +2701,7 @@ var render = function () {
     "div",
     {
       staticClass: "main-header",
-      staticStyle: { "background-color": "#F2BE22" },
+      staticStyle: { "background-color": "#0065bf" },
     },
     [
       _c(
@@ -2710,10 +2710,10 @@ var render = function () {
         [
           _c("router-link", { attrs: { to: "/app/dashboard" } }, [
             _c("img", {
+              staticStyle: { width: "250px" },
               attrs: {
                 src: "/images/" + _vm.currentUser.logo,
                 alt: "",
-                width: "250",
                 height: "60",
               },
             }),
