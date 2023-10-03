@@ -2713,7 +2713,7 @@ var render = function () {
               attrs: {
                 src: "/images/" + _vm.currentUser.logo,
                 alt: "",
-                width: "60",
+                width: "250",
                 height: "60",
               },
             }),

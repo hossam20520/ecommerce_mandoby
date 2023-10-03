@@ -248,7 +248,7 @@ class SettingsController extends Controller
         $this->authorizeForUser($request->user('api'), 'view', Setting::class);
 
         
-        // $helpers = new helpers();
+        $helpers = new helpers();
         // if( $helpers->IsMerchant()){
 
         //     $shop_id = $helpers->ShopID();

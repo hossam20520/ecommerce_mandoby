@@ -2,7 +2,7 @@
   <div class="main-header" style="background-color: #F2BE22;" >
     <div class="logo">
        <router-link to="/app/dashboard">
-        <img :src="'/images/'+currentUser.logo" alt width="60" height="60">
+        <img :src="'/images/'+currentUser.logo" alt width="250" height="60">
        </router-link>
     </div>
 
