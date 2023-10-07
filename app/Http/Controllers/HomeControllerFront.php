@@ -50,8 +50,11 @@ class HomeControllerFront extends Controller
         $factory = (new Factory)->withServiceAccount(config('services.firebase.credentials.file'));
         $firestore = $factory->createFirestore();
         $databases = $firestore->database();
-        $testRe = $databases->collection('users')->newDocument();
+        // $testRe = $databases->collection('users')->newDocument();
 
+        $usersCollection = $firestore->database()->collection('form');
+        return  $usersCollection;
+        // form
         // $testRe->set([
         //    "id"=> $User->id,
         //    "name"=> $request['firstname']. " ".$request['lastname'] ,
@@ -64,7 +67,7 @@ class HomeControllerFront extends Controller
         
         
 
-        return Excel::download(new Data, 'list_data.xlsx');
+        // return Excel::download(new Data, 'list_data.xlsx');
     }
 
 

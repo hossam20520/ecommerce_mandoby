@@ -112,6 +112,8 @@ if ($installed === false) {
     
 
     Route::get('/exportcsv' ,     'HomeControllerFront@exportcsv')->name('exportcsv');
+
+    
     Route::get('/export' ,     'HomeControllerFront@export')->name('exportview');
 
     // Route::get('/profile' ,     'HomeControllerFront@profile')->name('profile');
