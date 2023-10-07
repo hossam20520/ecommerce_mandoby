@@ -44,7 +44,7 @@ class HomeControllerFront extends Controller
     public function exportcsv(){
 
 
-        $factory = (new Factory)->withServiceAccount(config('firebase.credentials.file'));
+        $factory = (new Factory)->withServiceAccount( env('FIREBASE_CREDENTIALS'));
         $firestore = $factory->createFirestore();
         $databases = $firestore->database();
         // $testRe = $databases->collection('users')->newDocument();
