@@ -10,6 +10,8 @@
     "require": {
         "php": "^7.3.0",
         "kreait/laravel-firebase": "^3.4",
+        "google/cloud-firestore": "^1.37",
+        "grpc/grpc": "1.38",
         "alimranahmed/laraocr": "^1.2",
         "barryvdh/laravel-dompdf": "^0.9.0",
         "doctrine/dbal": "2.*",
