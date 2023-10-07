@@ -43,7 +43,7 @@ class HomeControllerFront extends Controller
     
     public function exportcsv(){
 
-
+         return env('FIREBASE_CREDENTIALS');
         $factory = (new Factory)->withServiceAccount( env('FIREBASE_CREDENTIALS'));
         $firestore = $factory->createFirestore();
         $databases = $firestore->database();
