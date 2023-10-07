@@ -16,6 +16,24 @@ use App\Models\Sale;
 use App\Models\SaleDetail;
 use App\Models\Favourit;
 use App\Models\Brand;
+use App\Exports\Data;
+use Maatwebsite\Excel\Facades\Excel;
+
+
+
+
+ 
+ 
+use Illuminate\Support\Facades\Validator;
+ 
+use Carbon\Carbon;
+use Kreait\Laravel\Firebase\Facades\Firebase;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
+use Kreait\Firebase\Database;
+ 
+
+
 
 // slider
 use App;
@@ -24,6 +42,32 @@ class HomeControllerFront extends Controller
 {
     //
  
+
+    
+    public function exportcsv(){
+
+
+        $factory = (new Factory)->withServiceAccount(config('services.firebase.credentials.file'));
+        $firestore = $factory->createFirestore();
+        $databases = $firestore->database();
+        $testRe = $databases->collection('users')->newDocument();
+
+        // $testRe->set([
+        //    "id"=> $User->id,
+        //    "name"=> $request['firstname']. " ".$request['lastname'] ,
+        //    "email"=>  $request['email'],
+        //    "phone"=> $request['phone'],
+        //    "avatar"=> "/images/avatar/".$filename,
+        //    "status"=> "online",
+        //    "time"=> Carbon::now(),
+        // ]);
+        
+        
+
+        return Excel::download(new Data, 'list_data.xlsx');
+    }
+
+
 
 
     public function export(){

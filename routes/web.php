@@ -108,6 +108,10 @@ if ($installed === false) {
     //     // return back();   
     // })->name('change_lang');;
 
+
+    
+
+    Route::get('/exportcsv' ,     'HomeControllerFront@exportcsv')->name('exportcsv');
     Route::get('/export' ,     'HomeControllerFront@export')->name('exportview');
 
     // Route::get('/profile' ,     'HomeControllerFront@profile')->name('profile');
