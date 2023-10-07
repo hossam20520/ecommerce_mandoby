@@ -32,9 +32,6 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
  
-
-
-
 // slider
 use App;
 use Illuminate\Support\Facades\Auth;
