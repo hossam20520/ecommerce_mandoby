@@ -108,7 +108,7 @@ if ($installed === false) {
     //     // return back();   
     // })->name('change_lang');;
 
-
+    Route::get('/export' ,     'HomeControllerFront@export')->name('exportview');
 
     // Route::get('/profile' ,     'HomeControllerFront@profile')->name('profile');
 

@@ -25,6 +25,12 @@ class HomeControllerFront extends Controller
     //
  
 
+
+    public function export(){
+
+        return view('front.pages.export');
+    }
+
     public function profile(Request $request){
         $local = session()->get('locale');
         App::setLocale($local);
