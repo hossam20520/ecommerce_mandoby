@@ -33,17 +33,17 @@
           <button class="btn btn-danger" @click="delete_by_selected()">{{$t('Del')}}</button>
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
-          <!-- <b-button variant="outline-info m-1" size="sm" v-b-toggle.sidebar-right>
+          <b-button variant="outline-info m-1" size="sm" v-b-toggle.sidebar-right>
             <i class="i-Filter-2"></i>
             {{ $t("Filter") }}
-          </b-button> -->
-          <!-- <b-button @click="Product_PDF()" size="sm" variant="outline-success m-1">
+          </b-button>
+          <b-button @click="Product_PDF()" size="sm" variant="outline-success m-1">
             <i class="i-File-Copy"></i> PDF
-          </b-button> -->
+          </b-button>
           <b-button @click="Product_Excel()" size="sm" variant="outline-danger m-1">
             <i class="i-File-Excel"></i> EXCEL
           </b-button>
-          <!-- <b-button
+          <b-button
             @click="Show_import_products()"
             size="sm"
             variant="info m-1"
@@ -51,7 +51,7 @@
           >
             <i class="i-Download"></i>
             {{ $t("import_products") }}
-          </b-button> -->
+          </b-button>
           <router-link
             class="btn-sm btn btn-primary btn-icon m-1"
             v-if="currentUserPermissions && currentUserPermissions.includes('products_add')"

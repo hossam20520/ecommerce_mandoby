@@ -29,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Passport::hashClientSecrets();
         Schema::defaultStringLength(191);
          /*ADD THIS LINES*/
         $this->commands([

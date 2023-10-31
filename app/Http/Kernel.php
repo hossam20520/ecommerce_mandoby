@@ -25,7 +25,6 @@ class Kernel extends HttpKernel
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
         // \App\Http\Middleware\AddAuthHeader::class,
-        \App\Http\Middleware\LanguageManager::class,
     ];
 
     protected $middleware = [
@@ -79,7 +78,5 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'Is_Active' => \App\Http\Middleware\Is_Active::class,
-
-        'IS_Merchant' => \App\Http\Middleware\IsMerchant::class,
     ];
 }

@@ -16,7 +16,6 @@ class CreatePaymentWithCreditCardTable extends Migration {
 		Schema::create('payment_with_credit_card', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('id', true);
 			$table->integer('payment_id');
 			$table->integer('customer_id');

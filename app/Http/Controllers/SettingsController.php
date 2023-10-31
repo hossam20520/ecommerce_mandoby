@@ -8,8 +8,6 @@ use App\Models\Setting;
 use App\Models\PosSetting;
 use App\Models\Client;
 use App\Models\Warehouse;
-use App\Models\Shop;
-use App\utils\helpers;
 use File;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\Request;
@@ -64,29 +62,15 @@ class SettingsController extends Controller
             $warehouse = null;
         }
 
-        if ($request['value'] != 'null') {
-            $value = $request['value'];
-        } else {
-            $value = 0;
-        }
-
-        
-        if ($request['percentage'] != 'null') {
-            $percentage = $request['percentage'];
-        } else {
-            $percentage = 0;
-        }
-
         if ($request['default_language'] != 'null') {
             $default_language = $request['default_language'];
         } else {
             $default_language = 'en';
         }
         Setting::whereId($id)->update([
-            'value'=> $value,
-            'percentage'=> $percentage,
             'currency_id' => $currency,
             'client_id' => $client,
+            'warehouse_id' => $warehouse,
             'email' => $request['email'],
             'default_language' =>  $default_language,
             'CompanyName' => $request['CompanyName'],
@@ -247,20 +231,7 @@ class SettingsController extends Controller
     {
         $this->authorizeForUser($request->user('api'), 'view', Setting::class);
 
-        
-        $helpers = new helpers();
-        // if( $helpers->IsMerchant()){
-
-        //     $shop_id = $helpers->ShopID();
-        //     $settings = Setting::where('deleted_at', '=', null)->where('shop_id' ,  $shop_id)->first();
-
-        // }else{
-            
-          
-        // }
-
         $settings = Setting::where('deleted_at', '=', null)->first();
-       
         if ($settings) {
             if ($settings->currency_id) {
                 if (Currency::where('id', $settings->currency_id)->where('deleted_at', '=', null)->first()) {
@@ -273,30 +244,11 @@ class SettingsController extends Controller
             }
 
             if ($settings->client_id) {
-                if( $helpers->IsMerchant()){
-
-                    $shop_id = $helpers->ShopID();
-
-                    if (Client::where('id', $settings->client_id)->where('deleted_at', '=', null)->where('shop_id' , $shop_id  )->first()) {
-                        $item['client_id'] = $settings->client_id;
-                    } else {
-                        $item['client_id'] = '';
-                    }
-
-                }else{
-
-                    if (Client::where('id', $settings->client_id)->where('deleted_at', '=', null)->where('shop_id' , 0  )->first()) {
-                        $item['client_id'] = $settings->client_id;
-                    } else {
-                        $item['client_id'] = '';
-                    }
-
-
+                if (Client::where('id', $settings->client_id)->where('deleted_at', '=', null)->first()) {
+                    $item['client_id'] = $settings->client_id;
+                } else {
+                    $item['client_id'] = '';
                 }
-                
-      
-
-
             } else {
                 $item['client_id'] = '';
             }
@@ -313,9 +265,6 @@ class SettingsController extends Controller
 
             $item['id'] = $settings->id;
             $item['email'] = $settings->email;
-            $item['value'] = $settings->value;
-            $item['percentage'] = $settings->percentage;
-
             $item['CompanyName'] = $settings->CompanyName;
             $item['CompanyPhone'] = $settings->CompanyPhone;
             $item['CompanyAdress'] = $settings->CompanyAdress;

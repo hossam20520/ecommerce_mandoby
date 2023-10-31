@@ -19,7 +19,6 @@ class SettingSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'currency_id' => 1,
                 'client_id' => 1,
-                'shop_id' => 0,
                 'warehouse_id' => Null,
                 'CompanyName' => 'coopxl',
                 'CompanyPhone' => '01111788511',

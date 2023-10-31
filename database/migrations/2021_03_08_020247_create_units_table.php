@@ -17,7 +17,6 @@ class CreateUnitsTable extends Migration {
 		{
 			$table->engine = 'InnoDB';
 			$table->integer('id', true);
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->string('name', 192);
 			$table->string('ShortName', 192);
 			$table->integer('base_unit')->nullable()->index('base_unit');

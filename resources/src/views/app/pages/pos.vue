@@ -51,18 +51,65 @@
                         <a @click="SetLocal('en')">
                           <i title="en" class="flag-icon flag-icon-squared flag-icon-gb"></i> English
                         </a>
-                 
+                        <a @click="SetLocal('fr')">
+                          <i title="fr" class="flag-icon flag-icon-squared flag-icon-fr"></i>
+                          <span class="title-lang">French</span>
+                        </a>
                         <a @click="SetLocal('ar')">
                           <i title="sa" class="flag-icon flag-icon-squared flag-icon-sa"></i>
                           <span class="title-lang">Arabic</span>
                         </a>
-       
+                        <a @click="SetLocal('tur')">
+                          <i title="sa" class="flag-icon flag-icon-squared flag-icon-tr"></i>
+                          <span class="title-lang">Turkish</span>
+                        </a>
 
-                
+                        <a @click="SetLocal('sm_ch')">
+                          <i title="sa" class="flag-icon flag-icon-squared flag-icon-cn"></i>
+                          <span class="title-lang">Simplified Chinese</span>
+                        </a>
 
-                  
+                        <a @click="SetLocal('thai')">
+                          <i title="sa" class="flag-icon flag-icon-squared flag-icon-tw"></i>
+                          <span class="title-lang">Thaï</span>
+                        </a>
 
-              
+                        <a @click="SetLocal('hn')">
+                          <i title="sa" class="flag-icon flag-icon-squared flag-icon-in"></i>
+                          <span class="title-lang">Hindi</span>
+                        </a>
+
+                        <a @click="SetLocal('de')">
+                          <i title="de" class="flag-icon flag-icon-squared flag-icon-de"></i>
+                          <span class="title-lang">German</span>
+                        </a>
+                        <a @click="SetLocal('es')">
+                          <i title="es" class="flag-icon flag-icon-squared flag-icon-es"></i>
+                          <span class="title-lang">Spanish</span>
+                        </a>
+                        <a @click="SetLocal('it')">
+                          <i title="it" class="flag-icon flag-icon-squared flag-icon-it"></i>
+                          <span class="title-lang">Italien</span>
+                        </a>
+                        <a @click="SetLocal('Ind')">
+                          <i title="sa" class="flag-icon flag-icon-squared flag-icon-id"></i>
+                          <span class="title-lang">Indonesian</span>
+                        </a>
+
+                        <a @click="SetLocal('tr_ch')">
+                          <i title="sa" class="flag-icon flag-icon-squared flag-icon-cn"></i>
+                          <span class="title-lang">Traditional Chinese</span>
+                        </a>
+
+                        <a @click="SetLocal('ru')">
+                          <i title="sa" class="flag-icon flag-icon-squared flag-icon-ru"></i>
+                          <span class="title-lang">Russian</span>
+                        </a>
+
+                        <a @click="SetLocal('vn')">
+                          <i title="sa" class="flag-icon flag-icon-squared flag-icon-vn"></i>
+                          <span class="title-lang">Vietnamese</span>
+                        </a>
                       </div>
                     </vue-perfect-scrollbar>
                   </b-dropdown>
@@ -125,18 +172,18 @@
                             :options="clients.map(clients => ({label: clients.name, value: clients.id}))"
                           />
                           <b-input-group-append>
-                            <!-- <b-button variant="primary" @click="New_Client()">
+                            <b-button variant="primary" @click="New_Client()">
                               <span>
                                 <i class="i-Add-User"></i>
                               </span>
-                            </b-button> -->
+                            </b-button>
                           </b-input-group-append>
                         </b-input-group>
                       </validation-provider>
                     </b-col>
 
                     <!-- warehouse -->
-                    <b-col lg="12" md="12" sm="12"  v-if="CurrentType && CurrentType.includes('owner')" >
+                    <b-col lg="12" md="12" sm="12">
                       <validation-provider name="warehouse" :rules="{ required: true}">
                         <b-form-group slot-scope="{ valid, errors }" class="mt-2">
                           <v-select
@@ -471,18 +518,18 @@
         <b-col md="7">
           <b-card class="list-grid">
             <b-row>
-              <!-- <b-col md="6">
+              <b-col md="6">
                 <button v-b-toggle.sidebar-category class="btn btn-outline-info mt-1 btn-block">
                   <i class="i-Two-Windows"></i>
                   {{$t('ListofCategory')}}
                 </button>
-              </b-col> -->
-              <!-- <b-col md="6">
+              </b-col>
+              <b-col md="6">
                 <button v-b-toggle.sidebar-brand class="btn btn-outline-info mt-1 btn-block">
                   <i class="i-Library"></i>
                   {{$t('ListofBrand')}}
                 </button>
-              </b-col> -->
+              </b-col>
 
 
                <!-- Product -->
@@ -1263,8 +1310,7 @@ export default {
   },
 
   computed: {
-   
-    ...mapGetters(["currentUser", "currentUserPermissions" , "CurrentType"]),
+    ...mapGetters(["currentUser", "currentUserPermissions"]),
 
     brand_totalRows() {
       return this.brands.length;

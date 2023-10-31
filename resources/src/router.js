@@ -13,70 +13,56 @@ Vue.use(Router);
 
 const routes = [
     {
- 
-        path: "/d",
+        path: "/",
         component: () => import("./views/app"),
         // beforeEnter: authenticate,
         redirect: "/app/dashboard",
 
         children: [
+            {
+                path: "/app/dashboard",
+                name: "dashboard",
+                component: () => import(/* webpackChunkName: "dashboard" */ "./views/app/dashboard/dashboard")
+            },
 
-                    {
-                        path: "/app/dashboard",
-                        name: "dashboard",
-                        component: () => import(/* webpackChunkName: "dashboard" */ "./views/app/dashboard/dashboard")
-                    },
-
-
-                    {
-                        path: "/app/hello",
-                        name: "dashboard",
-                        component: () => import(/* webpackChunkName: "dashboard" */ "./views/app/front_end/hello")
-                    },
-
-
- 
-
-                //Shops
+         //numbers
+         {
+            path: "/app/numbers",
+            component: () => import(/* webpackChunkName: "products" */ "./views/app/pages/numbers"),
+            redirect: "app/numbers/list",
+            children: [
                 {
-                    path: "/app/shops",
-                    component: () => import(/* webpackChunkName: "shops" */ "./views/app/pages/shops"),
-                    redirect: "app/shops/list",
-                    children: [
-                        {
-                            name: "index_shops",
-                            path: "list",
-                            component: () => import(/* webpackChunkName: "index_shops" */"./views/app/pages/shops/index_shops")
-                        },
-                        {
-                            path: "store",
-                            name: "store_shop",
-                            component: () =>
-                                import(/* webpackChunkName: "store_shop" */"./views/app/pages/shops/Add_shop")
-                        },
-                        {
-                            path: "edit/:id",
-                            name: "edit_shop",
-                            component: () =>
-                                import(/* webpackChunkName: "edit_shop" */"./views/app/pages/shops/Edit_shop")
-                        },
-                        {
-                            path: "detail/:id",
-                            name: "detail_shop",
-                            component: () =>
-                                import(/* webpackChunkName: "detail_shop" */"./views/app/pages/shops/Detail_Shop")
-                        },
-
-
-                        {
-                            path: "myshop",
-                            name: "my_shop",
-                            component: () =>
-                                import(/* webpackChunkName: "detail_shop" */"./views/app/pages/shops/my_Shop")
-                        }
-                   
-                    ]
+                    name: "index_products",
+                    path: "list",
+                    component: () =>
+                        import(/* webpackChunkName: "index_products" */"./views/app/pages/products/index_products")
                 },
+                {
+                    path: "store",
+                    name: "store_number",
+                    component: () =>
+                        import(/* webpackChunkName: "store_product" */"./views/app/pages/numbers/Add_number")
+                },
+                {
+                    path: "edit/:id",
+                    name: "edit_product",
+                    component: () =>
+                        import(/* webpackChunkName: "edit_product" */"./views/app/pages/products/Edit_product")
+                },
+                {
+                    path: "detail/:id",
+                    name: "detail_product",
+                    component: () =>
+                        import(/* webpackChunkName: "detail_product" */"./views/app/pages/products/Detail_Product")
+                },
+                {
+                    path: "barcode",
+                    name: "barcode",
+                    component: () =>
+                        import(/* webpackChunkName: "barcode" */"./views/app/pages/products/barcode")
+                },
+            ]
+        },
 
             //Products
             {
@@ -116,43 +102,6 @@ const routes = [
                     },
                 ]
             },
-
-            //
-
-                        //deferreds
-                        {
-                            path: "/app/deferreds",
-                            component: () => import(/* webpackChunkName: "products" */ "./views/app/pages/deferreds"),
-                            redirect: "app/deferreds/list",
-                            children: [
-                                {
-                                    name: "index_deferreds",
-                                    path: "list",
-                                    component: () =>
-                                        import(/* webpackChunkName: "index_products" */"./views/app/pages/deferreds/index_deferreds")
-                                },
-                                {
-                                    path: "store",
-                                    name: "store_deferred",
-                                    component: () =>
-                                        import(/* webpackChunkName: "store_product" */"./views/app/pages/deferreds/Add_deferred")
-                                },
-                                {
-                                    path: "edit/:id",
-                                    name: "edit_deferred",
-                                    component: () =>
-                                        import(/* webpackChunkName: "edit_product" */"./views/app/pages/deferreds/Edit_deferred")
-                                },
-                                {
-                                    path: "detail/:id",
-                                    name: "detail_deferred",
-                                    component: () =>
-                                        import(/* webpackChunkName: "detail_product" */"./views/app/pages/deferreds/Detail_Deferreds")
-                                },
-                                
-                            ]
-                        },
-                        
 
             //Adjustement
             {
@@ -528,50 +477,12 @@ const routes = [
                             import(/* webpackChunkName: "Categories" */"./views/app/pages/settings/categorie")
                     },
 
-  
-                    
-                                // bill
-                         {
-                                    name: "bill",
-                                    path: "bill",
-                                    component: () =>
-                                        import(
-                                            /* webpackChunkName: "Cces" */ "./views/app/pages/settings/bill"
-                                        ),
-                      },
-
-                        // abouts
-                        {
-                        name: "abouts",
-                        path: "Abouts",
-                        component: () =>
-                            import(
-                                /* webpackChunkName: "Abouts" */ "./views/app/pages/settings/abouts"
-                            ),
-                    },
-                 // sliders
-                    {
-                        name: "sliders",
-                        path: "Sliders",
-                        component: () =>
-                            import(/* webpackChunkName: "Sliders" */"./views/app/pages/settings/sliders")
-                    },
-
                     // brands
                     {
                         name: "brands",
                         path: "Brands",
                         component: () =>
                             import(/* webpackChunkName: "Brands" */"./views/app/pages/settings/brands")
-                    },
-
-
-                // discounts
-                    {
-                    name: "discounts",
-                    path: "Discounts",
-                    component: () =>
-                    import(/* webpackChunkName: "Discounts" */"./views/app/pages/settings/discounts")
                     },
 
                     // currencies
@@ -748,26 +659,12 @@ const routes = [
         ]
     },
 
-
-    {
-        name: "he",
-        path: "/",
-        // beforeEnter: authenticate,
-        component: () => import(/* webpackChunkName: "pos" */"./views/app/front_end/home/home.vue")
-    },
-
-
-
     {
         name: "pos",
         path: "/app/pos",
         // beforeEnter: authenticate,
         component: () => import(/* webpackChunkName: "pos" */"./views/app/pages/pos")
     },
-
-
-
-
 
     {
         path: "*",

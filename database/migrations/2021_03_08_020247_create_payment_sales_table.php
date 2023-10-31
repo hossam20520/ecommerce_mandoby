@@ -16,7 +16,6 @@ class CreatePaymentSalesTable extends Migration {
 		Schema::create('payment_sales', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('id', true);
 			$table->integer('user_id')->index('user_id_payments_sale');
 			$table->date('date');

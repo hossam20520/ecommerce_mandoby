@@ -16,7 +16,6 @@ class CreateSaleDetailsTable extends Migration {
 		Schema::create('sale_details', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('id', true);
 			$table->date('date');
 			$table->integer('sale_id')->index('Details_Sale_id');

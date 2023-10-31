@@ -45,7 +45,7 @@ window.axios.defaults.withCredentials = true;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 axios.interceptors.response.use((response) => {
-  console.log(response)
+
   return response;
 }, (error) => {
   if (error.response && error.response.data) {
@@ -84,12 +84,7 @@ Vue.config.productionTip = true;
 Vue.config.silent = true;
 Vue.config.devtools = false;
 
-import vuetify from './vuetify.js'
- 
- 
-
 new Vue({
-  vuetify,
   store,
   router,
   VueCookie,

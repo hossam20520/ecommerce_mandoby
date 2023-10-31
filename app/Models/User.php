@@ -10,7 +10,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
     protected $dates = ['deleted_at'];
- 
 
     /**
      * The attributes that are mass assignable.
@@ -27,9 +26,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token' , 'created_at' , 'updated_at' , 'deleted_at'  ,
+        'password', 'remember_token',
     ];
- 
 
     /**
      * The attributes that should be cast to native types.
@@ -42,26 +40,9 @@ class User extends Authenticatable
         'statut' => 'integer',
     ];
 
-    protected $appends = ['Avater'];
     public function oauthAccessToken()
     {
         return $this->hasMany('\App\Models\OauthAccessToken');
-    }
-
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    public function getAvaterAttribute()
-    {
-        // Access the role_name through the relationship
-        $avatar =  '/public/images/avatar/'.$this->avatar;
-
-        // Modify the role_name as needed
-        // For example, you can convert it to uppercase
-        return $avatar;
     }
 
     public function roles()
@@ -81,16 +62,5 @@ class User extends Authenticatable
         }
         return !!$role->intersect($this->roles)->count();
     }
-
-
-    public function shop()
-    {
-    
-        // return $this->belongsTo(Shop::class  ,'merchant_id'  );
-
-        return $this->hasOne(Shop::class , 'merchant_id'  );
-    }
-
- 
 
 }

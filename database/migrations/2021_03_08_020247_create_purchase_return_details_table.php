@@ -16,7 +16,6 @@ class CreatePurchaseReturnDetailsTable extends Migration {
 		Schema::create('purchase_return_details', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('id', true);
 			$table->decimal('cost', 16, 3);
 			$table->float('TaxNet', 10, 0)->nullable()->default(0);

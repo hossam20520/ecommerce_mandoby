@@ -15,18 +15,18 @@
             <i class="i-Edit"></i>
             <span>{{$t('EditSale')}}</span>
           </router-link>
-          <!-- <button @click="Sale_Email()" class="btn btn-info btn-icon ripple btn-sm">
+          <button @click="Sale_Email()" class="btn btn-info btn-icon ripple btn-sm">
             <i class="i-Envelope-2"></i>
             {{$t('Email')}}
-          </button> -->
-           <!-- <button @click="Sale_SMS()" class="btn btn-secondary btn-icon ripple btn-sm">
+          </button>
+           <button @click="Sale_SMS()" class="btn btn-secondary btn-icon ripple btn-sm">
             <i class="i-Speach-Bubble"></i>
             SMS
-          </button> -->
-          <!-- <button @click="Sale_PDF()" class="btn btn-primary btn-icon ripple btn-sm">
+          </button>
+          <button @click="Sale_PDF()" class="btn btn-primary btn-icon ripple btn-sm">
             <i class="i-File-TXT"></i>
             PDF
-          </button> -->
+          </button>
           <button @click="print()" class="btn btn-warning btn-icon ripple btn-sm">
             <i class="i-Billing"></i>
             {{$t('print')}}

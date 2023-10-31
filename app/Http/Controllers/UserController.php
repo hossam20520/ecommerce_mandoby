@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\role_user;
 use App\Models\product_warehouse;
 use App\utils\helpers;
-use App\Models\Client;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use File;
@@ -21,10 +20,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends BaseController
 {
-
-
-
-    
 
     //------------- GET ALL USERS---------\\
 
@@ -48,36 +43,11 @@ class UserController extends BaseController
         $Role = Auth::user()->roles()->first();
         $ShowRecord = Role::findOrFail($Role->id)->inRole('record_view');
 
-
-        
-  
-
-        if( $helpers->IsMerchant()){
-        //    $WarehouseID = $helpers->WarehouseID();
-
-           $shop_id = $helpers->ShopID();
-
-           $users = User::where(function ($query) use ($ShowRecord) {
+        $users = User::where(function ($query) use ($ShowRecord) {
             if (!$ShowRecord) {
                 return $query->where('id', '=', Auth::user()->id);
             }
-        })->where('shop_id' , $shop_id );    
-
-        }else{
-
-            $users = User::where(function ($query) use ($ShowRecord) {
-                if (!$ShowRecord) {
-                    return $query->where('id', '=', Auth::user()->id);
-                }
-            });
-
-
-    
-        }
-
-
-
-
+        });
 
         //Multiple Filter
         $Filtred = $helpers->filter($users, $columns, $param, $request)
@@ -123,18 +93,12 @@ class UserController extends BaseController
             ->whereRaw('qte <= stock_alert')
             ->where('product_warehouse.deleted_at', null)
             ->count();
-        $role = Auth::user()->roles()->first();
-        if($role->pivot->role_id == 2 ){
-          $type = ["merchant"];
-        }else{
-            $type = ["owner"];
-        }
+
         return response()->json([
             'success' => true,
             'user' => $user,
             'notifs' => $products_alerts,
             'permissions' => $permissions,
-            'type'=>  $type
         ]);
     }
 
@@ -180,18 +144,6 @@ class UserController extends BaseController
                 $filename = 'no_avatar.png';
             }
 
-
-
-            
-            $helpers = new helpers();
-            if( $helpers->IsMerchant()){   
-               $shop_id =   $helpers->ShopID();
-               $role = 3;
-            }else{
-               $shop_id = 0;
-               $role = $request['role'];
-            }
-
             $User = new User;
             $User->firstname = $request['firstname'];
             $User->lastname  = $request['lastname'];
@@ -201,26 +153,11 @@ class UserController extends BaseController
             $User->password  = Hash::make($request['password']);
             $User->avatar    = $filename;
             $User->role_id   = $request['role'];
-            $User->shop_id   =  $shop_id;
             $User->save();
-
-         
-           $Client = new Client;
-           $Client->name = $User->firstname.' '.$User->lastname;
-           $Client->code = $User->id;
-           $Client->adresse = "";
-           $Client->email =  $User->email;
-           $Client->phone =   $User->phone;
-           $Client->country =   "";
-           $Client->city =   "";
-           $Client->shop_id =   $shop_id;
-           $Client->save();
-
-
 
             $role_user = new role_user;
             $role_user->user_id = $User->id;
-            $role_user->role_id = $role;
+            $role_user->role_id = $request['role'];
             $role_user->save();
     
         }, 10);
@@ -284,18 +221,6 @@ class UserController extends BaseController
                 $filename = $currentAvatar;
             }
 
-            $helpers = new helpers();
-            if( $helpers->IsMerchant()){   
-               $shop_id =   $helpers->ShopID();
-          
-            }else{
-               $shop_id = 0;
-          
-            }
-
-
-   
-
             User::whereId($id)->update([
                 'firstname' => $request['firstname'],
                 'lastname' => $request['lastname'],
@@ -308,41 +233,10 @@ class UserController extends BaseController
                 'role_id' => $request['role'],
             ]);
 
- 
-            
-            Client::where('shop_id' , $shop_id )->where('code' ,$id )->update([
-                'name' => $request['firstname'].' '.$request['lastname'],
-                'code' => $id,
-                'adresse' => "",
-                'email' => $request['email'],
-                'phone' => $request['phone'],
-                'country' =>  "",
-                'city' =>  "",
-                'shop_id' =>  $shop_id,
+            role_user::where('user_id' , $id)->update([
+                'user_id' => $id,
+                'role_id' => $request['role'],
             ]);
-
-            
-            if($helpers->IsMerchant()){   
-
-                // $shop_id =   $helpers->ShopID();
-
-                // role_user::where('user_id' , $id)->update([
-                //     'user_id' => $id,
-                //     'role_id' => $request['role'],
-                // ]);
-           
-             }else{
-
-                role_user::where('user_id' , $id)->update([
-                    'user_id' => $id,
-                    'role_id' => $request['role'],
-                ]);
-           
-             }
-
-
-
-
 
         }, 10);
         

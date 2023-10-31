@@ -2,18 +2,7 @@
 
 
 export default {
-    Discount:'البرومو كود',
-    AddShop:'اضافة متجر',
-    en_Name_shop:'متجر بالانجليزية',
-    ar_Name_shop:'اسم المتجر بالعربي',
-    shopsList:'عرض المتاجر',
 
-
-    mYSHOP:'متجري',
-    Shops:'متاجر',
-    deferred:'الاجلة',
-    AddDeferreds:'اضافة اجل',
-    DeferredsList:'عرض الاجل',
     serial:'سيريال الخط',
     ffsss:'dddddd',
     number:'رقم الخط',
@@ -412,7 +401,7 @@ export default {
     ReturnsInvoices: 'فواتير المرتجعات',
     ReturnsInvoicesData: 'بيانات فواتير المرتجعات',
     ShowAll: 'إظهار كافة سجلات كافة المستخدمين',
-    
+    Discount: 'الخصم',
     OrderTax: 'ضريبة الطلب',
     Shipping: 'الشحن',
     ManagementCurrencies: 'ادارة العملات',

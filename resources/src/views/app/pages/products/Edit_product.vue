@@ -32,35 +32,6 @@
                     </validation-provider>
                   </b-col>
 
-
-
-
-                                 <!-- name -->
-                 <b-col md="6" class="mb-2">
-                    <validation-provider
-                      name="en_name"
-                      :rules="{required:true , min:3 , max:55}"
-                      v-slot="validationContext"
-                    >
-                      <b-form-group :label="$t('en_name')">
-                        <b-form-input
-                          :state="getValidationState(validationContext)"
-                          aria-describedby="name-feedback"
-                          label="en_name"
-                          :placeholder="$t('en_name')"
-                          v-model="product.en_name"
-                        ></b-form-input>
-                        <b-form-invalid-feedback
-                          id="name-feedback"
-                        >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                      </b-form-group>
-                    </validation-provider>
-                  </b-col>
-
-
-
-
-
                   <!-- Code Product"-->
                   <b-col md="6" class="mb-2">
                     <validation-provider
@@ -168,34 +139,6 @@
                     </validation-provider>
                   </b-col>
 
-
-
-
-
-                                  <!-- Product Cost -->
-                <b-col md="6" class="mb-2">
-                    <validation-provider
-                      name="discount  "
-                      :rules="{ required: true , regex: /^\d*\.?\d*$/}"
-                      v-slot="validationContext"
-                    >
-                      <b-form-group :label="$t('discount')">
-                        <b-form-input
-                          :state="getValidationState(validationContext)"
-                          aria-describedby="discount-feedback"
-                          label="Cost"
-                          :placeholder="$t('discount')"
-                          v-model="product.discount"
-                        ></b-form-input>
-                        <b-form-invalid-feedback
-                          id="ProductCost-feedback"
-                        >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                      </b-form-group>
-                    </validation-provider>
-                  </b-col>
-
-
-
                   <!-- Product Price -->
                   <b-col md="6" class="mb-2">
                     <validation-provider
@@ -274,7 +217,7 @@
                   </b-col>
 
                   <!-- Stock Alert -->
-                  <!-- <b-col md="6" class="mb-2">
+                  <b-col md="6" class="mb-2">
                     <validation-provider
                       name="Stock Alert"
                       :rules="{ regex: /^\d*\.?\d*$/}"
@@ -293,10 +236,10 @@
                         >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                       </b-form-group>
                     </validation-provider>
-                  </b-col> -->
+                  </b-col>
 
                   <!-- Order Tax -->
-                  <!-- <b-col md="6" class="mb-2">
+                  <b-col md="6" class="mb-2">
                     <validation-provider
                       name="Order Tax"
                       :rules="{regex: /^\d*\.?\d*$/}"
@@ -320,10 +263,10 @@
                         >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                       </b-form-group>
                     </validation-provider>
-                  </b-col> -->
+                  </b-col>
 
                   <!-- Tax Method -->
-                  <!-- <b-col lg="6" md="6" sm="12" class="mb-2">
+                  <b-col lg="6" md="6" sm="12" class="mb-2">
                     <validation-provider name="Tax Method" :rules="{ required: true}">
                       <b-form-group slot-scope="{ valid, errors }" :label="$t('TaxMethod')">
                         <v-select
@@ -341,74 +284,6 @@
                         <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
                       </b-form-group>
                     </validation-provider>
-                  </b-col> -->
-
- 
-
-
-                                <!-- Tax Method -->
-                <b-col lg="6" md="6" sm="12" class="mb-2">
-                  <validation-provider name="Tax Method" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('product_status')">
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="product.product_status"
-                        :reduce="label => label.value"
-                        :placeholder="$t('Choose_status')"
-                        :options="
-                           [
-                           {label: 'normal', value: 'normal'},
-                            {label: 'new', value: 'new'},
-                            {label: 'top', value: 'top'}
-                           ]"
-                      ></v-select>
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
-
-
-                  <b-col md="6"  v-if="CurrentType && CurrentType.includes('owner')" class="mb-2">
-                  <validation-provider name="Unit Purchase" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Shops')">
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="product.shop_id"
-                        :placeholder="$t('Shops')"
-                        :reduce="label => label.value"
-                        :options="shops.map(shops => ({label: shops.ar_name, value: shops.id}))"
-                      />
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-                
-
-                <b-col md="12" class="mb-2">
-                    <b-form-group :label="$t('ar_description')">
-                      <textarea
-                        rows="4"
-                        class="form-control"
-                        :placeholder="$t('ar_description')"
-                        v-model="product.ar_description"
-                      ></textarea>
-                    </b-form-group>
-                  </b-col>
-
-
-
-                  <b-col md="12" class="mb-2">
-                    <b-form-group :label="$t('en_description')">
-                      <textarea
-                        rows="4"
-                        class="form-control"
-                        :placeholder="$t('en_description')"
-                        v-model="product.en_description"
-                      ></textarea>
-                    </b-form-group>
                   </b-col>
 
                   <b-col md="12" class="mb-2">
@@ -454,7 +329,7 @@
                     </div>
                   </b-col>
                   <!-- Multiple Variants -->
-                  <!-- <b-col md="12 mb-2">
+                  <b-col md="12 mb-2">
                     <div class="form-check">
                       <label class="checkbox checkbox-outline-primary">
                         <input type="checkbox" v-model="product.is_variant">
@@ -462,8 +337,8 @@
                         <span class="checkmark"></span>
                       </label>
                     </div>
-                  </b-col> -->
-                  <!-- <b-col md="12 mb-5" v-show="product.is_variant">
+                  </b-col>
+                  <b-col md="12 mb-5" v-show="product.is_variant">
                     <vue-tags-input
                       placeholder="+ add"
                       v-model="tag"
@@ -472,7 +347,7 @@
                       @adding-duplicate="showNotifDuplicate()"
                       @tags-changed="newTags => variants = newTags"
                     />
-                  </b-col> -->
+                  </b-col>
                 </b-row>
               </div>
             </b-card>
@@ -493,7 +368,7 @@
 import VueUploadMultipleImage from "vue-upload-multiple-image";
 import VueTagsInput from "@johmun/vue-tags-input";
 import NProgress from "nprogress";
-import { mapGetters, mapActions } from "vuex";
+
 export default {
   metaInfo: {
     title: "Edit Product"
@@ -515,10 +390,7 @@ export default {
       brands: [],
       roles: {},
       variants: [],
-      shops:[],
       product: {
-        shop_id:"",
-        product_status:"",
         name: "",
         code: "",
         Type_barcode: "",
@@ -534,11 +406,7 @@ export default {
         stock_alert: "",
         image: "",
         note: "",
-        en_description:"",
-        ar_description:"",
-        is_variant: false,
-        discount:"",
-        en_name:"",
+        is_variant: false
       },
       code_exist: ""
     };
@@ -547,10 +415,6 @@ export default {
   components: {
     VueUploadMultipleImage,
     VueTagsInput
-  },
-
-  computed: {
-    ...mapGetters([  "currentUserPermissions" , "CurrentType"])
   },
 
   methods: {
@@ -615,9 +479,7 @@ export default {
       axios
         .get(`Products/${id}/edit`)
         .then(response => {
-          console.log(response.data)
           this.product = response.data.product;
-          this.shops = response.data.shops;
           this.variants = response.data.product.ProductVariant;
           this.images = response.data.product.images;
           this.categories = response.data.categories;
@@ -686,7 +548,9 @@ export default {
       self.data.append("_method", "put");
 
       //send Data with axios
-      axios.post("Products/" + this.product.id, self.data).then(response => {
+      axios
+        .post("Products/" + this.product.id, self.data)
+        .then(response => {
           NProgress.done();
           self.SubmitProcessing = false;
           this.$router.push({ name: "index_products" });

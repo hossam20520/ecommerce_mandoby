@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Slider;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,127 +89,12 @@ if ($installed === false) {
     });
 
 } else {
-
-
-    
-    // Route::get('/language/{lang}', function (Request $request , $lang) {
-
-    //     if( $lang){
-            
-    //         if( $lang == "ar" ||  $lang == "en" ){
-    //         App::setLocale( $lang);
-    //         session()->put('locale',  $lang); 
-
-    //         }
-    //     }
-    //     return redirect()->route('home'); 
-    //     // return  redirect()->back(); 
-    //     // return back();   
-    // })->name('change_lang');;
-
-
-    
-
-    Route::get('/exportcsv' ,     'HomeControllerFront@exportcsv')->name('exportcsv');
-
-    
-    Route::get('/export' ,     'HomeControllerFront@export')->name('exportview');
-
-    // Route::get('/profile' ,     'HomeControllerFront@profile')->name('profile');
-
-    // Route::get('/vendor/{id}' ,     'HomeControllerFront@vendor')->name('vendor');
-
-    
-    // Route::get('/' ,     'HomeControllerFront@home')->name('home');
-
-    // Route::get('/cart' ,     'HomeControllerFront@cart')->name('cart');
-        
-
-    // Route::get('/shop' ,     'HomeControllerFront@shop')->name('shop');
-
-
-    // Route::get('/product/{id}' ,     'HomeControllerFront@product')->name('product');
-     
-    // Route::get('/search' ,     'HomeControllerFront@search')->name('search');
-                                               
-    // Route::get('/wishlist' ,     'HomeControllerFront@wishlist')->name('wishlist');
-
-
-    // Route::get('/checkout' ,     'HomeControllerFront@checkout')->name('checkout');
-
-    // Route::get('/contact' ,     'HomeControllerFront@contact')->name('contact');
-
-
-    // Route::get('/auth/login' ,     'HomeControllerFront@login')->name('login');
-
-
-    //    Route::get('/auth/register' ,     'HomeControllerFront@register')->name('register');
-
-
-    // Route::get('/cart', function () {
-    //     return view("front.cart");
-    // })->name('cart');
-
-
-    // Route::get('/checkout', function () {
-    //     return view("front.checkout");
-    // })->name('checkout');
-
-
-    // Route::get('/shop', function () {
-    //     return view("front.shop");
-    // })->name('shop');
-    // Route::get('/contact', function () {
-    //     return view("front.contact");
-    // })->name('contact');
-
-
-    // Route::get('/profile', function () {
-    //     return view("front.profile");
-    // })->name('profile');
-
-
-
-    // Route::get('/store', function () {
-    //     return view("front.vendor");
-    // })->name('store');
-
-
-
-    // Route::get('/product/{id}', function () {
-    //     return view("front.product");
-    // })->name('product');
-
-
-    // Route::get('/auth/login', function () {
-    //     return view("front.login");
-    // })->name('login');
-
-    // Route::get('/chat', function () {
-    //     return view("front_old.chat");
-    // })->name('chat');
-
-
-    // Route::get('/messages', function () {
-    //     return view("front.messages");
-    // })->name('messages');
-
-    // Route::get('/auth/register', function () {
-    //     return view("front.register");
-    // })->name('register');
-
     Route::any('/setup/{vue}', function () {
         abort(403);
     });
 }
 
 //------------------------------------------------------------------\\
-// Route::group(['middleware' => ['auth' ] ], function () {
-
-
-
-
-// });
 
 Route::group(['middleware' => ['auth', 'Is_Active']], function () {
 
@@ -221,8 +105,6 @@ Route::group(['middleware' => ['auth', 'Is_Active']], function () {
         } else {
             return redirect('/login');
         }
-
-        
     });
 
 

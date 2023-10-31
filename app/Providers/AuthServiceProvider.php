@@ -40,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Unit'                      => 'App\Policies\UnitPolicy',
         'App\Models\Sale'                      => 'App\Policies\SalePolicy',
         'App\Models\User'                      => 'App\Policies\UserPolicy',
-        'App\Models\Deferred'                 => 'App\Policies\DefferredPolicy',
+
     ];
 
     /**

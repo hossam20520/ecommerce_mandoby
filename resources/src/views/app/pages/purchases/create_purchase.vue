@@ -9,27 +9,8 @@
           <b-col lg="12" md="12" sm="12">
             <b-card>
               <b-row>
-
-                               <!-- Shops -->
-               <b-col lg="2" md="2" sm="12" class="mb-3" v-if="CurrentType && CurrentType.includes('owner')"  >
-                  <validation-provider name="Unit Purchase" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Shops')">
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="purchase.shop_id"
-                        :placeholder="$t('Shops')"
-                        :reduce="label => label.value"
-                        :options="shops.map(shops => ({label: shops.ar_name, value: shops.id}))"
-                      />
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
-
                  <!-- date  -->
-                <b-col lg="2" md="2" sm="12" class="mb-3">
+                <b-col lg="4" md="4" sm="12" class="mb-3">
                   <validation-provider
                     name="date"
                     :rules="{ required: true}"
@@ -49,7 +30,7 @@
                   </validation-provider>
                 </b-col>
                 <!-- Supplier -->
-                <!-- <b-col lg="4" md="4" sm="12" class="mb-3">
+                <b-col lg="4" md="4" sm="12" class="mb-3">
                   <validation-provider name="Supplier" :rules="{ required: true}">
                     <b-form-group slot-scope="{ valid, errors }" :label="$t('Supplier')">
                       <v-select
@@ -63,7 +44,7 @@
                       <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
-                </b-col> -->
+                </b-col>
 
                 <!-- warehouse -->
                 <b-col lg="4" md="4" sm="12" class="mb-3">
@@ -491,7 +472,6 @@ export default {
       suppliers: [],
       products: [],
       details: [],
-      shops:[],
       units: [],
       detail: {
         quantity: "",
@@ -504,7 +484,6 @@ export default {
       purchases: [],
       purchase: {
         id: "",
-        shop_id:"",
         date: new Date().toISOString().slice(0, 10),
         statut: "received",
         notes: "",
@@ -544,8 +523,7 @@ export default {
     };
   },
   computed: {
-   
-    ...mapGetters(["currentUser" , "currentUserPermissions" , "CurrentType"])
+    ...mapGetters(["currentUser"])
   },
 
   methods: {
@@ -953,7 +931,6 @@ export default {
         axios
           .post("purchases", {
             date: this.purchase.date,
-            shop_id:this.purchase.shop_id,
             supplier_id: this.purchase.supplier_id,
             warehouse_id: this.purchase.warehouse_id,
             statut: this.purchase.statut,
@@ -1023,8 +1000,6 @@ export default {
         .then(response => {
           this.suppliers = response.data.suppliers;
           this.warehouses = response.data.warehouses;
-          this.shops = response.data.shops;
-          console.log(this.shops)
           this.isLoading = false;
         })
         .catch(response => {

@@ -35,43 +35,21 @@ class PosController extends BaseController
 
         request()->validate([
             'client_id' => 'required',
-          
+            'warehouse_id' => 'required',
             'payment.amount' => 'required',
         ]);
 
         $item = \DB::transaction(function () use ($request) {
-
-      
-   
-
-       
-    
-
             $helpers = new helpers();
-
-            if( $helpers->IsMerchant()){
-               $WarehouseID = $helpers->WarehouseID();
-
-               $shop_id = $helpers->ShopID();
-
-            }else{
-           
-                $WarehouseID = $request->warehouse_id;
-                $shop_id =  0;
-            }
-
-
-
             $role = Auth::user()->roles()->first();
             $view_records = Role::findOrFail($role->id)->inRole('record_view');
             $order = new Sale;
-            $order->shop_id =  $shop_id;
 
             $order->is_pos = 1;
             $order->date = Carbon::now();
             $order->Ref = app('App\Http\Controllers\SalesController')->getNumberOrder();
             $order->client_id = $request->client_id;
-            $order->warehouse_id = $WarehouseID;
+            $order->warehouse_id = $request->warehouse_id;
             $order->tax_rate = $request->tax_rate;
             $order->TaxNet = $request->TaxNet;
             $order->discount = $request->discount;
@@ -250,63 +228,30 @@ class PosController extends BaseController
         $offSet = ($pageStart * $perPage) - $perPage;
         $data = array();
 
+        $product_warehouse_data = product_warehouse::where('warehouse_id', $request->warehouse_id)
+            ->with('product', 'product.unitSale')
+            ->where('deleted_at', '=', null)
+            ->where(function ($query) use ($request) {
+                if ($request->stock == '1') {
+                    return $query->where('qte', '>', 0);
+                }
 
-        $helpers = new helpers();
-
-            if( $helpers->IsMerchant()){
-    
-               $WarehouseID = $helpers->WarehouseID();
-
-               $product_warehouse_data = product_warehouse::where('warehouse_id', $WarehouseID)
-               ->with('product', 'product.unitSale')
-               ->where('deleted_at', '=', null)
-               ->where(function ($query) use ($request) {
-                   if ($request->stock == '1') {
-                       return $query->where('qte', '>', 0);
-                   }
-   
-               })->where(function ($query) use ($request) {
-                   return $query->when($request->filled('category_id'), function ($query) use ($request) {
-                       return $query->whereHas('product', function ($q) use ($request) {
-                           $q->where('category_id', '=', $request->category_id);
-                       });
-                   });
-               })
-               ->where(function ($query) use ($request) {
-                   return $query->when($request->filled('brand_id'), function ($query) use ($request) {
-                       return $query->whereHas('product', function ($q) use ($request) {
-                           $q->where('brand_id', '=', $request->brand_id);
-                       });
-                   });
-               });
-
-            }else{
-                $product_warehouse_data = product_warehouse::where('warehouse_id', $request->warehouse_id)
-                ->with('product', 'product.unitSale')
-                ->where('deleted_at', '=', null)
-                ->where(function ($query) use ($request) {
-                    if ($request->stock == '1') {
-                        return $query->where('qte', '>', 0);
-                    }
-    
-                })->where(function ($query) use ($request) {
-                    return $query->when($request->filled('category_id'), function ($query) use ($request) {
-                        return $query->whereHas('product', function ($q) use ($request) {
-                            $q->where('category_id', '=', $request->category_id);
-                        });
-                    });
-                })
-                ->where(function ($query) use ($request) {
-                    return $query->when($request->filled('brand_id'), function ($query) use ($request) {
-                        return $query->whereHas('product', function ($q) use ($request) {
-                            $q->where('brand_id', '=', $request->brand_id);
-                        });
+            })
+        // Filter
+            ->where(function ($query) use ($request) {
+                return $query->when($request->filled('category_id'), function ($query) use ($request) {
+                    return $query->whereHas('product', function ($q) use ($request) {
+                        $q->where('category_id', '=', $request->category_id);
                     });
                 });
-            }
-
-
-
+            })
+            ->where(function ($query) use ($request) {
+                return $query->when($request->filled('brand_id'), function ($query) use ($request) {
+                    return $query->whereHas('product', function ($q) use ($request) {
+                        $q->where('brand_id', '=', $request->brand_id);
+                    });
+                });
+            });
 
         $totalRows = $product_warehouse_data->count();
 
@@ -380,16 +325,7 @@ class PosController extends BaseController
     {
         $this->authorizeForUser($request->user('api'), 'Sales_pos', Sale::class);
 
-
-        $helpe = new helpers();
-        $obj = $helpe->GetUserInfo();
-       if($obj['role'] == 2){
-        $warehouses = Warehouse::where('deleted_at', null)->where('zip' , $obj['shop']->id )->get(['id', 'name']);
-
-       }else{
         $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
-       }
-
         $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
         $settings = Setting::where('deleted_at', '=', null)->first();
         // $pos_settings = PosSetting::where('deleted_at', '=', null)->first();

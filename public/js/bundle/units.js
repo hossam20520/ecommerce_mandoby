@@ -11,13 +11,6 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -179,25 +172,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -223,10 +197,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       units_base: [],
       editmode: false,
       show_operator: false,
-      shops: [],
       unit: {
         id: "",
-        shop_id: "",
         name: "",
         ShortName: "",
         base_unit: "",
@@ -236,7 +208,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["currentUserPermissions", "CurrentType"])), {}, {
+  computed: {
     columns: function columns() {
       return [{
         label: this.$t("Name"),
@@ -248,25 +220,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         field: "ShortName",
         tdClass: "text-left",
         thClass: "text-left"
-      }, // {
-      //   label: this.$t("BaseUnit"),
-      //   field: "base_unit_name",
-      //   tdClass: "text-left",
-      //   thClass: "text-left"
-      // },
-      // {
-      //   label: this.$t("Operator"),
-      //   field: "operator",
-      //   tdClass: "text-left",
-      //   thClass: "text-left"
-      // },
-      // {
-      //   label: this.$t("OperationValue"),
-      //   field: "operator_value",
-      //   tdClass: "text-left",
-      //   thClass: "text-left"
-      // },
-      {
+      }, {
+        label: this.$t("BaseUnit"),
+        field: "base_unit_name",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("Operator"),
+        field: "operator",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("OperationValue"),
+        field: "operator_value",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("Action"),
         field: "actions",
         html: true,
@@ -275,7 +244,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         sortable: false
       }];
     }
-  }),
+  },
   methods: {
     //---- update Params Table
     updateParams: function updateParams(newProps) {
@@ -390,7 +359,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
       axios.get("units?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
         _this2.units = response.data.Units;
-        _this2.shops = response.data.shops;
         _this2.totalRows = response.data.totalRows;
         _this2.units_base = response.data.Units_base; // Complete the animation of theprogress bar.
 
@@ -419,7 +387,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.setToStrings();
       axios.post("units", {
         name: this.unit.name,
-        shop_id: this.unit.shop_id,
         ShortName: this.unit.ShortName,
         base_unit: this.unit.base_unit,
         operator: this.unit.operator,
@@ -443,7 +410,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.setToStrings();
       axios.put("units/" + this.unit.id, {
         name: this.unit.name,
-        shop_id: this.unit.shop_id,
         ShortName: this.unit.ShortName,
         base_unit: this.unit.base_unit,
         operator: this.unit.operator,
@@ -734,82 +700,6 @@ var render = function () {
                   _c(
                     "b-row",
                     [
-                      _vm.CurrentType && _vm.CurrentType.includes("owner")
-                        ? _c(
-                            "b-col",
-                            { attrs: { md: "12" } },
-                            [
-                              _c("validation-provider", {
-                                attrs: {
-                                  name: "Shops",
-                                  rules: { required: true },
-                                },
-                                scopedSlots: _vm._u(
-                                  [
-                                    {
-                                      key: "default",
-                                      fn: function (ref) {
-                                        var valid = ref.valid
-                                        var errors = ref.errors
-                                        return _c(
-                                          "b-form-group",
-                                          { attrs: { label: _vm.$t("Shops") } },
-                                          [
-                                            _c("v-select", {
-                                              class: {
-                                                "is-invalid": !!errors.length,
-                                              },
-                                              attrs: {
-                                                state: errors[0]
-                                                  ? false
-                                                  : valid
-                                                  ? true
-                                                  : null,
-                                                placeholder: _vm.$t("Shops"),
-                                                reduce: function (label) {
-                                                  return label.value
-                                                },
-                                                options: _vm.shops.map(
-                                                  function (shops) {
-                                                    return {
-                                                      label: shops.ar_name,
-                                                      value: shops.id,
-                                                    }
-                                                  }
-                                                ),
-                                              },
-                                              model: {
-                                                value: _vm.unit.shop_id,
-                                                callback: function ($$v) {
-                                                  _vm.$set(
-                                                    _vm.unit,
-                                                    "shop_id",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression: "unit.shop_id",
-                                              },
-                                            }),
-                                            _vm._v(" "),
-                                            _c("b-form-invalid-feedback", [
-                                              _vm._v(_vm._s(errors[0])),
-                                            ]),
-                                          ],
-                                          1
-                                        )
-                                      },
-                                    },
-                                  ],
-                                  null,
-                                  false,
-                                  2197002095
-                                ),
-                              }),
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
                       _c(
                         "b-col",
                         { attrs: { md: "12" } },
@@ -936,6 +826,89 @@ var render = function () {
                               },
                             ]),
                           }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "12" } },
+                        [
+                          _c(
+                            "b-form-group",
+                            { attrs: { label: _vm.$t("BaseUnit") } },
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  reduce: function (label) {
+                                    return label.value
+                                  },
+                                  placeholder: _vm.$t("Choose_Base_Unit"),
+                                  options: _vm.units_base.map(function (
+                                    units_base
+                                  ) {
+                                    return {
+                                      label: units_base.name,
+                                      value: units_base.id,
+                                    }
+                                  }),
+                                },
+                                on: { input: _vm.Selected_Base_Unit },
+                                model: {
+                                  value: _vm.unit.base_unit,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.unit, "base_unit", $$v)
+                                  },
+                                  expression: "unit.base_unit",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.show_operator,
+                              expression: "show_operator",
+                            },
+                          ],
+                          attrs: { md: "12" },
+                        },
+                        [
+                          _c(
+                            "b-form-group",
+                            { attrs: { label: _vm.$t("Operator") } },
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  reduce: function (label) {
+                                    return label.value
+                                  },
+                                  placeholder: _vm.$t("Choose_Operator"),
+                                  options: [
+                                    { label: "Multiply (*)", value: "*" },
+                                    { label: "Divide (/)", value: "/" },
+                                  ],
+                                },
+                                model: {
+                                  value: _vm.unit.operator,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.unit, "operator", $$v)
+                                  },
+                                  expression: "unit.operator",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
                         ],
                         1
                       ),

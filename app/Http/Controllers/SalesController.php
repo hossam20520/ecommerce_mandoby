@@ -6,7 +6,6 @@ use App\Exports\SalesExport;
 use App\Mail\SaleMail;
 use App\Models\Client;
 use App\Models\Unit;
-use App\Models\Shop;
 use App\Models\PaymentSale;
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -66,43 +65,14 @@ class SalesController extends BaseController
         );
         $data = array();
 
-
-      
-        $obj = $helpers->GetUserInfo();
-       if($obj['role'] == 2){
-           
-
-          $shop_id = $obj['shop']->id;
-
-          $Sales = Sale::with('facture', 'client', 'warehouse')->where('shop_id' , $shop_id)
-          ->where('deleted_at', '=', null)
-          ->where(function ($query) use ($view_records) {
-              if (!$view_records) {
-                  return $query->where('user_id', '=', Auth::user()->id);
-              }
-          });
-
-        }else{
-         //--Store Product Warehouse
-      
-         $Sales = Sale::with('facture', 'client', 'warehouse')
-         ->where('deleted_at', '=', null)
-         ->where(function ($query) use ($view_records) {
-             if (!$view_records) {
-                 return $query->where('user_id', '=', Auth::user()->id);
-             }
-         });
-        }
- 
-
         // Check If User Has Permission View  All Records
-        // $Sales = Sale::with('facture', 'client', 'warehouse')->where('shop_id' , $shop_id)
-        //     ->where('deleted_at', '=', null)
-        //     ->where(function ($query) use ($view_records) {
-        //         if (!$view_records) {
-        //             return $query->where('user_id', '=', Auth::user()->id);
-        //         }
-        //     });
+        $Sales = Sale::with('facture', 'client', 'warehouse')
+            ->where('deleted_at', '=', null)
+            ->where(function ($query) use ($view_records) {
+                if (!$view_records) {
+                    return $query->where('user_id', '=', Auth::user()->id);
+                }
+            });
         //Multiple Filter
         $Filtred = $helpers->filter($Sales, $columns, $param, $request)
         // Search With Multiple Param
@@ -156,23 +126,10 @@ class SalesController extends BaseController
         
         $stripe_key = config('app.STRIPE_KEY');
         $customers = client::where('deleted_at', '=', null)->get(['id', 'name']);
-
-        $obj = $helpers->IsMerchant();
-        
-                if($helpers->IsMerchant()){
-                   $shop_id =  $helpers->ShopID();
-                   $warehouses = Warehouse::where('deleted_at', '=', null)->where('zip' , $shop_id)->get(['id', 'name']);
-                }else{
-                    $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
-                }
-       
-
-       $shops = Shop::where('deleted_at', '=', null)->get(['id', 'ar_name' , 'en_name']);
-
+        $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
 
         return response()->json([
             'stripe_key' => $stripe_key,
-            'shops' => $shops,
             'totalRows' => $totalRows,
             'sales' => $data,
             'customers' => $customers,
@@ -194,15 +151,6 @@ class SalesController extends BaseController
 
         \DB::transaction(function () use ($request) {
             $helpers = new helpers();
-
-            if( $helpers->IsMerchant()){
-
-                $shop_id = $helpers->ShopID();
-
-
-            }else{
-                $shop_id  =  $request->shop_id;
-            }
             $order = new Sale;
 
             $order->is_pos = 0;
@@ -216,7 +164,6 @@ class SalesController extends BaseController
             $order->discount = $request->discount;
             $order->shipping = $request->shipping;
             $order->statut = $request->statut;
-            $order->shop_id =  $shop_id;
             $order->payment_statut = 'unpaid';
             $order->notes = $request->notes;
             $order->user_id = Auth::user()->id;
@@ -1067,12 +1014,9 @@ class SalesController extends BaseController
         $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
         $stripe_key = config('app.STRIPE_KEY');
 
-        $shops = Shop::where('deleted_at', '=', null)->get(['id', 'ar_name' , 'en_name']);
-
         return response()->json([
             'stripe_key' => $stripe_key,
             'clients' => $clients,
-            'shops' => $shops,
             'warehouses' => $warehouses,
         ]);
 
@@ -1383,14 +1327,12 @@ class SalesController extends BaseController
             }
         }
 
-        $shops = Shop::where('deleted_at', '=', null)->get(['id', 'ar_name' , 'en_name']);
         $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
         $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
 
         return response()->json([
             'details' => $details,
             'sale' => $sale,
-            'shops' => $shops,
             'clients' => $clients,
             'warehouses' => $warehouses,
         ]);

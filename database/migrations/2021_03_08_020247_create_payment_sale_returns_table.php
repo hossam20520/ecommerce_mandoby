@@ -16,9 +16,7 @@ class CreatePaymentSaleReturnsTable extends Migration {
 		Schema::create('payment_sale_returns', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-			
 			$table->integer('id', true);
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('user_id')->index('factures_sale_return_user_id');
 			$table->date('date');
 			$table->string('Ref', 192);

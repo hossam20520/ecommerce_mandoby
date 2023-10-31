@@ -458,8 +458,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2472,14 +2470,6 @@ var render = function () {
                                                             value: "pending",
                                                           },
                                                           {
-                                                            label: "delivering",
-                                                            value: "delivering",
-                                                          },
-                                                          {
-                                                            label: "cancelled",
-                                                            value: "cancelled",
-                                                          },
-                                                          {
                                                             label: "ordered",
                                                             value: "ordered",
                                                           },
@@ -2517,7 +2507,7 @@ var render = function () {
                                           ],
                                           null,
                                           false,
-                                          2317741220
+                                          3823911716
                                         ),
                                       }),
                                     ],

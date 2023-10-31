@@ -9,7 +9,7 @@ class Unit extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'ShortName', 'base_unit','shop_id', 'operator', 'operator_value', 'is_active',
+        'name', 'ShortName', 'base_unit', 'operator', 'operator_value', 'is_active',
     ];
 
     protected $casts = [

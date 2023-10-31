@@ -33,17 +33,17 @@
           <button class="btn btn-danger btn-sm" @click="delete_by_selected()">{{$t('Del')}}</button>
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
-          <!-- <b-button variant="outline-info m-1" size="sm" v-b-toggle.sidebar-right>
+          <b-button variant="outline-info m-1" size="sm" v-b-toggle.sidebar-right>
             <i class="i-Filter-2"></i>
             {{ $t("Filter") }}
-          </b-button> -->
-          <!-- <b-button @click="Providers_PDF()" size="sm" variant="outline-success m-1">
+          </b-button>
+          <b-button @click="Providers_PDF()" size="sm" variant="outline-success m-1">
             <i class="i-File-Copy"></i> PDF
-          </b-button> -->
-          <!-- <b-button @click="Providers_Excel()" size="sm" variant="outline-danger m-1">
+          </b-button>
+          <b-button @click="Providers_Excel()" size="sm" variant="outline-danger m-1">
             <i class="i-File-Excel"></i> EXCEL
-          </b-button> -->
-          <!-- <b-button
+          </b-button>
+          <b-button
             @click="Show_import_providers()"
             size="sm"
             variant="info m-1"
@@ -51,8 +51,8 @@
           >
             <i class="i-Download"></i>
             {{ $t("Import_Suppliers") }}
-          </b-button> -->
-          <!-- <b-button
+          </b-button>
+          <b-button
             @click="New_Provider()"
             size="sm"
             variant="btn btn-primary btn-icon m-1"
@@ -60,7 +60,7 @@
           >
             <i class="i-Add"></i>
             {{$t('Add')}}
-          </b-button> -->
+          </b-button>
         </div>
 
         <template slot="table-row" slot-scope="props">
@@ -76,14 +76,14 @@
             >
               <i class="i-Edit text-25 text-success"></i>
             </a>
-            <!-- <a
+            <a
               title="Delete"
               v-b-tooltip.hover
               v-if="currentUserPermissions && currentUserPermissions.includes('Suppliers_delete')"
               @click="Remove_Provider(props.row.id)"
             >
               <i class="i-Close-Window text-25 text-danger"></i>
-            </a> -->
+            </a>
           </span>
         </template>
       </vue-good-table>

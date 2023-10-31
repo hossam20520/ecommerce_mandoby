@@ -17,7 +17,6 @@ class CreateCurrenciesTable extends Migration {
 		{
 			$table->engine = 'InnoDB';
 			$table->integer('id', true);
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->string('code', 192);
 			$table->string('name', 192);
 			$table->string('symbol', 192);

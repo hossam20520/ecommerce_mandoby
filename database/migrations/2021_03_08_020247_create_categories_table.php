@@ -17,11 +17,8 @@ class CreateCategoriesTable extends Migration {
 		{
 			$table->engine = 'InnoDB';
 			$table->integer('id', true);
-			$table->integer('shop_id')->nullable()->index('shop_id');
-			$table->text('image')->nullable();
 			$table->string('code', 192);
 			$table->string('name', 192);
-			$table->string('en_name', 192);
 			$table->timestamps(6);
 			$table->softDeletes();
 		});

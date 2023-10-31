@@ -17,7 +17,6 @@ class CreateSaleReturnDetailsTable extends Migration {
 		{
 			$table->engine = 'InnoDB';
 			$table->integer('id', true);
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('sale_return_id')->index('return_id');
 			$table->integer('product_id')->index('product_id_details_returns');
 			$table->float('price', 10, 0);

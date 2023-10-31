@@ -9,28 +9,8 @@
           <b-col lg="12" md="12" sm="12">
             <b-card>
               <b-row>
-
-                 
-               <!-- Shops -->
-               <b-col lg="2" md="2" sm="12" class="mb-3" v-if="CurrentType && CurrentType.includes('owner')"  >
-                  <validation-provider name="Unit Purchase" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Shops')">
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="sale.shop_id"
-                        :placeholder="$t('Shops')"
-                        :reduce="label => label.value"
-                        :options="shops.map(shops => ({label: shops.ar_name, value: shops.id}))"
-                      />
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
-
                 <!-- date  -->
-                <b-col lg="2" md="2" sm="12" class="mb-3">
+                <b-col lg="4" md="4" sm="12" class="mb-3">
                   <validation-provider
                     name="date"
                     :rules="{ required: true}"
@@ -603,7 +583,7 @@
 import { mapActions, mapGetters } from "vuex";
 import NProgress from "nprogress";
 import { loadStripe } from "@stripe/stripe-js";
- 
+
 export default {
   metaInfo: {
     title: "Create Sale"
@@ -626,7 +606,6 @@ export default {
       details: [],
       detail: {},
       sales: [],
- 
       payment: {
         status: "pending",
         Reglement: "Cash",
@@ -635,7 +614,6 @@ export default {
       },
       sale: {
         id: "",
-        shop_id:"",
         date: new Date().toISOString().slice(0, 10),
         statut: "completed",
         notes: "",
@@ -650,9 +628,7 @@ export default {
       total: 0,
       GrandTotal: 0,
       units:[],
-      shops:[],
       product: {
-     
         id: "",
         code: "",
         stock: "",
@@ -680,7 +656,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["currentUser" ,  "currentUserPermissions" , "CurrentType"])
+    ...mapGetters(["currentUser"])
   },
 
  
@@ -1219,7 +1195,6 @@ export default {
             notes: this.sale.notes,
             tax_rate: this.sale.tax_rate,
             TaxNet: this.sale.TaxNet,
-            shop_id: this.sale.shop_id,
             discount: this.sale.discount,
             shipping: this.sale.shipping,
             GrandTotal: this.GrandTotal,
@@ -1269,11 +1244,9 @@ export default {
               warehouse_id: this.sale.warehouse_id,
               statut: this.sale.statut,
               notes: this.sale.notes,
-              shop_id:this.shop_id,
               tax_rate: this.sale.tax_rate,
               TaxNet: this.sale.TaxNet,
               discount: this.sale.discount,
-              shop_id: this.sale.shop_id,
               shipping: this.sale.shipping,
               GrandTotal: this.GrandTotal,
               details: this.details,
@@ -1340,8 +1313,6 @@ export default {
         .get("sales/create")
         .then(response => {
           this.clients = response.data.clients;
-          this.shops = response.data.shops;
-          console.log(this.shops)
           this.warehouses = response.data.warehouses;
           this.stripe_key = response.data.stripe_key;
           this.isLoading = false;

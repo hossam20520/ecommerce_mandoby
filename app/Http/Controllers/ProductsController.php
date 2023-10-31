@@ -10,8 +10,6 @@ use App\Models\ProductVariant;
 use App\Models\product_warehouse;
 use App\Models\Unit;
 use App\Models\Warehouse;
-use App\Models\MerchantProduct;
-use App\Models\Shop;
 use App\utils\helpers;
 use Carbon\Carbon;
 use DB;
@@ -22,8 +20,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use \Gumlet\ImageResize;
-
- 
 
 class ProductsController extends BaseController
 {
@@ -45,20 +41,9 @@ class ProductsController extends BaseController
         $columns = array(0 => 'name', 1 => 'category_id', 2 => 'brand_id', 3 => 'code');
         $param = array(0 => 'like', 1 => '=', 2 => '=', 3 => 'like');
         $data = array();
-        
 
-        $obj = $helpers->GetUserInfo();
-        if($obj['role'] == 2){
-            $shop_id = $obj['shop']->id;
-            $products = Product::with('unit', 'category', 'brand')
-            ->where('deleted_at', '=', null)->where('shop_id' , $shop_id);
-
-        }else{
-            $products = Product::with('unit', 'category', 'brand')
+        $products = Product::with('unit', 'category', 'brand')
             ->where('deleted_at', '=', null);
-        }
-
-      
 
         //Multiple Filter
         $Filtred = $helpers->filter($products, $columns, $param, $request)
@@ -93,9 +78,7 @@ class ProductsController extends BaseController
             $item['brand'] = $product['brand'] ? $product['brand']->name : 'N/D';
             $item['unit'] = $product['unit']->ShortName;
             $item['price'] = $product->price;
-            $item['discount'] = $product->discount;
-            $item['en_name'] = $product->en_name;
-          
+
             $product_warehouse_data = product_warehouse::where('product_id', $product->id)
                 ->where('deleted_at', '=', null)
                 ->get();
@@ -110,10 +93,6 @@ class ProductsController extends BaseController
 
             $data[] = $item;
         }
-
-        // MerchantProduct
-        // 'shop_id', 'product_id','warehouse_id',
-         
 
         $warehouses = Warehouse::where('deleted_at', null)->get(['id', 'name']);
         $categories = Category::where('deleted_at', null)->get(['id', 'name']);
@@ -136,10 +115,10 @@ class ProductsController extends BaseController
 
         try {
             $this->validate($request, [
-                // 'code' => 'required|unique:products',
-                // 'code' => Rule::unique('products')->where(function ($query) {
-                //     return $query->where('deleted_at', '=', null);
-                // }),
+                'code' => 'required|unique:products',
+                'code' => Rule::unique('products')->where(function ($query) {
+                    return $query->where('deleted_at', '=', null);
+                }),
                 'name' => 'required',
                 'Type_barcode' => 'required',
                 'price' => 'required',
@@ -152,24 +131,13 @@ class ProductsController extends BaseController
             ]);
 
             \DB::transaction(function () use ($request) {
-                $helpers = new helpers();
-                $obj = $helpers->GetUserInfo();
-                if($obj['role'] == 2){
-                    $shop_id = $obj['shop']->id;
-                  }else{
-                    $shop_id =  $request['shop_id'];
-                  }
+
                 //-- Create New Product
                 $Product = new Product;
-              
+
                 //-- Field Required
-
-                $Product->en_name = $request['en_name'];
-                $Product->discount = $request['discount'];
-
                 $Product->name = $request['name'];
                 $Product->code = $request['code'];
-                $Product->shop_id = $shop_id;
                 $Product->Type_barcode = $request['Type_barcode'];
                 $Product->price = $request['price'];
                 $Product->category_id = $request['category_id'];
@@ -178,11 +146,6 @@ class ProductsController extends BaseController
                 $Product->tax_method = $request['tax_method'];
                 $Product->note = $request['note'];
                 $Product->cost = $request['cost'];
-                $Product->ar_description = $request['ar_description'];
-                $Product->en_description = $request['en_description'];
-                $Product->product_status = $request['product_status'];
-              
-                
                 $Product->unit_id = $request['unit_id'];
                 $Product->unit_sale_id = $request['unit_sale_id'];
                 $Product->unit_purchase_id = $request['unit_purchase_id'];
@@ -192,11 +155,8 @@ class ProductsController extends BaseController
                 if ($request['images']) {
                     $files = $request['images'];
                     foreach ($files as $file) {
-                        $fileData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file['path']));
-                      
-                        // $filename = rand(11111111, 99999999) . $file->getClientOriginalName();
-                      
-                        // $fileData->resize(200, 200);
+                        $fileData = ImageResize::createFromString(base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file['path'])));
+                        $fileData->resize(200, 200);
                         $name = rand(11111111, 99999999) . $file['name'];
                         $path = public_path() . '/images/products/';
                         $success = file_put_contents($path . $name, $fileData);
@@ -220,19 +180,9 @@ class ProductsController extends BaseController
                     }
                     ProductVariant::insert($Product_variants_data);
                 }
-                
-                 $helpe = new helpers();
-                  $obj = $helpe->GetUserInfo();
-                 if($obj['role'] == 2){
-                    $warehouses = Warehouse::where('deleted_at', null)->where('shop_id' , $obj['shop']->id )->pluck('id')->toArray();
 
-                  }else{
-                   //--Store Product Warehouse
-                     $warehouses = Warehouse::where('deleted_at', null)->pluck('id')->toArray();
-                  }
-           
-
-                
+                //--Store Product Warehouse
+                $warehouses = Warehouse::where('deleted_at', null)->pluck('id')->toArray();
                 if ($warehouses) {
                     $Product_variants = ProductVariant::where('product_id', $Product->id)
                         ->where('deleted_at', null)
@@ -257,10 +207,6 @@ class ProductsController extends BaseController
                     product_warehouse::insert($product_warehouse);
                 }
 
-
-
-
-
             }, 10);
 
             return response()->json(['success' => true]);
@@ -283,10 +229,10 @@ class ProductsController extends BaseController
         $this->authorizeForUser($request->user('api'), 'update', Product::class);
         try {
             $this->validate($request, [
-                // 'code' => 'required|unique:products',
-                // 'code' => Rule::unique('products')->ignore($id)->where(function ($query) {
-                //     return $query->where('deleted_at', '=', null);
-                // }),
+                'code' => 'required|unique:products',
+                'code' => Rule::unique('products')->ignore($id)->where(function ($query) {
+                    return $query->where('deleted_at', '=', null);
+                }),
                 'name' => 'required',
                 'Type_barcode' => 'required',
                 'price' => 'required',
@@ -321,16 +267,6 @@ class ProductsController extends BaseController
                 $Product->stock_alert = $request['stock_alert'];
                 $Product->is_variant = $request['is_variant'] == 'true' ? 1 : 0;
 
-                $Product->product_status = $request['product_status'];
-
-                $Product->ar_description = $request['ar_description'];
-                $Product->en_description = $request['en_description'];
-
-                $Product->en_name = $request['en_name'];
-                $Product->discount = $request['discount'];
-                $Product->shop_id = $request['shop_id'];
-                
-              
                 // Store Variants Product
                 $oldVariants = ProductVariant::where('product_id', $id)
                     ->where('deleted_at', null)
@@ -503,8 +439,8 @@ class ProductsController extends BaseController
                     }
                     $files = $request['images'];
                     foreach ($files as $file) {
-                        $fileData =  base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file['path']));
-                        // $fileData->resize(200, 200);
+                        $fileData = ImageResize::createFromString(base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file['path'])));
+                        $fileData->resize(200, 200);
                         $name = rand(11111111, 99999999) . $file['name'];
                         $path = public_path() . '/images/products/';
                         $success = file_put_contents($path . $name, $fileData);
@@ -619,23 +555,9 @@ class ProductsController extends BaseController
     {
 
         $this->authorizeForUser($request->user('api'), 'view', Product::class);
-        $helpers = new helpers();
-        $obj = $helpers->GetUserInfo();
 
-   
-       
-
-        
- 
-        if( $obj['role'] == 2){
-           $shop_id =  $obj['shop']->id;
-           $Product = Product::where('deleted_at', '=', null)->where('shop_id' ,  $shop_id  )->findOrFail($id);
-           $warehouses = Warehouse::where('deleted_at', '=', null)->where('zip' , $shop_id )->get();
-        }else{
-            $Product = Product::where('deleted_at', '=', null)->findOrFail($id);
-            $warehouses = Warehouse::where('deleted_at', '=', null)->get();
-        }
-
+        $Product = Product::where('deleted_at', '=', null)->findOrFail($id);
+        $warehouses = Warehouse::where('deleted_at', '=', null)->get();
 
         $item['id'] = $Product->id;
         $item['code'] = $Product->code;
@@ -910,26 +832,13 @@ class ProductsController extends BaseController
 
         $this->authorizeForUser($request->user('api'), 'create', Product::class);
 
-         $shop = Shop::where('deleted_at', null)->get(['id', 'ar_name' , 'en_name']);
-        $helpers = new helpers();
-        if( $helpers->IsMerchant()){
-
-            $shop_id = $helpers->ShopID();
-
-            $categories = Category::where('deleted_at', null)->where('shop_id' , $shop_id )->get(['id', 'name']);
-            $brands = Brand::where('deleted_at', null)->where('shop_id' , $shop_id )->get(['id', 'name']);
-            $units = Unit::where('deleted_at', null)->where('shop_id' , $shop_id )->where('base_unit', null)->get();
-        }else{
-            $categories = Category::where('deleted_at', null)->get(['id', 'name']);
-            $brands = Brand::where('deleted_at', null)->get(['id', 'name']);
-            $units = Unit::where('deleted_at', null)->where('base_unit', null)->get();
-        }
-
+        $categories = Category::where('deleted_at', null)->get(['id', 'name']);
+        $brands = Brand::where('deleted_at', null)->get(['id', 'name']);
+        $units = Unit::where('deleted_at', null)->where('base_unit', null)->get();
         return response()->json([
             'categories' => $categories,
             'brands' => $brands,
             'units' => $units,
-            'shops'=>$shop,
         ]);
 
     }
@@ -952,19 +861,7 @@ class ProductsController extends BaseController
 
         $this->authorizeForUser($request->user('api'), 'update', Product::class);
 
-        $helpers = new helpers();
-        $obj = $helpers->GetUserInfo();
-
-        if( $obj['role'] == 2){
-            $shop_id =  $obj['shop']->id;
-            $Product = Product::where('deleted_at', '=', null)->where('shop_id' ,  $shop_id  )->findOrFail($id);
-        
-         }else{
-             $Product = Product::where('deleted_at', '=', null)->findOrFail($id);
-            //  $warehouses = Warehouse::where('deleted_at', '=', null)->get();
-         }
-
-        // $Product = Product::where('deleted_at', '=', null)->findOrFail($id);
+        $Product = Product::where('deleted_at', '=', null)->findOrFail($id);
 
         $item['id'] = $Product->id;
         $item['code'] = $Product->code;
@@ -1028,18 +925,6 @@ class ProductsController extends BaseController
         $item['cost'] = $Product->cost;
         $item['stock_alert'] = $Product->stock_alert;
         $item['TaxNet'] = $Product->TaxNet;
-
-        $item['ar_description'] = $Product->ar_description;
-        $item['en_description'] = $Product->en_description;
-        $item['shop_id'] = $Product->shop_id;
-        $item['product_status'] = $Product->product_status;
-    
- 
-
-        $item['discount'] = $Product->discount;
-        $item['en_name'] = $Product->en_name;
-   
-
         $item['note'] = $Product->note ? $Product->note : '';
         $item['images'] = [];
         if ($Product->image != '' && $Product->image != 'no-image.png') {
@@ -1092,7 +977,7 @@ class ProductsController extends BaseController
         //         $product_units[] = $unit_child;
         //     }
         // }
-        $shop = Shop::where('deleted_at', null)->get(['id', 'ar_name' , 'en_name']);
+
         $units = Unit::where('deleted_at', null)
             ->where('base_unit', null)
             ->get();
@@ -1103,7 +988,6 @@ class ProductsController extends BaseController
             'brands' => $brands,
             'units' => $units,
             'units_sub' => $product_units,
-            'shops'=> $shop,
         ]);
 
     }

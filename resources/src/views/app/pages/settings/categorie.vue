@@ -53,25 +53,13 @@
               <i class="i-Close-Window text-25 text-danger"></i>
             </a>
           </span>
-
-          <span v-else-if="props.column.field == 'image'">
-            <b-img
-              thumbnail
-              height="50"
-              width="50"
-              fluid
-              :src="'/images/category/' + props.row.image"
-              alt="image"
-            ></b-img>
-          </span>
-
         </template>
       </vue-good-table>
     </b-card>
 
     <validation-observer ref="Create_Category">
       <b-modal hide-footer size="md" id="New_Category" :title="editmode?$t('Edit'):$t('Add')">
-        <b-form @submit.prevent="Submit_Category" enctype="multipart/form-data">
+        <b-form @submit.prevent="Submit_Category">
           <b-row>
             <!-- Code category -->
             <b-col md="12">
@@ -98,7 +86,8 @@
               <validation-provider
                 name="Name category"
                 :rules="{ required: true}"
-                v-slot="validationContext">
+                v-slot="validationContext"
+              >
                 <b-form-group :label="$t('Namecategorie')">
                   <b-form-input
                     :placeholder="$t('Enter_name_category')"
@@ -108,85 +97,6 @@
                     v-model="category.name"
                   ></b-form-input>
                   <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                </b-form-group>
-              </validation-provider>
-            </b-col>
-
-
-
-          <!-- Name category -->
-           <b-col md="12">
-              <validation-provider
-                name="Name category"
-                :rules="{ required: true}"
-                v-slot="validationContext">
-                <b-form-group :label="$t('en_Namecategorie')">
-                  <b-form-input
-                    :placeholder="$t('Enter_en_name_category')"
-                    :state="getValidationState(validationContext)"
-                    aria-describedby="Name-feedback"
-                    label="Name"
-                    v-model="category.en_name"
-                  ></b-form-input>
-                  <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                </b-form-group>
-              </validation-provider>
-            </b-col>
-
-
-
-            <b-col lg="6" md="6" sm="12" class="mb-2">
-                  <validation-provider name="Tax Method" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('main_section')">
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="category.main_section"
-                        :reduce="label => label.value"
-                        :placeholder="$t('Choose_main_section')"
-                        :options="
-                           [
-                           {label: 'no', value: 'no'},
-                            {label: 'yes', value: 'yes'},
-                    
-                           ]"
-                      ></v-select>
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
-
-            <!-- Shops -->
-            <!-- <b-col md="12"  v-if="CurrentType && CurrentType.includes('owner')"  >
-                  <validation-provider name="Shops" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Shops')">
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="category.shop_id"
-                        :placeholder="$t('Shops')"
-                        :reduce="label => label.value"
-                        :options="shops.map(shops => ({label: shops.ar_name, value: shops.id}))"
-                      />
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col> -->
-
-
-                        <!-- -Brand Image -->
-            <b-col md="12">
-              <validation-provider name="Image" ref="Image" rules="mimes:image/*|size:200">
-                <b-form-group slot-scope="{validate, valid, errors }" :label="$t('categoryImage')">
-                  <input
-                    :state="errors[0] ? false : (valid ? true : null)"
-                    :class="{'is-invalid': !!errors.length}"
-                    @change="onFileSelected"
-                    label="Choose Image"
-                    type="file"
-                  >
-                  <b-form-invalid-feedback id="Image-feedback">{{ errors[0] }}</b-form-invalid-feedback>
                 </b-form-group>
               </validation-provider>
             </b-col>
@@ -208,7 +118,7 @@
 
 <script>
 import NProgress from "nprogress";
-import { mapGetters, mapActions } from "vuex";
+
 export default {
   metaInfo: {
     title: "Category"
@@ -217,7 +127,6 @@ export default {
     return {
       isLoading: true,
       SubmitProcessing:false,
-      data: new FormData(),
       serverParams: {
         columnFilters: {},
         sort: {
@@ -232,34 +141,18 @@ export default {
       search: "",
       limit: "10",
       categories: [],
-      shops:[],
       editmode: false,
 
       category: {
-        shop_id:"",
         id: "",
-        main_section:"",
-        en_name:"",
         name: "",
-        code: "",
-        image: ""
+        code: ""
       }
-      ,
-     
     };
   },
   computed: {
-    ...mapGetters([  "currentUserPermissions" , "CurrentType"]),
     columns() {
       return [
-
-      {
-          label: this.$t("categoryImage"),
-          field: "image",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
-
         {
           label: this.$t("Codecategorie"),
           field: "code",
@@ -269,18 +162,6 @@ export default {
         {
           label: this.$t("Namecategorie"),
           field: "name",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
-        {
-          label: this.$t("en_name"),
-          field: "en_name",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
-        {
-          label: this.$t("main_section"),
-          field: "main_section",
           tdClass: "text-left",
           thClass: "text-left"
         },
@@ -356,7 +237,9 @@ export default {
       this.$refs.Create_Category.validate().then(success => {
         if (!success) {
           this.makeToast(
-            "danger", this.$t("Please_fill_the_form_correctly"), this.$t("Failed")
+            "danger",
+            this.$t("Please_fill_the_form_correctly"),
+            this.$t("Failed")
           );
         } else {
           if (!this.editmode) {
@@ -375,16 +258,6 @@ export default {
         variant: variant,
         solid: true
       });
-    },
-
-    async onFileSelected(e) {
-      const { valid } = await this.$refs.Image.validate(e);
-
-      if (valid) {
-        this.category.image = e.target.files[0];
-      } else {
-        this.category.image = "";
-      }
     },
 
     //------------------------------ Modal  (create category) -------------------------------\\
@@ -424,7 +297,6 @@ export default {
         )
         .then(response => {
           this.categories = response.data.categories;
-          this.shops = response.data.shops;
           this.totalRows = response.data.totalRows;
 
           // Complete the animation of theprogress bar.
@@ -442,21 +314,12 @@ export default {
 
     //----------------------------------Create new Category ----------------\\
     Create_Category() {
-
-      var self = this;
-      self.SubmitProcessing = true;
-      self.data.append("name", self.category.name);
-      self.data.append("code", self.category.code);
-      self.data.append("en_name", self.category.en_name);
-      self.data.append("main_section", self.category.main_section);
-      self.data.append("shop_id", self.category.shop_id);
-
-      self.data.append("image", self.category.image);
-
-      
-
+      this.SubmitProcessing = true;
       axios
-        .post("categories", self.data)
+        .post("categories", {
+          name: this.category.name,
+          code: this.category.code
+        })
         .then(response => {
           this.SubmitProcessing = false;
           Fire.$emit("Event_Category");
@@ -474,19 +337,12 @@ export default {
 
     //---------------------------------- Update Category ----------------\\
     Update_Category() {
-     
-      var self = this;
-      self.SubmitProcessing = true;
-      self.data.append("name", self.category.name);
-      self.data.append("code", self.category.code);
-      self.data.append("shop_id", self.category.shop_id);
-      self.data.append("image", self.category.image);
-      self.data.append("en_name", self.category.en_name);
-      self.data.append("main_section", self.category.main_section);
-      self.data.append("_method", "put");
-
+      this.SubmitProcessing = true;
       axios
-        .post("categories/" + this.category.id,  self.data)
+        .put("categories/" + this.category.id, {
+          name: this.category.name,
+          code: this.category.code
+        })
         .then(response => {
           this.SubmitProcessing = false;
           Fire.$emit("Event_Category");
@@ -508,14 +364,8 @@ export default {
       this.category = {
         id: "",
         name: "",
-        code: "",
-        main_section:"",
-        image:"",
-        en_name:"",
-        shop_id:"",
+        code: ""
       };
-
-      this.data = new FormData();
     },
 
     //--------------------------- Remove Category----------------\\

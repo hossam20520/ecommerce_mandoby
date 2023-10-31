@@ -679,62 +679,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -750,8 +694,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       clients: [],
       warehouses: [],
       setting: {
-        value: "",
-        percentage: "",
         client_id: "",
         warehouse_id: "",
         currency_id: "",
@@ -914,8 +856,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
       var self = this;
-      self.data.append("percentage", self.setting.percentage);
-      self.data.append("value", self.setting.value);
       self.data.append("client", self.setting.client_id);
       self.data.append("warehouse", self.setting.warehouse_id);
       self.data.append("currency", self.setting.currency_id);
@@ -1533,189 +1473,6 @@ var render = function () {
                                         [
                                           _c("validation-provider", {
                                             attrs: {
-                                              name: "value",
-                                              rules: { required: true },
-                                            },
-                                            scopedSlots: _vm._u(
-                                              [
-                                                {
-                                                  key: "default",
-                                                  fn: function (
-                                                    validationContext
-                                                  ) {
-                                                    return [
-                                                      _c(
-                                                        "b-form-group",
-                                                        {
-                                                          attrs: {
-                                                            label:
-                                                              _vm.$t("value"),
-                                                          },
-                                                        },
-                                                        [
-                                                          _c("b-form-input", {
-                                                            attrs: {
-                                                              state:
-                                                                _vm.getValidationState(
-                                                                  validationContext
-                                                                ),
-                                                              "aria-describedby":
-                                                                "Company-feedback",
-                                                              label: "value",
-                                                              placeholder:
-                                                                _vm.$t("value"),
-                                                            },
-                                                            model: {
-                                                              value:
-                                                                _vm.setting
-                                                                  .value,
-                                                              callback:
-                                                                function ($$v) {
-                                                                  _vm.$set(
-                                                                    _vm.setting,
-                                                                    "value",
-                                                                    $$v
-                                                                  )
-                                                                },
-                                                              expression:
-                                                                "setting.value",
-                                                            },
-                                                          }),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "b-form-invalid-feedback",
-                                                            {
-                                                              attrs: {
-                                                                id: "Company-feedback",
-                                                              },
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  validationContext
-                                                                    .errors[0]
-                                                                )
-                                                              ),
-                                                            ]
-                                                          ),
-                                                        ],
-                                                        1
-                                                      ),
-                                                    ]
-                                                  },
-                                                },
-                                              ],
-                                              null,
-                                              false,
-                                              2595574012
-                                            ),
-                                          }),
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        {
-                                          attrs: { lg: "4", md: "4", sm: "12" },
-                                        },
-                                        [
-                                          _c("validation-provider", {
-                                            attrs: {
-                                              name: "percentage",
-                                              rules: { required: true },
-                                            },
-                                            scopedSlots: _vm._u(
-                                              [
-                                                {
-                                                  key: "default",
-                                                  fn: function (
-                                                    validationContext
-                                                  ) {
-                                                    return [
-                                                      _c(
-                                                        "b-form-group",
-                                                        {
-                                                          attrs: {
-                                                            label:
-                                                              _vm.$t(
-                                                                "percentage"
-                                                              ),
-                                                          },
-                                                        },
-                                                        [
-                                                          _c("b-form-input", {
-                                                            attrs: {
-                                                              state:
-                                                                _vm.getValidationState(
-                                                                  validationContext
-                                                                ),
-                                                              "aria-describedby":
-                                                                "Company-feedback",
-                                                              label:
-                                                                "percentage",
-                                                              placeholder:
-                                                                _vm.$t(
-                                                                  "percentage"
-                                                                ),
-                                                            },
-                                                            model: {
-                                                              value:
-                                                                _vm.setting
-                                                                  .percentage,
-                                                              callback:
-                                                                function ($$v) {
-                                                                  _vm.$set(
-                                                                    _vm.setting,
-                                                                    "percentage",
-                                                                    $$v
-                                                                  )
-                                                                },
-                                                              expression:
-                                                                "setting.percentage",
-                                                            },
-                                                          }),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "b-form-invalid-feedback",
-                                                            {
-                                                              attrs: {
-                                                                id: "Company-feedback",
-                                                              },
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  validationContext
-                                                                    .errors[0]
-                                                                )
-                                                              ),
-                                                            ]
-                                                          ),
-                                                        ],
-                                                        1
-                                                      ),
-                                                    ]
-                                                  },
-                                                },
-                                              ],
-                                              null,
-                                              false,
-                                              1485101212
-                                            ),
-                                          }),
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-col",
-                                        {
-                                          attrs: { lg: "4", md: "4", sm: "12" },
-                                        },
-                                        [
-                                          _c("validation-provider", {
-                                            attrs: {
                                               name: "Company Phone",
                                               rules: { required: true },
                                             },
@@ -2180,6 +1937,58 @@ var render = function () {
                                                   },
                                                   expression:
                                                     "setting.client_id",
+                                                },
+                                              }),
+                                            ],
+                                            1
+                                          ),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        {
+                                          attrs: { lg: "4", md: "4", sm: "12" },
+                                        },
+                                        [
+                                          _c(
+                                            "b-form-group",
+                                            {
+                                              attrs: {
+                                                label:
+                                                  _vm.$t("DefaultWarehouse"),
+                                              },
+                                            },
+                                            [
+                                              _c("v-select", {
+                                                attrs: {
+                                                  reduce: function (label) {
+                                                    return label.value
+                                                  },
+                                                  placeholder:
+                                                    _vm.$t("Choose_Warehouse"),
+                                                  options: _vm.warehouses.map(
+                                                    function (warehouses) {
+                                                      return {
+                                                        label: warehouses.name,
+                                                        value: warehouses.id,
+                                                      }
+                                                    }
+                                                  ),
+                                                },
+                                                model: {
+                                                  value:
+                                                    _vm.setting.warehouse_id,
+                                                  callback: function ($$v) {
+                                                    _vm.$set(
+                                                      _vm.setting,
+                                                      "warehouse_id",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "setting.warehouse_id",
                                                 },
                                               }),
                                             ],

@@ -16,7 +16,6 @@ class CreateSettingsTable extends Migration {
 		Schema::create('settings', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('id', true);
 			$table->string('email', 191);
 			$table->integer('currency_id')->nullable()->index('currency_id');

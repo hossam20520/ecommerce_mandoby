@@ -11,13 +11,6 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -154,28 +147,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -197,12 +168,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       selectedIds: [],
       totalRows: "",
       search: "",
-      shops: [],
       limit: "10",
       currencies: [],
       editmode: false,
       currency: {
-        shop_id: "",
         id: "",
         name: "",
         code: "",
@@ -210,7 +179,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["currentUserPermissions", "CurrentType"])), {}, {
+  computed: {
     columns: function columns() {
       return [{
         label: this.$t("CurrencyCode"),
@@ -236,7 +205,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         sortable: false
       }];
     }
-  }),
+  },
   methods: {
     //---- update Params Table
     updateParams: function updateParams(newProps) {
@@ -346,7 +315,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
       axios.get("currencies?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
         _this3.currencies = response.data.currencies;
-        _this3.shops = response.data.shops;
         _this3.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
@@ -366,7 +334,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.SubmitProcessing = true;
       axios.post("currencies", {
         name: this.currency.name,
-        shop_id: this.currency.shop_id,
         code: this.currency.code,
         symbol: this.currency.symbol
       }).then(function (response) {
@@ -388,7 +355,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.put("currencies/" + this.currency.id, {
         name: this.currency.name,
         code: this.currency.code,
-        shop_id: this.currency.shop_id,
         symbol: this.currency.symbol
       }).then(function (response) {
         _this5.SubmitProcessing = false;
@@ -719,82 +685,6 @@ var render = function () {
                   _c(
                     "b-row",
                     [
-                      _vm.CurrentType && _vm.CurrentType.includes("owner")
-                        ? _c(
-                            "b-col",
-                            { attrs: { md: "12" } },
-                            [
-                              _c("validation-provider", {
-                                attrs: {
-                                  name: "Shops",
-                                  rules: { required: true },
-                                },
-                                scopedSlots: _vm._u(
-                                  [
-                                    {
-                                      key: "default",
-                                      fn: function (ref) {
-                                        var valid = ref.valid
-                                        var errors = ref.errors
-                                        return _c(
-                                          "b-form-group",
-                                          { attrs: { label: _vm.$t("Shops") } },
-                                          [
-                                            _c("v-select", {
-                                              class: {
-                                                "is-invalid": !!errors.length,
-                                              },
-                                              attrs: {
-                                                state: errors[0]
-                                                  ? false
-                                                  : valid
-                                                  ? true
-                                                  : null,
-                                                placeholder: _vm.$t("Shops"),
-                                                reduce: function (label) {
-                                                  return label.value
-                                                },
-                                                options: _vm.shops.map(
-                                                  function (shops) {
-                                                    return {
-                                                      label: shops.ar_name,
-                                                      value: shops.id,
-                                                    }
-                                                  }
-                                                ),
-                                              },
-                                              model: {
-                                                value: _vm.currency.shop_id,
-                                                callback: function ($$v) {
-                                                  _vm.$set(
-                                                    _vm.currency,
-                                                    "shop_id",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression: "currency.shop_id",
-                                              },
-                                            }),
-                                            _vm._v(" "),
-                                            _c("b-form-invalid-feedback", [
-                                              _vm._v(_vm._s(errors[0])),
-                                            ]),
-                                          ],
-                                          1
-                                        )
-                                      },
-                                    },
-                                  ],
-                                  null,
-                                  false,
-                                  3987056878
-                                ),
-                              }),
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
                       _c(
                         "b-col",
                         { attrs: { md: "12" } },

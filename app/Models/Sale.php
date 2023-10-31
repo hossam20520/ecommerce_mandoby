@@ -9,7 +9,7 @@ class Sale extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'date', 'Ref', 'is_pos', 'client_id', 'GrandTotal',  'shop_id' ,  'qte_retturn', 'TaxNet', 'tax_rate', 'notes',
+        'date', 'Ref', 'is_pos', 'client_id', 'GrandTotal', 'qte_retturn', 'TaxNet', 'tax_rate', 'notes',
         'total_retturn', 'warehouse_id', 'user_id', 'statut', 'discount', 'shipping',
         'paid_amount', 'payment_statut', 'created_at', 'updated_at', 'deleted_at',
     ];
@@ -44,11 +44,6 @@ class Sale extends Model
         return $this->belongsTo('App\Models\Client');
     }
 
-    public function shop()
-    {
-        return $this->belongsTo('App\Models\Shop' , 'shop_id');
-    }
-     
     public function facture()
     {
         return $this->hasMany('App\Models\PaymentSale');

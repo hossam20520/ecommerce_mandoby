@@ -16,7 +16,6 @@ class CreatePurchaseDetailsTable extends Migration {
 		Schema::create('purchase_details', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('id', true);
 			$table->float('cost', 10, 0);
 			$table->float('TaxNet', 10, 0)->nullable()->default(0);

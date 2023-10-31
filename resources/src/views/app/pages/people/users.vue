@@ -25,13 +25,13 @@
         styleClass="table-hover tableOne vgt-table"
       >
         <div slot="table-actions" class="mt-2 mb-3">
-          <!-- <b-button variant="outline-info m-1" size="sm" v-b-toggle.sidebar-right>
+          <b-button variant="outline-info m-1" size="sm" v-b-toggle.sidebar-right>
             <i class="i-Filter-2"></i>
             {{ $t("Filter") }}
-          </b-button> -->
-          <!-- <b-button @click="Users_PDF()" size="sm" variant="outline-success m-1">
+          </b-button>
+          <b-button @click="Users_PDF()" size="sm" variant="outline-success m-1">
             <i class="i-File-Copy"></i> PDF
-          </b-button> -->
+          </b-button>
           <b-button @click="Users_Excel()" size="sm" variant="outline-danger m-1">
             <i class="i-File-Excel"></i> EXCEL
           </b-button>
@@ -252,7 +252,7 @@
             </b-col>
 
             <!-- role -->
-            <b-col md="6" sm="12"  v-if="CurrentType && CurrentType.includes('owner')" >
+            <b-col md="6" sm="12">
               <validation-provider name="role" :rules="{ required: true}">
                 <b-form-group slot-scope="{ valid, errors }" :label="$t('RoleName')">
                   <v-select
@@ -372,7 +372,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["currentUserPermissions" , "CurrentType"]),
+    ...mapGetters(["currentUserPermissions"]),
     columns() {
       return [
         {

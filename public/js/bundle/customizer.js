@@ -82,6 +82,58 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -170,6 +222,38 @@ var render = function () {
             _vm._v(" "),
             _c("div", {}, [
               _c("div", { staticClass: "card-header" }, [
+                _c("p", { staticClass: "mb-0" }, [_vm._v("Dark Mode")]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c(
+                  "label",
+                  {
+                    directives: [
+                      {
+                        name: "b-popover",
+                        rawName: "v-b-popover.hover.left",
+                        value: "Dark Mode",
+                        expression: "'Dark Mode'",
+                        modifiers: { hover: true, left: true },
+                      },
+                    ],
+                    staticClass: "switch switch-primary mr-3 mt-2",
+                  },
+                  [
+                    _c("input", {
+                      attrs: { type: "checkbox" },
+                      on: { click: _vm.changeThemeMode },
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "slider" }),
+                  ]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c("div", { staticClass: "card-header" }, [
                 _c("p", { staticClass: "mb-0" }, [_vm._v("Language")]),
               ]),
               _vm._v(" "),
@@ -198,6 +282,27 @@ var render = function () {
                     {
                       on: {
                         click: function ($event) {
+                          return _vm.SetLocal("fr")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-fr",
+                        attrs: { title: "fr" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("French"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
                           return _vm.SetLocal("ar")
                         },
                       },
@@ -210,6 +315,237 @@ var render = function () {
                       _vm._v(" "),
                       _c("span", { staticClass: "title-lang" }, [
                         _vm._v("Arabic"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("tur")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-tr",
+                        attrs: { title: "sa" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Turkish"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("sm_ch")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-cn",
+                        attrs: { title: "sa" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Simplified Chinese"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("thai")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-th",
+                        attrs: { title: "sa" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Thaï"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("hn")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-in",
+                        attrs: { title: "sa" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Hindi"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("de")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-de",
+                        attrs: { title: "de" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("German"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("es")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-es",
+                        attrs: { title: "es" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Spanish"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("it")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-it",
+                        attrs: { title: "it" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Italien"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("Ind")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-id",
+                        attrs: { title: "sa" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Indonesian"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("tr_ch")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-cn",
+                        attrs: { title: "sa" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Traditional Chinese"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("ru")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-ru",
+                        attrs: { title: "sa" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Russian"),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.SetLocal("vn")
+                        },
+                      },
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "flag-icon flag-icon-squared flag-icon-vn",
+                        attrs: { title: "sa" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "title-lang" }, [
+                        _vm._v("Vietnamese"),
                       ]),
                     ]
                   ),

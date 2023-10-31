@@ -1,28 +1,6 @@
 //Language Anglais
 
 export default {
-    Discount:'Promo Code',
-    AddShop:'Add Shop',
-    en_Name_shop:'En Shop Name',
-    ar_Name_shop:'Ar Shop Name',
-    shopsList:'Shop List',
-
-    
-    mYSHOP:'My Shop',
-    Shops:'Shops',
-    amount:'Amount',
-    paypackdate:'Pay Pack date',
-    customer_def:'Customer',
-    IsPaied:'Is paied',
-    writeProducts:'writeProducts',
-    is_verified:'is_verified',
-    Phonee:'Phone',
-    Enter_Phonee:'Enter Phone',
-    Choose_Customer:'Choose Customer',
-    Enter_def_amount:'Enter Amount',
-    deferred:'Deferred',
-    AddDeferreds:'Add Deferred',
-    DeferredsList:'Deferreds List',
     Receipt:'Receipt',
     Pos_Settings:'Pos Settings (Receipt)',
     Note_to_customer:'Note to customer',
@@ -422,7 +400,7 @@ export default {
     ReturnsInvoices: 'Returns Invoices',
     ReturnsInvoicesData: 'Returns Invoices Data',
     ShowAll: 'View all records of all Users',
- 
+    Discount: 'Discount',
     OrderTax: 'Order Tax',
     Shipping: 'Shipping',
     CompanyName: 'Company Name',

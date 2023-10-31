@@ -11,7 +11,6 @@ use App\Mail\PurchaseMail;
 use App\Models\PaymentPurchase;
 use App\Models\Product;
 use App\Models\Unit;
-use App\Models\Shop;
 use App\Models\ProductVariant;
 use App\Models\product_warehouse;
 use App\Models\Provider;
@@ -142,32 +141,16 @@ class PurchasesController extends BaseController
         $this->authorizeForUser($request->user('api'), 'create', Purchase::class);
 
         request()->validate([
-       
+            'supplier_id' => 'required',
             'warehouse_id' => 'required',
         ]);
 
         \DB::transaction(function () use ($request) {
-
-            $helpers = new helpers();
-
-            if( $helpers->IsMerchant()){
-    
-               $shop_id = $helpers->ShopID();
-
-            }else{
-                $shop_id =  $request->shop_id;
-            }
-
-
             $order = new Purchase;
-            
 
-            $provider =  Provider::where('deleted_at', '=', null)->where('shop_id' ,  $shop_id )->first();
-            
             $order->date = $request->date;
-            $order->shop_id =  $request->shop_id;
             $order->Ref = $this->getNumberOrder();
-            $order->provider_id =  $provider->id;
+            $order->provider_id = $request->supplier_id;
             $order->GrandTotal = $request->GrandTotal;
             $order->warehouse_id = $request->warehouse_id;
             $order->tax_rate = $request->tax_rate;
@@ -857,32 +840,12 @@ class PurchasesController extends BaseController
 
         $this->authorizeForUser($request->user('api'), 'create', Purchase::class);
 
-        
-        $helpe = new helpers();
-        $obj = $helpe->GetUserInfo();
-       if($obj['role'] == 2){
-        
-
-
-          $warehouses = Warehouse::where('deleted_at', null)->where('zip' , $obj['shop']->id )->get(['id', 'name']);
-
-        }else{
- 
-         $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
-        }
- 
-
-      
-
-
-        $shops = Shop::where('deleted_at', '=', null)->get(['id', 'ar_name' , 'en_name']);
-
+        $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
         $suppliers = Provider::where('deleted_at', '=', null)->get(['id', 'name']);
 
         return response()->json([
             'warehouses' => $warehouses,
             'suppliers' => $suppliers,
-            'shops' =>  $shops,
         ]);
     }
 

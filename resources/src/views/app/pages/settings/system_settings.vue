@@ -86,62 +86,6 @@
                     </validation-provider>
                   </b-col>
 
-
-
-                  
-                  <!-- Company Name  -->
-                  <b-col lg="4" md="4" sm="12">
-                    <validation-provider
-                      name="value"
-                      :rules="{ required: true}"
-                      v-slot="validationContext"
-                    >
-                      <b-form-group :label="$t('value')">
-                        <b-form-input
-                          :state="getValidationState(validationContext)"
-                          aria-describedby="Company-feedback"
-                          label="value"
-                          :placeholder="$t('value')"
-                          v-model="setting.value"
-                        ></b-form-input>
-                        <b-form-invalid-feedback
-                          id="Company-feedback"
-                        >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                      </b-form-group>
-                    </validation-provider>
-                  </b-col>
-
-
-
-
-
-                  
-                  <!-- Company Name  -->
-                  <b-col lg="4" md="4" sm="12">
-                    <validation-provider
-                      name="percentage"
-                      :rules="{ required: true}"
-                      v-slot="validationContext"
-                    >
-                      <b-form-group :label="$t('percentage')">
-                        <b-form-input
-                          :state="getValidationState(validationContext)"
-                          aria-describedby="Company-feedback"
-                          label="percentage"
-                          :placeholder="$t('percentage')"
-                          v-model="setting.percentage"
-                        ></b-form-input>
-                        <b-form-invalid-feedback
-                          id="Company-feedback"
-                        >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                      </b-form-group>
-                    </validation-provider>
-                  </b-col>
-
-
-
-
-
                   <!-- Company Phone  -->
                   <b-col lg="4" md="4" sm="12">
                     <validation-provider
@@ -253,7 +197,7 @@
                   </b-col>
 
                    <!-- Default Warehouse -->
-                  <!-- <b-col lg="4" md="4" sm="12">
+                  <b-col lg="4" md="4" sm="12">
                     <b-form-group :label="$t('DefaultWarehouse')">
                       <v-select
                         v-model="setting.warehouse_id"
@@ -262,7 +206,7 @@
                         :options="warehouses.map(warehouses => ({label: warehouses.name, value: warehouses.id}))"
                       />
                     </b-form-group>
-                  </b-col> -->
+                  </b-col>
 
                    <!-- Company Adress -->
                   <b-col lg="12" md="12" sm="12">
@@ -725,8 +669,6 @@ export default {
       clients: [],
       warehouses: [],
       setting: {
-        value:"",
-        percentage:"",
         client_id: "",
         warehouse_id: "",
         currency_id: "",
@@ -889,8 +831,6 @@ export default {
       NProgress.start();
       NProgress.set(0.1);
       var self = this;
-      self.data.append("percentage", self.setting.percentage);
-      self.data.append("value", self.setting.value);
       self.data.append("client", self.setting.client_id);
       self.data.append("warehouse", self.setting.warehouse_id);
       self.data.append("currency", self.setting.currency_id);

@@ -33,13 +33,13 @@
           <button class="btn btn-danger btn-sm" @click="delete_by_selected()">{{$t('Del')}}</button>
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
-          <!-- <b-button variant="outline-info ripple m-1" size="sm" v-b-toggle.sidebar-right>
+          <b-button variant="outline-info ripple m-1" size="sm" v-b-toggle.sidebar-right>
             <i class="i-Filter-2"></i>
             {{ $t("Filter") }}
-          </b-button> -->
-          <!-- <b-button @click="Sales_PDF()" size="sm" variant="outline-success ripple m-1">
+          </b-button>
+          <b-button @click="Sales_PDF()" size="sm" variant="outline-success ripple m-1">
             <i class="i-File-Copy"></i> PDF
-          </b-button> -->
+          </b-button>
           <b-button @click="Sales_Excel()" size="sm" variant="outline-danger ripple m-1">
             <i class="i-File-Excel"></i> EXCEL
           </b-button>
@@ -109,15 +109,15 @@
                   {{$t('Invoice_POS')}}
                 </b-dropdown-item>
 
-                <!-- <b-dropdown-item title="PDF" @click="Invoice_PDF(props.row , props.row.id)">
+                <b-dropdown-item title="PDF" @click="Invoice_PDF(props.row , props.row.id)">
                   <i class="nav-icon i-File-TXT font-weight-bold mr-2"></i>
                   {{$t('DownloadPdf')}}
-                </b-dropdown-item> -->
+                </b-dropdown-item>
 
-                <!-- <b-dropdown-item title="Email" @click="Sale_Email(props.row , props.row.id)">
+                <b-dropdown-item title="Email" @click="Sale_Email(props.row , props.row.id)">
                   <i class="nav-icon i-Envelope-2 font-weight-bold mr-2"></i>
                   {{$t('EmailSale')}}
-                </b-dropdown-item> -->
+                </b-dropdown-item>
 
                 <b-dropdown-item
                   title="Delete"
@@ -294,20 +294,20 @@
                       >
                         <i class="i-Pen-2"></i>
                       </span>
-                      <!-- <span
+                      <span
                         title="Email"
                         class="btn btn-icon btn-primary btn-sm"
                         @click="EmailPayment(payment , sale)"
                       >
                         <i class="i-Envelope"></i>
-                      </span> -->
-                      <!-- <span
+                      </span>
+                      <span
                         title="SMS"
                         class="btn btn-icon btn-secondary btn-sm"
                         @click="Payment_Sale_SMS(payment)"
                       >
                         <i class="i-Speach-Bubble"></i>
-                      </span> -->
+                      </span>
                       <span
                         v-if="currentUserPermissions.includes('payment_sales_delete')"
                         title="Delete"
@@ -1394,9 +1394,8 @@ export default {
             this.paymentProcessing = false;
           }
         }else{
-
-
-        axios.post("payment/sale", {
+        axios
+          .post("payment/sale", {
             sale_id: this.sale.id,
             date: this.payment.date,
             montant: parseFloat(this.payment.montant).toFixed(2),
@@ -1404,7 +1403,8 @@ export default {
             change: parseFloat(this.payment.received_amount - this.payment.montant).toFixed(2),
             Reglement: this.payment.Reglement,
             notes: this.payment.notes
-          }).then(response => {
+          })
+          .then(response => {
             this.paymentProcessing = false;
             Fire.$emit("Create_Facture_sale");
             this.makeToast(

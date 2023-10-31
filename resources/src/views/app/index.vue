@@ -1,7 +1,6 @@
 <template>
   <div>
     <component :is="getThemeMode.layout"></component>
-    
   </div>
 </template>
 

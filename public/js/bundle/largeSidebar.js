@@ -805,29 +805,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -854,7 +831,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     document.removeEventListener("click", this.returnSelectedParentMenu);
     window.removeEventListener("resize", this.handleWindowResize);
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(["getSideBarToggleProperties", "currentUserPermissions", "CurrentType"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(["getSideBarToggleProperties", "currentUserPermissions"])),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(["changeSecondarySidebarProperties", "changeSecondarySidebarPropertiesViaMenuItem", "changeSecondarySidebarPropertiesViaOverlay", "changeSidebarProperties"])), {}, {
     handleWindowResize: function handleWindowResize() {
       if (window.innerWidth <= 1200) {
@@ -944,6 +921,59 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1349,12 +1379,7 @@ var render = function () {
                       attrs: { tag: "a", to: "/app/dashboard" },
                     },
                     [
-                      _c("img", {
-                        attrs: {
-                          src: "https://cdn-icons-png.flaticon.com/512/10397/10397171.png",
-                          width: "50%",
-                        },
-                      }),
+                      _c("i", { staticClass: "nav-icon i-Bar-Chart" }),
                       _vm._v(" "),
                       _c("span", { staticClass: "nav-text" }, [
                         _vm._v(_vm._s(_vm.$t("dashboard"))),
@@ -1364,72 +1389,6 @@ var render = function () {
                 ],
                 1
               ),
-              _vm._v(" "),
-              _vm.CurrentType && _vm.CurrentType.includes("merchant")
-                ? _c(
-                    "li",
-                    {
-                      staticClass: "nav-item",
-                      class: { active: _vm.selectedParentMenu == "shops" },
-                      attrs: { "data-item": "shops" },
-                      on: { mouseenter: _vm.toggleSubMenu },
-                    },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-item-hold",
-                          attrs: { tag: "a", to: "/app/shops/myshop" },
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "https://cdn-icons-png.flaticon.com/512/273/273177.png",
-                              width: "50%",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "nav-text" }, [
-                            _vm._v(_vm._s(_vm.$t("mYSHOP"))),
-                          ]),
-                        ]
-                      ),
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.CurrentType && _vm.CurrentType.includes("owner")
-                ? _c(
-                    "li",
-                    {
-                      staticClass: "nav-item",
-                      class: { active: _vm.selectedParentMenu == "shops" },
-                      attrs: { "data-item": "shops", "data-submenu": true },
-                      on: { mouseenter: _vm.toggleSubMenu },
-                    },
-                    [
-                      _c(
-                        "a",
-                        { staticClass: "nav-item-hold", attrs: { href: "#" } },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "https://cdn-icons-png.flaticon.com/512/273/273177.png",
-                              width: "50%",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "nav-text" }, [
-                            _vm._v(_vm._s(_vm.$t("Shops"))),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "triangle" }),
-                    ]
-                  )
-                : _vm._e(),
               _vm._v(" "),
               _c(
                 "li",
@@ -1459,15 +1418,49 @@ var render = function () {
                     "a",
                     { staticClass: "nav-item-hold", attrs: { href: "#" } },
                     [
-                      _c("img", {
-                        attrs: {
-                          src: "https://cdn-icons-png.flaticon.com/512/10439/10439818.png",
-                          width: "50%",
-                        },
-                      }),
+                      _c("i", { staticClass: "nav-icon i-Library-2" }),
                       _vm._v(" "),
                       _c("span", { staticClass: "nav-text" }, [
                         _vm._v(_vm._s(_vm.$t("Products"))),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "triangle" }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        _vm.currentUserPermissions &&
+                        (_vm.currentUserPermissions.includes(
+                          "Purchases_view"
+                        ) ||
+                          _vm.currentUserPermissions.includes("Purchases_add")),
+                      expression:
+                        "currentUserPermissions && (currentUserPermissions.includes('Purchases_view') \n                      || currentUserPermissions.includes('Purchases_add'))",
+                    },
+                  ],
+                  staticClass: "nav-item",
+                  class: { active: _vm.selectedParentMenu == "purchases" },
+                  attrs: { "data-item": "purchases", "data-submenu": true },
+                  on: { mouseenter: _vm.toggleSubMenu },
+                },
+                [
+                  _c(
+                    "a",
+                    { staticClass: "nav-item-hold", attrs: { href: "#" } },
+                    [
+                      _c("i", { staticClass: "nav-icon i-Receipt" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "nav-text" }, [
+                        _vm._v(_vm._s(_vm.$t("Purchases"))),
                       ]),
                     ]
                   ),
@@ -1501,15 +1494,97 @@ var render = function () {
                     "a",
                     { staticClass: "nav-item-hold", attrs: { href: "#" } },
                     [
-                      _c("img", {
-                        attrs: {
-                          src: "https://cdn-icons-png.flaticon.com/512/3211/3211596.png",
-                          width: "50%",
-                        },
-                      }),
+                      _c("i", { staticClass: "nav-icon i-Full-Cart" }),
                       _vm._v(" "),
                       _c("span", { staticClass: "nav-text" }, [
                         _vm._v(_vm._s(_vm.$t("Sales"))),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "triangle" }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        _vm.currentUserPermissions &&
+                        (_vm.currentUserPermissions.includes(
+                          "Sale_Returns_view"
+                        ) ||
+                          _vm.currentUserPermissions.includes(
+                            "Sale_Returns_add"
+                          )),
+                      expression:
+                        "currentUserPermissions && (currentUserPermissions.includes('Sale_Returns_view') \n                      || currentUserPermissions.includes('Sale_Returns_add'))",
+                    },
+                  ],
+                  staticClass: "nav-item",
+                  class: { active: _vm.selectedParentMenu == "sale_return" },
+                  attrs: { "data-item": "sale_return", "data-submenu": true },
+                  on: { mouseenter: _vm.toggleSubMenu },
+                },
+                [
+                  _c(
+                    "a",
+                    { staticClass: "nav-item-hold", attrs: { href: "#" } },
+                    [
+                      _c("i", { staticClass: "nav-icon i-Right" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "nav-text" }, [
+                        _vm._v(_vm._s(_vm.$t("SalesReturn"))),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "triangle" }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        _vm.currentUserPermissions &&
+                        (_vm.currentUserPermissions.includes(
+                          "Purchase_Returns_view"
+                        ) ||
+                          _vm.currentUserPermissions.includes(
+                            "Purchase_Returns_add"
+                          )),
+                      expression:
+                        "currentUserPermissions && (currentUserPermissions.includes('Purchase_Returns_view') \n                      || currentUserPermissions.includes('Purchase_Returns_add'))",
+                    },
+                  ],
+                  staticClass: "nav-item",
+                  class: {
+                    active: _vm.selectedParentMenu == "purchase_return",
+                  },
+                  attrs: {
+                    "data-item": "purchase_return",
+                    "data-submenu": true,
+                  },
+                  on: { mouseenter: _vm.toggleSubMenu },
+                },
+                [
+                  _c(
+                    "a",
+                    { staticClass: "nav-item-hold", attrs: { href: "#" } },
+                    [
+                      _c("i", { staticClass: "nav-icon i-Left" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "nav-text" }, [
+                        _vm._v(_vm._s(_vm.$t("PurchasesReturn"))),
                       ]),
                     ]
                   ),
@@ -1548,12 +1623,7 @@ var render = function () {
                     "a",
                     { staticClass: "nav-item-hold", attrs: { href: "#" } },
                     [
-                      _c("img", {
-                        attrs: {
-                          src: "https://cdn-icons-png.flaticon.com/512/476/476863.png",
-                          width: "50%",
-                        },
-                      }),
+                      _c("i", { staticClass: "nav-icon i-Business-Mens" }),
                       _vm._v(" "),
                       _c("span", { staticClass: "nav-text" }, [
                         _vm._v(_vm._s(_vm.$t("People"))),
@@ -1600,12 +1670,7 @@ var render = function () {
                     "a",
                     { staticClass: "nav-item-hold", attrs: { href: "#" } },
                     [
-                      _c("img", {
-                        attrs: {
-                          src: "https://cdn-icons-png.flaticon.com/512/6584/6584875.png",
-                          width: "50%",
-                        },
-                      }),
+                      _c("i", { staticClass: "nav-icon i-Data-Settings" }),
                       _vm._v(" "),
                       _c("span", { staticClass: "nav-text" }, [
                         _vm._v(_vm._s(_vm.$t("Settings"))),
@@ -1634,60 +1699,6 @@ var render = function () {
         },
         [
           _c("div", { ref: "sidebarChild" }, [
-            _vm.CurrentType && _vm.CurrentType.includes("owner")
-              ? _c(
-                  "ul",
-                  {
-                    staticClass: "childNav d-none",
-                    class: { "d-block": _vm.selectedParentMenu == "shops" },
-                    attrs: { "data-parent": "shops" },
-                  },
-                  [
-                    _vm.CurrentType && _vm.CurrentType.includes("owner")
-                      ? _c(
-                          "li",
-                          { staticClass: "nav-item" },
-                          [
-                            _c(
-                              "router-link",
-                              { attrs: { tag: "a", to: "/app/shops/store" } },
-                              [
-                                _c("i", { staticClass: "nav-icon i-Add-File" }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "item-name" }, [
-                                  _vm._v(_vm._s(_vm.$t("AddShop"))),
-                                ]),
-                              ]
-                            ),
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.CurrentType && _vm.CurrentType.includes("owner")
-                      ? _c(
-                          "li",
-                          { staticClass: "nav-item" },
-                          [
-                            _c(
-                              "router-link",
-                              { attrs: { tag: "a", to: "/app/shops/list" } },
-                              [
-                                _c("i", { staticClass: "nav-icon i-Files" }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "item-name" }, [
-                                  _vm._v(_vm._s(_vm.$t("shopsList"))),
-                                ]),
-                              ]
-                            ),
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
             _c(
               "ul",
               {
@@ -1739,53 +1750,21 @@ var render = function () {
                       1
                     )
                   : _vm._e(),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "ul",
-              {
-                staticClass: "childNav d-none",
-                class: { "d-block": _vm.selectedParentMenu == "deferreds" },
-                attrs: { "data-parent": "deferreds" },
-              },
-              [
-                _vm.currentUserPermissions &&
-                _vm.currentUserPermissions.includes("deferreds_add")
-                  ? _c(
-                      "li",
-                      { staticClass: "nav-item" },
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { tag: "a", to: "/app/deferreds/store" } },
-                          [
-                            _c("i", { staticClass: "nav-icon i-Add-File" }),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "item-name" }, [
-                              _vm._v(_vm._s(_vm.$t("AddDeferreds"))),
-                            ]),
-                          ]
-                        ),
-                      ],
-                      1
-                    )
-                  : _vm._e(),
                 _vm._v(" "),
                 _vm.currentUserPermissions &&
-                _vm.currentUserPermissions.includes("deferreds_view")
+                _vm.currentUserPermissions.includes("barcode_view")
                   ? _c(
                       "li",
                       { staticClass: "nav-item" },
                       [
                         _c(
                           "router-link",
-                          { attrs: { tag: "a", to: "/app/deferreds/list" } },
+                          { attrs: { tag: "a", to: "/app/products/barcode" } },
                           [
-                            _c("i", { staticClass: "nav-icon i-Files" }),
+                            _c("i", { staticClass: "nav-icon i-Bar-Code" }),
                             _vm._v(" "),
                             _c("span", { staticClass: "item-name" }, [
-                              _vm._v(_vm._s(_vm.$t("DeferredsList"))),
+                              _vm._v(_vm._s(_vm.$t("Printbarcode"))),
                             ]),
                           ]
                         ),
@@ -1894,6 +1873,82 @@ var render = function () {
                             _vm._v(" "),
                             _c("span", { staticClass: "item-name" }, [
                               _vm._v(_vm._s(_vm.$t("ListTransfers"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "ul",
+              {
+                staticClass: "childNav d-none",
+                class: { "d-block": _vm.selectedParentMenu == "expenses" },
+                attrs: { "data-parent": "expenses" },
+              },
+              [
+                _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("expense_add")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { tag: "a", to: "/app/expenses/store" } },
+                          [
+                            _c("i", { staticClass: "nav-icon i-Add-File" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("Create_Expense"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("expense_view")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { tag: "a", to: "/app/expenses/list" } },
+                          [
+                            _c("i", { staticClass: "nav-icon i-Files" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("ListExpenses"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("expense_view")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { tag: "a", to: "/app/expenses/category" } },
+                          [
+                            _c("i", { staticClass: "nav-icon i-Files" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("Expense_Category"))),
                             ]),
                           ]
                         ),
@@ -2306,6 +2361,59 @@ var render = function () {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("permissions_view")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              tag: "a",
+                              to: "/app/settings/permissions",
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon i-Key" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("GroupPermissions"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("warehouse")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: { tag: "a", to: "/app/settings/Warehouses" },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "nav-icon i-Clothing-Store",
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("Warehouses"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
                 _vm.currentUserPermissions.includes("category")
                   ? _c(
                       "li",
@@ -2331,63 +2439,6 @@ var render = function () {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { tag: "a", to: "/app/settings/bill" } },
-                      [
-                        _c("i", { staticClass: "nav-icon i-Bookmark" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "item-name" }, [
-                          _vm._v(_vm._s(_vm.$t("Bill"))),
-                        ]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { tag: "a", to: "/app/settings/Abouts" } },
-                      [
-                        _c("i", { staticClass: "nav-icon i-Bookmark" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "item-name" }, [
-                          _vm._v(_vm._s(_vm.$t("About"))),
-                        ]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { tag: "a", to: "/app/settings/Sliders" } },
-                      [
-                        _c("i", { staticClass: "nav-icon i-Bookmark" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "item-name" }, [
-                          _vm._v(_vm._s(_vm.$t("Slider"))),
-                        ]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
                 _vm.currentUserPermissions &&
                 _vm.currentUserPermissions.includes("brand")
                   ? _c(
@@ -2409,25 +2460,6 @@ var render = function () {
                       1
                     )
                   : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { tag: "a", to: "/app/settings/Discounts" } },
-                      [
-                        _c("i", { staticClass: "nav-icon i-Bookmark" }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "item-name" }, [
-                          _vm._v(_vm._s(_vm.$t("Discount"))),
-                        ]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
                 _vm._v(" "),
                 _vm.currentUserPermissions &&
                 _vm.currentUserPermissions.includes("currency")
@@ -2542,7 +2574,129 @@ var render = function () {
                           _c("i", { staticClass: "dd-arrow i-Arrow-Down" }),
                         ]),
                         _vm._v(" "),
-                        _c("ul", { staticClass: "submenu" }),
+                        _c("ul", { staticClass: "submenu" }, [
+                          _vm.currentUserPermissions &&
+                          _vm.currentUserPermissions.includes(
+                            "Reports_payments_Purchases"
+                          )
+                            ? _c(
+                                "li",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        tag: "a",
+                                        to: "/app/reports/payments_purchase",
+                                      },
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "nav-icon i-ID-Card",
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", { staticClass: "item-name" }, [
+                                        _vm._v(_vm._s(_vm.$t("Purchases"))),
+                                      ]),
+                                    ]
+                                  ),
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.currentUserPermissions &&
+                          _vm.currentUserPermissions.includes(
+                            "Reports_payments_Sales"
+                          )
+                            ? _c(
+                                "li",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        tag: "a",
+                                        to: "/app/reports/payments_sale",
+                                      },
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "nav-icon i-ID-Card",
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", { staticClass: "item-name" }, [
+                                        _vm._v(_vm._s(_vm.$t("Sales"))),
+                                      ]),
+                                    ]
+                                  ),
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.currentUserPermissions &&
+                          _vm.currentUserPermissions.includes(
+                            "Reports_payments_Sale_Returns"
+                          )
+                            ? _c(
+                                "li",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        tag: "a",
+                                        to: "/app/reports/payments_sales_returns",
+                                      },
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "nav-icon i-ID-Card",
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", { staticClass: "item-name" }, [
+                                        _vm._v(_vm._s(_vm.$t("SalesReturn"))),
+                                      ]),
+                                    ]
+                                  ),
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.currentUserPermissions &&
+                          _vm.currentUserPermissions.includes(
+                            "Reports_payments_purchase_Return"
+                          )
+                            ? _c(
+                                "li",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        tag: "a",
+                                        to: "/app/reports/payments_purchases_returns",
+                                      },
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "nav-icon i-ID-Card",
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", { staticClass: "item-name" }, [
+                                        _vm._v(
+                                          _vm._s(_vm.$t("PurchasesReturn"))
+                                        ),
+                                      ]),
+                                    ]
+                                  ),
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                        ]),
                       ]
                     )
                   : _vm._e(),
@@ -2604,6 +2758,33 @@ var render = function () {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("Warehouse_report")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              tag: "a",
+                              to: "/app/reports/warehouse_report",
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon i-Pie-Chart" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("Warehouse_report"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
                 _vm.currentUserPermissions.includes("Reports_sales")
                   ? _c(
                       "li",
@@ -2656,6 +2837,60 @@ var render = function () {
                       1
                     )
                   : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("Reports_customers")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              tag: "a",
+                              to: "/app/reports/customers_report",
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon i-Bar-Chart" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("CustomersReport"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("Reports_suppliers")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              tag: "a",
+                              to: "/app/reports/providers_report",
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon i-Pie-Chart" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("SuppliersReport"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
               ]
             ),
           ]),
@@ -2697,344 +2932,617 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "main-header",
-      staticStyle: { "background-color": "#0065bf" },
-    },
-    [
-      _c(
-        "div",
-        { staticClass: "logo" },
-        [
-          _c("router-link", { attrs: { to: "/app/dashboard" } }, [
-            _c("img", {
-              staticStyle: { width: "250px" },
-              attrs: {
-                src: "/images/" + _vm.currentUser.logo,
-                alt: "",
-                height: "60",
-              },
-            }),
-          ]),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "menu-toggle", on: { click: _vm.sideBarToggle } },
-        [_c("div"), _vm._v(" "), _c("div"), _vm._v(" "), _c("div")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticStyle: { margin: "auto" } }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "header-part-right", staticStyle: { color: "#0B2B40" } },
-        [
-          _c("i", {
-            staticClass: "i-Full-Screen header-icon d-none d-sm-inline-block",
-            on: { click: _vm.handleFullScreen },
+  return _c("div", { staticClass: "main-header" }, [
+    _c(
+      "div",
+      { staticClass: "logo" },
+      [
+        _c("router-link", { attrs: { to: "/app/dashboard" } }, [
+          _c("img", {
+            staticStyle: { width: "131px" },
+            attrs: {
+              src: "/images/" + _vm.currentUser.logo,
+              alt: "",
+              width: "131",
+              height: "60",
+            },
           }),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown" },
-            [
-              _c(
-                "b-dropdown",
-                {
-                  staticClass: "m-md-2 d-none  d-md-block",
-                  attrs: {
-                    id: "dropdown",
-                    text: "Dropdown Button",
-                    "toggle-class": "text-decoration-none",
-                    "no-caret": "",
-                    variant: "link",
-                  },
+        ]),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "menu-toggle", on: { click: _vm.sideBarToggle } },
+      [_c("div"), _vm._v(" "), _c("div"), _vm._v(" "), _c("div")]
+    ),
+    _vm._v(" "),
+    _c("div", { staticStyle: { margin: "auto" } }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "header-part-right" },
+      [
+        _vm.currentUserPermissions &&
+        _vm.currentUserPermissions.includes("Pos_view")
+          ? _c(
+              "router-link",
+              {
+                staticClass: "btn btn-outline-primary tn-sm btn-rounded",
+                attrs: { to: "/app/pos" },
+              },
+              [
+                _c("span", { staticClass: "ul-btn__text ml-1" }, [
+                  _vm._v("POS"),
+                ]),
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c("i", {
+          staticClass: "i-Full-Screen header-icon d-none d-sm-inline-block",
+          on: { click: _vm.handleFullScreen },
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "dropdown" },
+          [
+            _c(
+              "b-dropdown",
+              {
+                staticClass: "m-md-2 d-none  d-md-block",
+                attrs: {
+                  id: "dropdown",
+                  text: "Dropdown Button",
+                  "toggle-class": "text-decoration-none",
+                  "no-caret": "",
+                  variant: "link",
                 },
-                [
-                  _c("template", { slot: "button-content" }, [
-                    _c("i", {
-                      staticClass: "i-Globe text-muted header-icon",
-                      attrs: {
-                        role: "button",
-                        id: "dropdownMenuButton",
-                        "data-toggle": "dropdown",
-                        "aria-haspopup": "true",
-                        "aria-expanded": "false",
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "vue-perfect-scrollbar",
-                    {
-                      ref: "myData",
-                      staticClass:
-                        "dropdown-menu-right rtl-ps-none notification-dropdown ps scroll",
-                      attrs: {
-                        settings: {
-                          suppressScrollX: true,
-                          wheelPropagation: false,
-                        },
+              },
+              [
+                _c("template", { slot: "button-content" }, [
+                  _c("i", {
+                    staticClass: "i-Globe text-muted header-icon",
+                    attrs: {
+                      role: "button",
+                      id: "dropdownMenuButton",
+                      "data-toggle": "dropdown",
+                      "aria-haspopup": "true",
+                      "aria-expanded": "false",
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "vue-perfect-scrollbar",
+                  {
+                    ref: "myData",
+                    staticClass:
+                      "dropdown-menu-right rtl-ps-none notification-dropdown ps scroll",
+                    attrs: {
+                      settings: {
+                        suppressScrollX: true,
+                        wheelPropagation: false,
                       },
                     },
-                    [
-                      _c("div", { staticClass: "menu-icon-grid" }, [
-                        _c(
-                          "a",
-                          {
-                            on: {
-                              click: function ($event) {
-                                return _vm.SetLocal("en")
-                              },
-                            },
-                          },
-                          [
-                            _c("i", {
-                              staticClass:
-                                "flag-icon flag-icon-squared flag-icon-gb",
-                              attrs: { title: "en" },
-                            }),
-                            _vm._v(" English\n            "),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            on: {
-                              click: function ($event) {
-                                return _vm.SetLocal("ar")
-                              },
-                            },
-                          },
-                          [
-                            _c("i", {
-                              staticClass:
-                                "flag-icon flag-icon-squared flag-icon-sa",
-                              attrs: { title: "sa" },
-                            }),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "title-lang" }, [
-                              _vm._v("Arabic"),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ],
-                2
-              ),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown" },
-            [
-              _c(
-                "b-dropdown",
-                {
-                  staticClass:
-                    "m-md-2 badge-top-container d-none  d-sm-inline-block",
-                  attrs: {
-                    id: "dropdown-1",
-                    text: "Dropdown Button",
-                    "toggle-class": "text-decoration-none",
-                    "no-caret": "",
-                    variant: "link",
                   },
-                },
-                [
-                  _c("template", { slot: "button-content" }, [
-                    _vm.notifs_alert > 0
-                      ? _c("span", { staticClass: "badge badge-primary" }, [
-                          _vm._v("1"),
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "i-Bell text-muted header-icon" }),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "vue-perfect-scrollbar",
-                    {
-                      ref: "myData",
-                      staticClass:
-                        "dropdown-menu-right rtl-ps-none notification-dropdown ps scroll",
-                      class: {
-                        open: _vm.getSideBarToggleProperties.isSideNavOpen,
-                      },
-                      attrs: {
-                        settings: {
-                          suppressScrollX: true,
-                          wheelPropagation: false,
-                        },
-                      },
-                    },
-                    [
-                      _vm.notifs_alert > 0
-                        ? _c("div", { staticClass: "dropdown-item d-flex" }, [
-                            _c("div", { staticClass: "notification-icon" }, [
-                              _c("i", {
-                                staticClass: "i-Bell text-primary mr-1",
-                              }),
-                            ]),
-                            _vm._v(" "),
-                            _vm.currentUserPermissions &&
-                            _vm.currentUserPermissions.includes(
-                              "Reports_quantity_alerts"
-                            )
-                              ? _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "notification-details flex-grow-1",
-                                  },
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        attrs: {
-                                          tag: "a",
-                                          to: "/app/reports/quantity_alerts",
-                                        },
-                                      },
-                                      [
-                                        _c(
-                                          "p",
-                                          {
-                                            staticClass:
-                                              "text-small text-muted m-0",
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                " +
-                                                _vm._s(_vm.notifs_alert) +
-                                                " " +
-                                                _vm._s(
-                                                  _vm.$t(
-                                                    "ProductQuantityAlerts"
-                                                  )
-                                                ) +
-                                                "\n                "
-                                            ),
-                                          ]
-                                        ),
-                                      ]
-                                    ),
-                                  ],
-                                  1
-                                )
-                              : _vm._e(),
-                          ])
-                        : _vm._e(),
-                    ]
-                  ),
-                ],
-                2
-              ),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown" },
-            [
-              _c(
-                "b-dropdown",
-                {
-                  staticClass: "m-md-2 user col align-self-end d-md-block",
-                  attrs: {
-                    id: "dropdown-1",
-                    text: "Dropdown Button",
-                    "toggle-class": "text-decoration-none",
-                    "no-caret": "",
-                    variant: "link",
-                  },
-                },
-                [
-                  _c("template", { slot: "button-content" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "/images/avatar/" + _vm.currentUser.avatar,
-                        id: "userDropdown",
-                        alt: "",
-                        "data-toggle": "dropdown",
-                        "aria-haspopup": "true",
-                        "aria-expanded": "false",
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "dropdown-menu-right",
-                      attrs: { "aria-labelledby": "userDropdown" },
-                    },
-                    [
-                      _c("div", { staticClass: "dropdown-header" }, [
-                        _c("i", { staticClass: "i-Lock-User mr-1" }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(_vm.currentUser.username))]),
-                      ]),
-                      _vm._v(" "),
+                  [
+                    _c("div", { staticClass: "menu-icon-grid" }, [
                       _c(
-                        "router-link",
+                        "a",
                         {
-                          staticClass: "dropdown-item",
-                          attrs: { to: "/app/profile" },
-                        },
-                        [_vm._v(_vm._s(_vm.$t("profil")))]
-                      ),
-                      _vm._v(" "),
-                      _vm.currentUserPermissions &&
-                      _vm.currentUserPermissions.includes("setting_system")
-                        ? _c(
-                            "router-link",
-                            {
-                              staticClass: "dropdown-item",
-                              attrs: { to: "/app/settings/System_settings" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("en")
                             },
-                            [_vm._v(_vm._s(_vm.$t("Settings")))]
-                          )
-                        : _vm._e(),
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-gb",
+                            attrs: { title: "en" },
+                          }),
+                          _vm._v(" English\n            "),
+                        ]
+                      ),
                       _vm._v(" "),
                       _c(
                         "a",
                         {
-                          staticClass: "dropdown-item",
-                          attrs: { href: "#" },
                           on: {
                             click: function ($event) {
-                              $event.preventDefault()
-                              return _vm.logoutUser($event)
+                              return _vm.SetLocal("fr")
                             },
                           },
                         },
-                        [_vm._v(_vm._s(_vm.$t("logout")))]
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-fr",
+                            attrs: { title: "fr" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("French"),
+                          ]),
+                        ]
                       ),
-                    ],
-                    1
-                  ),
-                ],
-                2
-              ),
-            ],
-            1
-          ),
-        ]
-      ),
-    ]
-  )
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("ar")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-sa",
+                            attrs: { title: "sa" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Arabic"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("tur")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-tr",
+                            attrs: { title: "sa" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Turkish"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("sm_ch")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-cn",
+                            attrs: { title: "sa" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Simplified Chinese"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("thai")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-th",
+                            attrs: { title: "sa" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Thaï"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("hn")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-in",
+                            attrs: { title: "sa" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Hindi"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("de")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-de",
+                            attrs: { title: "de" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("German"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("es")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-es",
+                            attrs: { title: "es" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Spanish"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("it")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-it",
+                            attrs: { title: "it" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Italien"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("Ind")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-id",
+                            attrs: { title: "sa" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Indonesian"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("tr_ch")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-cn",
+                            attrs: { title: "sa" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Traditional Chinese"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("ru")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-ru",
+                            attrs: { title: "sa" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Russian"),
+                          ]),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          on: {
+                            click: function ($event) {
+                              return _vm.SetLocal("vn")
+                            },
+                          },
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "flag-icon flag-icon-squared flag-icon-vn",
+                            attrs: { title: "sa" },
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title-lang" }, [
+                            _vm._v("Vietnamese"),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]
+                ),
+              ],
+              2
+            ),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "dropdown" },
+          [
+            _c(
+              "b-dropdown",
+              {
+                staticClass:
+                  "m-md-2 badge-top-container d-none  d-sm-inline-block",
+                attrs: {
+                  id: "dropdown-1",
+                  text: "Dropdown Button",
+                  "toggle-class": "text-decoration-none",
+                  "no-caret": "",
+                  variant: "link",
+                },
+              },
+              [
+                _c("template", { slot: "button-content" }, [
+                  _vm.notifs_alert > 0
+                    ? _c("span", { staticClass: "badge badge-primary" }, [
+                        _vm._v("1"),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "i-Bell text-muted header-icon" }),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "vue-perfect-scrollbar",
+                  {
+                    ref: "myData",
+                    staticClass:
+                      "dropdown-menu-right rtl-ps-none notification-dropdown ps scroll",
+                    class: {
+                      open: _vm.getSideBarToggleProperties.isSideNavOpen,
+                    },
+                    attrs: {
+                      settings: {
+                        suppressScrollX: true,
+                        wheelPropagation: false,
+                      },
+                    },
+                  },
+                  [
+                    _vm.notifs_alert > 0
+                      ? _c("div", { staticClass: "dropdown-item d-flex" }, [
+                          _c("div", { staticClass: "notification-icon" }, [
+                            _c("i", {
+                              staticClass: "i-Bell text-primary mr-1",
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _vm.currentUserPermissions &&
+                          _vm.currentUserPermissions.includes(
+                            "Reports_quantity_alerts"
+                          )
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "notification-details flex-grow-1",
+                                },
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        tag: "a",
+                                        to: "/app/reports/quantity_alerts",
+                                      },
+                                    },
+                                    [
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass:
+                                            "text-small text-muted m-0",
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                " +
+                                              _vm._s(_vm.notifs_alert) +
+                                              " " +
+                                              _vm._s(
+                                                _vm.$t("ProductQuantityAlerts")
+                                              ) +
+                                              "\n                "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                        ])
+                      : _vm._e(),
+                  ]
+                ),
+              ],
+              2
+            ),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "dropdown" },
+          [
+            _c(
+              "b-dropdown",
+              {
+                staticClass: "m-md-2 user col align-self-end d-md-block",
+                attrs: {
+                  id: "dropdown-1",
+                  text: "Dropdown Button",
+                  "toggle-class": "text-decoration-none",
+                  "no-caret": "",
+                  variant: "link",
+                },
+              },
+              [
+                _c("template", { slot: "button-content" }, [
+                  _c("img", {
+                    attrs: {
+                      src: "/images/avatar/" + _vm.currentUser.avatar,
+                      id: "userDropdown",
+                      alt: "",
+                      "data-toggle": "dropdown",
+                      "aria-haspopup": "true",
+                      "aria-expanded": "false",
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "dropdown-menu-right",
+                    attrs: { "aria-labelledby": "userDropdown" },
+                  },
+                  [
+                    _c("div", { staticClass: "dropdown-header" }, [
+                      _c("i", { staticClass: "i-Lock-User mr-1" }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(_vm.currentUser.username))]),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { to: "/app/profile" },
+                      },
+                      [_vm._v(_vm._s(_vm.$t("profil")))]
+                    ),
+                    _vm._v(" "),
+                    _vm.currentUserPermissions &&
+                    _vm.currentUserPermissions.includes("setting_system")
+                      ? _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/app/settings/System_settings" },
+                          },
+                          [_vm._v(_vm._s(_vm.$t("Settings")))]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.logoutUser($event)
+                          },
+                        },
+                      },
+                      [_vm._v(_vm._s(_vm.$t("logout")))]
+                    ),
+                  ],
+                  1
+                ),
+              ],
+              2
+            ),
+          ],
+          1
+        ),
+      ],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

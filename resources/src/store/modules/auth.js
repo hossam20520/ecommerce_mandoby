@@ -11,7 +11,6 @@ Vue.use(Vuex)
 
 const state = {
     isAuthenticated:false,
-    Type:null,
     Permissions: null,
     user: {},
     loading: false,
@@ -25,7 +24,6 @@ const getters = {
     isAuthenticated: state => state.isAuthenticated,
     currentUser: state => state.user,
     currentUserPermissions: state => state.Permissions,
-    CurrentType:state => state.Type,
     loading: state => state.loading,
     notifs_alert: state => state.notifs,
     DefaultLanguage: state => state.Default_Language,
@@ -50,10 +48,6 @@ const mutations = {
         state.Permissions = Permissions;
     },
 
-    setType(state, Type){
-        state.Type = Type;
-    }
-,
 
     setUser(state, user) {
         state.user = user;
@@ -85,15 +79,11 @@ const actions = {
     async refreshUserPermissions(context) {
 
         await axios.get("GetUserAuth").then((userAuth) => {
-           
             let Permissions = userAuth.data.permissions
             let user = userAuth.data.user
             let notifs = userAuth.data.notifs
             let default_language = userAuth.data.user.default_language
-            let Type = userAuth.data.type;
 
-            
-            context.commit('setType', Type)
             context.commit('setPermissions', Permissions)
             context.commit('setUser', user)
             context.commit('Notifs_alert', notifs)

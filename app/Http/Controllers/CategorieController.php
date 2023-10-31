@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Shop;
 use App\utils\helpers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Intervention\Image\ImageManagerStatic as Image;
+
 class CategorieController extends BaseController
 {
 
@@ -24,34 +23,16 @@ class CategorieController extends BaseController
         $order = $request->SortField;
         $dir = $request->SortType;
         $helpers = new helpers();
-        
 
-        $shops = Shop::where('deleted_at', '=', null)->get(['id', 'ar_name' , 'en_name']);
+        $categories = Category::where('deleted_at', '=', null)
 
-     
-
-        if( $helpers->IsMerchant()){
-
-           $shop_id = $helpers->ShopID();
-           
-           $categories = Category::where('deleted_at', '=', null)->where('shop_id' ,  $shop_id)->where(function ($query) use ($request) {
-            return $query->when($request->filled('search'), function ($query) use ($request) {
-                return $query->where('name', 'LIKE', "%{$request->search}%")
-                    ->orWhere('code', 'LIKE', "%{$request->search}%");
-            });
-        });
-
-        }else{
-
-            $categories = Category::where('deleted_at', '=', null)->where(function ($query) use ($request) {
+        // Search With Multiple Param
+            ->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('name', 'LIKE', "%{$request->search}%")
                         ->orWhere('code', 'LIKE', "%{$request->search}%");
                 });
             });
-        }
-
-
         $totalRows = $categories->count();
         $categories = $categories->offset($offSet)
             ->limit($perPage)
@@ -60,7 +41,6 @@ class CategorieController extends BaseController
 
         return response()->json([
             'categories' => $categories,
-            'shops' =>  $shops,
             'totalRows' => $totalRows,
         ]);
     }
@@ -76,37 +56,9 @@ class CategorieController extends BaseController
             'code' => 'required',
         ]);
 
-        if ($request->hasFile('image')) {
-
-            $image = $request->file('image');
-            $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
-
-            $image_resize = Image::make($image->getRealPath());
-            // $image_resize->resize(200, 200);
-            $image_resize->save(public_path('/images/category/' . $filename));
-
-        } else {
-            $filename = 'no-image.png';
-        }
-
-        $helpers = new helpers();
-        $obj = $helpers->GetUserInfo();
-
-        if( $obj['role'] == 2){
-
-           $shop_id =  $obj['shop']->id;
-        }else{
-            $shop_id =  $request['shop_id'];
-        } 
-
-        
         Category::create([
-            'main_section' => $request['main_section'],
             'code' => $request['code'],
-            'shop_id' => $shop_id ,
             'name' => $request['name'],
-            'en_name' => $request['en_name'],
-            'image' =>  $filename,
         ]);
         return response()->json(['success' => true]);
     }
@@ -124,73 +76,15 @@ class CategorieController extends BaseController
     {
         $this->authorizeForUser($request->user('api'), 'update', Category::class);
 
-        // request()->validate([
-        //     'name' => 'required',
-        //     'code' => 'required',
-        // ]);
-        $cate = Category::findOrFail($id);
-    
-        $currentImage = $cate->image;
- 
-        // dd($request->image);
-        if ($currentImage && $request->image != $currentImage) {
-            $image = $request->file('image');
-            $path = public_path() . '/images/category';
-            $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
+        request()->validate([
+            'name' => 'required',
+            'code' => 'required',
+        ]);
 
-            $image_resize = Image::make($image->getRealPath());
-            // $image_resize->resize(200, 200);
-            $image_resize->save(public_path('/images/category/' . $filename));
-
-            $BrandImage = $path . '/' . $currentImage;
-            if (file_exists($BrandImage)) {
-                if ($currentImage != 'no-image.png') {
-                    @unlink($BrandImage);
-                }
-            }
-        } else if (!$currentImage && $request->image !='null'){
-            $image = $request->file('image');
-            $path = public_path() . '/images/category';
-            $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
-
-            $image_resize = Image::make($image->getRealPath());
-            // $image_resize->resize(200, 200);
-            $image_resize->save(public_path('/images/category/' . $filename));
-        }
-
-        else {
-            $filename = $currentImage?$currentImage:'no-image.png';
-        }
-
-        $helpers = new helpers();
-        $obj = $helpers->GetUserInfo();
-
-        if( $obj['role'] == 2){
-
-           $shop_id =  $obj['shop']->id;
-
-           
-        Category::whereId($id)->where('shop_id' ,  $shop_id )->update([
+        Category::whereId($id)->update([
             'code' => $request['code'],
             'name' => $request['name'],
-            'en_name' => $request['en_name'],
-            'image' => $filename,
-            'main_section' => $request['main_section'],
         ]);
-        
-
-        }else{
-            Category::whereId($id)->update([
-                'code' => $request['code'],
-                'name' => $request['name'],
-                'en_name' => $request['en_name'],
-                'image' => $filename,
-                'main_section' => $request['main_section'],
-            ]);
-        }
-
-
-
         return response()->json(['success' => true]);
 
     }

@@ -471,25 +471,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -508,7 +489,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       suppliers: [],
       products: [],
       details: [],
-      shops: [],
       units: [],
       detail: {
         quantity: "",
@@ -521,7 +501,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       purchases: [],
       purchase: {
         id: "",
-        shop_id: "",
         date: new Date().toISOString().slice(0, 10),
         statut: "received",
         notes: "",
@@ -560,7 +539,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUser", "currentUserPermissions", "CurrentType"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUser"])),
   methods: {
     //--- Submit Validate Create Purchase
     Submit_Purchase: function Submit_Purchase() {
@@ -899,7 +878,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
         axios.post("purchases", {
           date: this.purchase.date,
-          shop_id: this.purchase.shop_id,
           supplier_id: this.purchase.supplier_id,
           warehouse_id: this.purchase.warehouse_id,
           statut: this.purchase.statut,
@@ -968,8 +946,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.get("purchases/create").then(function (response) {
         _this8.suppliers = response.data.suppliers;
         _this8.warehouses = response.data.warehouses;
-        _this8.shops = response.data.shops;
-        console.log(_this8.shops);
         _this8.isLoading = false;
       })["catch"](function (response) {
         setTimeout(function () {
@@ -1044,115 +1020,11 @@ var render = function () {
                               _c(
                                 "b-row",
                                 [
-                                  _vm.CurrentType &&
-                                  _vm.CurrentType.includes("owner")
-                                    ? _c(
-                                        "b-col",
-                                        {
-                                          staticClass: "mb-3",
-                                          attrs: { lg: "2", md: "2", sm: "12" },
-                                        },
-                                        [
-                                          _c("validation-provider", {
-                                            attrs: {
-                                              name: "Unit Purchase",
-                                              rules: { required: true },
-                                            },
-                                            scopedSlots: _vm._u(
-                                              [
-                                                {
-                                                  key: "default",
-                                                  fn: function (ref) {
-                                                    var valid = ref.valid
-                                                    var errors = ref.errors
-                                                    return _c(
-                                                      "b-form-group",
-                                                      {
-                                                        attrs: {
-                                                          label:
-                                                            _vm.$t("Shops"),
-                                                        },
-                                                      },
-                                                      [
-                                                        _c("v-select", {
-                                                          class: {
-                                                            "is-invalid":
-                                                              !!errors.length,
-                                                          },
-                                                          attrs: {
-                                                            state: errors[0]
-                                                              ? false
-                                                              : valid
-                                                              ? true
-                                                              : null,
-                                                            placeholder:
-                                                              _vm.$t("Shops"),
-                                                            reduce: function (
-                                                              label
-                                                            ) {
-                                                              return label.value
-                                                            },
-                                                            options:
-                                                              _vm.shops.map(
-                                                                function (
-                                                                  shops
-                                                                ) {
-                                                                  return {
-                                                                    label:
-                                                                      shops.ar_name,
-                                                                    value:
-                                                                      shops.id,
-                                                                  }
-                                                                }
-                                                              ),
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.purchase
-                                                                .shop_id,
-                                                            callback: function (
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.purchase,
-                                                                "shop_id",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "purchase.shop_id",
-                                                          },
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "b-form-invalid-feedback",
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(errors[0])
-                                                            ),
-                                                          ]
-                                                        ),
-                                                      ],
-                                                      1
-                                                    )
-                                                  },
-                                                },
-                                              ],
-                                              null,
-                                              false,
-                                              3744323042
-                                            ),
-                                          }),
-                                        ],
-                                        1
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
                                   _c(
                                     "b-col",
                                     {
                                       staticClass: "mb-3",
-                                      attrs: { lg: "2", md: "2", sm: "12" },
+                                      attrs: { lg: "4", md: "4", sm: "12" },
                                     },
                                     [
                                       _c("validation-provider", {
@@ -1227,6 +1099,108 @@ var render = function () {
                                           null,
                                           false,
                                           1215936152
+                                        ),
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-col",
+                                    {
+                                      staticClass: "mb-3",
+                                      attrs: { lg: "4", md: "4", sm: "12" },
+                                    },
+                                    [
+                                      _c("validation-provider", {
+                                        attrs: {
+                                          name: "Supplier",
+                                          rules: { required: true },
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function (ref) {
+                                                var valid = ref.valid
+                                                var errors = ref.errors
+                                                return _c(
+                                                  "b-form-group",
+                                                  {
+                                                    attrs: {
+                                                      label: _vm.$t("Supplier"),
+                                                    },
+                                                  },
+                                                  [
+                                                    _c("v-select", {
+                                                      class: {
+                                                        "is-invalid":
+                                                          !!errors.length,
+                                                      },
+                                                      attrs: {
+                                                        state: errors[0]
+                                                          ? false
+                                                          : valid
+                                                          ? true
+                                                          : null,
+                                                        reduce: function (
+                                                          label
+                                                        ) {
+                                                          return label.value
+                                                        },
+                                                        placeholder:
+                                                          _vm.$t(
+                                                            "Choose_Supplier"
+                                                          ),
+                                                        options:
+                                                          _vm.suppliers.map(
+                                                            function (
+                                                              suppliers
+                                                            ) {
+                                                              return {
+                                                                label:
+                                                                  suppliers.name,
+                                                                value:
+                                                                  suppliers.id,
+                                                              }
+                                                            }
+                                                          ),
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.purchase
+                                                            .supplier_id,
+                                                        callback: function (
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.purchase,
+                                                            "supplier_id",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "purchase.supplier_id",
+                                                      },
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "b-form-invalid-feedback",
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(errors[0])
+                                                        ),
+                                                      ]
+                                                    ),
+                                                  ],
+                                                  1
+                                                )
+                                              },
+                                            },
+                                          ],
+                                          null,
+                                          false,
+                                          2176043484
                                         ),
                                       }),
                                     ],

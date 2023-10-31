@@ -17,7 +17,6 @@ class CreateTransferDetailsTable extends Migration {
 		{
 			$table->engine = 'InnoDB';
 			$table->integer('id', true);
-		    $table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('transfer_id')->index('transfer_id');
 			$table->integer('product_id')->index('product_id_transfers');
 			$table->integer('product_variant_id')->nullable()->index('product_variant_id_transfer');

@@ -287,8 +287,6 @@
                                 [
                                   {label: 'completed', value: 'completed'},
                                   {label: 'Pending', value: 'pending'},
-                                  {label: 'delivering', value: 'delivering'},
-                                  {label: 'cancelled', value: 'cancelled'},
                                   {label: 'ordered', value: 'ordered'}
                                 ]"
                       ></v-select>

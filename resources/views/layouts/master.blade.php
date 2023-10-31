@@ -5,10 +5,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
- 
+    <link rel=icon href=/images/favicon.ico>
     <link rel="stylesheet" href="/css/master.css">
 
-    <title>Mandoby</title>
+    <title>Inventory System (pos managamnet)</title>
   </head>
 
   <body class="text-left">
@@ -22,7 +22,7 @@
     <!-- built files will be auto injected -->
     <div class="loading_wrap" id="loading_wrap">
       <div class="loader_logo">
-      <img src="/images/logo.png" class="" style="width: 250px" alt="logo" />
+      <img src="/images/logo.png" class="" alt="logo" />
 
       </div>
 

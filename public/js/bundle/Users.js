@@ -399,7 +399,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUserPermissions", "CurrentType"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUserPermissions"])), {}, {
     columns: function columns() {
       return [{
         label: this.$t("Firstname"),
@@ -984,6 +984,44 @@ var render = function () {
                       slot: "table-actions",
                     },
                     [
+                      _c(
+                        "b-button",
+                        {
+                          directives: [
+                            {
+                              name: "b-toggle",
+                              rawName: "v-b-toggle.sidebar-right",
+                              modifiers: { "sidebar-right": true },
+                            },
+                          ],
+                          attrs: { variant: "outline-info m-1", size: "sm" },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Filter-2" }),
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.$t("Filter")) +
+                              "\n        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
+                          attrs: { size: "sm", variant: "outline-success m-1" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.Users_PDF()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-File-Copy" }),
+                          _vm._v(" PDF\n        "),
+                        ]
+                      ),
+                      _vm._v(" "),
                       _c(
                         "b-button",
                         {
@@ -1678,86 +1716,67 @@ var render = function () {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.CurrentType && _vm.CurrentType.includes("owner")
-                        ? _c(
-                            "b-col",
-                            { attrs: { md: "6", sm: "12" } },
-                            [
-                              _c("validation-provider", {
-                                attrs: {
-                                  name: "role",
-                                  rules: { required: true },
-                                },
-                                scopedSlots: _vm._u(
-                                  [
-                                    {
-                                      key: "default",
-                                      fn: function (ref) {
-                                        var valid = ref.valid
-                                        var errors = ref.errors
-                                        return _c(
-                                          "b-form-group",
-                                          {
-                                            attrs: {
-                                              label: _vm.$t("RoleName"),
-                                            },
+                      _c(
+                        "b-col",
+                        { attrs: { md: "6", sm: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: { name: "role", rules: { required: true } },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (ref) {
+                                  var valid = ref.valid
+                                  var errors = ref.errors
+                                  return _c(
+                                    "b-form-group",
+                                    { attrs: { label: _vm.$t("RoleName") } },
+                                    [
+                                      _c("v-select", {
+                                        class: {
+                                          "is-invalid": !!errors.length,
+                                        },
+                                        attrs: {
+                                          state: errors[0]
+                                            ? false
+                                            : valid
+                                            ? true
+                                            : null,
+                                          reduce: function (label) {
+                                            return label.value
                                           },
-                                          [
-                                            _c("v-select", {
-                                              class: {
-                                                "is-invalid": !!errors.length,
-                                              },
-                                              attrs: {
-                                                state: errors[0]
-                                                  ? false
-                                                  : valid
-                                                  ? true
-                                                  : null,
-                                                reduce: function (label) {
-                                                  return label.value
-                                                },
-                                                placeholder:
-                                                  _vm.$t("PleaseSelect"),
-                                                options: _vm.roles.map(
-                                                  function (roles) {
-                                                    return {
-                                                      label: roles.name,
-                                                      value: roles.id,
-                                                    }
-                                                  }
-                                                ),
-                                              },
-                                              model: {
-                                                value: _vm.user.role_id,
-                                                callback: function ($$v) {
-                                                  _vm.$set(
-                                                    _vm.user,
-                                                    "role_id",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression: "user.role_id",
-                                              },
-                                            }),
-                                            _vm._v(" "),
-                                            _c("b-form-invalid-feedback", [
-                                              _vm._v(_vm._s(errors[0])),
-                                            ]),
-                                          ],
-                                          1
-                                        )
-                                      },
-                                    },
-                                  ],
-                                  null,
-                                  false,
-                                  1989888241
-                                ),
-                              }),
-                            ],
-                            1
-                          )
-                        : _vm._e(),
+                                          placeholder: _vm.$t("PleaseSelect"),
+                                          options: _vm.roles.map(function (
+                                            roles
+                                          ) {
+                                            return {
+                                              label: roles.name,
+                                              value: roles.id,
+                                            }
+                                          }),
+                                        },
+                                        model: {
+                                          value: _vm.user.role_id,
+                                          callback: function ($$v) {
+                                            _vm.$set(_vm.user, "role_id", $$v)
+                                          },
+                                          expression: "user.role_id",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("b-form-invalid-feedback", [
+                                        _vm._v(_vm._s(errors[0])),
+                                      ]),
+                                    ],
+                                    1
+                                  )
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
                         "b-col",

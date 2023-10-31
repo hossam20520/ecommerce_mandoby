@@ -1049,6 +1049,38 @@ var render = function () {
                                       ]
                                     )
                                   : _vm._e(),
+                                _vm._v(" "),
+                                _vm.currentUserPermissions &&
+                                _vm.currentUserPermissions.includes(
+                                  "Suppliers_delete"
+                                )
+                                  ? _c(
+                                      "a",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "b-tooltip",
+                                            rawName: "v-b-tooltip.hover",
+                                            modifiers: { hover: true },
+                                          },
+                                        ],
+                                        attrs: { title: "Delete" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.Remove_Provider(
+                                              props.row.id
+                                            )
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "i-Close-Window text-25 text-danger",
+                                        }),
+                                      ]
+                                    )
+                                  : _vm._e(),
                               ])
                             : _vm._e(),
                         ]
@@ -1079,11 +1111,119 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("div", {
-                    staticClass: "mt-2 mb-3",
-                    attrs: { slot: "table-actions" },
-                    slot: "table-actions",
-                  }),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "mt-2 mb-3",
+                      attrs: { slot: "table-actions" },
+                      slot: "table-actions",
+                    },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          directives: [
+                            {
+                              name: "b-toggle",
+                              rawName: "v-b-toggle.sidebar-right",
+                              modifiers: { "sidebar-right": true },
+                            },
+                          ],
+                          attrs: { variant: "outline-info m-1", size: "sm" },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Filter-2" }),
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.$t("Filter")) +
+                              "\n        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
+                          attrs: { size: "sm", variant: "outline-success m-1" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.Providers_PDF()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-File-Copy" }),
+                          _vm._v(" PDF\n        "),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
+                          attrs: { size: "sm", variant: "outline-danger m-1" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.Providers_Excel()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-File-Excel" }),
+                          _vm._v(" EXCEL\n        "),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.currentUserPermissions &&
+                      _vm.currentUserPermissions.includes("Suppliers_import")
+                        ? _c(
+                            "b-button",
+                            {
+                              attrs: { size: "sm", variant: "info m-1" },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.Show_import_providers()
+                                },
+                              },
+                            },
+                            [
+                              _c("i", { staticClass: "i-Download" }),
+                              _vm._v(
+                                "\n          " +
+                                  _vm._s(_vm.$t("Import_Suppliers")) +
+                                  "\n        "
+                              ),
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.currentUserPermissions &&
+                      _vm.currentUserPermissions.includes("Suppliers_add")
+                        ? _c(
+                            "b-button",
+                            {
+                              attrs: {
+                                size: "sm",
+                                variant: "btn btn-primary btn-icon m-1",
+                              },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.New_Provider()
+                                },
+                              },
+                            },
+                            [
+                              _c("i", { staticClass: "i-Add" }),
+                              _vm._v(
+                                "\n          " +
+                                  _vm._s(_vm.$t("Add")) +
+                                  "\n        "
+                              ),
+                            ]
+                          )
+                        : _vm._e(),
+                    ],
+                    1
+                  ),
                 ]
               ),
             ],

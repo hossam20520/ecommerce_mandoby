@@ -16,7 +16,6 @@ class CreateProductVariantsTable extends Migration {
 		Schema::create('product_variants', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('id', true);
 			$table->integer('product_id')->nullable()->index('product_id_variant');
 			$table->string('name', 192)->nullable();

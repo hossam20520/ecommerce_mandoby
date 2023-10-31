@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dhafar | Update</title>
+    <title>Stocky | Update</title>
 
     <link rel="stylesheet" href="/assets_setup/css/bootstrap.css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">

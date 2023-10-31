@@ -32,19 +32,7 @@ class ProvidersController extends BaseController
         $param = array(0 => 'like', 1 => 'like', 2 => 'like', 3 => 'like');
         $data = array();
 
-        $helpers = new helpers();
-
-        if( $helpers->IsMerchant()){
-
-           $shop_id = $helpers->ShopID();
-           $providers = Provider::where('deleted_at', '=', null)->where('shop_id',  $shop_id );
-        }else{
-            
-            $providers = Provider::where('deleted_at', '=', null);
-        }
-
-
-       
+        $providers = Provider::where('deleted_at', '=', null);
 
         //Multiple Filter
         $Filtred = $helpers->filter($providers, $columns, $param, $request)

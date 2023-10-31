@@ -42,48 +42,22 @@ class PaymentPurchasesController extends BaseController
         $columns = array(0 => 'Ref', 1 => 'purchase_id', 2 => 'Reglement', 3 =>'date');
         $data = array();
 
-        $helpers = new helpers();
-        if( $helpers->IsMerchant()){
-
-           $shop_id = $helpers->ShopID();
-
-           $Payments = PaymentPurchase::with('purchase.provider')->where('shop_id' , $shop_id )
-           ->where('deleted_at', '=', null)
-           ->where(function ($query) use ($view_records) {
-               if (!$view_records) {
-                   return $query->where('user_id', '=', Auth::user()->id);
-               }
-           })
-       // Multiple Filter
-           ->where(function ($query) use ($request) {
-               return $query->when($request->filled('provider_id'), function ($query) use ($request) {
-                   return $query->whereHas('purchase.provider', function ($q) use ($request) {
-                       $q->where('id', '=', $request->provider_id);
-                   });
-               });
-           });
-
-        }else{
-            $Payments = PaymentPurchase::with('purchase.provider')
+        // Check If User Has Permission View  All Records
+        $Payments = PaymentPurchase::with('purchase.provider')
             ->where('deleted_at', '=', null)
             ->where(function ($query) use ($view_records) {
                 if (!$view_records) {
                     return $query->where('user_id', '=', Auth::user()->id);
                 }
             })
-           // Multiple Filter
-             ->where(function ($query) use ($request) {
+        // Multiple Filter
+            ->where(function ($query) use ($request) {
                 return $query->when($request->filled('provider_id'), function ($query) use ($request) {
                     return $query->whereHas('purchase.provider', function ($q) use ($request) {
                         $q->where('id', '=', $request->provider_id);
                     });
                 });
             });
-        }
-
-
-        // Check If User Has Permission View  All Records
-
         $Filtred = $helpers->filter($Payments, $columns, $param, $request)
         // Search With Multiple Param
             ->where(function ($query) use ($request) {
@@ -132,10 +106,6 @@ class PaymentPurchasesController extends BaseController
             'suppliers' => $suppliers,
         ]);
 
-
-
-   
-
     }
 
     //----------- Store New Payment Purchase --------------\\
@@ -167,17 +137,7 @@ class PaymentPurchasesController extends BaseController
                     $payment_statut = 'unpaid';
                 }
 
-                $helpers = new helpers();
-                if( $helpers->IsMerchant()){
-        
-                   $shop_id = $helpers->ShopID();
-
-                }else{
-                    $shop_id =0; 
-                }
-
                 PaymentPurchase::create([
-                    'shop_id'=>  $shop_id,
                     'purchase_id' => $request['purchase_id'],
                     'Ref' => $this->getNumberOrder(),
                     'date' => $request['date'],
@@ -235,9 +195,6 @@ class PaymentPurchasesController extends BaseController
             } else if ($due === $purchase->GrandTotal) {
                 $payment_statut = 'unpaid';
             }
-
-    
-
 
             $payment->update([
                 'date' => $request['date'],

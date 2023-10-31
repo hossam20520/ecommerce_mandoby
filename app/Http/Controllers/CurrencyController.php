@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Currency;
-use App\Models\Shop;
 use App\utils\helpers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,29 +24,15 @@ class CurrencyController extends Controller
         $dir = $request->SortType;
         $helpers = new helpers();
 
+        $currencies = Currency::where('deleted_at', '=', null)
 
-        $shops = Shop::where('deleted_at', '=', null)->get(['id', 'ar_name' , 'en_name']);
-        if( $helpers->IsMerchant()){
-
-            $shop_id = $helpers->ShopID();
-            $currencies = Currency::where('deleted_at', '=', null)->where('shop_id' , $shop_id)
+        // Search With Multiple Param
             ->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('name', 'LIKE', "%{$request->search}%")
                         ->orWhere('code', 'LIKE', "%{$request->search}%");
                 });
             });
- 
-         }else{
-            $currencies = Currency::where('deleted_at', '=', null)
-            ->where(function ($query) use ($request) {
-                return $query->when($request->filled('search'), function ($query) use ($request) {
-                    return $query->where('name', 'LIKE', "%{$request->search}%")
-                        ->orWhere('code', 'LIKE', "%{$request->search}%");
-                });
-            });
-         }
-
         $totalRows = $currencies->count();
         $currencies = $currencies->offset($offSet)
             ->limit($perPage)
@@ -56,7 +41,6 @@ class CurrencyController extends Controller
 
         return response()->json([
             'currencies' => $currencies,
-            'shops' => $shops,
             'totalRows' => $totalRows,
         ]);
     }
@@ -66,16 +50,6 @@ class CurrencyController extends Controller
     public function store(Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'create', Currency::class);
-      
-
-        $helpers = new helpers();
-        if( $helpers->IsMerchant()){
-
-            $shop_id = $helpers->ShopID();
-
-        }else{
-            $shop_id = $request['shop_id'];
-        }
 
         request()->validate([
             'code' => 'required',
@@ -84,7 +58,6 @@ class CurrencyController extends Controller
         ]);
 
         Currency::create([
-            'shop_id' =>  $shop_id ,
             'name' => $request['name'],
             'code' => $request['code'],
             'symbol' => $request['symbol'],
@@ -107,16 +80,6 @@ class CurrencyController extends Controller
     {
         $this->authorizeForUser($request->user('api'), 'update', Currency::class);
 
-        $helpers = new helpers();
-        if( $helpers->IsMerchant()){
-
-            $shop_id = $helpers->ShopID();
-
-        }else{
-            $shop_id = $request['shop_id'];
-        }
-
-
         request()->validate([
             'code' => 'required',
             'name' => 'required',
@@ -124,7 +87,6 @@ class CurrencyController extends Controller
         ]);
 
         Currency::whereId($id)->update([
-            'shop_id'=> $shop_id,
             'name' => $request['name'],
             'code' => $request['code'],
             'symbol' => $request['symbol'],

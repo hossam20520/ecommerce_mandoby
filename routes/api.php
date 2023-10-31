@@ -8,101 +8,16 @@ use Illuminate\Support\Facades\Route;
 | API Routes
 |--------------------------------------------------------------------------
 |
-
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
 
-//  
-
-// flutter api
-
-
-Route::post('/web/mycart', 'device\ProductsController@AddToCart');
-
-
-
-
-
-
-Route::post("/v1/device/user/auth/login/", "device\AuthController@loginAuthD");
-
-Route::post("/v1/device/user/auth/create/", "device\AuthController@createAccountD");
-
-
-Route::get("/v1/device/shops", "device\ProductsController@shopsD");
-
-Route::get("/v1/device/auth/check", "device\AuthController@check");
-
-// Route::get("/v1/device/products", "device\ProductsController@ProductsDF");
-Route::get("/v1/device/noauth/products", "device\ProductsController@ProductsDF");
-
-Route::get("/v1/device/categories", "device\ProductsController@indexD");
-
-
-Route::get('/v1/device/review/product', 'device\ProductsController@getReviews');
-Route::get('/v1/device/sliders', 'device\ProductsController@getSlider');
-
-Route::get('/v1/device/about', 'device\AuthController@getInfoAbout');
-
-Route::get('/v1/device/version', 'device\AuthController@version');
-
-Route::post('/v1/device/version', 'device\AuthController@updateVersion');
-
-Route::get('/v1/device/noauth/product/{id}', 'device\ProductsController@Get_Products_DetailsNotauth');
-
-// /user/auth/create/
-
-
-
-
-// end flutter api
-
-
-
-
-
-
-
- Route::get("device/shops", "device\ProductsController@shops");
- Route::get("device/vendor/{id}", "device\AuthController@GetProfileData");
-
-
-
-Route::get("device/brands/", "device\ProductsController@brands");
-
-
- 
-
-  Route::post("device/users/message/", "device\AuthController@GetUsers");
-
- Route::post("device/auth/login/", "device\AuthController@login");
-
- Route::post("device/auth/login/web", "device\AuthController@loginweb");
-
- 
-
-
- 
-
- Route::post("device/auth/register/", "device\AuthController@register");
-
- Route::post("device/create/", "AuthController@createAccount");
-//  register
-//  Route::post("log", "AuthController@getAccessToken");
 /*auth middleware api passport token*/
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get("device/category", "device\ProductsController@index");
-Route::get("device/products", "device\ProductsController@Products");
-Route::get("device/category/products", "device\ProductsController@productByCategory");
-Route::post("/v1/device/password/reset", "device\AuthController@resetPassowrd");
-
-// http://localhost:8000/api/
 
 //--------------------------- Reset Password  ---------------------------
 
@@ -113,165 +28,7 @@ Route::group([
     Route::post('reset', 'PasswordResetController@reset');
 });
 
-Route::middleware(['auth:api', 'IS_Merchant'])->group(function () {
-   // Device
-    Route::post("device/shop/create/", "device\ShopsController@createShop");
-
-
-});
-
-
-Route::get('device/product/{id}', 'device\ProductsController@Get_Products_Details');
-
-
-
-
-// my/order
-
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
-
-    // {{url}}/api/v1/device/confirm/payment
-
-    Route::post("/v1/device/payment/confirmation", "device\ProductsController@confirmation");
-
-
-    Route::post("/v1/device/driver/my/order", "device\ProductsController@updateStatusOrder");
-
-
-    Route::get("/v1/device/client/my/orders", "device\ProductsController@myordersClient");
-
-    Route::get("/v1/device/client/notification", "device\AuthController@getnotification");
-
-
-    Route::post("/v1/device/client/notification", "device\AuthController@sendNotification");
- 
- 
-
- Route::get("/v1/device/driver/my/orders", "device\ProductsController@myordersDriver");
-
-
-Route::post("/v1/device/driver/order", "device\ProductsController@acceptOrder");
-
-
-Route::get("/v1/device/driver/orders/detail/{id}", "device\ProductsController@order_detail");
-
-Route::get("/v1/device/driver/orders", "device\ProductsController@driverorders");
-
-Route::get("/v1/device/order/track/{id}", "device\ProductsController@trackorder");
-
-
-
-Route::post('/v1/device/auth/password/change', 'device\AuthController@changePassword');
-   
-Route::get("/v1/device/profile", "device\AuthController@GetProfile");
-Route::put("/v1/device/profile/edit", "device\AuthController@EditProfile");
-// flutter with auth
-
-Route::get("/v1/device/success", "device\ProductsController@successPayment");
-
-
-Route::get("/v1/device/auth/logout", "device\AuthController@logout");
-
-Route::get('/v1/device/product/{id}', 'device\ProductsController@Get_Products_DetailsD');
-
-Route::get("/v1/device/whishlist", "device\AuthController@GetFavouritD");
-
-
-Route::get("/v1/device/addresses", "device\AuthController@getAddress");
-
-Route::post("/v1/device/addresses/create", "device\AuthController@createAddress");
-
-Route::put("/v1/device/addresses/update/{id}", "device\AuthController@updateAddress");
-Route::delete("/v1/device/addresses/delete/{id}", "device\AuthController@deleteAddress");
-
-
-
-Route::post("/v1/device/whishlist", "device\AuthController@AddToFavourit");
-Route::post('/v1/device/mycart', 'device\ProductsController@AddToCart');
-
-
-
-// Route::get('/device/num', 'device\ProductsController@cartNum');
-
-
-
-Route::get('/v1/device/mycart', 'device\ProductsController@GetMyCartD');
-
-
-
-Route::delete('/v1/device/profile/delete', 'device\AuthController@deleteProfile');
-
-Route::post('/v1/device/cart/check', 'device\ProductsController@cartCheck');
-
-
-Route::post('/v1/device/review', 'device\ProductsController@addReview');
-Route::post('/v1/device/promo', 'device\ProductsController@addpromo');
-Route::post('/v1/device/profile/image', 'device\AuthController@changeImage');
-
-Route::post('/v1/device/increase', 'device\ProductsController@increase');
-Route::post('/v1/device/decrease', 'device\ProductsController@decrease');
-
-Route::post('/v1/device/cart/delete', 'device\ProductsController@deleteCart');
-
-Route::post('/v1/device/order/thawani', 'device\ProductsController@Electronic');
-Route::post('/v1/device/order/confirm', 'device\ProductsController@storeSale');
-
-Route::post('/v1/device/fcm', 'device\AuthController@updateFCM');
-
-Route::get('/v1/device/fcm/get', 'device\AuthController@GetFcm');
-
-
-Route::post('/v1/device/orders', 'device\ProductsController@getOrders');
-
-Route::delete("/v1/device/favourit/{id}", "device\AuthController@deleteFavD");
-
-
-
-Route::get("/v1/device/category/products/{category_id}", "device\ProductsController@GetProductsBYCategory");
-
-
-
-Route::get("/v1/device/products", "device\ProductsController@ProductsD");
-
-
-Route::get("/v1/device/products/shop/{id}", "device\ProductsController@GetShopOne");
-
-// Route::get('/v1/device/orders', 'device\ProductsController@getOrders');
- 
-// Route::post('/v1/device/cart/delete', 'device\ProductsController@deleteCart');
-//
-
-
-
-    Route::get("device/auth/user", "device\AuthController@User");
-    Route::post('device/order/confirm', 'device\ProductsController@storeSale');
-
-
-    Route::get('bill', 'BillController@GetBill');
-    // Route::post('device/order/thani', 'device\ProductsController@storeSaleThawani');
-    Route::post('device/order/thawani', 'device\ProductsController@Electronic');
-    //x
-
-    Route::post('device/review', 'device\ProductsController@addReview');
-    Route::get('device/mycart', 'device\ProductsController@GetMyCart');
-    Route::post('device/mycart', 'device\ProductsController@AddToCart');
-  
-
-    Route::post("device/favourit", "device\AuthController@AddToFavourit");
-    Route::get("device/favourit", "device\AuthController@GetFavourit");
-
-
-    Route::delete("device/favourit/{id}", "device\AuthController@deleteFav");
-
-
-
-
-    
-    //------------------------------- Abouts--------------------------\
-    //------------------------------------------------------------------\
-    Route::resource('abouts', 'AboutsController');
-    Route::post('abouts/delete/by_selection', 'AboutsController@delete_by_selection');
-
 
     //-------------------------- Clear Cache ---------------------------
 
@@ -338,53 +95,19 @@ Route::get("/v1/device/products/shop/{id}", "device\ProductsController@GetShopOn
     Route::post('providers/delete/by_selection', 'ProvidersController@delete_by_selection');
 
 
-        //------------------------------- Discounts--------------------------\
-    //------------------------------------------------------------------\
-    Route::resource('discounts', 'DiscountsController');
-    Route::post('discounts/delete/by_selection', 'DiscountsController@delete_by_selection');
-    
-
-
-
-
-    
-    //------------------------------- Sliders--------------------------\
-    //------------------------------------------------------------------\
-    Route::resource('sliders', 'SlidersController');
-    Route::post('sliders/delete/by_selection', 'SlidersController@delete_by_selection');
-
-
-
     //---------------------- POS (point of sales) ----------------------\\
     //------------------------------------------------------------------\\
 
-
-
-
-    
     Route::post('pos/CreatePOS', 'PosController@CreatePOS');
     Route::post('pos/calculTotal', 'PosController@CalculGrandTotal');
     Route::get('getArticlesByCategory/{id}', 'PosController@getArticlesByCategory');
     Route::get('GetProductsByParametre', 'PosController@GetProductsByParametre');
     Route::get('pos/GetELementPos', 'PosController@GetELementPos');
 
-
-        //------------------------------- SHOPS --------------------------\\
-    //------------------------------------------------------------------\\
-
-    Route::resource('Shops', 'ShopsController');
-    Route::get('Shops/export/Excel', 'ShopsController@export_Excel');
-    Route::post('Shops/import/csv', 'ShopsController@import_shops');
-    Route::post('Shops/delete/by_selection', 'ShopsController@delete_by_selection');
-    Route::get('Shops/Detail/{id}', 'ShopsController@Get_Shops_Details');
-    Route::get('shops/myshop', 'ShopsController@GetMyShop');
-    
-
     //------------------------------- PRODUCTS --------------------------\\
     //------------------------------------------------------------------\\
 
   
-
    
 
     Route::resource('Products', 'ProductsController');
@@ -551,8 +274,6 @@ Route::get("/v1/device/products/shop/{id}", "device\ProductsController@GetShopOn
     //------------------------------------------------------------------\\
 
     Route::get('GetUserAuth', 'UserController@GetUserAuth');
-
-    
     Route::get("/GetPermissions", "UserController@GetPermissions");
     Route::resource('users', 'UserController');
     Route::put('users/Activated/{id}', 'UserController@IsActivated');
@@ -612,6 +333,3 @@ Route::get("/v1/device/products/shop/{id}", "device\ProductsController@GetShopOn
 
    
     Route::get('Products/filter/{id}/{input}', 'ProductsController@Filter_Products');
-
-    // deffered
-    Route::resource('Deffereds', 'DefferedController');

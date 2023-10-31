@@ -462,6 +462,59 @@ var render = function () {
                       _c(
                         "button",
                         {
+                          staticClass: "btn btn-info btn-icon ripple btn-sm",
+                          on: {
+                            click: function ($event) {
+                              return _vm.Sale_Email()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Envelope-2" }),
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.$t("Email")) +
+                              "\n        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-secondary btn-icon ripple btn-sm",
+                          on: {
+                            click: function ($event) {
+                              return _vm.Sale_SMS()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Speach-Bubble" }),
+                          _vm._v("\n          SMS\n        "),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-icon ripple btn-sm",
+                          on: {
+                            click: function ($event) {
+                              return _vm.Sale_PDF()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-File-TXT" }),
+                          _vm._v("\n          PDF\n        "),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
                           staticClass: "btn btn-warning btn-icon ripple btn-sm",
                           on: {
                             click: function ($event) {

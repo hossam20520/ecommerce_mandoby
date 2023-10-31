@@ -9,8 +9,6 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Events\AfterSheet;
-use App\utils\helpers;
-
 
 class ProductsExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvents
 {
@@ -19,21 +17,9 @@ class ProductsExport implements FromArray, WithHeadings, ShouldAutoSize, WithEve
      */
     function array(): array
     {
-
-        $helpers = new helpers();
-        if( $helpers->IsMerchant()){
-
-            $shop_id = $helpers->ShopID();
-            $products = Product::where('deleted_at', '=', null)->where('shop_id' , $shop_id)
+        $products = Product::where('deleted_at', '=', null)
             ->orderBy('id', 'DESC')
             ->get();
-
-        }else{
-            $products = Product::where('deleted_at', '=', null)
-            ->orderBy('id', 'DESC')
-            ->get();
-        }
-
 
         if ($products->isNotEmpty()) {
 

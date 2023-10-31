@@ -17,7 +17,6 @@ class CreatePurchasesTable extends Migration {
 		{
 			$table->engine = 'InnoDB';
 			$table->integer('id', true);
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('user_id')->index('user_id_purchases');
 			$table->string('Ref', 192);
 			$table->date('date');

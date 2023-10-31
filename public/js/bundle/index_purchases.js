@@ -1552,6 +1552,60 @@ var render = function () {
                                             )
                                           : _vm._e(),
                                         _vm._v(" "),
+                                        _c(
+                                          "b-dropdown-item",
+                                          {
+                                            attrs: { title: "PDF" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.Invoice_PDF(
+                                                  props.row,
+                                                  props.row.id
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass:
+                                                "nav-icon i-File-TXT font-weight-bold mr-2",
+                                            }),
+                                            _vm._v(
+                                              "\n                " +
+                                                _vm._s(_vm.$t("DownloadPdf")) +
+                                                "\n              "
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-dropdown-item",
+                                          {
+                                            attrs: { title: "Email" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.Purchase_Email(
+                                                  props.row,
+                                                  props.row.id
+                                                )
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass:
+                                                "nav-icon i-Envelope-2 font-weight-bold mr-2",
+                                            }),
+                                            _vm._v(
+                                              "\n                " +
+                                                _vm._s(
+                                                  _vm.$t("EmailPurchase")
+                                                ) +
+                                                "\n              "
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
                                         _vm.currentUserPermissions.includes(
                                           "Purchases_delete"
                                         )
@@ -1683,6 +1737,50 @@ var render = function () {
                       slot: "table-actions",
                     },
                     [
+                      _c(
+                        "b-button",
+                        {
+                          directives: [
+                            {
+                              name: "b-toggle",
+                              rawName: "v-b-toggle.sidebar-right",
+                              modifiers: { "sidebar-right": true },
+                            },
+                          ],
+                          attrs: {
+                            variant: "outline-info ripple m-1",
+                            size: "sm",
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Filter-2" }),
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.$t("Filter")) +
+                              "\n        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            size: "sm",
+                            variant: "outline-success ripple m-1",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.Purchase_PDF()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-File-Copy" }),
+                          _vm._v(" PDF\n        "),
+                        ]
+                      ),
+                      _vm._v(" "),
                       _c(
                         "b-button",
                         {

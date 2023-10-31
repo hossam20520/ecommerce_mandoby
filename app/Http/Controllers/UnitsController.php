@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Shop;
-use App\utils\helpers;
+
 use App\Models\Unit;
 use App\Models\Product;
 use Carbon\Carbon;
@@ -25,29 +24,15 @@ class UnitsController extends BaseController
         $dir = $request->SortType;
         $data = array();
 
-        $helpers = new helpers();
-        $shops = Shop::where('deleted_at', '=', null)->get(['id', 'ar_name' , 'en_name']);
-        if( $helpers->IsMerchant()){
-            
-            $shop_id = $helpers->ShopID();
-            $Units = Unit::where('deleted_at', '=', null)->where('shop_id' , $shop_id)
-                ->where(function ($query) use ($request) {
-                    return $query->when($request->filled('search'), function ($query) use ($request) {
-                        return $query->where('name', 'LIKE', "%{$request->search}%")
-                            ->orWhere('ShortName', 'LIKE', "%{$request->search}%");
-                    });
-                });
+        $Units = Unit::where('deleted_at', '=', null)
 
-        }else{
-            $Units = Unit::where('deleted_at', '=', null)
-                ->where(function ($query) use ($request) {
-                    return $query->when($request->filled('search'), function ($query) use ($request) {
-                        return $query->where('name', 'LIKE', "%{$request->search}%")
-                            ->orWhere('ShortName', 'LIKE', "%{$request->search}%");
-                    });
+        // Search With Multiple Param
+            ->where(function ($query) use ($request) {
+                return $query->when($request->filled('search'), function ($query) use ($request) {
+                    return $query->where('name', 'LIKE', "%{$request->search}%")
+                        ->orWhere('ShortName', 'LIKE', "%{$request->search}%");
                 });
-        }
-
+            });
         $totalRows = $Units->count();
         $Units = $Units->offset($offSet)
             ->limit($perPage)
@@ -78,11 +63,8 @@ class UnitsController extends BaseController
             ->orderBy('id', 'DESC')
             ->get(['id', 'name']);
 
-            $shops = Shop::where('deleted_at', '=', null)->get(['id', 'ar_name' , 'en_name']);
-
         return response()->json([
             'Units' => $data,
-            'shops' => $shops,
             'Units_base' => $Units_base,
             'totalRows' => $totalRows,
         ]);
@@ -94,17 +76,6 @@ class UnitsController extends BaseController
     public function store(Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'create', Unit::class);
-
-        $helpers = new helpers();
-        if( $helpers->IsMerchant()){
-
-            $shop_id = $helpers->ShopID();
-
-        }else{
-            $shop_id = $request['shop_id'];
-        }
-
-
 
         request()->validate([
             'name' => 'required',
@@ -120,7 +91,6 @@ class UnitsController extends BaseController
         }
 
         Unit::create([
-            'shop_id' =>  $shop_id ,
             'name' => $request['name'],
             'ShortName' => $request['ShortName'],
             'base_unit' => $request['base_unit'],
@@ -138,15 +108,6 @@ class UnitsController extends BaseController
     {
         $this->authorizeForUser($request->user('api'), 'update', Unit::class);
 
-        $helpers = new helpers();
-        if( $helpers->IsMerchant()){
-
-            $shop_id = $helpers->ShopID();
-
-        }else{
-            $shop_id = $request['shop_id'];
-        }
-
         request()->validate([
             'name' => 'required',
             'ShortName' => 'required',
@@ -163,7 +124,6 @@ class UnitsController extends BaseController
         }
 
         Unit::whereId($id)->update([
-            'shop_id' =>  $shop_id ,
             'name' => $request['name'],
             'ShortName' => $request['ShortName'],
             'base_unit' => $base_unit,

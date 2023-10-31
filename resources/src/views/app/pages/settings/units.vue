@@ -57,24 +57,6 @@
       <b-modal hide-footer size="md" id="New_Unit" :title="editmode?$t('Edit'):$t('Add')">
         <b-form @submit.prevent="Submit_Unit">
           <b-row>
-
-            <b-col md="12"  v-if="CurrentType && CurrentType.includes('owner')"  >
-                  <validation-provider name="Shops" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Shops')">
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="unit.shop_id"
-                        :placeholder="$t('Shops')"
-                        :reduce="label => label.value"
-                        :options="shops.map(shops => ({label: shops.ar_name, value: shops.id}))"
-                      />
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
-
             <!-- Name -->
             <b-col md="12">
               <validation-provider
@@ -115,7 +97,7 @@
               </validation-provider>
             </b-col>
             <!-- Base unit -->
-            <!-- <b-col md="12">
+            <b-col md="12">
               <b-form-group :label="$t('BaseUnit')">
                 <v-select
                   @input="Selected_Base_Unit"
@@ -125,9 +107,9 @@
                   :options="units_base.map(units_base => ({label: units_base.name, value: units_base.id}))"
                 />
               </b-form-group>
-            </b-col> -->
+            </b-col>
             <!-- operator  -->
-            <!-- <b-col md="12" v-show="show_operator">
+            <b-col md="12" v-show="show_operator">
               <b-form-group :label="$t('Operator')">
                 <v-select
                   v-model="unit.operator"
@@ -140,7 +122,7 @@
                         ]"
                 ></v-select>
               </b-form-group>
-            </b-col> -->
+            </b-col>
 
             <!-- Operation Value -->
             <b-col md="12" v-show="show_operator">
@@ -179,7 +161,7 @@
 
 <script>
 import NProgress from "nprogress";
-import { mapGetters, mapActions } from "vuex";
+
 export default {
   metaInfo: {
     title: "Unit"
@@ -204,10 +186,8 @@ export default {
       units_base: [],
       editmode: false,
       show_operator: false,
-      shops:[],
       unit: {
         id: "",
-        shop_id:"",
         name: "",
         ShortName: "",
         base_unit: "",
@@ -219,7 +199,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters([  "currentUserPermissions" , "CurrentType"]),
     columns() {
       return [
         {
@@ -234,24 +213,24 @@ export default {
           tdClass: "text-left",
           thClass: "text-left"
         },
-        // {
-        //   label: this.$t("BaseUnit"),
-        //   field: "base_unit_name",
-        //   tdClass: "text-left",
-        //   thClass: "text-left"
-        // },
-        // {
-        //   label: this.$t("Operator"),
-        //   field: "operator",
-        //   tdClass: "text-left",
-        //   thClass: "text-left"
-        // },
-        // {
-        //   label: this.$t("OperationValue"),
-        //   field: "operator_value",
-        //   tdClass: "text-left",
-        //   thClass: "text-left"
-        // },
+        {
+          label: this.$t("BaseUnit"),
+          field: "base_unit_name",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+        {
+          label: this.$t("Operator"),
+          field: "operator",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+        {
+          label: this.$t("OperationValue"),
+          field: "operator_value",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
         {
           label: this.$t("Action"),
           field: "actions",
@@ -387,7 +366,6 @@ export default {
         )
         .then(response => {
           this.units = response.data.Units;
-          this.shops = response.data.shops;
           this.totalRows = response.data.totalRows;
           this.units_base = response.data.Units_base;
 
@@ -418,7 +396,6 @@ export default {
       axios
         .post("units", {
           name: this.unit.name,
-          shop_id:this.unit.shop_id,
           ShortName: this.unit.ShortName,
           base_unit: this.unit.base_unit,
           operator: this.unit.operator,
@@ -447,7 +424,6 @@ export default {
       axios
         .put("units/" + this.unit.id, {
           name: this.unit.name,
-          shop_id:this.unit.shop_id,
           ShortName: this.unit.ShortName,
           base_unit: this.unit.base_unit,
           operator: this.unit.operator,

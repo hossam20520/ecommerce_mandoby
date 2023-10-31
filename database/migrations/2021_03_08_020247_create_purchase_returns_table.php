@@ -16,7 +16,6 @@ class CreatePurchaseReturnsTable extends Migration {
 		Schema::create('purchase_returns', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->integer('id', true);
 			$table->integer('user_id')->index('user_id_returns');
 			$table->date('date');

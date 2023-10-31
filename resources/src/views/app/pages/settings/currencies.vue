@@ -60,25 +60,6 @@
       <b-modal hide-footer size="md" id="New_Currency" :title="editmode?$t('Edit'):$t('Add')">
         <b-form @submit.prevent="Submit_Currency">
           <b-row>
-
-
-                                                               <!-- Shops -->
-          <b-col md="12"  v-if="CurrentType && CurrentType.includes('owner')"  >
-                  <validation-provider name="Shops" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Shops')">
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="currency.shop_id"
-                        :placeholder="$t('Shops')"
-                        :reduce="label => label.value"
-                        :options="shops.map(shops => ({label: shops.ar_name, value: shops.id}))"
-                      />
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
             <!-- Code Currency -->
             <b-col md="12">
               <validation-provider
@@ -119,8 +100,6 @@
               </validation-provider>
             </b-col>
 
-
-
             <!-- Symbole Currency -->
             <b-col md="12">
               <validation-provider
@@ -157,7 +136,7 @@
 
 <script>
 import NProgress from "nprogress";
-import { mapGetters, mapActions } from "vuex";
+
 export default {
   metaInfo: {
     title: "Currency"
@@ -178,12 +157,10 @@ export default {
       selectedIds: [],
       totalRows: "",
       search: "",
-      shops:[],
       limit: "10",
       currencies: [],
       editmode: false,
       currency: {
-        shop_id:"",
         id: "",
         name: "",
         code: "",
@@ -193,7 +170,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters([  "currentUserPermissions" , "CurrentType"]),
     columns() {
       return [
         {
@@ -344,7 +320,6 @@ export default {
         )
         .then(response => {
           this.currencies = response.data.currencies;
-          this.shops = response.data.shops;
           this.totalRows = response.data.totalRows;
 
           // Complete the animation of theprogress bar.
@@ -366,7 +341,6 @@ export default {
       axios
         .post("currencies", {
           name: this.currency.name,
-          shop_id: this.currency.shop_id,
           code: this.currency.code,
           symbol: this.currency.symbol
         })
@@ -393,7 +367,6 @@ export default {
         .put("currencies/" + this.currency.id, {
           name: this.currency.name,
           code: this.currency.code,
-          shop_id: this.currency.shop_id,
           symbol: this.currency.symbol
         })
         .then(response => {

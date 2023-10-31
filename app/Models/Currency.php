@@ -9,7 +9,7 @@ class Currency extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'code','shop_id',  'name', 'symbol',
+        'code', 'name', 'symbol',
     ];
 
 }

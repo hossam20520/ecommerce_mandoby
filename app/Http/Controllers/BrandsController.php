@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\utils\helpers;
-use App\Models\Shop;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -27,39 +26,15 @@ class BrandsController extends Controller
         $dir = $request->SortType;
         $helpers = new helpers();
 
+        $brands = Brand::where('deleted_at', '=', null)
 
-        $shops = Shop::where('deleted_at', '=', null)->get(['id', 'ar_name' , 'en_name']);
-
-  
-
-        if( $helpers->IsMerchant()){
-
-           $shop_id = $helpers->ShopID();
-
-           $brands = Brand::where('deleted_at', '=', null)->where('shop_id' , $shop_id)
-           ->where(function ($query) use ($request) {
-               return $query->when($request->filled('search'), function ($query) use ($request) {
-                   return $query->where('name', 'LIKE', "%{$request->search}%")
-                       ->orWhere('description', 'LIKE', "%{$request->search}%");
-               });
-           });
-
-        }else{
-
-            $brands = Brand::where('deleted_at', '=', null)
+        // Search With Multiple Param
             ->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('name', 'LIKE', "%{$request->search}%")
                         ->orWhere('description', 'LIKE', "%{$request->search}%");
                 });
             });
-
-
-        }
-
-
-
-
         $totalRows = $brands->count();
         $brands = $brands->offset($offSet)
             ->limit($perPage)
@@ -68,7 +43,6 @@ class BrandsController extends Controller
 
         return response()->json([
             'brands' => $brands,
-            'shops' =>  $shops,
             'totalRows' => $totalRows,
         ]);
 
@@ -85,15 +59,6 @@ class BrandsController extends Controller
         ]);
 
         \DB::transaction(function () use ($request) {
-
-            $helpers = new helpers();
-            if( $helpers->IsMerchant()){
-
-                $shop_id = $helpers->ShopID();
-
-            }else{
-                $shop_id = $request['shop_id'];
-            }
 
             if ($request->hasFile('image')) {
 
@@ -113,7 +78,6 @@ class BrandsController extends Controller
             $Brand->name = $request['name'];
             $Brand->description = $request['description'];
             $Brand->image = $filename;
-            $Brand->shop_id = $shop_id;
             $Brand->save();
 
         }, 10);
@@ -140,16 +104,6 @@ class BrandsController extends Controller
              'name' => 'required',
          ]);
          \DB::transaction(function () use ($request, $id) {
-
-            $helpers = new helpers();
-            if( $helpers->IsMerchant()){
-
-                $shop_id = $helpers->ShopID();
-
-            }else{
-                $shop_id = $request['shop_id'];
-            }
-
              $Brand = Brand::findOrFail($id);
              $currentImage = $Brand->image;
  
@@ -184,7 +138,6 @@ class BrandsController extends Controller
              }
  
              Brand::whereId($id)->update([
-                 'shop_id'=>  $shop_id,
                  'name' => $request['name'],
                  'description' => $request['description'],
                  'image' => $filename,

@@ -20,20 +20,7 @@ class RoleSeeder extends Seeder
                 'label' => 'Owner',
                 'status' => 1,
                 'description' => 'Owner',
-            ], 
-            
-            [
-                'id'    =>2,
-                'name'  => 'Merchant',
-                'label' => 'Merchant',
-                'status' => 1,
-                'description' => 'Merchant',
-            ]
-            
-            )
-
-
-            
+            ])
         );
     }
 }

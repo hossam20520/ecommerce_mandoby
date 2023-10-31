@@ -553,6 +553,50 @@ var render = function () {
                       _c(
                         "b-button",
                         {
+                          directives: [
+                            {
+                              name: "b-toggle",
+                              rawName: "v-b-toggle.sidebar-right",
+                              modifiers: { "sidebar-right": true },
+                            },
+                          ],
+                          attrs: {
+                            variant: "outline-info ripple m-1",
+                            size: "sm",
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Filter-2" }),
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.$t("Filter")) +
+                              "\n        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            size: "sm",
+                            variant: "outline-success ripple m-1",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.Purchase_PDF()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-File-Copy" }),
+                          _vm._v(" PDF\n        "),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
                           attrs: {
                             size: "sm",
                             variant: "outline-danger ripple m-1",

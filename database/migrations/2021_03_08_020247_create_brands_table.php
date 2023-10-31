@@ -17,7 +17,6 @@ class CreateBrandsTable extends Migration {
 		{
 			$table->engine = 'InnoDB';
 			$table->integer('id', true);
-			$table->integer('shop_id')->nullable()->index('shop_id');
 			$table->string('name', 192);
 			$table->string('description', 192)->nullable();
 			$table->string('image', 192)->nullable();

@@ -751,26 +751,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -806,7 +786,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       sale: {
         id: "",
-        shop_id: "",
         date: new Date().toISOString().slice(0, 10),
         statut: "completed",
         notes: "",
@@ -817,7 +796,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         shipping: 0,
         discount: 0
       }
-    }, _defineProperty(_ref, "timer", null), _defineProperty(_ref, "total", 0), _defineProperty(_ref, "GrandTotal", 0), _defineProperty(_ref, "units", []), _defineProperty(_ref, "shops", []), _defineProperty(_ref, "product", {
+    }, _defineProperty(_ref, "timer", null), _defineProperty(_ref, "total", 0), _defineProperty(_ref, "GrandTotal", 0), _defineProperty(_ref, "units", []), _defineProperty(_ref, "product", {
       id: "",
       code: "",
       stock: "",
@@ -842,7 +821,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       product_variant_id: ""
     }), _ref;
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUser", "currentUserPermissions", "CurrentType"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUser"])),
   methods: {
     loadStripe_payment: function loadStripe_payment() {
       var _this = this;
@@ -1312,7 +1291,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     notes: _this8.sale.notes,
                     tax_rate: _this8.sale.tax_rate,
                     TaxNet: _this8.sale.TaxNet,
-                    shop_id: _this8.sale.shop_id,
                     discount: _this8.sale.discount,
                     shipping: _this8.sale.shipping,
                     GrandTotal: _this8.GrandTotal,
@@ -1365,20 +1343,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
           }
         } else {
-          var _axios$post;
-
           this.paymentProcessing = true;
-          axios.post("sales", (_axios$post = {
+          axios.post("sales", {
             date: this.sale.date,
             client_id: this.sale.client_id,
             warehouse_id: this.sale.warehouse_id,
             statut: this.sale.statut,
             notes: this.sale.notes,
-            shop_id: this.shop_id,
             tax_rate: this.sale.tax_rate,
             TaxNet: this.sale.TaxNet,
-            discount: this.sale.discount
-          }, _defineProperty(_axios$post, "shop_id", this.sale.shop_id), _defineProperty(_axios$post, "shipping", this.sale.shipping), _defineProperty(_axios$post, "GrandTotal", this.GrandTotal), _defineProperty(_axios$post, "details", this.details), _defineProperty(_axios$post, "payment", this.payment), _defineProperty(_axios$post, "amount", parseFloat(this.payment.amount).toFixed(2)), _defineProperty(_axios$post, "received_amount", parseFloat(this.payment.received_amount).toFixed(2)), _defineProperty(_axios$post, "change", parseFloat(this.payment.received_amount - this.payment.amount).toFixed(2)), _axios$post)).then(function (response) {
+            discount: this.sale.discount,
+            shipping: this.sale.shipping,
+            GrandTotal: this.GrandTotal,
+            details: this.details,
+            payment: this.payment,
+            amount: parseFloat(this.payment.amount).toFixed(2),
+            received_amount: parseFloat(this.payment.received_amount).toFixed(2),
+            change: parseFloat(this.payment.received_amount - this.payment.amount).toFixed(2)
+          }).then(function (response) {
             _this9.makeToast("success", _this9.$t("Create.TitleSale"), _this9.$t("Success"));
 
             nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
@@ -1432,8 +1414,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       axios.get("sales/create").then(function (response) {
         _this11.clients = response.data.clients;
-        _this11.shops = response.data.shops;
-        console.log(_this11.shops);
         _this11.warehouses = response.data.warehouses;
         _this11.stripe_key = response.data.stripe_key;
         _this11.isLoading = false;
@@ -1510,114 +1490,11 @@ var render = function () {
                               _c(
                                 "b-row",
                                 [
-                                  _vm.CurrentType &&
-                                  _vm.CurrentType.includes("owner")
-                                    ? _c(
-                                        "b-col",
-                                        {
-                                          staticClass: "mb-3",
-                                          attrs: { lg: "2", md: "2", sm: "12" },
-                                        },
-                                        [
-                                          _c("validation-provider", {
-                                            attrs: {
-                                              name: "Unit Purchase",
-                                              rules: { required: true },
-                                            },
-                                            scopedSlots: _vm._u(
-                                              [
-                                                {
-                                                  key: "default",
-                                                  fn: function (ref) {
-                                                    var valid = ref.valid
-                                                    var errors = ref.errors
-                                                    return _c(
-                                                      "b-form-group",
-                                                      {
-                                                        attrs: {
-                                                          label:
-                                                            _vm.$t("Shops"),
-                                                        },
-                                                      },
-                                                      [
-                                                        _c("v-select", {
-                                                          class: {
-                                                            "is-invalid":
-                                                              !!errors.length,
-                                                          },
-                                                          attrs: {
-                                                            state: errors[0]
-                                                              ? false
-                                                              : valid
-                                                              ? true
-                                                              : null,
-                                                            placeholder:
-                                                              _vm.$t("Shops"),
-                                                            reduce: function (
-                                                              label
-                                                            ) {
-                                                              return label.value
-                                                            },
-                                                            options:
-                                                              _vm.shops.map(
-                                                                function (
-                                                                  shops
-                                                                ) {
-                                                                  return {
-                                                                    label:
-                                                                      shops.ar_name,
-                                                                    value:
-                                                                      shops.id,
-                                                                  }
-                                                                }
-                                                              ),
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.sale.shop_id,
-                                                            callback: function (
-                                                              $$v
-                                                            ) {
-                                                              _vm.$set(
-                                                                _vm.sale,
-                                                                "shop_id",
-                                                                $$v
-                                                              )
-                                                            },
-                                                            expression:
-                                                              "sale.shop_id",
-                                                          },
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "b-form-invalid-feedback",
-                                                          [
-                                                            _vm._v(
-                                                              _vm._s(errors[0])
-                                                            ),
-                                                          ]
-                                                        ),
-                                                      ],
-                                                      1
-                                                    )
-                                                  },
-                                                },
-                                              ],
-                                              null,
-                                              false,
-                                              237239410
-                                            ),
-                                          }),
-                                        ],
-                                        1
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
                                   _c(
                                     "b-col",
                                     {
                                       staticClass: "mb-3",
-                                      attrs: { lg: "2", md: "2", sm: "12" },
+                                      attrs: { lg: "4", md: "4", sm: "12" },
                                     },
                                     [
                                       _c("validation-provider", {

@@ -14,9 +14,6 @@ class Role extends Model
         return $this->belongsToMany(Permission::class);
     }
 
-
-
-
     public function givePermissionTo(Permission $permission)
     {
         return $this->permissions()->save($permission);
@@ -44,10 +41,4 @@ class Role extends Model
         }
         return !!$permission->intersect($this->permissions)->count();
     }
-
-
-        public function users()
-        {
-            return $this->belongsToMany(User::class);
-        }
 }

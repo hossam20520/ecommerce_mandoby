@@ -1,42 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["pos"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/views/app/front_end/home/home.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/src/views/app/front_end/home/home.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/views/app/pages/pos.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/src/views/app/pages/pos.vue?vue&type=script&lang=js& ***!
@@ -71,6 +34,53 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1315,7 +1325,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       audio: new Audio("/audio/Beep.wav")
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["currentUser", "currentUserPermissions", "CurrentType"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["currentUser", "currentUserPermissions"])), {}, {
     brand_totalRows: function brand_totalRows() {
       return this.brands.length;
     },
@@ -2158,7 +2168,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.total {\n  font-weight: bold;\n  font-size: 14px;\n  /* text-transform: uppercase; */\n  /* height: 50px; */\n}\n", ""]);
+exports.push([module.i, "\n.total {\r\n  font-weight: bold;\r\n  font-size: 14px;\r\n  /* text-transform: uppercase; */\r\n  /* height: 50px; */\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2192,90 +2202,6 @@ var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/li
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/views/app/front_end/home/home.vue?vue&type=template&id=4e97e1c3&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/src/views/app/front_end/home/home.vue?vue&type=template&id=4e97e1c3& ***!
-  \**********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "nav",
-      { staticClass: "navbar navbar-expand-lg navbar-dark bg-dark" },
-      [
-        _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-          _vm._v("My App"),
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "navbar-toggler",
-            attrs: {
-              type: "button",
-              "data-toggle": "collapse",
-              "data-target": "#navbarSupportedContent",
-              "aria-controls": "navbarSupportedContent",
-              "aria-expanded": "false",
-              "aria-label": "Toggle navigation",
-            },
-          },
-          [_c("span", { staticClass: "navbar-toggler-icon" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "collapse navbar-collapse",
-            attrs: { id: "navbarSupportedContent" },
-          },
-          [
-            _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Home"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("About"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Contact"),
-                ]),
-              ]),
-            ]),
-          ]
-        ),
-      ]
-    )
-  },
-]
-render._withStripped = true
-
-
 
 /***/ }),
 
@@ -2429,6 +2355,30 @@ var render = function () {
                                               {
                                                 on: {
                                                   click: function ($event) {
+                                                    return _vm.SetLocal("fr")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-fr",
+                                                  attrs: { title: "fr" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("French")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
                                                     return _vm.SetLocal("ar")
                                                   },
                                                 },
@@ -2444,6 +2394,274 @@ var render = function () {
                                                   "span",
                                                   { staticClass: "title-lang" },
                                                   [_vm._v("Arabic")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("tur")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-tr",
+                                                  attrs: { title: "sa" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("Turkish")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("sm_ch")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-cn",
+                                                  attrs: { title: "sa" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("Simplified Chinese")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("thai")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-tw",
+                                                  attrs: { title: "sa" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("Thaï")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("hn")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-in",
+                                                  attrs: { title: "sa" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("Hindi")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("de")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-de",
+                                                  attrs: { title: "de" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("German")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("es")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-es",
+                                                  attrs: { title: "es" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("Spanish")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("it")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-it",
+                                                  attrs: { title: "it" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("Italien")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("Ind")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-id",
+                                                  attrs: { title: "sa" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("Indonesian")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("tr_ch")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-cn",
+                                                  attrs: { title: "sa" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [
+                                                    _vm._v(
+                                                      "Traditional Chinese"
+                                                    ),
+                                                  ]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("ru")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-ru",
+                                                  attrs: { title: "sa" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("Russian")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.SetLocal("vn")
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "flag-icon flag-icon-squared flag-icon-vn",
+                                                  attrs: { title: "sa" },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title-lang" },
+                                                  [_vm._v("Vietnamese")]
                                                 ),
                                               ]
                                             ),
@@ -2676,7 +2894,35 @@ var render = function () {
                                                           }),
                                                           _vm._v(" "),
                                                           _c(
-                                                            "b-input-group-append"
+                                                            "b-input-group-append",
+                                                            [
+                                                              _c(
+                                                                "b-button",
+                                                                {
+                                                                  attrs: {
+                                                                    variant:
+                                                                      "primary",
+                                                                  },
+                                                                  on: {
+                                                                    click:
+                                                                      function (
+                                                                        $event
+                                                                      ) {
+                                                                        return _vm.New_Client()
+                                                                      },
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _c("span", [
+                                                                    _c("i", {
+                                                                      staticClass:
+                                                                        "i-Add-User",
+                                                                    }),
+                                                                  ]),
+                                                                ]
+                                                              ),
+                                                            ],
+                                                            1
                                                           ),
                                                         ],
                                                         1
@@ -2686,122 +2932,110 @@ var render = function () {
                                                 ],
                                                 null,
                                                 false,
-                                                974659927
+                                                1846940208
                                               ),
                                             }),
                                           ],
                                           1
                                         ),
                                         _vm._v(" "),
-                                        _vm.CurrentType &&
-                                        _vm.CurrentType.includes("owner")
-                                          ? _c(
-                                              "b-col",
-                                              {
-                                                attrs: {
-                                                  lg: "12",
-                                                  md: "12",
-                                                  sm: "12",
-                                                },
+                                        _c(
+                                          "b-col",
+                                          {
+                                            attrs: {
+                                              lg: "12",
+                                              md: "12",
+                                              sm: "12",
+                                            },
+                                          },
+                                          [
+                                            _c("validation-provider", {
+                                              attrs: {
+                                                name: "warehouse",
+                                                rules: { required: true },
                                               },
-                                              [
-                                                _c("validation-provider", {
-                                                  attrs: {
-                                                    name: "warehouse",
-                                                    rules: { required: true },
-                                                  },
-                                                  scopedSlots: _vm._u(
-                                                    [
-                                                      {
-                                                        key: "default",
-                                                        fn: function (ref) {
-                                                          var valid = ref.valid
-                                                          var errors =
-                                                            ref.errors
-                                                          return _c(
-                                                            "b-form-group",
-                                                            {
-                                                              staticClass:
-                                                                "mt-2",
+                                              scopedSlots: _vm._u(
+                                                [
+                                                  {
+                                                    key: "default",
+                                                    fn: function (ref) {
+                                                      var valid = ref.valid
+                                                      var errors = ref.errors
+                                                      return _c(
+                                                        "b-form-group",
+                                                        { staticClass: "mt-2" },
+                                                        [
+                                                          _c("v-select", {
+                                                            class: {
+                                                              "is-invalid":
+                                                                !!errors.length,
                                                             },
-                                                            [
-                                                              _c("v-select", {
-                                                                class: {
-                                                                  "is-invalid":
-                                                                    !!errors.length,
+                                                            attrs: {
+                                                              state: errors[0]
+                                                                ? false
+                                                                : valid
+                                                                ? true
+                                                                : null,
+                                                              disabled:
+                                                                _vm.details
+                                                                  .length > 0,
+                                                              reduce: function (
+                                                                label
+                                                              ) {
+                                                                return label.value
+                                                              },
+                                                              placeholder:
+                                                                _vm.$t(
+                                                                  "Choose_Warehouse"
+                                                                ),
+                                                              options:
+                                                                _vm.warehouses.map(
+                                                                  function (
+                                                                    warehouses
+                                                                  ) {
+                                                                    return {
+                                                                      label:
+                                                                        warehouses.name,
+                                                                      value:
+                                                                        warehouses.id,
+                                                                    }
+                                                                  }
+                                                                ),
+                                                            },
+                                                            on: {
+                                                              input:
+                                                                _vm.Selected_Warehouse,
+                                                            },
+                                                            model: {
+                                                              value:
+                                                                _vm.sale
+                                                                  .warehouse_id,
+                                                              callback:
+                                                                function ($$v) {
+                                                                  _vm.$set(
+                                                                    _vm.sale,
+                                                                    "warehouse_id",
+                                                                    $$v
+                                                                  )
                                                                 },
-                                                                attrs: {
-                                                                  state:
-                                                                    errors[0]
-                                                                      ? false
-                                                                      : valid
-                                                                      ? true
-                                                                      : null,
-                                                                  disabled:
-                                                                    _vm.details
-                                                                      .length >
-                                                                    0,
-                                                                  reduce:
-                                                                    function (
-                                                                      label
-                                                                    ) {
-                                                                      return label.value
-                                                                    },
-                                                                  placeholder:
-                                                                    _vm.$t(
-                                                                      "Choose_Warehouse"
-                                                                    ),
-                                                                  options:
-                                                                    _vm.warehouses.map(
-                                                                      function (
-                                                                        warehouses
-                                                                      ) {
-                                                                        return {
-                                                                          label:
-                                                                            warehouses.name,
-                                                                          value:
-                                                                            warehouses.id,
-                                                                        }
-                                                                      }
-                                                                    ),
-                                                                },
-                                                                on: {
-                                                                  input:
-                                                                    _vm.Selected_Warehouse,
-                                                                },
-                                                                model: {
-                                                                  value:
-                                                                    _vm.sale
-                                                                      .warehouse_id,
-                                                                  callback:
-                                                                    function (
-                                                                      $$v
-                                                                    ) {
-                                                                      _vm.$set(
-                                                                        _vm.sale,
-                                                                        "warehouse_id",
-                                                                        $$v
-                                                                      )
-                                                                    },
-                                                                  expression:
-                                                                    "sale.warehouse_id",
-                                                                },
-                                                              }),
-                                                            ],
-                                                            1
-                                                          )
-                                                        },
-                                                      },
-                                                    ],
-                                                    null,
-                                                    false,
-                                                    1940612659
-                                                  ),
-                                                }),
-                                              ],
-                                              1
-                                            )
-                                          : _vm._e(),
+                                                              expression:
+                                                                "sale.warehouse_id",
+                                                            },
+                                                          }),
+                                                        ],
+                                                        1
+                                                      )
+                                                    },
+                                                  },
+                                                ],
+                                                null,
+                                                false,
+                                                1940612659
+                                              ),
+                                            }),
+                                          ],
+                                          1
+                                        ),
                                         _vm._v(" "),
                                         _c(
                                           "b-col",
@@ -4467,6 +4701,56 @@ var render = function () {
                         _c(
                           "b-row",
                           [
+                            _c("b-col", { attrs: { md: "6" } }, [
+                              _c(
+                                "button",
+                                {
+                                  directives: [
+                                    {
+                                      name: "b-toggle",
+                                      rawName: "v-b-toggle.sidebar-category",
+                                      modifiers: { "sidebar-category": true },
+                                    },
+                                  ],
+                                  staticClass:
+                                    "btn btn-outline-info mt-1 btn-block",
+                                },
+                                [
+                                  _c("i", { staticClass: "i-Two-Windows" }),
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(_vm.$t("ListofCategory")) +
+                                      "\n              "
+                                  ),
+                                ]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("b-col", { attrs: { md: "6" } }, [
+                              _c(
+                                "button",
+                                {
+                                  directives: [
+                                    {
+                                      name: "b-toggle",
+                                      rawName: "v-b-toggle.sidebar-brand",
+                                      modifiers: { "sidebar-brand": true },
+                                    },
+                                  ],
+                                  staticClass:
+                                    "btn btn-outline-info mt-1 btn-block",
+                                },
+                                [
+                                  _c("i", { staticClass: "i-Library" }),
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(_vm.$t("ListofBrand")) +
+                                      "\n              "
+                                  ),
+                                ]
+                              ),
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "b-col",
                               { staticClass: "mt-2 mb-2", attrs: { md: "12" } },
@@ -7138,78 +7422,6 @@ var toggleFullScreen = function toggleFullScreen() {
 /* harmony default export */ __webpack_exports__["default"] = ({
   toggleFullScreen: toggleFullScreen
 });
-
-/***/ }),
-
-/***/ "./resources/src/views/app/front_end/home/home.vue":
-/*!*********************************************************!*\
-  !*** ./resources/src/views/app/front_end/home/home.vue ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _home_vue_vue_type_template_id_4e97e1c3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home.vue?vue&type=template&id=4e97e1c3& */ "./resources/src/views/app/front_end/home/home.vue?vue&type=template&id=4e97e1c3&");
-/* harmony import */ var _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.vue?vue&type=script&lang=js& */ "./resources/src/views/app/front_end/home/home.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _home_vue_vue_type_template_id_4e97e1c3___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _home_vue_vue_type_template_id_4e97e1c3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/src/views/app/front_end/home/home.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/src/views/app/front_end/home/home.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/src/views/app/front_end/home/home.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./home.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/views/app/front_end/home/home.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/src/views/app/front_end/home/home.vue?vue&type=template&id=4e97e1c3&":
-/*!****************************************************************************************!*\
-  !*** ./resources/src/views/app/front_end/home/home.vue?vue&type=template&id=4e97e1c3& ***!
-  \****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_4e97e1c3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./home.vue?vue&type=template&id=4e97e1c3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/views/app/front_end/home/home.vue?vue&type=template&id=4e97e1c3&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_4e97e1c3___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_home_vue_vue_type_template_id_4e97e1c3___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
 
 /***/ }),
 
