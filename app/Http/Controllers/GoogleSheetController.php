@@ -52,4 +52,30 @@ class GoogleSheetController extends Controller
         // return $doc;
    
     }
+
+
+
+    public function writeSheet($values){
+         $body = new ValueRange([
+            'values'=> $values
+         ]);
+
+         $params = [
+            'valueInputOption'=> 'RAW'
+         ];
+         $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params );
+    
+    
+        }
+
+
+  public function write(Request $request){
+       $this->writeSheet([
+        [
+            'ahmed',
+            'row ww'
+        ]
+       ]);
+  }
+
 }
