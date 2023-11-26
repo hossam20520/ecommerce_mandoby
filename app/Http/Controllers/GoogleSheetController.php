@@ -83,39 +83,39 @@ class GoogleSheetController extends Controller
 
     // return $request->milkused;
     $Survey = new Survey;
-    $survey->name = $request['name'];
-    $survey->nameselectaStatus = $request['nameselectaStatus'];
-    $survey->city = $request['city'];
-    $survey->area = $request['area'];
+    $Survey->name = $request['name'];
+    $Survey->nameselectaStatus = $request['nameselectaStatus'];
+    $Survey->city = $request['city'];
+    $Survey->area = $request['area'];
     // Continue assigning values for the other fields...
 
-    $survey->DIDMeatResponsiblePerson = $request['DIDMeatResponsiblePerson'];
-    $survey->NameResponsible = $request['NameResponsible'];
-    $survey->Phone = $request['Phone'];
-    $survey->activityType = $request['activityType'];
-    $survey->address_Detail = $request['address_Detail'];
-    $survey->delevery_detail = $request['delevery_detail'];
-    $survey->reasonVisit = $request['reasonVisit'];
-    $survey->usingApplication = $request['usingApplication'];
-    $survey->milkused = $request['milkused'];
-    $survey->kreemUsed = $request['kreemUsed'];
-    $survey->spices = $request['spices'];
-    $survey->cheeseUsed = $request['cheeseUsed'];
-    $survey->SelectedBatter = $request['SelectedBatter'];
-    $survey->oilUsed = $request['oilUsed'];
-    $survey->teaused = $request['teaused'];
-    $survey->seeeds = $request['seeeds'];
-    $survey->sauce = $request['sauce'];
-    $survey->sauceCompany = $request['sauceCompany'];
-    $survey->watergasused = $request['watergasused'];
-    $survey->pastaUsed = $request['pastaUsed'];
-    $survey->bonUsed = $request['bonUsed'];
-    $survey->branchNumber = $request['branchNumber'];
-    $survey->summryVisit = $request['summryVisit'];
-    $survey->productUsesClient = $request['productUsesClient'];
-    $survey->activity = $request['activity'];
+    $Survey->DIDMeatResponsiblePerson = $request['DIDMeatResponsiblePerson'];
+    $Survey->NameResponsible = $request['NameResponsible'];
+    $Survey->Phone = $request['Phone'];
+    $Survey->activityType = $request['activityType'];
+    $Survey->address_Detail = $request['address_Detail'];
+    $Survey->delevery_detail = $request['delevery_detail'];
+    $Survey->reasonVisit = $request['reasonVisit'];
+    $Survey->usingApplication = $request['usingApplication'];
+    $Survey->milkused = $request['milkused'];
+    $Survey->kreemUsed = $request['kreemUsed'];
+    $Survey->spices = $request['spices'];
+    $Survey->cheeseUsed = $request['cheeseUsed'];
+    $Survey->SelectedBatter = $request['SelectedBatter'];
+    $Survey->oilUsed = $request['oilUsed'];
+    $Survey->teaused = $request['teaused'];
+    $Survey->seeeds = $request['seeeds'];
+    $Survey->sauce = $request['sauce'];
+    $Survey->sauceCompany = $request['sauceCompany'];
+    $Survey->watergasused = $request['watergasused'];
+    $Survey->pastaUsed = $request['pastaUsed'];
+    $Survey->bonUsed = $request['bonUsed'];
+    $Survey->branchNumber = $request['branchNumber'];
+    $Survey->summryVisit = $request['summryVisit'];
+    $Survey->productUsesClient = $request['productUsesClient'];
+    $Survey->activity = $request['activity'];
 
-    $survey->save();
+    $Survey->save();
 
 
     
