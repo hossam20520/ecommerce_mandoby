@@ -135,6 +135,18 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
   
    
 
+
+
+    
+
+    //------------------------------- Surveys--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('surveys', 'SurveysController');
+    Route::post('surveys/delete/by_selection', 'SurveysController@delete_by_selection');
+
+ 
+
+
     Route::resource('Products', 'ProductsController');
     Route::get('Products/export/Excel', 'ProductsController@export_Excel');
     Route::post('Products/import/csv', 'ProductsController@import_products');

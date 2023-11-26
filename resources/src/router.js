@@ -477,6 +477,14 @@ const routes = [
                             import(/* webpackChunkName: "Categories" */"./views/app/pages/settings/categorie")
                     },
 
+                                  // surveys
+                                  {
+                                    name: "surveys",
+                                    path: "Surveys",
+                                    component: () =>
+                                        import(/* webpackChunkName: "Surveys" */"./views/app/pages/settings/surveys")
+                                },
+
                     // brands
                     {
                         name: "brands",

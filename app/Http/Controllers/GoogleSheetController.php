@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Models\Survey;
+ 
 use Google\Client;
 use Google\Service\Sheets;
 use Google\Service\Sheets\ValueRange;
@@ -79,6 +82,41 @@ class GoogleSheetController extends Controller
 
 
     // return $request->milkused;
+    $Survey = new Survey;
+    $survey->name = $request['name'];
+    $survey->nameselectaStatus = $request['nameselectaStatus'];
+    $survey->city = $request['city'];
+    $survey->area = $request['area'];
+    // Continue assigning values for the other fields...
+
+    $survey->DIDMeatResponsiblePerson = $request['DIDMeatResponsiblePerson'];
+    $survey->NameResponsible = $request['NameResponsible'];
+    $survey->Phone = $request['Phone'];
+    $survey->activityType = $request['activityType'];
+    $survey->address_Detail = $request['address_Detail'];
+    $survey->delevery_detail = $request['delevery_detail'];
+    $survey->reasonVisit = $request['reasonVisit'];
+    $survey->usingApplication = $request['usingApplication'];
+    $survey->milkused = $request['milkused'];
+    $survey->kreemUsed = $request['kreemUsed'];
+    $survey->spices = $request['spices'];
+    $survey->cheeseUsed = $request['cheeseUsed'];
+    $survey->SelectedBatter = $request['SelectedBatter'];
+    $survey->oilUsed = $request['oilUsed'];
+    $survey->teaused = $request['teaused'];
+    $survey->seeeds = $request['seeeds'];
+    $survey->sauce = $request['sauce'];
+    $survey->sauceCompany = $request['sauceCompany'];
+    $survey->watergasused = $request['watergasused'];
+    $survey->pastaUsed = $request['pastaUsed'];
+    $survey->bonUsed = $request['bonUsed'];
+    $survey->branchNumber = $request['branchNumber'];
+    $survey->summryVisit = $request['summryVisit'];
+    $survey->productUsesClient = $request['productUsesClient'];
+    $survey->activity = $request['activity'];
+
+    $survey->save();
+
 
     
     $this->writeSheett([
@@ -86,8 +124,8 @@ class GoogleSheetController extends Controller
 
 
 
-        [$request->name, 
-            $request->nameselectaStatus  ,
+        [   $request->name, 
+             $request->nameselectaStatus  ,
              $request->city , 
 
                $request->area,
