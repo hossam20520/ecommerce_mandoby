@@ -114,8 +114,20 @@ class GoogleSheetController extends Controller
         'insertDataOption' => 'INSERT_ROWS'
     ];
 
-    $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params );
+    // $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params );
     // $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params);
+
+
+    $result = $service->spreadsheets_values->append($this->document, $this->range, $body, $params);
+
+// Handle the result
+if ($result->getUpdates()->getUpdatedRows() > 0) {
+    echo "Data inserted successfully.";
+} else {
+    echo "Failed to insert data.";
+}
+
+
 }
 
   
