@@ -104,7 +104,7 @@ class GoogleSheetController extends Controller
 
 
                $request->usingApplication,
-               $request->milkused,
+               json_decode('["' . implode('","', $request->milkused) . '"]') ,
             //    $request->kreemUsed,
             //    $request->spices,
             //    $request->cheeseUsed,
