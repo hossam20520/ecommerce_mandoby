@@ -110,7 +110,8 @@ class GoogleSheetController extends Controller
     ]);
 
     $params = [
-        'valueInputOption'=> 'RAW'
+        'valueInputOption'=> 'RAW',
+        'insertDataOption' => 'INSERT_ROWS'
     ];
 
     $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params );
