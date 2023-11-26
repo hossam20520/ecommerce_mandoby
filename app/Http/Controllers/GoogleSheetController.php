@@ -83,7 +83,40 @@ class GoogleSheetController extends Controller
 
 
 
-        [$request->name, 'Doe', 30],
+        [$request->name, 
+         $request->nameselectaStatus  ,
+           $request->city , 
+
+               $request->area,
+               $request->DIDMeatResponsiblePerson,
+               $request->NameResponsible,
+               $request->Phone,
+
+
+               $request->activityType,
+                "عنوان الادارة",
+                "عنوان التوصيل",
+               $request->reasonVisit,
+               $request->usingApplication,
+               $request->milkused,
+               $request->kreemUsed,
+               $request->spices,
+               $request->cheeseUsed,
+               $request->oilUsed,
+               "الشاي المستخدم",
+                "ارز وبقوليات",
+               $request->sauce,
+               $request->sauceCompany,
+               $request->watergasused,
+               $request->pastaUsed,
+               $request->bonUsed,
+               $request->branchNumber,
+               $request->summryVisit,
+               $request->productUsesClient,
+               $request->activity,
+               
+
+               ],
       
        
     ]);
