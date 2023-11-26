@@ -105,14 +105,16 @@ class GoogleSheetController extends Controller
         $rows[] = array_values($combinedRow);
     }
 
-    $body = new Google_Service_Sheets_ValueRange([
+    $body = new ValueRange([
         'values'=> $rows
     ]);
 
     $params = [
         'valueInputOption'=> 'RAW'
     ];
-    $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params);
+
+    $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params );
+    // $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params);
 }
 
   
