@@ -78,8 +78,10 @@ class GoogleSheetController extends Controller
     //    ]);
 
 
-    return $request->milkused;
+    // return $request->milkused;
 
+
+    
     $this->writeSheett([
         // ['First Name', 'Last Name', 'Age'], // This could be used as headers or skipped
 
