@@ -35,20 +35,20 @@
           <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button>
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
-          <b-button @click="New_Survey()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
+          <!-- <b-button @click="New_Survey()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
             <i class="i-Add"></i>
              {{ $t('Add') }}
-          </b-button>
+          </b-button> -->
         </div>
 
         <template slot="table-row" slot-scope="props">
           <span v-if="props.column.field == 'actions'">
-            <a @click="Edit_Survey(props.row)" title="Edit" v-b-tooltip.hover>
+            <!-- <a @click="Edit_Survey(props.row)" title="Edit" v-b-tooltip.hover>
               <i class="i-Edit text-25 text-success"></i>
-            </a>
-            <a title="Delete" v-b-tooltip.hover @click="Delete_Survey(props.row.id)">
+            </a> -->
+            <!-- <a title="Delete" v-b-tooltip.hover @click="Delete_Survey(props.row.id)">
               <i class="i-Close-Window text-25 text-danger"></i>
-            </a>
+            </a> -->
           </span>
           <span v-else-if="props.column.field == 'image'">
             <b-img

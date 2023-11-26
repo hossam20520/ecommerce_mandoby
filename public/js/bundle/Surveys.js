@@ -709,57 +709,7 @@ var render = function () {
                         fn: function (props) {
                           return [
                             props.column.field == "actions"
-                              ? _c("span", [
-                                  _c(
-                                    "a",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true },
-                                        },
-                                      ],
-                                      attrs: { title: "Edit" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.Edit_Survey(props.row)
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "i-Edit text-25 text-success",
-                                      }),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true },
-                                        },
-                                      ],
-                                      attrs: { title: "Delete" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.Delete_Survey(props.row.id)
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "i-Close-Window text-25 text-danger",
-                                      }),
-                                    ]
-                                  ),
-                                ])
+                              ? _c("span")
                               : props.column.field == "image"
                               ? _c(
                                   "span",
@@ -785,7 +735,7 @@ var render = function () {
                     ],
                     null,
                     false,
-                    2597886644
+                    3461693510
                   ),
                 },
                 [
@@ -811,37 +761,11 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "mt-2 mb-3",
-                      attrs: { slot: "table-actions" },
-                      slot: "table-actions",
-                    },
-                    [
-                      _c(
-                        "b-button",
-                        {
-                          staticClass: "btn-rounded",
-                          attrs: { variant: "btn btn-primary btn-icon m-1" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.New_Survey()
-                            },
-                          },
-                        },
-                        [
-                          _c("i", { staticClass: "i-Add" }),
-                          _vm._v(
-                            "\n           " +
-                              _vm._s(_vm.$t("Add")) +
-                              "\n        "
-                          ),
-                        ]
-                      ),
-                    ],
-                    1
-                  ),
+                  _c("div", {
+                    staticClass: "mt-2 mb-3",
+                    attrs: { slot: "table-actions" },
+                    slot: "table-actions",
+                  }),
                 ]
               ),
             ],
