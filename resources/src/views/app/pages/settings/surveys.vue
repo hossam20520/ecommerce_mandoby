@@ -178,55 +178,55 @@ export default {
     columns() {
       return [
       {
-    label: this.$t("name"),
+    label: this.$t("اسم العميل"),
     field: "name",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("nameselectaStatus"),
+    label: this.$t("جديد / قديم"),
     field: "nameselectaStatus",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("city"),
+    label: this.$t("المدينة"),
     field: "city",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("area"),
+    label: this.$t("المنطقة"),
     field: "area",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("DIDMeatResponsiblePerson"),
+    label: this.$t("هل قابلت الشخص المسؤل"),
     field: "DIDMeatResponsiblePerson",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("NameResponsible"),
+    label: this.$t("اسم المسؤل"),
     field: "NameResponsible",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("Phone"),
+    label: this.$t("رقم التليفون"),
     field: "Phone",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("activityType"),
+    label: this.$t("نوع النشاط"),
     field: "activityType",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("address_Detail"),
+    label: this.$t("عنوان الإدارة"),
     field: "address_Detail",
     tdClass: "text-left",
     thClass: "text-left"
@@ -238,115 +238,115 @@ export default {
     thClass: "text-left"
   },
   {
-    label: this.$t("reasonVisit"),
+    label: this.$t("عنوان التوصيل"),
     field: "reasonVisit",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("usingApplication"),
+    label: this.$t("هل يستخدم ابلكيشن للطلب"),
     field: "usingApplication",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("milkused"),
+    label: this.$t("اللبن المستخدم"),
     field: "milkused",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("kreemUsed"),
+    label: this.$t("الكريمة المستخدمة"),
     field: "kreemUsed",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("spices"),
+    label: this.$t("التوابل المستخدمة"),
     field: "spices",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("cheeseUsed"),
+    label: this.$t("الجبن المستخدمة"),
     field: "cheeseUsed",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("SelectedBatter"),
+    label: this.$t("الذبدة المستخدمة"),
     field: "SelectedBatter",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("oilUsed"),
+    label: this.$t("الزيوت المستخدمة"),
     field: "oilUsed",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("teaused"),
+    label: this.$t("الشاى المستخدم"),
     field: "teaused",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("seeeds"),
+    label: this.$t("ارز و بقوليات"),
     field: "seeeds",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("sauce"),
+    label: this.$t("الصوصات المستخدمة"),
     field: "sauce",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("sauceCompany"),
+    label: this.$t("الشركة المنتجة للصوصات"),
     field: "sauceCompany",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("watergasused"),
+    label: this.$t("المشروبات الغازية المستخدمة"),
     field: "watergasused",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("pastaUsed"),
+    label: this.$t("المكرونة المستخدمة"),
     field: "pastaUsed",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("bonUsed"),
+    label: this.$t("البن المستخدم"),
     field: "bonUsed",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("branchNumber"),
+    label: this.$t("عدد فروع العميل ومكانهم"),
     field: "branchNumber",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("summryVisit"),
+    label: this.$t("ملخص الزيارة"),
     field: "summryVisit",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("productUsesClient"),
+    label: this.$t("منتجات اخرى يستخدمها العميل"),
     field: "productUsesClient",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("activity"),
+    label: this.$t("هل تم تفعيل العميل"),
     field: "activity",
     tdClass: "text-left",
     thClass: "text-left"
