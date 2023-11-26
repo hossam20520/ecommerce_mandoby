@@ -94,8 +94,8 @@ class GoogleSheetController extends Controller
 
 
                $request->activityType,
-                "عنوان الادارة",
-                "عنوان التوصيل",
+                 'عنوان الادارة',
+                'عنوان التوصيل',
                $request->reasonVisit,
                $request->usingApplication,
                $request->milkused,
@@ -103,8 +103,8 @@ class GoogleSheetController extends Controller
                $request->spices,
                $request->cheeseUsed,
                $request->oilUsed,
-               "الشاي المستخدم",
-                "ارز وبقوليات",
+                'الشاي المستخدم',
+                 'ارز وبقوليات',
                $request->sauce,
                $request->sauceCompany,
                $request->watergasused,
