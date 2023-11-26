@@ -78,6 +78,8 @@ class GoogleSheetController extends Controller
     //    ]);
 
 
+    return $request->milkused;
+
     $this->writeSheett([
         // ['First Name', 'Last Name', 'Age'], // This could be used as headers or skipped
 
@@ -103,10 +105,10 @@ class GoogleSheetController extends Controller
 
                $request->usingApplication,
                $request->milkused,
-               $request->kreemUsed,
-               $request->spices,
-               $request->cheeseUsed,
-               $request->oilUsed,
+            //    $request->kreemUsed,
+            //    $request->spices,
+            //    $request->cheeseUsed,
+            //    $request->oilUsed,
             //     'الشاي المستخدم',
             //      'ارز وبقوليات',
             //    $request->sauce,
