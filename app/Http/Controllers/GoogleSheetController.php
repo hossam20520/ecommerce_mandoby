@@ -70,12 +70,51 @@ class GoogleSheetController extends Controller
 
 
   public function write(Request $request){
-       $this->writeSheet([
-        [
-            'ahmed',
-            'row ww'
-        ]
-       ]);
+    //    $this->writeSheet([
+    //     [
+    //         'ahmed',
+    //         'row ww'
+    //     ]
+    //    ]);
+
+
+    $this->writeSheett([
+        ['First Name', 'Last Name', 'Age'], // This could be used as headers or skipped
+        ['John', 'Doe', 30],
+        ['Jane', 'Smith', 28],
+       
+    ]);
+
+
   }
+
+
+  public function writeSheett($values){
+    // Get the existing headers from the spreadsheet
+    $response = $this->service->spreadsheets_values->get($this->document, 'A1:1');
+    $existingHeaders = $response->getValues()[0] ?? [];
+
+    // Combine existing headers with the provided values
+    $rows = [];
+    foreach ($values as $rowValues) {
+        $combinedRow = [];
+        foreach ($existingHeaders as $index => $header) {
+            // Use the existing headers to map values
+            $combinedRow[$header] = $rowValues[$index] ?? '';
+        }
+        $rows[] = array_values($combinedRow);
+    }
+
+    $body = new Google_Service_Sheets_ValueRange([
+        'values'=> $rows
+    ]);
+
+    $params = [
+        'valueInputOption'=> 'RAW'
+    ];
+    $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params);
+}
+
+  
 
 }
