@@ -101,7 +101,7 @@ class GoogleSheetController extends Controller
 
 
 
-            //    $request->usingApplication,
+               $request->usingApplication,
             //    $request->milkused,
             //    $request->kreemUsed,
             //    $request->spices,
