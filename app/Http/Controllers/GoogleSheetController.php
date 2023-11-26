@@ -19,7 +19,7 @@ class GoogleSheetController extends Controller
     $this->client = $this->getClient();
     $this->service = new Sheets($this->client);
     $this->document = "1f5HFWIQwdfRxD0XYEzYKOSuO_uJD6vPaT_YO6Ar4YbY";
-    $this->range = 'A:Z';
+    $this->range = 'A:AC';
    }
 
 
@@ -84,8 +84,8 @@ class GoogleSheetController extends Controller
 
 
         [$request->name, 
-         $request->nameselectaStatus  ,
-           $request->city , 
+            $request->nameselectaStatus  ,
+             $request->city , 
 
                $request->area,
                $request->DIDMeatResponsiblePerson,
