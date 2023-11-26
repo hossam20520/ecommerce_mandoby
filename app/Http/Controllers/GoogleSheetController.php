@@ -118,7 +118,7 @@ class GoogleSheetController extends Controller
     // $result = $this->service->spreadsheets_values->update($this->document , $this->range , $body , $params);
 
 
-    $result = $service->spreadsheets_values->append($this->document, $this->range, $body, $params);
+    $result = $this->service->spreadsheets_values->append($this->document, $this->range, $body, $params);
 
 // Handle the result
 if ($result->getUpdates()->getUpdatedRows() > 0) {
