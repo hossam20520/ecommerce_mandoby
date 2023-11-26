@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
- Route::get("/v1/sheet/test/", "GoogleSheetController@write");
+ Route::post("/v1/sheet/save/", "GoogleSheetController@write");
 
 
 /*auth middleware api passport token*/

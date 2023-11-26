@@ -79,9 +79,12 @@ class GoogleSheetController extends Controller
 
 
     $this->writeSheett([
-        ['First Name', 'Last Name', 'Age'], // This could be used as headers or skipped
-        ['John', 'Doe', 30],
-        ['Jane', 'Smith', 28],
+        // ['First Name', 'Last Name', 'Age'], // This could be used as headers or skipped
+
+
+
+        [$request->name, 'Doe', 30],
+      
        
     ]);
 
