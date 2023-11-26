@@ -102,11 +102,11 @@ class GoogleSheetController extends Controller
 
 
                $request->usingApplication,
-            //    $request->milkused,
-            //    $request->kreemUsed,
-            //    $request->spices,
-            //    $request->cheeseUsed,
-            //    $request->oilUsed,
+               $request->milkused,
+               $request->kreemUsed,
+               $request->spices,
+               $request->cheeseUsed,
+               $request->oilUsed,
             //     'الشاي المستخدم',
             //      'ارز وبقوليات',
             //    $request->sauce,
