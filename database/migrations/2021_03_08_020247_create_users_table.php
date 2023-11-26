@@ -17,6 +17,13 @@ class CreateUsersTable extends Migration {
 		{
 			$table->engine = 'InnoDB';
 			$table->integer('id', true);
+			$table->string('area_name');
+			$table->string('bussiness_type');
+			$table->string('location_lat');
+			$table->string('location_long');
+			$table->string('address');
+
+
 			$table->string('firstname');
 			$table->string('lastname');
 			$table->string('username', 192);

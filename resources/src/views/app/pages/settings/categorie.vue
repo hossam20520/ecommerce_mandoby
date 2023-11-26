@@ -53,6 +53,18 @@
               <i class="i-Close-Window text-25 text-danger"></i>
             </a>
           </span>
+
+          <span v-else-if="props.column.field == 'image'">
+            <b-img
+              thumbnail
+              height="50"
+              width="50"
+              fluid
+              :src="'/images/category/' + props.row.image"
+              alt="image"
+            ></b-img>
+          </span>
+
         </template>
       </vue-good-table>
     </b-card>
@@ -100,6 +112,41 @@
                 </b-form-group>
               </validation-provider>
             </b-col>
+            <!-- Name category -->
+            <b-col md="12">
+              <validation-provider
+                name="Name category"
+                :rules="{ required: true}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('ArNamecategorie')">
+                  <b-form-input
+                    :placeholder="$t('Enter_ar_name_category')"
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="Name-feedback"
+                    label="Name"
+                    v-model="category.ar_name"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+                  <!-- -Brand Image -->
+           <b-col md="12">
+              <validation-provider name="Image" ref="Image" rules="mimes:image/*">
+                <b-form-group slot-scope="{validate, valid, errors }" :label="$t('CategoryImage')">
+                  <input
+                    :state="errors[0] ? false : (valid ? true : null)"
+                    :class="{'is-invalid': !!errors.length}"
+                    @change="onFileSelected"
+                    label="Choose Image"
+                    type="file"
+                  >
+                  <b-form-invalid-feedback id="Image-feedback">{{ errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
 
              <b-col md="12" class="mt-3">
                 <b-button variant="primary" type="submit"  :disabled="SubmitProcessing">{{$t('submit')}}</b-button>
@@ -142,9 +189,11 @@ export default {
       limit: "10",
       categories: [],
       editmode: false,
-
+      data: new FormData(),
       category: {
         id: "",
+        ar_name:"",
+        image:"",
         name: "",
         code: ""
       }
@@ -153,6 +202,13 @@ export default {
   computed: {
     columns() {
       return [
+      {
+          label: this.$t("CategoryImage"),
+          field: "image",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
         {
           label: this.$t("Codecategorie"),
           field: "code",
@@ -182,7 +238,15 @@ export default {
     updateParams(newProps) {
       this.serverParams = Object.assign({}, this.serverParams, newProps);
     },
+    async onFileSelected(e) {
+      const { valid } = await this.$refs.Image.validate(e);
 
+      if (valid) {
+        this.category.image = e.target.files[0];
+      } else {
+        this.category.image = "";
+      }
+    },
     //---- Event Page Change
     onPageChange({ currentPage }) {
       if (this.serverParams.page !== currentPage) {
@@ -315,11 +379,13 @@ export default {
     //----------------------------------Create new Category ----------------\\
     Create_Category() {
       this.SubmitProcessing = true;
+      var self = this;
+      self.data.append("name", self.category.name);
+      self.data.append("code", self.category.code);
+      self.data.append("image", self.category.image);
+      self.data.append("ar_name", self.category.ar_name);
       axios
-        .post("categories", {
-          name: this.category.name,
-          code: this.category.code
-        })
+        .post("categories", self.data)
         .then(response => {
           this.SubmitProcessing = false;
           Fire.$emit("Event_Category");
@@ -338,11 +404,14 @@ export default {
     //---------------------------------- Update Category ----------------\\
     Update_Category() {
       this.SubmitProcessing = true;
+      var self = this;
+      self.data.append("name", self.category.name);
+      self.data.append("code", self.category.code);
+      self.data.append("image", self.category.image);
+      self.data.append("ar_name", self.category.ar_name);
+      self.data.append("_method", "put");
       axios
-        .put("categories/" + this.category.id, {
-          name: this.category.name,
-          code: this.category.code
-        })
+        .post("categories/" + this.category.id, self.data)
         .then(response => {
           this.SubmitProcessing = false;
           Fire.$emit("Event_Category");
@@ -364,7 +433,9 @@ export default {
       this.category = {
         id: "",
         name: "",
-        code: ""
+        code: "",
+        ar_name:"",
+        image:"",
       };
     },
 

@@ -9,6 +9,96 @@ use Illuminate\Support\Facades\Auth;
 class helpers
 {
 
+
+    public function IsInWhishlist($product_id , $user_id){
+
+        // $products = Favourit::where('deleted_at', '=', null)->where('product_id' , $product_id )->where('user_id' , $user_id )->first();
+
+        if(false){
+
+            return true;
+
+        }else{
+
+            return false;
+        }
+  
+
+    }
+
+
+
+    public function IsInCart($product_id , $user_id){
+        // $cart = Cart::where('deleted_at', '=', null)->where('user_id' ,  $user_id)->where('order_id' ,  '='  , null )->first();
+
+        // if(!$cart){
+        //     return false;
+        // }
+ 
+
+        // $cartItem =  Cartitem::where('deleted_at', '=', null)->where('product_id' , $product_id )->where('cart_id' ,  $cart->id )->first();
+
+
+  
+
+
+        if( false){
+
+            return true;
+
+        }else{
+            return false;
+        }
+      
+ 
+
+
+    }
+
+
+    public function singleProduct($product){
+        $is_widh =  false;
+        $isCart =   false;
+        if (!Auth::check()) {
+            $is_widh =  false;
+            $isCart =   false;
+        }else{
+             $user =  Auth::user();
+             $is_widh =  $this->IsInWhishlist($product->id , $user->id);
+             $isCart =   $this->IsInCart($product->id , $user->id);
+        }
+ 
+        $item['id'] = $product->id;
+        $item['en_name'] = $product->name;
+        $item['ar_name'] = $product->ar_name;
+        $item['ar_category'] = $product['category']->name;
+        $item['en_category'] = $product['category']->en_name;
+        $item['ar_unit'] = $product['unit']->name;
+        $item['en_unit'] = $product['unit']->ShortName;
+        $item['price'] = $product->price;
+        $item['ar_description'] =$product->ar_description;
+        $item['en_description'] =$product->en_description;
+        $item['discount'] = $product->discount;
+     
+        $item['photo']= $product->photo;
+        $item['isInWishlist'] =    $is_widh;
+        $item['isInCart'] =  $isCart;
+        if ($product->image != '') {
+            // $isFirstImage = true; 
+            foreach (explode(',', $product->image) as $img) {
+                // $item['images'][] = "/public/images/products/".$img;
+                $item['gallery'][]=  env('url', 'http://localhost:8000')."/images/products/". $img;
+            }
+        }
+        $firstimage = explode(',', $product->image);
+        $item['image'] = "/public/images/products/".$firstimage[0];
+         return $item;
+
+    }
+
+
+
+
     //  Helper Multiple Filter
     public function filter($model, $columns, $param, $request)
     {

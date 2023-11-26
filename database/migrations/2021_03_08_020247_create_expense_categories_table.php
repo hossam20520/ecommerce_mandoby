@@ -20,6 +20,8 @@ class CreateExpenseCategoriesTable extends Migration {
 			$table->integer('user_id')->index('expense_category_user_id');
 			$table->string('name', 192);
 			$table->text('description')->nullable();
+
+		 
 			$table->timestamps(6);
 			$table->softDeletes();
 		});

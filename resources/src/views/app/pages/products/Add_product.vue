@@ -29,6 +29,27 @@
                   </validation-provider>
                 </b-col>
 
+
+
+
+                <b-col md="6" class="mb-2">
+                  <validation-provider
+                    name="Name"
+                    :rules="{required:true , min:3 , max:55}"
+                    v-slot="validationContext"
+                  >
+                    <b-form-group :label="$t('ar_Name_product')">
+                      <b-form-input
+                        :state="getValidationState(validationContext)"
+                        aria-describedby="Name-feedback"
+                        label="Name"
+                        :placeholder="$t('Enter_ar_Name_Product')"
+                        v-model="product.ar_name"
+                      ></b-form-input>
+                      <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
                 <!-- Code Product"-->
                 <b-col md="6" class="mb-2">
                   <validation-provider
@@ -394,6 +415,7 @@ export default {
       variants: [],
       product: {
         name: "",
+        ar_name:"",
         code: "",
         Type_barcode: "",
         cost: "",

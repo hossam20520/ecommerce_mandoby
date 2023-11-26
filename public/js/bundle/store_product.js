@@ -775,6 +775,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -800,6 +821,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       variants: [],
       product: {
         name: "",
+        ar_name: "",
         code: "",
         Type_barcode: "",
         cost: "",
@@ -1582,6 +1604,98 @@ var render = function () {
                                           null,
                                           false,
                                           4163318998
+                                        ),
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-col",
+                                    { staticClass: "mb-2", attrs: { md: "6" } },
+                                    [
+                                      _c("validation-provider", {
+                                        attrs: {
+                                          name: "Name",
+                                          rules: {
+                                            required: true,
+                                            min: 3,
+                                            max: 55,
+                                          },
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function (validationContext) {
+                                                return [
+                                                  _c(
+                                                    "b-form-group",
+                                                    {
+                                                      attrs: {
+                                                        label:
+                                                          _vm.$t(
+                                                            "ar_Name_product"
+                                                          ),
+                                                      },
+                                                    },
+                                                    [
+                                                      _c("b-form-input", {
+                                                        attrs: {
+                                                          state:
+                                                            _vm.getValidationState(
+                                                              validationContext
+                                                            ),
+                                                          "aria-describedby":
+                                                            "Name-feedback",
+                                                          label: "Name",
+                                                          placeholder: _vm.$t(
+                                                            "Enter_ar_Name_Product"
+                                                          ),
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.product.ar_name,
+                                                          callback: function (
+                                                            $$v
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.product,
+                                                              "ar_name",
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "product.ar_name",
+                                                        },
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "b-form-invalid-feedback",
+                                                        {
+                                                          attrs: {
+                                                            id: "Name-feedback",
+                                                          },
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              validationContext
+                                                                .errors[0]
+                                                            )
+                                                          ),
+                                                        ]
+                                                      ),
+                                                    ],
+                                                    1
+                                                  ),
+                                                ]
+                                              },
+                                            },
+                                          ],
+                                          null,
+                                          false,
+                                          1076510938
                                         ),
                                       }),
                                     ],

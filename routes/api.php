@@ -14,10 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+ Route::get("/v1/sheet/test/", "GoogleSheetController@readSheet");
+
+
 /*auth middleware api passport token*/
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+
+Route::post("/v1/device/login/", "device\AuthController@login");
+
+Route::post("/v1/device/register/", "device\AuthController@register");
+
+
+
+Route::get("/v1/device/products/", "device\ProductsController@Products");
+
 
 //--------------------------- Reset Password  ---------------------------
 
@@ -29,6 +44,16 @@ Route::group([
 });
 
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
+
+
+
+
+
+
+
+
+
+
 
     //-------------------------- Clear Cache ---------------------------
 

@@ -137,6 +137,7 @@ class ProductsController extends BaseController
 
                 //-- Field Required
                 $Product->name = $request['name'];
+                $Product->ar_name = $request['ar_name'];
                 $Product->code = $request['code'];
                 $Product->Type_barcode = $request['Type_barcode'];
                 $Product->price = $request['price'];
@@ -252,6 +253,7 @@ class ProductsController extends BaseController
 
                 //-- Update Product
                 $Product->name = $request['name'];
+                $Product->ar_name = $request['ar_name'];
                 $Product->code = $request['code'];
                 $Product->Type_barcode = $request['Type_barcode'];
                 $Product->price = $request['price'];
@@ -631,6 +633,8 @@ class ProductsController extends BaseController
     public function Products_by_Warehouse(request $request, $id)
     {
         $data = [];
+
+
         $product_warehouse_data = product_warehouse::with('warehouse', 'product', 'productVariant')
             ->where('warehouse_id', $id)
             ->where('deleted_at', '=', null)
@@ -867,6 +871,7 @@ class ProductsController extends BaseController
         $item['code'] = $Product->code;
         $item['Type_barcode'] = $Product->Type_barcode;
         $item['name'] = $Product->name;
+        $item['ar_name'] = $Product->ar_name;
         if ($Product->category_id) {
             if (Category::where('id', $Product->category_id)
                 ->where('deleted_at', '=', null)

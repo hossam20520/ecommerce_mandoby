@@ -19,6 +19,8 @@ class CreateCategoriesTable extends Migration {
 			$table->integer('id', true);
 			$table->string('code', 192);
 			$table->string('name', 192);
+			$table->text('ar_name')->nullable();
+			$table->text('image')->nullable();
 			$table->timestamps(6);
 			$table->softDeletes();
 		});
