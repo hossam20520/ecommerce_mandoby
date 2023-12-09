@@ -17,7 +17,152 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     
-  
+    public function resetPassword(Request $request){
+
+        $phone = $request->phone;
+        $passowrd = $request->passowrd;
+        $user = User::where('phone',  $phone )->first();
+        $pass = Hash::make($request->new_password);
+        User::whereId($user->id)->update([
+            'password' => $pass,
+        ]);
+
+
+ 
+        return response()->json(['status' => "success" ,  'message'=> 'success'   ], 200);
+
+
+        // $User->password  = Hash::make($request['password']);
+
+    }
+
+
+    public function getCountries(Request $request){
+
+         $countries = Cce::with('currency')->where('deleted_at', '=', null)->get();
+         return response()->json(['countries' =>  $countries     ], 200);
+
+    }
+
+    
+    public function changeImage(Request $request){
+ 
+        $helpers = new helpers();
+        $user =   Auth::user();
+         $currentAvatar = $user->avatar;
+
+
+         $image = $request->file('avatar');
+         $path = public_path() . '/images/avatar';
+         $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
+
+         $image_resize = Image::make($image->getRealPath());
+      
+         $image_resize->save(public_path('/images/avatar/' . $filename));
+
+         $userPhoto = $path . '/' . $currentAvatar;
+         if (file_exists($userPhoto)) {
+             if ($user->avatar != 'no_avatar.png') {
+                 @unlink($userPhoto);
+             }
+         }
+
+         // $filename = $currentAvatar;
+   
+
+        // return $filename;
+
+
+ User::whereId($user->id)->update([
+
+     'avatar' => $filename,
+   
+ ]);
+
+
+
+
+ return response()->json(['url' =>  "/images/avatar/".  $filename   ], 200);
+
+
+
+ }
+
+
+
+ public function EditProfile(Request $request){
+    $helpers = new helpers();
+    $user =   Auth::user();
+    $email =  $request['email']  == null ? $user->email : $request['email'];
+    $phone =  $request['phone']  == null ? $user->phone : $request['phone'];
+
+
+
+    if($phone  ==  $user->phone ){
+
+         
+
+    }else{
+
+
+        $userd  = User::where('deleted_at', '=', null )->where('phone' , $phone )->first();
+        if( $userd ){
+            return response()->json(['status' => "fail" ,  'message'=> 'Phone Already Exist'   ], 401);
+        }   
+
+
+
+    }
+
+
+    if($email  ==  $user->email ){
+
+
+        
+    }else{
+        $user  = User::where('deleted_at', '=', null )->where('email' ,  $email  )->first();
+        if( $user ){
+            return response()->json(['status' => "fail" ,  'message'=> 'Email Already Exist'   ], 401);
+        } 
+ 
+    }
+    $userrr =   User::where('email' , $email )->first();
+      
+    User::whereId($user->id)->update([
+        'firstname' => $request['firstname'] == "" ? $userrr->firstname :  $request['firstname'] ,
+        'lastname' =>  $request['lastname'] == "" ? $userrr->lastname :  $request['lastname'] ,
+        'email' =>    $email == "" ? $user->email :  $email ,
+        'phone' =>   $phone == "" ? $user->phone :  $phone  ,
+      
+    ]); 
+    
+
+    return response()->json(  $user, 200);
+}
+
+
+ public function profile(Request $request){
+        $user = Auth::user(); 
+       
+ 
+        return response()->json(['user' =>  $user     ], 200);
+
+    }
+
+    public function updateProfile(Request $request){
+ 
+        $helpers = new helpers();
+        $user =  $helpers->getInfo();
+        User::whereId($user->id)->update([
+            'firstname' => $request['firstname'],
+            'lastname' =>  $request['lastname'],
+            'email' =>  $request['email'],
+            'phone' => $request['phone'],
+        ]);
+
+
+        return response()->json(['status' => "success" ,  'message'=> 'success'   ], 200);
+    }
 
 
     public function register(Request $request){
@@ -64,24 +209,28 @@ class AuthController extends Controller
         $User->phone     = $request['phone'];
         $User->password  = Hash::make($request['password']);
         $User->avatar    = $filename;
-        // $User->role_id   = $role;
-        $User->save();
 
-        // $role_user = new role_user;
-        // $role_user->user_id = $User->id;
-        // $role_user->role_id = $role;
-        // $role_user->save();
+        $User->area_name    = $request['area_name'];
+        $User->bussiness_type    = $request['bussiness_type'];
+        $User->location_lat    = $request['location_lat'];
+        $User->location_long    = $request['location_long'];
+        $User->address    = $request['address'];
+ 
+        $User->save();
  
     
         $accessToken = $User->createToken('AuthToken')->accessToken;
-     
+
+
+        
         return response()->json([
-            'status'=> 200,
-            'message'=> 'success',
-            'token'=> $accessToken,
-            'user'=> $User
+           
+            'user'=>  $User,
+            'token'=> $accessToken
             
         ] , 200); 
+     
+ 
 
 
     }

@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration {
 			$table->string('location_lat');
 			$table->string('location_long');
 			$table->string('address');
-
+			$table->string('bussiness_name');
 
 			$table->string('firstname');
 			$table->string('lastname');
@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration {
 			$table->string('phone', 192);
 			$table->integer('role_id');
 			$table->boolean('statut')->default(1);
+			
 			$table->timestamps(6);
 			$table->softDeletes();
 		});

@@ -135,6 +135,11 @@
                     <td>{{$t('Discount')}}</td>
                     <td>{{currentUser.currency}} {{sale.discount.toFixed(2)}}</td>
                   </tr>
+
+                  <!-- <tr>
+                    <td>{{$t('Promo')}}</td>
+                    <td>{{currentUser.currency}} {{sale.discount.toFixed(2)}}</td>
+                  </tr> -->
                   <tr>
                     <td>{{$t('Shipping')}}</td>
                     <td>{{currentUser.currency}} {{sale.shipping.toFixed(2)}}</td>

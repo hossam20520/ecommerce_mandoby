@@ -501,6 +501,24 @@ const routes = [
                             import(/* webpackChunkName: "Currencies" */"./views/app/pages/settings/currencies")
                     },
 
+                           // sliders
+                           {
+                            name: "sliders",
+                            path: "Sliders",
+                            component: () =>
+                                import(/* webpackChunkName: "Sliders" */"./views/app/pages/settings/sliders")
+                        },
+
+
+                        
+                          // promos
+                    {
+                        name: "promos",
+                        path: "Promos",
+                        component: () =>
+                            import(/* webpackChunkName: "Promos" */"./views/app/pages/settings/promos")
+                    },
+
                     // units
                     {
                         name: "units",

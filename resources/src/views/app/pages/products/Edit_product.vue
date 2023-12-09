@@ -308,6 +308,58 @@
                     </validation-provider>
                   </b-col>
 
+
+
+
+           <!-- Product discount -->
+           <b-col md="6" class="mb-2">
+                  <validation-provider
+                    name="Product Discount"
+                    :rules="{ required: true , regex: /^\d*\.?\d*$/}"
+                    v-slot="validationContext">
+                    <b-form-group :label="$t('ProductDiscount')">
+                      <b-form-input
+                        :state="getValidationState(validationContext)"
+                        aria-describedby="ProductPrice-feedback"
+                        label="discount"
+                        :placeholder="$t('Enter_Product_discount')"
+                        v-model="product.discount"
+                      ></b-form-input>
+
+                      <b-form-invalid-feedback
+                        id="ProductPrice-feedback"
+                      >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+                
+                <!-- Tax Method -->
+                <b-col lg="6" md="6" sm="12" class="mb-2">
+                  <validation-provider name="Status" :rules="{ required: true}">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Status')">
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        v-model="product.status"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Choose_Status')"
+                        :options="
+                           [
+                            {label: 'normal', value: 'NORMAL_PRODUCT'},
+                            {label: 'top', value: 'TOP_PRODUCT'},
+                            {label: 'new', value: 'NEW_PRODUCT'},
+                            {label: 'offers', value: 'OFFERS_PRODUCT'}
+                           ]"
+                      ></v-select>
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+
+ 
+
                   <b-col md="12" class="mb-2">
                     <b-form-group :label="$t('Note')">
                       <textarea
@@ -414,6 +466,8 @@ export default {
       variants: [],
       product: {
         ar_name:"",
+        status:"",
+        discount:"",
         name: "",
         code: "",
         Type_barcode: "",

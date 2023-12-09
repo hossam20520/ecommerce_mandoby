@@ -4,6 +4,9 @@ namespace App\utils;
 use App\Models\Currency;
 use App\Models\Role;
 use App\Models\Setting;
+use App\Models\Cart;
+use App\Models\Favourit;
+
 use Illuminate\Support\Facades\Auth;
 
 class helpers
@@ -12,9 +15,9 @@ class helpers
 
     public function IsInWhishlist($product_id , $user_id){
 
-        // $products = Favourit::where('deleted_at', '=', null)->where('product_id' , $product_id )->where('user_id' , $user_id )->first();
+       $products = Favourit::where('deleted_at', '=', null)->where('product_id' , $product_id )->where('user_id' , $user_id )->first();
 
-        if(false){
+        if($products){
 
             return true;
 
@@ -29,6 +32,20 @@ class helpers
 
 
     public function IsInCart($product_id , $user_id){
+
+
+        $cart = Cart::where('user_id', $user_id)->whereNull('order_id')->first();
+
+         if($cart){
+            return   $cart->ProductIsInCart($product_id);
+         }else{
+           false;
+         }
+        
+         
+
+         
+
         // $cart = Cart::where('deleted_at', '=', null)->where('user_id' ,  $user_id)->where('order_id' ,  '='  , null )->first();
 
         // if(!$cart){
@@ -64,34 +81,74 @@ class helpers
             $isCart =   false;
         }else{
              $user =  Auth::user();
-             $is_widh =  $this->IsInWhishlist($product->id , $user->id);
-             $isCart =   $this->IsInCart($product->id , $user->id);
+             $is_widh =  $this->IsInWhishlist($product['product']->id , $user->id);
+             $isCart =   $this->IsInCart($product['product']->id , $user->id);
         }
  
-        $item['id'] = $product->id;
-        $item['en_name'] = $product->name;
-        $item['ar_name'] = $product->ar_name;
-        $item['ar_category'] = $product['category']->name;
-        $item['en_category'] = $product['category']->en_name;
-        $item['ar_unit'] = $product['unit']->name;
-        $item['en_unit'] = $product['unit']->ShortName;
-        $item['price'] = $product->price;
-        $item['ar_description'] =$product->ar_description;
-        $item['en_description'] =$product->en_description;
-        $item['discount'] = $product->discount;
-     
-        $item['photo']= $product->photo;
+        $item['id'] = $product['product']->id;
+        $item['en_name'] = $product['product']->name;
+        $item['ar_name'] = $product['product']->ar_name;
+        $item['ar_category'] = $product['product']['category']->name;
+        $item['en_category'] = $product['product']['category']->en_name;
+        $item['ar_unit'] = $product['product']['unit']->name;
+        $item['en_unit'] = $product['product']['unit']->ShortName;
+        $item['price'] = $product['product']->price;
+        $item['ar_description'] =$product['product']->ar_description;
+        $item['en_description'] =$product['product']->en_description;
+        $item['discount'] = $product['product']->discount;
+        $item['photo']= $product['product']->photo;
         $item['isInWishlist'] =    $is_widh;
+
+
+        $item['status'] = $product['product']->status;
+ 
+      
+
         $item['isInCart'] =  $isCart;
-        if ($product->image != '') {
+
+        if ($product['product']->image != '') {
             // $isFirstImage = true; 
-            foreach (explode(',', $product->image) as $img) {
+            foreach (explode(',', $product['product']->image) as $img) {
                 // $item['images'][] = "/public/images/products/".$img;
                 $item['gallery'][]=  env('url', 'http://localhost:8000')."/images/products/". $img;
             }
         }
-        $firstimage = explode(',', $product->image);
-        $item['image'] = "/public/images/products/".$firstimage[0];
+        $firstimage = explode(',', $product['product']->image);
+        $item['image'] = "/images/products/".$firstimage[0];
+
+
+        if ($product['product']['unitSale']->operator == '/') {
+            $item['qte_sale'] = $product['product']->qte * $product['product']['unitSale']->operator_value;
+            $price = $product['product']->price / $product['product']['unitSale']->operator_value;
+        } else {
+            $item['qte_sale'] = $product['product']->qte / $product['product']['unitSale']->operator_value;
+            $price = $product['product']->price * $product['product']['unitSale']->operator_value;
+        }
+
+        if ($product['product']['unitPurchase']->operator == '/') {
+            $item['qte_purchase'] = round($product['product']->qte * $product['product']['unitPurchase']->operator_value, 5);
+        } else {
+            $item['qte_purchase'] = round($product['product']->qte / $product['product']['unitPurchase']->operator_value, 5);
+        }
+
+         $item['qte'] = $product->qte;
+        //  $item['unitSale'] = $product_warehouse['product']['unitSale']->ShortName;
+        // $item['unitPurchase'] = $product_warehouse['product']['unitPurchase']->ShortName;
+
+        if ($product['product']->TaxNet !== 0.0) {
+            //Exclusive
+            if ($product['product']->tax_method == '1') {
+                $tax_price = $price * $product['product']->TaxNet / 100;
+                $item['Net_price'] = $price + $tax_price;
+                // Inxclusive
+            } else {
+                $item['Net_price'] = $price;
+            }
+
+        } else {
+            $item['Net_price'] = $price;
+        }
+        
          return $item;
 
     }

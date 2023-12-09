@@ -43,8 +43,10 @@ class PosController extends BaseController
             $helpers = new helpers();
             $role = Auth::user()->roles()->first();
             $view_records = Role::findOrFail($role->id)->inRole('record_view');
-            $order = new Sale;
 
+
+
+            $order = new Sale;
             $order->is_pos = 1;
             $order->date = Carbon::now();
             $order->Ref = app('App\Http\Controllers\SalesController')->getNumberOrder();
@@ -57,7 +59,6 @@ class PosController extends BaseController
             $order->GrandTotal = $request->GrandTotal;
             $order->statut = 'completed';
             $order->user_id = Auth::user()->id;
-
             $order->save();
 
             $data = $request['details'];

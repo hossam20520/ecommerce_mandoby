@@ -21,6 +21,8 @@ class CreateProductsTable extends Migration {
 			$table->string('Type_barcode', 192);
 			$table->string('name', 192);
 			$table->string('ar_name', 192);
+			$table->string('status', 192)->nullable();
+			$table->string('discount', 192)->nullable()->default('0');
 			$table->float('cost', 10, 0);
 			$table->float('price', 10, 0);
 			$table->integer('category_id')->index('category_id');

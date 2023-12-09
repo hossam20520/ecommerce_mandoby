@@ -23,15 +23,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+// Route::post("device/auth/login/", "device\AuthController@login");
+
+Route::post("/v1/device/auth/login/", "device\AuthController@login");
+
+Route::post("/v1/device/auth/register/", "device\AuthController@register");
 
 
-Route::post("/v1/device/login/", "device\AuthController@login");
 
-Route::post("/v1/device/register/", "device\AuthController@register");
 
 
 
 Route::get("/v1/device/products/", "device\ProductsController@Products");
+Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
+
+Route::get("/v1/device/product/{id}", "device\ProductsController@OneProduct");
+
 
 
 //--------------------------- Reset Password  ---------------------------
@@ -45,16 +52,52 @@ Route::group([
 
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
+ Route::get('/v1/device/home', 'device\HomeController@HomePage');
+
+ Route::get('/v1/device/wishlist', 'device\FavouritesController@GetFavourites');
+
+ Route::post('/v1/device/wishlist', 'device\FavouritesController@AddFavourites');
+ Route::post('/v1/device/wishlist/delete', 'device\FavouritesController@RemoveProduct');
 
 
+ Route::get('/v1/device/all/products', 'device\ProductsController@GetAllProducts');
+ 
+
+ Route::get("device/profile", "device\AuthController@profile");
+ Route::post("device/profile/image", "device\AuthController@changeImage");
+
+ Route::post("device/profile/edit", "device\AuthController@EditProfile");
 
 
+ Route::post("device/password/edit", "device\AuthController@changePassword");
 
 
+  Route::post("/v1/device/cart/add", "device\CartController@addToCart");
+  Route::post("/v1/device/cart/increase", "device\CartController@IncreaseProductQT");
+  Route::get("/v1/device/cart", "device\CartController@getCartByUserId");
+    
+  Route::post("/v1/device/cart/decrease", "device\CartController@decreaseProductQT");  
+ 
+  Route::post("/v1/device/cart/remove", "device\CartController@removeProductfromCart");  
+ 
 
+  Route::post("/v1/device/checkout", "device\CheckoutController@checkout");  
 
+  Route::get("/v1/device/orders", "device\OrdersController@GetOrders");  
+  Route::get("/v1/device/order/{id}", "device\OrdersController@getorder"); 
+  
+//   OrdersController
 
+//   Route::get("/v1/device/checkout", "device\ProductsController@search"); 
 
+  Route::post("/v1/device/promo", "device\CheckoutController@applyPromoCode"); 
+  
+    //------------------------------- Promos--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('promos', 'PromosController');
+    Route::post('promos/delete/by_selection', 'PromosController@delete_by_selection');
+  
+  
     //-------------------------- Clear Cache ---------------------------
 
     Route::get("Clear_Cache", "SettingsController@Clear_Cache");
@@ -190,6 +233,15 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::resource('warehouses', 'WarehouseController');
     Route::get('Get_Warehouses/All', 'WarehouseController@Get_Warehouses');
     Route::post('warehouses/delete/by_selection', 'WarehouseController@delete_by_selection');
+
+
+        //------------------------------- Sliders--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('sliders', 'SlidersController');
+    Route::post('sliders/delete/by_selection', 'SlidersController@delete_by_selection');
+
+
+
 
     //------------------------------- PURCHASES --------------------------\\
     //------------------------------------------------------------------\\

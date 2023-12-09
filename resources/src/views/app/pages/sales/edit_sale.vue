@@ -286,8 +286,10 @@
                         :options="
                                 [
                                   {label: 'completed', value: 'completed'},
+                                  {label: 'shipping', value: 'shipping'},
                                   {label: 'Pending', value: 'pending'},
-                                  {label: 'ordered', value: 'ordered'}
+                                 
+                                  {label: 'ordered', value: 'ordered'},
                                 ]"
                       ></v-select>
                       <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>

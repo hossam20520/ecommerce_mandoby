@@ -17,8 +17,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'area_name' ,'bussiness_type' ,  'location_lat' ,  'location_long' , 'address' ,
+        'firstname', 'area_name' ,'bussiness_type' ,  'location_lat' ,  'location_long' , 'address' , 'bussiness_name',
          'lastname', 'username', 'email', 'password', 'phone', 'statut', 'avatar', 'role_id',
+         
     ];
 
  
@@ -44,6 +45,13 @@ class User extends Authenticatable
         'statut' => 'integer',
     ];
 
+
+    public function getAvatarAttribute($value)
+    {
+        // Manipulate the retrieved value before returning it
+        return    '/images/avatar/'.$value;
+    }
+
     public function oauthAccessToken()
     {
         return $this->hasMany('\App\Models\OauthAccessToken');
@@ -58,6 +66,23 @@ class User extends Authenticatable
     {
         return $this->roles()->save($role);
     }
+
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
+
+    public function favourits()
+    {
+        return $this->hasMany(Favourit::class, 'user_id', 'id');
+    }
+
+    public function client()
+    {
+        return $this->belongsTo('App\Models\User' , 'user_id');
+    }
+
 
     public function hasRole($role)
     {

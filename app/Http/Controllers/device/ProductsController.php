@@ -21,6 +21,9 @@ class ProductsController extends Controller
     
     public function Products(request $request)
     {
+
+
+
         $perPage = $request->limit;
         $pageStart = \Request::get('page', 1);
         // Start displaying items from this number;
@@ -43,9 +46,9 @@ class ProductsController extends Controller
             ->where('warehouse_id', $settings->warehouse_id)
             ->where('deleted_at', '=', null)
             ->where(function ($query) use ($request) {
-                if ($request->stock == '1') {
+                // if ($request->stock == '1') {
                     return $query->where('qte', '>', 0);
-                }
+                // }
             });
 
             $Filtred = $helpers->filter($product_warehouse_data, $columns, $param, $request)
@@ -78,46 +81,246 @@ class ProductsController extends Controller
 
        
 
-              $item = $helpers->singleProduct($product_warehouse['product']);
+      $item = $helpers->singleProduct($product_warehouse);
 
-  
-            if ($product_warehouse['product']['unitSale']->operator == '/') {
-                $item['qte_sale'] = $product_warehouse->qte * $product_warehouse['product']['unitSale']->operator_value;
-                $price = $product_warehouse['product']->price / $product_warehouse['product']['unitSale']->operator_value;
-            } else {
-                $item['qte_sale'] = $product_warehouse->qte / $product_warehouse['product']['unitSale']->operator_value;
-                $price = $product_warehouse['product']->price * $product_warehouse['product']['unitSale']->operator_value;
-            }
-
-            // if ($product_warehouse['product']['unitPurchase']->operator == '/') {
-            //     $item['qte_purchase'] = round($product_warehouse->qte * $product_warehouse['product']['unitPurchase']->operator_value, 5);
-            // } else {
-            //     $item['qte_purchase'] = round($product_warehouse->qte / $product_warehouse['product']['unitPurchase']->operator_value, 5);
-            // }
-
-             $item['qte'] = $product_warehouse->qte;
-            //  $item['unitSale'] = $product_warehouse['product']['unitSale']->ShortName;
-            // $item['unitPurchase'] = $product_warehouse['product']['unitPurchase']->ShortName;
-
-            if ($product_warehouse['product']->TaxNet !== 0.0) {
-                //Exclusive
-                if ($product_warehouse['product']->tax_method == '1') {
-                    $tax_price = $price * $product_warehouse['product']->TaxNet / 100;
-                    $item['Net_price'] = $price + $tax_price;
-                    // Inxclusive
-                } else {
-                    $item['Net_price'] = $price;
-                }
-            } else {
-                $item['Net_price'] = $price;
-            }
+   
 
             $data[] = $item;
         }
 
 
+        return response()->json([
+            'products'=> $data, 
+           
+        ]);
+        // return response()->json($data);
+    }
 
-        return response()->json($data);
+
+
+
+
+    public function GetProducts($limit ){
+
+ 
+        $settings = Setting::where('deleted_at', '=', null)->first();
+        $helpers = new helpers();
+        $data = [];
+        $product_warehouse_data = product_warehouse::with('warehouse', 'product', 'productVariant')
+            ->where('warehouse_id', $settings->warehouse_id)
+            ->where('deleted_at', '=', null)
+            ->where( 'qte', '>', 0 )->take($limit)->get();
+ 
+        foreach ($product_warehouse_data as $product_warehouse) {
+ 
+              $item = $helpers->singleProduct($product_warehouse);
+ 
+            $data[] = $item;
+        }
+
+
+
+        return $data ;
+
+    }
+
+
+
+
+
+    public function GetProductsByCategory(request $request)
+    {
+
+
+
+        $perPage = $request->limit;
+        $pageStart = \Request::get('page', 1);
+        // Start displaying items from this number;
+        $offSet = ($pageStart * $perPage) - $perPage;
+        $order = $request->SortField;
+        $dir = $request->SortType;
+     
+        // Filter fields With Params to retrieve
+        $columns = array(0 => 'name', 1 => 'category_id', 2 => 'brand_id', 3 => 'code');
+        $param = array(0 => 'like', 1 => '=', 2 => '=', 3 => 'like');
+        $data = array();
+    
+        $settings = Setting::where('deleted_at', '=', null)->first();
+        $helpers = new helpers();
+
+        $categoryId = $request->category_id;
+
+        $data = [];
+        $product_warehouse_data = product_warehouse::with('warehouse', 'product', 'productVariant')
+        ->where('warehouse_id', $settings->warehouse_id)
+        ->where('deleted_at', '=', null)
+        ->where('qte', '>', 0) // Filter for quantity > 0
+        ->whereHas('product', function ($query) use ($categoryId) {
+            $query->whereHas('category', function ($q) use ($categoryId) {
+                $q->where('id', $categoryId);
+            });
+        });
+    
+    $totalRows = $product_warehouse_data->count();
+    
+    $products = $product_warehouse_data
+        ->offset($offSet)
+        ->limit($perPage)
+        ->orderBy($order, $dir)
+        ->get();
+
+
+      
+        foreach ($products as $product_warehouse) {
+ 
+         $item = $helpers->singleProduct($product_warehouse);
+ 
+            $data[] = $item;
+        }
+
+        $category = Category::find($categoryId);
+
+        return response()->json([
+            'products'=> $data, 
+            'category'=>  $category 
+        ]);
+    }
+
+
+
+    public function ProductDetail($id)
+    {
+
+     $settings = Setting::where('deleted_at', '=', null)->first();
+     $helpers = new helpers();
+
+    $productId = $id;  
+
+    $product = product_warehouse::with('warehouse', 'product', 'productVariant')
+    ->where('warehouse_id', $settings->warehouse_id)
+    ->where('deleted_at', '=', null)
+    ->where('product_id', $productId) // Filter by the specific product ID
+    ->first(); 
+     return $helpers->singleProduct($product);
+ 
+    }
+
+
+
+
+    public function OneProduct(Request $request , $id)
+    {
+
+     $settings = Setting::where('deleted_at', '=', null)->first();
+     $helpers = new helpers();
+
+    $productId = $id;  
+
+    $product = product_warehouse::with('warehouse', 'product', 'productVariant')
+    ->where('warehouse_id', $settings->warehouse_id)
+    ->where('deleted_at', '=', null)
+    ->where('qte', '>', 0) // Filter for quantity > 0
+    ->where('product_id', $productId) // Filter by the specific product ID
+    ->first(); 
+    $item = $helpers->singleProduct($product);
+        return response()->json( $item );
+    }
+
+
+
+    public function GetAllProducts(Request $request){
+
+        
+        // OFFERS_PRODUCT
+        $type = $request->type;
+        $perPage = $request->limit;
+        $pageStart = \Request::get('page', 1);
+        // Start displaying items from this number;
+        $offSet = ($pageStart * $perPage) - $perPage;
+        $order = $request->SortField;
+        $dir = $request->SortType;
+     
+        // Filter fields With Params to retrieve
+        $columns = array(0 => 'name', 1 => 'category_id', 2 => 'brand_id', 3 => 'code');
+        $param = array(0 => 'like', 1 => '=', 2 => '=', 3 => 'like');
+        $data = array();
+    
+        $settings = Setting::where('deleted_at', '=', null)->first();
+        $helpers = new helpers();
+
+        $categoryId = $request->category_id;
+
+        $data = [];
+        $product_warehouse_data = product_warehouse::with('warehouse', 'product', 'productVariant')
+        ->where('warehouse_id', $settings->warehouse_id)
+        ->where('deleted_at', '=', null)
+        ->where('qte', '>', 0) // Filter for quantity > 0
+        ->whereHas('product', function ($query) use ($type ) {
+              $query->where('status', $type);
+        });
+    
+    $totalRows = $product_warehouse_data->count();
+    
+    $products = $product_warehouse_data
+        ->offset($offSet)
+        ->limit($perPage)
+        ->orderBy($order, $dir)
+        ->get();
+
+
+      
+        foreach ($products as $product_warehouse) {
+ 
+         $item = $helpers->singleProduct($product_warehouse);
+ 
+            $data[] = $item;
+        }
+
+ 
+
+        return response()->json([
+            'products'=> $data 
+          
+        ]);
+
+
+    }
+
+
+
+    public function search(Request $request){
+
+    }
+
+
+
+
+    public function ProducctInStock($product_id)
+    {
+        $settings = Setting::where('deleted_at', '=', null)->first();
+        $helpers = new helpers();
+
+        // return $product_id;
+     
+
+            $product_warehouse_data = product_warehouse::with('warehouse', 'product', 'productVariant')
+            ->where('warehouse_id', $settings->warehouse_id)
+            ->where('deleted_at', '=', null)
+            ->where('product_id',  $product_id)
+            // ->whereHas('product', function ($query) use ($product_id) {
+            //     $query->where('id', $product_id);
+            // })
+            ->where('qte', '>', 0)
+            ->first();
+            if($product_warehouse_data){
+                return true;
+            }else{
+                return false;
+            }
+
+        // $item = $helpers->singleProduct($product_warehouse_data);
+
+        // return $item;
     }
 
 }

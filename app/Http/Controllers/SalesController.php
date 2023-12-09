@@ -708,6 +708,19 @@ class SalesController extends BaseController
             ->where('deleted_at', '=', null)
             ->findOrFail($id);
 
+
+        
+        // $cart  = Cart::where('order_id' , $sale_data->id )->frist();
+       
+       
+        //   if($cart){
+        //       $promo = Promo::where('code' , $cart->promo_code )->first();
+        //       if($promo){
+        //           $promo = $promo->calculateFinalValue($cart->total);
+        //       }
+
+        //   }
+
         $details = array();
 
         // Check If User Has Permission view All Records
@@ -721,6 +734,11 @@ class SalesController extends BaseController
         $sale_details['statut'] = $sale_data->statut;
         $sale_details['warehouse'] = $sale_data['warehouse']->name;
         $sale_details['discount'] = $sale_data->discount;
+
+
+        // $sale_details['promo'] =  $sale_data->GrandTotal ;
+
+
         $sale_details['shipping'] = $sale_data->shipping;
         $sale_details['tax_rate'] = $sale_data->tax_rate;
         $sale_details['TaxNet'] = $sale_data->TaxNet;

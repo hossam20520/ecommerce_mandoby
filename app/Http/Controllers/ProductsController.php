@@ -78,7 +78,7 @@ class ProductsController extends BaseController
             $item['brand'] = $product['brand'] ? $product['brand']->name : 'N/D';
             $item['unit'] = $product['unit']->ShortName;
             $item['price'] = $product->price;
-
+            $item['status'] = $product->status;
             $product_warehouse_data = product_warehouse::where('product_id', $product->id)
                 ->where('deleted_at', '=', null)
                 ->get();
@@ -153,6 +153,10 @@ class ProductsController extends BaseController
                 $Product->stock_alert = $request['stock_alert'] ? $request['stock_alert'] : 0;
                 $Product->is_variant = $request['is_variant'] == 'true' ? 1 : 0;
 
+
+                $Product->status = $request['status'];
+                $Product->discount = $request['discount'];
+      
                 if ($request['images']) {
                     $files = $request['images'];
                     foreach ($files as $file) {
@@ -263,6 +267,10 @@ class ProductsController extends BaseController
                 $Product->tax_method = $request['tax_method'];
                 $Product->note = $request['note'];
                 $Product->cost = $request['cost'];
+
+                $Product->status = $request['status'];
+                $Product->discount = $request['discount'];
+
                 $Product->unit_id = $request['unit_id'];
                 $Product->unit_sale_id = $request['unit_sale_id'] ? $request['unit_sale_id'] : $request['unit_id'];
                 $Product->unit_purchase_id = $request['unit_purchase_id'] ? $request['unit_purchase_id'] : $request['unit_id'];
@@ -928,6 +936,8 @@ class ProductsController extends BaseController
         $item['tax_method'] = $Product->tax_method;
         $item['price'] = $Product->price;
         $item['cost'] = $Product->cost;
+        $item['status'] = $Product->status;
+        $item['discount'] = $Product->discount;
         $item['stock_alert'] = $Product->stock_alert;
         $item['TaxNet'] = $Product->TaxNet;
         $item['note'] = $Product->note ? $Product->note : '';
