@@ -65,7 +65,7 @@ class CartController extends Controller
     {
         $product_id = $request->id;
 
-        $productexist =   app('App\Http\Controllers\Device\ProductsController')->ProducctInStock($product_id);
+        $productexist =   app('App\Http\Controllers\device\ProductsController')->ProducctInStock($product_id);
        
 
         $user = Auth::user();

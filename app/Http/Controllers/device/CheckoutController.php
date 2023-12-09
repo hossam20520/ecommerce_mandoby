@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Device;
+namespace App\Http\Controllers\device;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -94,7 +94,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
             
         
             foreach ($data['cartItems'] as $key => $value) {
-                $productexist =  app('App\Http\Controllers\Device\ProductsController')->ProducctInStock($value['product']->id);
+                $productexist =  app('App\Http\Controllers\device\ProductsController')->ProducctInStock($value['product']->id);
                   
               
                 if(!$productexist){
