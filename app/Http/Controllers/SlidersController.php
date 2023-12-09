@@ -61,9 +61,10 @@ class SlidersController extends Controller
                 $image = $request->file('image');
                 $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
 
-                $image_resize = Image::make($image->getRealPath());
+                // $image_resize = Image::make($image->getRealPath());
+                $image->move(public_path('/images/category/'), $filename);
                 // $image_resize->resize(200, 200);
-                $image_resize->save(public_path('/images/sliders/' . $filename));
+                // $image_resize->save(public_path('/images/sliders/' . $filename));
 
             } else {
                 $filename = 'no-image.png';
@@ -109,9 +110,10 @@ class SlidersController extends Controller
                  $path = public_path() . '/images/sliders';
                  $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
  
-                 $image_resize = Image::make($image->getRealPath());
+                //  $image_resize = Image::make($image->getRealPath());
                 //  $image_resize->resize(200, 200);
-                 $image_resize->save(public_path('/images/sliders/' . $filename));
+                //  $image_resize->save(public_path('/images/sliders/' . $filename));
+                $image->move(public_path('/images/category/'), $filename);
  
                  $SliderImage = $path . '/' . $currentImage;
                  if (file_exists($SliderImage)) {
@@ -123,10 +125,10 @@ class SlidersController extends Controller
                  $image = $request->file('image');
                  $path = public_path() . '/images/sliders';
                  $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
- 
-                 $image_resize = Image::make($image->getRealPath());
+                 $image->move(public_path('/images/category/'), $filename);
+                //  $image_resize = Image::make($image->getRealPath());
                 //  $image_resize->resize(200, 200);
-                 $image_resize->save(public_path('/images/sliders/' . $filename));
+                //  $image_resize->save(public_path('/images/sliders/' . $filename));
              }
  
              else {
