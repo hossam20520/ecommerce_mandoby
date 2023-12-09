@@ -62,9 +62,11 @@ class CategorieController extends BaseController
             $image = $request->file('image');
             $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
 
-            $image_resize = Image::make($image->getRealPath());
+            // $image_resize = Image::make($image->getRealPath());
+
+            $image->move(public_path('/images/category/'), $filename);
             // $image_resize->resize(200, 200);
-            $image_resize->save(public_path('/images/category/' . $filename));
+            // $image_resize->save(public_path('/images/category/' . $filename));
 
         } else {
             $filename = 'no-image.png';
@@ -107,9 +109,10 @@ class CategorieController extends BaseController
             $path = public_path() . '/images/category';
             $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
 
-            $image_resize = Image::make($image->getRealPath());
+            // $image_resize = Image::make($image->getRealPath());
             // $image_resize->resize(200, 200);
-            $image_resize->save(public_path('/images/category/' . $filename));
+            // $image_resize->save(public_path('/images/category/' . $filename));
+            $image->move(public_path('/images/category/'), $filename);
 
             $BrandImage = $path . '/' . $currentImage;
             if (file_exists($BrandImage)) {
@@ -121,10 +124,10 @@ class CategorieController extends BaseController
             $image = $request->file('image');
             $path = public_path() . '/images/category';
             $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
-
-            $image_resize = Image::make($image->getRealPath());
+            $image->move(public_path('/images/category/'), $filename);
+            // $image_resize = Image::make($image->getRealPath());
             // $image_resize->resize(200, 200);
-            $image_resize->save(public_path('/images/category/' . $filename));
+            // $image_resize->save(public_path('/images/category/' . $filename));
         }
 
         else {
