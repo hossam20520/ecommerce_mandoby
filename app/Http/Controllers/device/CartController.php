@@ -221,7 +221,7 @@ class CartController extends Controller
                 // $product = $this->GetProductFromStock($cartItem->product->id);
                 // $item['products'] = $this->GetProductFromStock($cartItem->product->id);
                 // $item['cart_items'] = $cartWithItems;
-                $cartItem->in_stock =  app('App\Http\Controllers\Device\ProductsController')->ProducctInStock($cartItem->product->id);
+                $cartItem->in_stock =  app('App\Http\Controllers\device\ProductsController')->ProducctInStock($cartItem->product->id);
                 $cartItem->porduct_item = $this->GetProductFromStock($cartItem->product->id);
                 
                 
