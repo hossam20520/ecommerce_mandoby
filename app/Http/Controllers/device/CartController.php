@@ -124,6 +124,7 @@ class CartController extends Controller
         // $cart = $user->cart;
         // $cart = $user->cart()->first();
         $cart = $user->cart()->where('order_id', null)->first();
+        
        
 
         if ($cart) {
@@ -140,7 +141,7 @@ class CartController extends Controller
             foreach ($cartItems as $cartItem) {
                 $cartItem->porduct_item = $this->GetProductFromStock($cartItem->product->id);
             
-            }
+               }
 
             return $cartWithItems;
         } else {
@@ -204,6 +205,8 @@ class CartController extends Controller
         $user = User::findOrFail($userauth->id);
         // Retrieve the user's cart, if available
         $cart = $user->cart()->where('order_id', null)->first();
+        
+        // return getTotalItemsCart();
     
         if ($cart) {
             // If the user has a cart, load its associated items and products

@@ -263,11 +263,23 @@ class ProductsController extends Controller
     
     $products = $product_warehouse_data
         ->offset($offSet)
-        ->limit($perPage)
+        ->whereHas('product', function ($query) use ($request ) {
+            $query->whereBetween('price', [
+                $request->start ?? 0,
+                $request->end ?? 1000000000
+            ]);
+      })->limit($perPage)
         ->orderBy($order, $dir)
         ->get();
 
+    //     ->whereHas('product', function ($query) use ($request ) {
+    //         $query->orwhere('brand_id',null);
+    //    }) 
 
+        // ->whereBetween('price', [
+        //     $request->start ?? 0,
+        //     $request->end ?? 10000000
+        // ])
       
         foreach ($products as $product_warehouse) {
  

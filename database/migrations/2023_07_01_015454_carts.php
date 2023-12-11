@@ -23,6 +23,8 @@ class Carts extends Migration
             // $table->float('qty', 10, 0)->nullable()->default(1);
             // $table->float('discount', 10, 0)->nullable()->default(0);
             $table->float('total', 10, 0)->nullable()->default(0);
+            $table->float('discounted_value', 10, 0)->nullable()->default(0);
+            
             $table->text('promo_code')->nullable();
 			$table->timestamps(6);
 			$table->softDeletes();

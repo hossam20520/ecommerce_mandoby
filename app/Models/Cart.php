@@ -13,7 +13,7 @@ class Cart extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'user_id', 'order_id', 'total' , 'promo_code'  ,
+        'user_id', 'order_id', 'total' , 'promo_code'  , 'discounted_value'
     ];
     public function CartItems()
     {
@@ -33,9 +33,11 @@ class Cart extends Model
         if ($existingCartItem) {
             // If the product exists, update the quantity and subtotal
             $existingCartItem->qty += $qty;
-            $existingCartItem->discount = $discount;
-            $existingCartItem->subtotal = $existingCartItem->qty * $price;
+            $existingCartItem->discount  =  $discount;
+            $existingCartItem->subtotal = ($existingCartItem->qty *  ($price ) )   ;
             $existingCartItem->save();
+
+
         } else {
             // If the product doesn't exist, create a new cart item
             $newCartItem = new CartItem([
@@ -43,7 +45,7 @@ class Cart extends Model
                 'qty' => $qty,
                 'price' => $price,
                 // 'subtotal' => $qty * $price,
-                'subtotal' => ($qty * $price) - $discount,
+                'subtotal' => ($qty * $price) ,
                 'discount' => $discount,
             ]);
             $this->cartItems()->save($newCartItem);
@@ -54,11 +56,48 @@ class Cart extends Model
         $this->save();
     }
 
+    public function getTotalItemsCart(){
+        return $this->cartItems()->sum('subtotal');
+    }
+
     private function calculateTotal()
     {
-        $this->total = $this->cartItems()->sum('subtotal');
+        // $this->total = $this->cartItems()->sum('subtotal');
+        // $totalDiscount = $this->getTotalDiscount();
+       
+        $subtotal = $this->cartItems()->sum('subtotal');
         $totalDiscount = $this->getTotalDiscount();
+         
+        $cart_total = $subtotal - $totalDiscount;
 
+       
+        $total = $cart_total;
+
+        // Apply additional discount if a promo code is used
+        $disPer = 0;
+        if (!empty($this->promo_code)) {
+            $promo = Promo::where('code', $this->promo_code)->first();
+            if ($promo) {
+                if ($promo->type === 'percentage') {
+                    $disPer = ($total * ($promo->value / 100));
+                    $total -= $disPer;
+                    $this->discounted_value =     $disPer +  $totalDiscount ;
+                } elseif ($promo->type === 'fixed') {
+                    $disPer = $promo->value;
+                    $total -= $disPer;
+                    $this->discounted_value =    $disPer +   $totalDiscount ;
+
+                }
+            }
+        }else{
+            $this->discounted_value	 =   $totalDiscount ;
+        }
+
+        $this->total = $total;
+  
+
+
+        $this->save();
         // // Subtract total discounts from subtotal
         // $this->total = $subtotal - $totalDiscount;
     
@@ -69,6 +108,31 @@ class Cart extends Model
         // }
 
     }
+
+
+
+
+    public function calculateDiscountedTotal()
+{
+    $subtotal = $this->cartItems()->sum('subtotal');
+    $totalDiscount = $this->getTotalDiscount();
+    
+    $total = $subtotal - $totalDiscount;
+
+    // Apply additional discount if a promo code is used
+    if (!empty($this->promo_code)) {
+        $promo = Promo::where('code', $this->promo_code)->first();
+        if ($promo) {
+            if ($promo->type === 'percentage') {
+                $total -= ($total * ($promo->value / 100));
+            } elseif ($promo->type === 'fixed') {
+                $total -= $promo->value;
+            }
+        }
+    }
+
+    return $total;
+}
 
 
   public function ProductIsInCart($product_id){
@@ -90,7 +154,8 @@ class Cart extends Model
 
     if ($cartItem) {
         $cartItem->qty += $qty;
-        $cartItem->subtotal = ($cartItem->qty * $cartItem->price) - $cartItem->discount;
+        // - $cartItem->discount
+        $cartItem->subtotal = ($cartItem->qty * $cartItem->price);
         $cartItem->save();
         $this->calculateTotal();
         $this->save();
@@ -104,7 +169,8 @@ public function decreaseProductQuantity($product_id, $qty = 1)
     if ($cartItem) {
         if ($cartItem->qty > $qty) {
             $cartItem->qty -= $qty;
-            $cartItem->subtotal = ($cartItem->qty * $cartItem->price) - $cartItem->discount;
+            // - $cartItem->discount
+            $cartItem->subtotal = ($cartItem->qty * $cartItem->price) ;
             $cartItem->save();
             $this->calculateTotal();
             $this->save();
@@ -140,7 +206,7 @@ public function getTotalDiscount()
     $totalDiscount = 0;
 
     foreach ($this->cartItems as $cartItem) {
-        $totalDiscount += $cartItem->discount;
+        $totalDiscount += ($cartItem->discount * $cartItem->qty);
     }
 
     return $totalDiscount;
@@ -177,8 +243,10 @@ public function applyPromoCode($promoCode)
         // Apply discount based on promo type (percentage or fixed amount)
         if ($promo->type === 'percentage') {
             $this->total -= ($this->total * ($promo->value / 100));
+            $this->discounted_value =  $this->discounted_value + ($this->total * ($promo->value / 100)); 
         } elseif ($promo->type === 'fixed') {
             $this->total -= $promo->value;
+            $this->discounted_value = $this->discounted_value + $promo->value; 
         }
 
         $this->promo_code = $promoCode;
