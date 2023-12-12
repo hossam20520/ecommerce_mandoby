@@ -133,6 +133,7 @@ class AuthController extends Controller
         'lastname' =>  $request['lastname'] == "" ? $userrr->lastname :  $request['lastname'] ,
         'email' =>    $email == "" ? $user->email :  $email ,
         'phone' =>   $phone == "" ? $user->phone :  $phone  ,
+        'address' => $request['address']
       
     ]); 
     
