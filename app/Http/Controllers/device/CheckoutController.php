@@ -120,7 +120,9 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
                 // return ApiResponse::errorNotFound('There is no products in Cart', 'لا توجد منتجات في السلة');
              }
 
-             $toalDiscount = $cartUser->getTotalDiscount();
+            //  $toalDiscount = $cartUser->getTotalDiscount();
+            $toalDiscount = $cartUser->discounted_value;
+            
 
             if(!$client){
                  $client = new Client;
@@ -148,7 +150,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
             $order->TaxNet = 0;
             $order->discount =  floatval($toalDiscount);
             $order->shipping = 0;
-            $order->GrandTotal =  floatval($data->total)  -   floatval($toalDiscount);
+            $order->GrandTotal =  floatval($data->total);
             $order->statut = 'ordered';
             $order->user_id = Auth::user()->id;
             $order->save();
@@ -172,7 +174,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
                     'quantity' => $value->qty,
                     'product_id' =>  $value['product']->id,
                     'product_variant_id' => null,
-                    'total' => $value->subtotal,
+                    'total' => $value->subtotal - $value->discount,
                     'price' => $value['product']->price,
                     'TaxNet' => $value['product']->TaxNet,
                     'tax_method' => 1,
