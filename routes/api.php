@@ -35,7 +35,7 @@ Route::post("/v1/device/auth/register/", "device\AuthController@register");
 
 
 Route::get("/v1/device/products/", "device\ProductsController@Products");
-Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
+
 
 Route::get("/v1/device/product/{id}", "device\ProductsController@OneProduct");
 
@@ -51,6 +51,8 @@ Route::group([
 });
 
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
+
+    Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
 
  Route::get('/v1/device/home', 'device\HomeController@HomePage');
 
