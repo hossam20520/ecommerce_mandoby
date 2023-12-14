@@ -64,10 +64,10 @@ class BrandsController extends Controller
 
                 $image = $request->file('image');
                 $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
-
-                $image_resize = Image::make($image->getRealPath());
-                $image_resize->resize(200, 200);
-                $image_resize->save(public_path('/images/brands/' . $filename));
+                $image->move(public_path('/images/brands/'), $filename);
+                // $image_resize = Image::make($image->getRealPath());
+                // $image_resize->resize(200, 200);
+                // $image_resize->save(public_path('/images/brands/' . $filename));
 
             } else {
                 $filename = 'no-image.png';
@@ -112,10 +112,10 @@ class BrandsController extends Controller
                  $image = $request->file('image');
                  $path = public_path() . '/images/brands';
                  $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
- 
-                 $image_resize = Image::make($image->getRealPath());
-                 $image_resize->resize(200, 200);
-                 $image_resize->save(public_path('/images/brands/' . $filename));
+                 $image->move(public_path('/images/brands/'), $filename);
+                //  $image_resize = Image::make($image->getRealPath());
+                //  $image_resize->resize(200, 200);
+                //  $image_resize->save(public_path('/images/brands/' . $filename));
  
                  $BrandImage = $path . '/' . $currentImage;
                  if (file_exists($BrandImage)) {
@@ -127,10 +127,10 @@ class BrandsController extends Controller
                  $image = $request->file('image');
                  $path = public_path() . '/images/brands';
                  $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
- 
-                 $image_resize = Image::make($image->getRealPath());
-                 $image_resize->resize(200, 200);
-                 $image_resize->save(public_path('/images/brands/' . $filename));
+                 $image->move(public_path('/images/brands/'), $filename);
+                //  $image_resize = Image::make($image->getRealPath());
+                //  $image_resize->resize(200, 200);
+                //  $image_resize->save(public_path('/images/brands/' . $filename));
              }
  
              else {
