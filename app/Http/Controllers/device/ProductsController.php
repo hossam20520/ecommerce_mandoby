@@ -240,11 +240,20 @@ class ProductsController extends Controller
         }
 
         $brand = Brand::find($brandId);
+
+        $dataBrand = array();
+        $item['id'] =  $brand->id;
+        $item['ar_name'] =  $brand->name;
+        $item['en_name'] =   $brand->description;
+        $item['image'] =  "/images/brands/".$brand->image;
+        $dataBrand[] = $item;
+
+
         // $brand = Brand::find($categoryId);
 
         return response()->json([
             'products'=> $data, 
-            'brand'=>  $brand ,
+            'brand'=>  $dataBrand[0] ,
             // 'brand'=>  $brand,
 
         ]);
