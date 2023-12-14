@@ -179,15 +179,78 @@ class ProductsController extends Controller
         }
 
         $category = Category::find($categoryId);
+        // $brand = Brand::find($categoryId);
 
         return response()->json([
             'products'=> $data, 
-            'category'=>  $category 
+            'category'=>  $category ,
+            // 'brand'=>  $brand,
+
         ]);
     }
 
+    public function GetProductsByBrand(request $request)
+    {
 
 
+
+        $perPage = $request->limit;
+        $pageStart = \Request::get('page', 1);
+        // Start displaying items from this number;
+        $offSet = ($pageStart * $perPage) - $perPage;
+        $order = $request->SortField;
+        $dir = $request->SortType;
+     
+        // Filter fields With Params to retrieve
+        $columns = array(0 => 'name', 1 => 'category_id', 2 => 'brand_id', 3 => 'code');
+        $param = array(0 => 'like', 1 => '=', 2 => '=', 3 => 'like');
+        $data = array();
+    
+        $settings = Setting::where('deleted_at', '=', null)->first();
+        $helpers = new helpers();
+
+        $brandId = $request->brand_id;
+
+        $data = [];
+        $product_warehouse_data = product_warehouse::with('warehouse', 'product', 'productVariant')
+        ->where('warehouse_id', $settings->warehouse_id)
+        ->where('deleted_at', '=', null)
+        ->where('qte', '>', 0) // Filter for quantity > 0
+        ->whereHas('product', function ($query) use ($brandId) {
+            $query->whereHas('brand', function ($q) use ($brandId) {
+                $q->where('id', $brandId);
+            });
+        });
+    
+    $totalRows = $product_warehouse_data->count();
+    
+    $products = $product_warehouse_data
+        ->offset($offSet)
+        ->limit($perPage)
+        ->orderBy($order, $dir)
+        ->get();
+
+
+      
+        foreach ($products as $product_warehouse) {
+ 
+         $item = $helpers->singleProduct($product_warehouse);
+ 
+            $data[] = $item;
+        }
+
+        $brand = Brand::find($brandId);
+        // $brand = Brand::find($categoryId);
+
+        return response()->json([
+            'products'=> $data, 
+            'brand'=>  $brand ,
+            // 'brand'=>  $brand,
+
+        ]);
+    }
+
+    
     public function ProductDetail($id)
     {
 

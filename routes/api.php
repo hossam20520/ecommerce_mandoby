@@ -54,6 +54,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
 
+    Route::get("/v1/device/products/brand", "device\ProductsController@GetProductsByBrand");
+
  Route::get('/v1/device/home', 'device\HomeController@HomePage');
 
  Route::get('/v1/device/wishlist', 'device\FavouritesController@GetFavourites');

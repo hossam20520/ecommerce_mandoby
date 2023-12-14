@@ -110,7 +110,7 @@ class helpers
             // $isFirstImage = true; 
             foreach (explode(',', $product['product']->image) as $img) {
                 // $item['images'][] = "/public/images/products/".$img;
-                $item['gallery'][]=  env('url', 'http://localhost:8000')."/images/products/". $img;
+                $item['gallery'][] =  "/images/products/". $img;
             }
         }
         $firstimage = explode(',', $product['product']->image);

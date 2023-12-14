@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Category;
+use App\Models\Brand;
+
 use App\Http\Controllers\device\ProductsController;
 
 class HomeController extends Controller
@@ -41,12 +43,26 @@ class HomeController extends Controller
         }
 
         
+
+
+        $brand = Brand::where('deleted_at', '=', null)->get();
+        $dataBrand = array();
+        foreach ( $brand  as $oneBrand) {
+            $item['id'] =  $oneBrand->id;
+            $item['ar_name'] =  $oneBrand->name;
+            $item['en_name'] =   $oneBrand->description;
+            $item['image'] =  "/images/brands/".$oneBrand->image;
+            $dataBrand[] = $item;
+        }
+
+
       
        $products =  $this->productController->GetProducts(10);
         return response()->json([
          
                 'slider'=> $data ,
                 'category'=> $dataCategory ,
+                'brands'=> $dataBrand ,
                 'products'=> $products 
  
         ]);
