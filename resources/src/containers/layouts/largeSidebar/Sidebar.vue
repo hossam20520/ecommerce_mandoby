@@ -629,7 +629,7 @@
 
           <li
             class="nav-item"
-            v-if="currentUserPermissions && currentUserPermissions.includes('notification')"
+           
           >
             <router-link tag="a" class to="/app/settings/Notifications">
               <i class="nav-icon i-Bookmark"></i>
