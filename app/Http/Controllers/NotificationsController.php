@@ -111,6 +111,8 @@ class NotificationsController extends Controller
 
      public function update(Request $request, $id)
      {
+
+        return $id;
  
         $firebaseToken = Fcm::whereNotNull('device_token')->pluck('device_token')->where('id' , $id)->all();
             
