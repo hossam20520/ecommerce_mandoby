@@ -111,10 +111,9 @@ class NotificationsController extends Controller
 
      public function update(Request $request, $id)
      {
-
-        return $id;
+        
  
-        $firebaseToken = Fcm::whereNotNull('device_token')->pluck('device_token')->where('id' , $id)->all();
+        $firebaseToken = Fcm::whereNotNull('device_token')->where('id' , $id)->pluck('device_token')->all();
             
         $SERVER_API_KEY =  "AAAADumPMMY:APA91bGKAs5r_w7S5g1xjvYSY8Ema6dXc0i9ntukAcYcHIMoTnQnRUfg0IVPnyZmCcEM6BX_5zUGHBBGvtFaA5sCQzMwFOabELSrEMHBUDivaa7ZFxK-PzAJk_9yiPIAH7fDDpmoEOAR";
     
