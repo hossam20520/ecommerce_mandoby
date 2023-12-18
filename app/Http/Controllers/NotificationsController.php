@@ -98,13 +98,13 @@ class NotificationsController extends Controller
  
         $firebaseToken = Fcm::whereNotNull('device_token')->pluck('device_token')->all();
             
-        $SERVER_API_KEY = env('FCM_SERVER_KEY');
+        $SERVER_API_KEY =  "AAAADumPMMY:APA91bGKAs5r_w7S5g1xjvYSY8Ema6dXc0i9ntukAcYcHIMoTnQnRUfg0IVPnyZmCcEM6BX_5zUGHBBGvtFaA5sCQzMwFOabELSrEMHBUDivaa7ZFxK-PzAJk_9yiPIAH7fDDpmoEOAR";
     
         $data = [
             "registration_ids" => $firebaseToken,
             "notification" => [
-                "title" => $request->title,
-                "body" => $request->body,  
+                "title" => "test",
+                "body" =>  "How are you",  
             ]
         ];
         $dataString = json_encode($data);
