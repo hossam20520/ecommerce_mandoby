@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fcm extends Model
 {
-    use HasFactory;
+  
+    
+
+
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User' , 'user_id');
+    }
 }

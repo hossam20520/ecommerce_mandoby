@@ -136,30 +136,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -187,27 +163,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       limit: "10",
       notification: {
         id: "",
-        ar_name: "",
-        en_name: "",
-        image: ""
+        title: "",
+        body: ""
       }
     };
   },
   computed: {
     columns: function columns() {
       return [{
-        label: this.$t("NotificationImage"),
-        field: "image",
+        label: this.$t("firstname"),
+        field: "firstname",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("NotificationName"),
-        field: "en_name",
+        label: this.$t("lastanme"),
+        field: "lastanme",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("NotificationDescription"),
-        field: "ar_name",
+        label: this.$t("email"),
+        field: "email",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("phone"),
+        field: "phone",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -379,9 +359,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var self = this;
       self.SubmitProcessing = true;
-      self.data.append("ar_name", self.notification.ar_name);
-      self.data.append("en_name", self.notification.en_name);
-      self.data.append("image", self.notification.image);
+      self.data.append("title", self.notification.title);
+      self.data.append("body", self.notification.body);
       axios.post("notifications", self.data).then(function (response) {
         self.SubmitProcessing = false;
         Fire.$emit("Event_Notification");
@@ -399,9 +378,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var self = this;
       self.SubmitProcessing = true;
-      self.data.append("en_name", self.notification.en_name);
-      self.data.append("ar_name", self.notification.ar_name);
-      self.data.append("image", self.notification.image);
+      self.data.append("title", self.notification.title);
+      self.data.append("body", self.notification.body);
       self.data.append("_method", "put");
       axios.post("notifications/" + self.notification.id, self.data).then(function (response) {
         self.SubmitProcessing = false;
@@ -418,9 +396,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     reset_Form: function reset_Form() {
       this.notification = {
         id: "",
-        ar_name: "",
-        en_name: "",
-        image: ""
+        title: "",
+        body: ""
       };
       this.data = new FormData();
     },
@@ -634,25 +611,6 @@ var render = function () {
                                     ]
                                   ),
                                 ])
-                              : props.column.field == "image"
-                              ? _c(
-                                  "span",
-                                  [
-                                    _c("b-img", {
-                                      attrs: {
-                                        thumbnail: "",
-                                        height: "50",
-                                        width: "50",
-                                        fluid: "",
-                                        src:
-                                          "/images/notifications/" +
-                                          props.row.image,
-                                        alt: "image",
-                                      },
-                                    }),
-                                  ],
-                                  1
-                                )
                               : _vm._e(),
                           ]
                         },
@@ -660,7 +618,7 @@ var render = function () {
                     ],
                     null,
                     false,
-                    3009743815
+                    1793350821
                   ),
                 },
                 [
@@ -770,11 +728,7 @@ var render = function () {
                                   return [
                                     _c(
                                       "b-form-group",
-                                      {
-                                        attrs: {
-                                          label: _vm.$t("Name_ar_name"),
-                                        },
-                                      },
+                                      { attrs: { label: _vm.$t("title") } },
                                       [
                                         _c("b-form-input", {
                                           attrs: {
@@ -783,20 +737,19 @@ var render = function () {
                                                 validationContext
                                               ),
                                             "aria-describedby": "Name-feedback",
-                                            label: "ar_name",
-                                            placeholder:
-                                              _vm.$t("Enter_Name_ar_name"),
+                                            label: "title",
+                                            placeholder: _vm.$t("title"),
                                           },
                                           model: {
-                                            value: _vm.notification.ar_name,
+                                            value: _vm.notification.title,
                                             callback: function ($$v) {
                                               _vm.$set(
                                                 _vm.notification,
-                                                "ar_name",
+                                                "title",
                                                 $$v
                                               )
                                             },
-                                            expression: "notification.ar_name",
+                                            expression: "notification.title",
                                           },
                                         }),
                                         _vm._v(" "),
@@ -829,7 +782,7 @@ var render = function () {
                         [
                           _c("validation-provider", {
                             attrs: {
-                              name: "en_Name",
+                              name: "body",
                               rules: { required: true, min: 3, max: 55 },
                             },
                             scopedSlots: _vm._u([
@@ -839,11 +792,7 @@ var render = function () {
                                   return [
                                     _c(
                                       "b-form-group",
-                                      {
-                                        attrs: {
-                                          label: _vm.$t("Name_en_name"),
-                                        },
-                                      },
+                                      { attrs: { label: _vm.$t("body") } },
                                       [
                                         _c("b-form-input", {
                                           attrs: {
@@ -852,20 +801,19 @@ var render = function () {
                                                 validationContext
                                               ),
                                             "aria-describedby": "Name-feedback",
-                                            label: "en_name",
-                                            placeholder:
-                                              _vm.$t("Enter_Name_en_name"),
+                                            label: "body",
+                                            placeholder: _vm.$t("body"),
                                           },
                                           model: {
-                                            value: _vm.notification.en_name,
+                                            value: _vm.notification.body,
                                             callback: function ($$v) {
                                               _vm.$set(
                                                 _vm.notification,
-                                                "en_name",
+                                                "body",
                                                 $$v
                                               )
                                             },
-                                            expression: "notification.en_name",
+                                            expression: "notification.body",
                                           },
                                         }),
                                         _vm._v(" "),
@@ -884,63 +832,6 @@ var render = function () {
                                       1
                                     ),
                                   ]
-                                },
-                              },
-                            ]),
-                          }),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-col",
-                        { attrs: { md: "12" } },
-                        [
-                          _c("validation-provider", {
-                            ref: "Image",
-                            attrs: {
-                              name: "Image",
-                              rules: "mimes:image/*|size:200",
-                            },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "default",
-                                fn: function (ref) {
-                                  var validate = ref.validate
-                                  var valid = ref.valid
-                                  var errors = ref.errors
-                                  return _c(
-                                    "b-form-group",
-                                    {
-                                      attrs: {
-                                        label: _vm.$t("NotificationImage"),
-                                      },
-                                    },
-                                    [
-                                      _c("input", {
-                                        class: {
-                                          "is-invalid": !!errors.length,
-                                        },
-                                        attrs: {
-                                          state: errors[0]
-                                            ? false
-                                            : valid
-                                            ? true
-                                            : null,
-                                          label: "Choose Image",
-                                          type: "file",
-                                        },
-                                        on: { change: _vm.onFileSelected },
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "b-form-invalid-feedback",
-                                        { attrs: { id: "Image-feedback" } },
-                                        [_vm._v(_vm._s(errors[0]))]
-                                      ),
-                                    ],
-                                    1
-                                  )
                                 },
                               },
                             ]),

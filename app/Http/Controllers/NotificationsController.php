@@ -26,20 +26,35 @@ class NotificationsController extends Controller
         $dir = $request->SortType;
         $helpers = new helpers();
 
-        $notifications = Fcm::where('deleted_at', '=', null)->where(function ($query) use ($request) {
+        $notifications = Fcm::with('user')->where('deleted_at', '=', null)->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
-                    return $query->where('ar_name', 'LIKE', "%{$request->search}%")
-                        ->orWhere('en_name', 'LIKE', "%{$request->search}%");
+                    return $query->whereHas('user', function ($q) use ($request) {
+                        $q->where('firstname', 'LIKE', "%{$request->search}%")
+                        ->orWhere('lastname', 'LIKE', "%{$request->search}%")
+                        ->orWhere('phone', 'LIKE', "%{$request->search}%")->orWhere('email', 'LIKE', "%{$request->search}%");
+                    });
+          
                 });
             });
+
+
         $totalRows = $notifications->count();
         $notifications = $notifications->offset($offSet)
             ->limit($perPage)
             ->orderBy($order, $dir)
             ->get();
+             $data = array();
+            foreach ($notifications as $da  ) {
+                $item['firstname']  = $da->user->id;
+                $item['firstname']  = $da->user->firstname;
+                $item['lastname']  = $da->user->lastname;
+                $item['email']  = $da->user->email;
+                $item['phone']  = $da->user->phone;
+                $data[] = $item;
+            }
 
         return response()->json([
-            'notifications' => $notifications,
+            'notifications' => $data,
             'totalRows' => $totalRows,
         ]);
 
@@ -52,7 +67,7 @@ class NotificationsController extends Controller
      
         $firebaseToken = Fcm::whereNotNull('device_token')->pluck('device_token')->all();
             
-        $SERVER_API_KEY = env('FCM_SERVER_KEY');
+        $SERVER_API_KEY =  "AAAADumPMMY:APA91bGKAs5r_w7S5g1xjvYSY8Ema6dXc0i9ntukAcYcHIMoTnQnRUfg0IVPnyZmCcEM6BX_5zUGHBBGvtFaA5sCQzMwFOabELSrEMHBUDivaa7ZFxK-PzAJk_9yiPIAH7fDDpmoEOAR";
     
         $data = [
             "registration_ids" => $firebaseToken,
@@ -79,8 +94,8 @@ class NotificationsController extends Controller
                  
         $response = curl_exec($ch);
  
-
-        return response()->json(['success' => true]);
+ 
+         return response()->json(['success' =>  $response]);
 
     }
 
@@ -96,15 +111,15 @@ class NotificationsController extends Controller
      public function update(Request $request, $id)
      {
  
-        $firebaseToken = Fcm::whereNotNull('device_token')->pluck('device_token')->all();
+        $firebaseToken = Fcm::whereNotNull('device_token')->pluck('device_token')->where('user_id' , $id)->all();
             
         $SERVER_API_KEY =  "AAAADumPMMY:APA91bGKAs5r_w7S5g1xjvYSY8Ema6dXc0i9ntukAcYcHIMoTnQnRUfg0IVPnyZmCcEM6BX_5zUGHBBGvtFaA5sCQzMwFOabELSrEMHBUDivaa7ZFxK-PzAJk_9yiPIAH7fDDpmoEOAR";
     
         $data = [
             "registration_ids" => $firebaseToken,
             "notification" => [
-                "title" => "test",
-                "body" =>  "How are you",  
+                "title" => $request->title,
+                "body" => $request->body,  
             ]
         ];
         $dataString = json_encode($data);

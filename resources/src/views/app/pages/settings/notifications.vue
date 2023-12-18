@@ -50,16 +50,7 @@
               <i class="i-Close-Window text-25 text-danger"></i>
             </a>
           </span>
-          <span v-else-if="props.column.field == 'image'">
-            <b-img
-              thumbnail
-              height="50"
-              width="50"
-              fluid
-              :src="'/images/notifications/' + props.row.image"
-              alt="image"
-            ></b-img>
-          </span>
+     
         </template>
       </vue-good-table>
     </b-card>
@@ -77,13 +68,13 @@
                     name="ar_Name"
                     :rules="{required:true , min:3 , max:55}"
                     v-slot="validationContext">
-                    <b-form-group :label="$t('Name_ar_name')">
+                    <b-form-group :label="$t('title')">
                       <b-form-input
                         :state="getValidationState(validationContext)"
                         aria-describedby="Name-feedback"
-                        label="ar_name"
-                        :placeholder="$t('Enter_Name_ar_name')"
-                        v-model="notification.ar_name"
+                        label="title"
+                        :placeholder="$t('title')"
+                        v-model="notification.title"
                       ></b-form-input>
                       <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
@@ -93,37 +84,22 @@
             <!-- Notification -->
             <b-col md="12">
               <validation-provider
-                    name="en_Name"
+                    name="body"
                     :rules="{required:true , min:3 , max:55}"
                     v-slot="validationContext">
-                    <b-form-group :label="$t('Name_en_name')">
+                    <b-form-group :label="$t('body')">
                       <b-form-input
                         :state="getValidationState(validationContext)"
                         aria-describedby="Name-feedback"
-                        label="en_name"
-                        :placeholder="$t('Enter_Name_en_name')"
-                        v-model="notification.en_name"
+                        label="body"
+                        :placeholder="$t('body')"
+                        v-model="notification.body"
                       ></b-form-input>
                       <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
             </b-col>
-
-            <!-- -Notification Image -->
-            <b-col md="12">
-              <validation-provider name="Image" ref="Image" rules="mimes:image/*|size:200">
-                <b-form-group slot-scope="{validate, valid, errors }" :label="$t('NotificationImage')">
-                  <input
-                    :state="errors[0] ? false : (valid ? true : null)"
-                    :class="{'is-invalid': !!errors.length}"
-                    @change="onFileSelected"
-                    label="Choose Image"
-                    type="file"
-                  >
-                  <b-form-invalid-feedback id="Image-feedback">{{  errors[0]  }}</b-form-invalid-feedback>
-                </b-form-group>
-              </validation-provider>
-            </b-col>
+ 
 
             <b-col md="12" class="mt-3">
               <b-button variant="primary" type="submit"  :disabled="SubmitProcessing"> {{  $t('submit') }}</b-button>
@@ -168,30 +144,40 @@ export default {
       limit: "10",
       notification: {
         id: "",
-        ar_name: "",
-        en_name: "",
-        image: ""
+        title: "",
+        body: "",
+     
       }
     };
   },
   computed: {
     columns() {
       return [
+   
         {
-          label: this.$t("NotificationImage"),
-          field: "image",
+          label: this.$t("firstname"),
+          field: "firstname",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
-          label: this.$t("NotificationName"),
-          field: "en_name",
+          label: this.$t("lastanme"),
+          field: "lastanme",
           tdClass: "text-left",
           thClass: "text-left"
         },
+
+
         {
-          label: this.$t("NotificationDescription"),
-          field: "ar_name",
+          label: this.$t("email"),
+          field: "email",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+        {
+          label: this.$t("phone"),
+          field: "phone",
           tdClass: "text-left",
           thClass: "text-left"
         },
@@ -356,9 +342,9 @@ export default {
     Create_Notification() {
       var self = this;
       self.SubmitProcessing = true;
-      self.data.append("ar_name", self.notification.ar_name);
-      self.data.append("en_name", self.notification.en_name);
-      self.data.append("image", self.notification.image);
+      self.data.append("title", self.notification.title);
+      self.data.append("body", self.notification.body);
+    
       axios
         .post("notifications", self.data)
         .then(response => {
@@ -381,9 +367,8 @@ export default {
     Update_Notification() {
       var self = this;
        self.SubmitProcessing = true;
-      self.data.append("en_name", self.notification.en_name);
-      self.data.append("ar_name", self.notification.ar_name);
-      self.data.append("image", self.notification.image);
+       self.data.append("title", self.notification.title);
+      self.data.append("body", self.notification.body);
       self.data.append("_method", "put");
 
       axios
@@ -408,9 +393,9 @@ export default {
     reset_Form() {
       this.notification = {
         id: "",
-        ar_name: "",
-        en_name: "",
-        image: ""
+        title: "",
+        body: "",
+   
       };
       this.data = new FormData();
     },
