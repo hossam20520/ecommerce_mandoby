@@ -176,8 +176,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("lastanme"),
-        field: "lastanme",
+        label: this.$t("lastname"),
+        field: "lastname",
         tdClass: "text-left",
         thClass: "text-left"
       }, {

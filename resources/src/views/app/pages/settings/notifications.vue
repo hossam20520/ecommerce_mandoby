@@ -161,8 +161,8 @@ export default {
           thClass: "text-left"
         },
         {
-          label: this.$t("lastanme"),
-          field: "lastanme",
+          label: this.$t("lastname"),
+          field: "lastname",
           tdClass: "text-left",
           thClass: "text-left"
         },
