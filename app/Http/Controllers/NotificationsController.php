@@ -126,7 +126,7 @@ class NotificationsController extends Controller
         $response = curl_exec($ch);
  
  
-         return response()->json(['success' => true]);
+         return response()->json(['success' =>  $response]);
      }
 
     //------------ Delete Notification -----------\
