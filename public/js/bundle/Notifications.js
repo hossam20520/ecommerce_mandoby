@@ -191,6 +191,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
+        label: this.$t("device_token"),
+        field: "device_token",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("Action"),
         field: "actions",
         html: true,
