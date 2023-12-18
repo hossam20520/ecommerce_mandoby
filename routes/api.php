@@ -50,6 +50,11 @@ Route::group([
     Route::post('reset', 'PasswordResetController@reset');
 });
 
+
+Route::get("/v1/device/play", "device\PlayController@play");
+
+
+
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
@@ -101,6 +106,12 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::resource('promos', 'PromosController');
     Route::post('promos/delete/by_selection', 'PromosController@delete_by_selection');
   
+
+
+        //------------------------------- Notifications--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('notifications', 'NotificationsController');
+    Route::post('notifications/delete/by_selection', 'NotificationsController@delete_by_selection');
   
     //-------------------------- Clear Cache ---------------------------
 

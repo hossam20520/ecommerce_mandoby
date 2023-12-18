@@ -425,7 +425,18 @@ const routes = [
                         path: "Users",
                         component: () =>
                             import(/* webpackChunkName: "Users" */"./views/app/pages/people/users")
-                    }
+                    },
+
+
+                        //   // Users
+                        //   {
+                        //     name: "user",
+                        //     path: "Users",
+                        //     component: () =>
+                        //         import(/* webpackChunkName: "Users" */"./views/app/pages/people/mandob")
+                        // }
+
+
                 ]
             },
 
@@ -468,6 +479,14 @@ const routes = [
                             }
                         ]
                     },
+
+                                          // notifications
+                                          {
+                                            name: "notifications",
+                                            path: "Notifications",
+                                            component: () =>
+                                                import(/* webpackChunkName: "Notifications" */"./views/app/pages/settings/notifications")
+                                        },
 
                     // categories
                     {

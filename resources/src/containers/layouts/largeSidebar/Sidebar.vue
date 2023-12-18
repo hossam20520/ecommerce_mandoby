@@ -493,13 +493,27 @@
           </li>
           <li
             class="nav-item"
-            v-if="currentUserPermissions && currentUserPermissions.includes('Suppliers_view')"
-          >
+            v-if="currentUserPermissions && currentUserPermissions.includes('Suppliers_view')">
             <router-link tag="a" class to="/app/People/Suppliers">
               <i class="nav-icon i-Administrator"></i>
               <span class="item-name">{{$t('Suppliers')}}</span>
             </router-link>
           </li>
+
+
+
+          <!-- <li
+            class="nav-item"
+            v-if="currentUserPermissions && currentUserPermissions.includes('users_view')"
+          >
+            <router-link tag="a" class to="/app/People/Users">
+              <i class="nav-icon i-Administrator"></i>
+              <span class="item-name">{{$t('Manobs')}}</span>
+            </router-link>
+          </li> -->
+
+
+
           <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('users_view')"
@@ -612,6 +626,16 @@
             </router-link>
           </li>
 
+
+          <li
+            class="nav-item"
+            v-if="currentUserPermissions && currentUserPermissions.includes('notification')"
+          >
+            <router-link tag="a" class to="/app/settings/Notifications">
+              <i class="nav-icon i-Bookmark"></i>
+              <span class="item-name">{{   $t('Notification') }}</span>
+            </router-link>
+          </li>
           
           <li
             class="nav-item"
