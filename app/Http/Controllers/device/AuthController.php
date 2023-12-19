@@ -222,7 +222,7 @@ class AuthController extends Controller
     
         $accessToken = $User->createToken('AuthToken')->accessToken;
 
-
+      app('App\Http\Controllers\device\NotificationsController')->AddFcm($User ,  $request['fcm']);
         
         return response()->json([
            
@@ -249,6 +249,9 @@ class AuthController extends Controller
             $user = Auth::user();
         
             $accessToken = $user->createToken('AuthToken')->accessToken;
+
+            app('App\Http\Controllers\device\NotificationsController')->AddFcm($user ,  $request['fcm']);
+
             $user = array( 'user'=>   $user   ,   'token' => $accessToken   );
             return response()->json(['status' => "success" ,  'message'=> 'success' 
               , 'data'=> $user 

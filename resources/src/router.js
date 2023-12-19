@@ -488,6 +488,23 @@ const routes = [
                                                 import(/* webpackChunkName: "Notifications" */"./views/app/pages/settings/notifications")
                                         },
 
+
+                                                                // mandobs
+                    {
+                        name: "mandobs",
+                        path: "Mandobs",
+                        component: () =>
+                            import(/* webpackChunkName: "Mandobs" */"./views/app/pages/settings/mandobs")
+                    },
+
+                                         // orders
+                                         {
+                                            name: "orders",
+                                            path: "orders/:id",
+                                            component: () =>
+                                                import(/* webpackChunkName: "Orders" */"./views/app/pages/settings/orders")
+                                        },
+
                     // categories
                     {
                         name: "categories",

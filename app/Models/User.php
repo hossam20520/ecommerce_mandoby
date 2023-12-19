@@ -62,6 +62,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
     public function assignRole(Role $role)
     {
         return $this->roles()->save($role);
@@ -90,6 +94,12 @@ class User extends Authenticatable
             return $this->roles->contains('name', $role);
         }
         return !!$role->intersect($this->roles)->count();
+    }
+
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
     }
 
 }

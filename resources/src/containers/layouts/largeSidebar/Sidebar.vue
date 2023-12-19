@@ -626,7 +626,15 @@
             </router-link>
           </li>
 
-
+          <li
+            class="nav-item"
+            v-if="currentUserPermissions && currentUserPermissions.includes('setting_system')"
+          >
+            <router-link tag="a" class to="/app/settings/Mandobs">
+              <i class="nav-icon i-Bookmark"></i>
+              <span class="item-name">{{   $t('Mandob') }}</span>
+            </router-link>
+          </li>
           <li
             class="nav-item"
            

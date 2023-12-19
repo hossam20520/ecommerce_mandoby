@@ -94,7 +94,15 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
   Route::get("/v1/device/orders", "device\OrdersController@GetOrders");  
   Route::get("/v1/device/order/{id}", "device\OrdersController@getorder"); 
-  
+  Route::post("/v1/device/notification", "device\NotificationsController@updateFcm"); 
+
+
+
+      //------------------------------- Orders--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('orders', 'OrdersController');
+    Route::post('orders/delete/by_selection', 'OrdersController@delete_by_selection');
+ 
 //   OrdersController
 
 //   Route::get("/v1/device/checkout", "device\ProductsController@search"); 
@@ -106,7 +114,10 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::resource('promos', 'PromosController');
     Route::post('promos/delete/by_selection', 'PromosController@delete_by_selection');
   
-
+    //------------------------------- Mandobs--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('mandobs', 'MandobsController');
+    Route::post('mandobs/delete/by_selection', 'MandobsController@delete_by_selection');
 
         //------------------------------- Notifications--------------------------\
     //------------------------------------------------------------------\
