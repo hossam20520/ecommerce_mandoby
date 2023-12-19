@@ -68,7 +68,7 @@ class NotificationsController extends Controller
      
         $firebaseToken = Fcm::whereNotNull('device_token')->pluck('device_token')->all();
             
-        $SERVER_API_KEY =  "AAAADumPMMY:APA91bGKAs5r_w7S5g1xjvYSY8Ema6dXc0i9ntukAcYcHIMoTnQnRUfg0IVPnyZmCcEM6BX_5zUGHBBGvtFaA5sCQzMwFOabELSrEMHBUDivaa7ZFxK-PzAJk_9yiPIAH7fDDpmoEOAR";
+        $SERVER_API_KEY = env('FCM_SERVER_KEY', 'AAAAjE4uqNk:APA91bGBl7CN2AnB3_SzsyQBSTnZzu5C35pwlJ_WSkePXTZVJcpYVB89qmI0vTqyG388krsWNYGK56g-I9WwSKhVcejju2yoJI4eRCTtaCGn4HauRiTsbEpJLXfLR4jKizOnT5pnIuxl') ;
     
         $data = [
             "registration_ids" => $firebaseToken,
@@ -115,7 +115,7 @@ class NotificationsController extends Controller
  
         $firebaseToken = Fcm::whereNotNull('device_token')->where('id' , $id)->pluck('device_token')->all();
             
-        $SERVER_API_KEY =  "AAAADumPMMY:APA91bGKAs5r_w7S5g1xjvYSY8Ema6dXc0i9ntukAcYcHIMoTnQnRUfg0IVPnyZmCcEM6BX_5zUGHBBGvtFaA5sCQzMwFOabELSrEMHBUDivaa7ZFxK-PzAJk_9yiPIAH7fDDpmoEOAR";
+        $SERVER_API_KEY = env('FCM_SERVER_KEY', 'AAAAjE4uqNk:APA91bGBl7CN2AnB3_SzsyQBSTnZzu5C35pwlJ_WSkePXTZVJcpYVB89qmI0vTqyG388krsWNYGK56g-I9WwSKhVcejju2yoJI4eRCTtaCGn4HauRiTsbEpJLXfLR4jKizOnT5pnIuxl') ;
     
         $data = [
             "registration_ids" => $firebaseToken,
