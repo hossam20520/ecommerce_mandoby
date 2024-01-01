@@ -351,6 +351,81 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -387,6 +462,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       data: new FormData(),
       user: {
         firstname: "",
+        area_name: "",
+        location_lat: "",
+        address: "",
+        location_long: "",
         lastname: "",
         username: "",
         password: "",
@@ -699,6 +778,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.data.append("password", self.user.password);
       self.data.append("phone", self.user.phone);
       self.data.append("role", self.user.role_id);
+      self.data.append("area_name", self.user.area_name);
+      self.data.append("location_lat", self.user.location_lat);
+      self.data.append("address", self.user.address);
+      self.data.append("location_long", self.user.location_long);
       self.data.append("avatar", self.user.avatar);
       axios.post("users", self.data).then(function (response) {
         self.SubmitProcessing = false;
@@ -730,6 +813,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.data.append("role", self.user.role_id);
       self.data.append("statut", self.user.statut);
       self.data.append("avatar", self.user.avatar);
+      self.data.append("area_name", self.user.area_name);
+      self.data.append("location_lat", self.user.location_lat);
+      self.data.append("address", self.user.address);
+      self.data.append("location_long", self.user.location_long);
       self.data.append("_method", "put");
       axios.post("users/" + this.user.id, self.data).then(function (response) {
         _this6.makeToast("success", _this6.$t("Update.TitleUser"), _this6.$t("Success"));
@@ -750,6 +837,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     reset_Form: function reset_Form() {
       this.user = {
         id: "",
+        area_name: "",
+        location_lat: "",
+        address: "",
+        location_long: "",
         firstname: "",
         lastname: "",
         username: "",
@@ -1538,6 +1629,268 @@ var render = function () {
                                               _vm.$set(_vm.user, "phone", $$v)
                                             },
                                             expression: "user.phone",
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-form-invalid-feedback",
+                                          { attrs: { id: "Phone-feedback" } },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                validationContext.errors[0]
+                                              )
+                                            ),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "6", sm: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "location_lat",
+                              rules: { required: true, min: 3, max: 30 },
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (validationContext) {
+                                  return [
+                                    _c(
+                                      "b-form-group",
+                                      {
+                                        attrs: {
+                                          label: _vm.$t("location_lat"),
+                                        },
+                                      },
+                                      [
+                                        _c("b-form-input", {
+                                          attrs: {
+                                            state:
+                                              _vm.getValidationState(
+                                                validationContext
+                                              ),
+                                            "aria-describedby":
+                                              "username-feedback",
+                                            label: "location_lat",
+                                          },
+                                          model: {
+                                            value: _vm.user.location_lat,
+                                            callback: function ($$v) {
+                                              _vm.$set(
+                                                _vm.user,
+                                                "location_lat",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "user.location_lat",
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-form-invalid-feedback",
+                                          {
+                                            attrs: { id: "username-feedback" },
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                validationContext.errors[0]
+                                              )
+                                            ),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "6", sm: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "location_long",
+                              rules: { required: true },
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (validationContext) {
+                                  return [
+                                    _c(
+                                      "b-form-group",
+                                      {
+                                        attrs: {
+                                          label: _vm.$t("location_long"),
+                                        },
+                                      },
+                                      [
+                                        _c("b-form-input", {
+                                          attrs: {
+                                            state:
+                                              _vm.getValidationState(
+                                                validationContext
+                                              ),
+                                            "aria-describedby":
+                                              "Phone-feedback",
+                                            label: "location_long",
+                                          },
+                                          model: {
+                                            value: _vm.user.location_long,
+                                            callback: function ($$v) {
+                                              _vm.$set(
+                                                _vm.user,
+                                                "location_long",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "user.location_long",
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-form-invalid-feedback",
+                                          { attrs: { id: "Phone-feedback" } },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                validationContext.errors[0]
+                                              )
+                                            ),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "6", sm: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "address",
+                              rules: { required: true },
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (validationContext) {
+                                  return [
+                                    _c(
+                                      "b-form-group",
+                                      { attrs: { label: _vm.$t("address") } },
+                                      [
+                                        _c("b-form-input", {
+                                          attrs: {
+                                            state:
+                                              _vm.getValidationState(
+                                                validationContext
+                                              ),
+                                            "aria-describedby":
+                                              "Phone-feedback",
+                                            label: "address",
+                                          },
+                                          model: {
+                                            value: _vm.user.address,
+                                            callback: function ($$v) {
+                                              _vm.$set(_vm.user, "address", $$v)
+                                            },
+                                            expression: "user.address",
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-form-invalid-feedback",
+                                          { attrs: { id: "Phone-feedback" } },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                validationContext.errors[0]
+                                              )
+                                            ),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "6", sm: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "area_name",
+                              rules: { required: true },
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (validationContext) {
+                                  return [
+                                    _c(
+                                      "b-form-group",
+                                      { attrs: { label: _vm.$t("area_name") } },
+                                      [
+                                        _c("b-form-input", {
+                                          attrs: {
+                                            state:
+                                              _vm.getValidationState(
+                                                validationContext
+                                              ),
+                                            "aria-describedby":
+                                              "Phone-feedback",
+                                            label: "area_name",
+                                          },
+                                          model: {
+                                            value: _vm.user.area_name,
+                                            callback: function ($$v) {
+                                              _vm.$set(
+                                                _vm.user,
+                                                "area_name",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "user.area_name",
                                           },
                                         }),
                                         _vm._v(" "),

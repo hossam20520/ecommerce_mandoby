@@ -150,6 +150,13 @@ class UserController extends BaseController
             $User->username  = $request['username'];
             $User->email     = $request['email'];
             $User->phone     = $request['phone'];
+
+            $User->area_name     = $request['area_name'];
+            $User->location_lat     = $request['location_lat'];
+            $User->address     = $request['address'];
+            $User->location_long     = $request['location_long'];
+
+ 
             $User->password  = Hash::make($request['password']);
             $User->avatar    = $filename;
             $User->role_id   = $request['role'];
@@ -220,7 +227,7 @@ class UserController extends BaseController
             } else {
                 $filename = $currentAvatar;
             }
-
+ 
             User::whereId($id)->update([
                 'firstname' => $request['firstname'],
                 'lastname' => $request['lastname'],
@@ -231,6 +238,11 @@ class UserController extends BaseController
                 'avatar' => $filename,
                 'statut' => $request['statut'],
                 'role_id' => $request['role'],
+
+                'area_name' => $request['area_name'],
+                'location_lat' => $request['location_lat'],
+                'address' => $request['address'],
+                'location_long' => $request['location_long'],
             ]);
 
             role_user::where('user_id' , $id)->update([
@@ -302,6 +314,10 @@ class UserController extends BaseController
             'phone' => $request['phone'],
             'password' => $pass,
             'avatar' => $filename,
+            'area_name' => $request['area_name'],
+            'location_lat' => $request['location_lat'],
+            'address' => $request['address'],
+            'location_long' => $request['location_long'],
 
         ]);
 

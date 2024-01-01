@@ -20,10 +20,10 @@ class Orders extends Migration
             $table->integer('user_id_action')->nullable()->index('user_id_action');
             $table->integer('user_id')->nullable()->index('user_id');
             $table->text('order_id')->nullable();
-            $table->string('start_time', 100);
-            $table->string('end_time', 100);
-            $table->string('received_time_warehouse', 100);
-            $table->string('delivery_time', 100);
+            $table->date('start_time')->nullable();
+            $table->date('end_time')->nullable();
+            $table->date('received_time_warehouse')->nullable();
+            $table->date('delivery_time')->nullable();
             $table->float('paid_cash', 10, 0);
             $table->float('total', 10, 0);
             $table->text('returned_items')->nullable();

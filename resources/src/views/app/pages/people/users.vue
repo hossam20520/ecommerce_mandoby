@@ -206,6 +206,81 @@
               </validation-provider>
             </b-col>
 
+
+                        <!-- lat -->
+         <b-col md="6" sm="12">
+              <validation-provider
+                name="location_lat"
+                :rules="{ required: true , min:3 , max:30}"
+                v-slot="validationContext" >
+                <b-form-group :label="$t('location_lat')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="username-feedback"
+                    label="location_lat"
+                    v-model="user.location_lat"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="username-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+            <!-- location_long -->
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="location_long"
+                :rules="{ required: true}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('location_long')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="Phone-feedback"
+                    label="location_long"
+                    v-model="user.location_long"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="Phone-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="address"
+                :rules="{ required: true}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('address')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="Phone-feedback"
+                    label="address"
+                    v-model="user.address"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="Phone-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="area_name"
+                :rules="{ required: true}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('area_name')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="Phone-feedback"
+                    label="area_name"
+                    v-model="user.area_name"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="Phone-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
             <!-- Email -->
             <b-col md="6" sm="12">
               <validation-provider
@@ -358,6 +433,10 @@ export default {
       data: new FormData(),
       user: {
         firstname: "",
+        area_name:"",
+        location_lat:"",
+        address:"",
+        location_long:"",
         lastname: "",
         username: "",
         password: "",
@@ -689,6 +768,10 @@ export default {
       self.data.append("password", self.user.password);
       self.data.append("phone", self.user.phone);
       self.data.append("role", self.user.role_id);
+      self.data.append("area_name", self.user.area_name);
+      self.data.append("location_lat", self.user.location_lat);
+      self.data.append("address", self.user.address);
+      self.data.append("location_long", self.user.location_long);
       self.data.append("avatar", self.user.avatar);
      
       axios
@@ -725,6 +808,11 @@ export default {
       self.data.append("role", self.user.role_id);
       self.data.append("statut", self.user.statut);
       self.data.append("avatar", self.user.avatar);
+      self.data.append("area_name", self.user.area_name);
+      self.data.append("location_lat", self.user.location_lat);
+      self.data.append("address", self.user.address);
+      self.data.append("location_long", self.user.location_long);
+
       self.data.append("_method", "put");
 
       axios
@@ -751,6 +839,12 @@ export default {
     reset_Form() {
       this.user = {
         id: "",
+ 
+      area_name: "",
+      location_lat: "",
+      address: "",
+      location_long: "",
+
         firstname: "",
         lastname: "",
         username: "",

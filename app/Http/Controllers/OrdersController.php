@@ -28,7 +28,7 @@ class OrdersController extends Controller
         $dir = $request->SortType;
         $helpers = new helpers();
 
-        $orders = Order::with('order')->where('deleted_at', '=', null)->where(function ($query) use ($request) {
+        $orders = Order::with('order')->where('deleted_at', '=', null)->where('user_id' , $request->id)->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('ar_name', 'LIKE', "%{$request->search}%")
                         ->orWhere('en_name', 'LIKE', "%{$request->search}%");
@@ -40,18 +40,23 @@ class OrdersController extends Controller
             ->orderBy($order, $dir)
             ->get();
 
-      $data = array();
+       $data = array();
+       $orders_ids = array();
        foreach ($orders as $da) {
-         $item['id'] = $da->id;
+          $item['id'] = $da->id;
+          $item['order_id'] = $da->order->id;
+          array_push($orders_ids , $da->order->id);
           $item['Ref'] = $da->order->Ref;
           $item['GrandTotal'] = $da->order->GrandTotal;
           $item['Ref'] = $da->order->Ref;
           $item['status'] = $da->status;
+          $item['paid_cash'] = $da->paid_cash;
+
+          
           $data[] = $item;
        }
-
-
-         $sales = Sale::where('deleted_at', '=', null)->get();
+ 
+       $sales = Sale::where('deleted_at', '=', null)->where('statut' ,  'pending' )->whereNotIn('id', $orders_ids)->get();
         return response()->json([
             'orders' =>  $data ,
             'sales'=>  $sales ,
@@ -70,14 +75,18 @@ class OrdersController extends Controller
 
         \DB::transaction(function () use ($request) {
 
-        
-           
+           $order_id =  $request['order_id'];
 
+            $order =  Order::where('deleted_at' , '=' , null)->where('order_id' , $order_id )->first();
+
+            if($order ){
+                return response()->json(['fail' => false]);
+
+            }
             $Order = new Order;
-
             $Order->user_id_action = Auth::user()->id;
             $Order->user_id = $request['user_id'];
-            $Order->order_id = $request['order_id'];
+            $Order->order_id =  $order_id;
             $Order->status = "pending";
  
             // $Order->image = $filename;
@@ -103,51 +112,14 @@ class OrdersController extends Controller
  
         //  $this->authorizeForUser($request->user('api'), 'update', Order::class);
  
-         request()->validate([
-             'ar_name' => 'required',
-         ]);
-         \DB::transaction(function () use ($request, $id) {
-             $Order = Order::findOrFail($id);
-             $currentImage = $Order->image;
- 
-             // dd($request->image);
-             if ($currentImage && $request->image != $currentImage) {
-                 $image = $request->file('image');
-                 $path = public_path() . '/images/orders';
-                 $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
- 
-                 $image_resize = Image::make($image->getRealPath());
-                 $image_resize->resize(200, 200);
-                 $image_resize->save(public_path('/images/orders/' . $filename));
- 
-                 $OrderImage = $path . '/' . $currentImage;
-                 if (file_exists($OrderImage)) {
-                     if ($currentImage != 'no-image.png') {
-                         @unlink($OrderImage);
-                     }
-                 }
-             } else if (!$currentImage && $request->image !='null'){
-                 $image = $request->file('image');
-                 $path = public_path() . '/images/orders';
-                 $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
- 
-                 $image_resize = Image::make($image->getRealPath());
-                 $image_resize->resize(200, 200);
-                 $image_resize->save(public_path('/images/orders/' . $filename));
-             }
- 
-             else {
-                 $filename = $currentImage?$currentImage:'no-image.png';
-             }
- 
-             Order::whereId($id)->update([
-                 'ar_name' => $request['ar_name'],
-                 'description' => $request['en_name'],
-                 'image' => $filename,
-             ]);
- 
-         }, 10);
- 
+        Order::whereId($id)->update([
+            'user_id_action' => Auth::user()->id,
+            'user_id' => $request['user_id'],
+            'order_id' => $request['order_id'],
+            'status' =>  "pending",
+        ]);
+
+
          return response()->json(['success' => true]);
      }
 

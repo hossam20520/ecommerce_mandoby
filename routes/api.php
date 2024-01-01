@@ -96,8 +96,17 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
   Route::get("/v1/device/order/{id}", "device\OrdersController@getorder"); 
   Route::post("/v1/device/notification", "device\NotificationsController@updateFcm"); 
 
+  Route::get("/v1/device/mandob/orders", "device\mandob\OrdersController@GetOrders"); 
 
 
+  Route::get("/v1/device/mandob/order/{id}", "device\mandob\OrdersController@OrderDetail"); 
+  
+  Route::post("/v1/device/mandob/order/accept", "device\mandob\OrdersController@acceptOrder"); 
+ 
+
+  Route::post("/v1/device/mandob/order/pay", "device\mandob\OrdersController@pay"); 
+
+  
       //------------------------------- Orders--------------------------\
     //------------------------------------------------------------------\
     Route::resource('orders', 'OrdersController');

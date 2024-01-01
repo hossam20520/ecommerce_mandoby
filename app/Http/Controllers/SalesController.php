@@ -12,6 +12,7 @@ use App\Models\ProductVariant;
 use App\Models\product_warehouse;
 use App\Models\Quotation;
 use App\Models\Role;
+use App\Models\User;
 use App\Models\Sale;
 use App\Models\SaleDetail;
 use App\Models\Setting;
@@ -81,10 +82,10 @@ class SalesController extends BaseController
                     return $query->where('Ref', 'LIKE', "%{$request->search}%")
                         ->orWhere('statut', 'LIKE', "%{$request->search}%")
                         ->orWhere('GrandTotal', $request->search)
-                        ->orWhere('payment_statut', 'like', "$request->search")
+                        ->orWhere('payment_statut', 'like', "$request->search")  
                         ->orWhere(function ($query) use ($request) {
-                            return $query->whereHas('client', function ($q) use ($request) {
-                                $q->where('name', 'LIKE', "%{$request->search}%");
+                            return $query->whereHas('user', function ($q) use ($request) {
+                                $q->where('email', 'LIKE', "%{$request->search}%");
                             });
                         })
                         ->orWhere(function ($query) use ($request) {
@@ -111,11 +112,11 @@ class SalesController extends BaseController
             $item['shipping'] = $Sale['shipping'];
             $item['warehouse_name'] = $Sale['warehouse']['name'];
             $item['client_id'] = $Sale['client']['id'];
-            $item['client_name'] = $Sale['client']['name'];
+            $item['client_name'] = $Sale['client']['email'];
             $item['client_email'] = $Sale['client']['email'];
             $item['client_tele'] = $Sale['client']['phone'];
             $item['client_code'] = $Sale['client']['code'];
-            $item['client_adr'] = $Sale['client']['adresse'];
+            $item['client_adr'] = $Sale['client']['address'];
             $item['GrandTotal'] = number_format($Sale['GrandTotal'], 2, '.', '');
             $item['paid_amount'] = number_format($Sale['paid_amount'], 2, '.', '');
             $item['due'] = number_format($item['GrandTotal'] - $item['paid_amount'], 2, '.', '');
@@ -125,7 +126,8 @@ class SalesController extends BaseController
         }
         
         $stripe_key = config('app.STRIPE_KEY');
-        $customers = client::where('deleted_at', '=', null)->get(['id', 'name']);
+        // $customers = client::where('deleted_at', '=', null)->get(['id', 'name']);
+        $customers = User::where('deleted_at', '=', null)->get(['id', 'email']);
         $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
 
         return response()->json([
@@ -1029,7 +1031,9 @@ class SalesController extends BaseController
         $this->authorizeForUser($request->user('api'), 'create', Sale::class);
 
         $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
-        $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
+        // $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
+
+        $clients = User::where('deleted_at', '=', null)->get(['id', 'email']);
         $stripe_key = config('app.STRIPE_KEY');
 
         return response()->json([
@@ -1059,7 +1063,7 @@ class SalesController extends BaseController
           }
   
           if ($Sale_data->client_id) {
-              if (Client::where('id', $Sale_data->client_id)
+              if (User::where('id', $Sale_data->client_id)
                   ->where('deleted_at', '=', null)
                   ->first()) {
                   $sale['client_id'] = $Sale_data->client_id;
@@ -1185,8 +1189,8 @@ class SalesController extends BaseController
           }
   
           $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
-          $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
-  
+          //   $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
+          $clients = User::where('deleted_at', '=', null)->get(['id', 'email']);
           return response()->json([
               'details' => $details,
               'sale' => $sale,
@@ -1346,8 +1350,8 @@ class SalesController extends BaseController
         }
 
         $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
-        $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
-
+        // $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
+        $clients = User::where('deleted_at', '=', null)->get(['id', 'email']);
         return response()->json([
             'details' => $details,
             'sale' => $sale,

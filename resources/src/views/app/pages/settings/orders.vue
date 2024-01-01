@@ -49,6 +49,20 @@
             <a title="Delete" v-b-tooltip.hover @click="Delete_Order(props.row.id)">
               <i class="i-Close-Window text-25 text-danger"></i>
             </a>
+
+
+            
+            <router-link
+            
+              v-b-tooltip.hover
+              title="View"
+             
+              :to="'/app/sales/detail/'+props.row.order_id"
+              >
+              <i class="i-Eye text-25 text-info"></i>
+            </router-link>
+
+            <!-- :to="{ name:'orders', params: { id: props.row.id} }" -->
           </span>
     
         </template>
@@ -285,6 +299,7 @@ export default {
 
     //---------------------------------------- Get All orders-----------------\
     Get_Orders(page) {
+      let id = this.$route.params.id;
       // Start the progress bar.
       NProgress.start();
       NProgress.set(0.1);
@@ -299,7 +314,9 @@ export default {
             "&search=" +
             this.search +
             "&limit=" +
-            this.limit
+            this.limit+
+            "&id="+ 
+            id
         )
         .then(response => {
           this.orders = response.data.orders;
@@ -348,6 +365,7 @@ export default {
     //---------------------------------------- Update Order-----------------\
     Update_Order() {
       var self = this;
+      let id = this.$route.params.id;
        self.SubmitProcessing = true;
        self.data.append("order_id", self.order.order_id);
       self.data.append("user_id", id);

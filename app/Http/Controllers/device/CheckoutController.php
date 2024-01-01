@@ -111,7 +111,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
 
            
        
-            $client = Client::where('deleted_at', '=', null)->where('user_id' , $user->id)->first();
+            // $client = Client::where('deleted_at', '=', null)->where('user_id' , $user->id)->first();
             $settings = Setting::where('deleted_at', '=', null)->first();
 
              $cartUser = Cart::where('user_id' , $user->id )->where('order_id' , '=' , null)->first();
@@ -124,19 +124,19 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
             $toalDiscount = $cartUser->discounted_value;
             
 
-            if(!$client){
-                 $client = new Client;
-                 $client->name =  $user->firstname." ".$user->lastname;
-                 $client->code  = 0;
-                //  $client->addresse  =  $user->address;
-                 $client->email  =  $user->email;
-                 $client->phone  =  $user->phone;
-                 $client->country  =   "";
-                 $client->city  =   "city";
-                 $client->user_id  =    $user->id;
-                 $client->save();
+            // if(!$client){
+            //      $client = new Client;
+            //      $client->name =  $user->firstname." ".$user->lastname;
+            //      $client->code  = 0;
+            //     //  $client->addresse  =  $user->address;
+            //      $client->email  =  $user->email;
+            //      $client->phone  =  $user->phone;
+            //      $client->country  =   "";
+            //      $client->city  =   "city";
+            //      $client->user_id  =    $user->id;
+            //      $client->save();
 
-            }
+            // }
 
           
 
@@ -144,7 +144,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
             $order->is_pos = 1;
             $order->date = Carbon::now();
             $order->Ref = app('App\Http\Controllers\SalesController')->getNumberOrder();
-            $order->client_id = $client->id;
+            $order->client_id = Auth::user()->id;
             $order->warehouse_id =  $settings->warehouse_id;
             $order->tax_rate = 0;
             $order->TaxNet = 0;

@@ -1626,7 +1626,7 @@ var render = function () {
                                                             function (clients) {
                                                               return {
                                                                 label:
-                                                                  clients.name,
+                                                                  clients.email,
                                                                 value:
                                                                   clients.id,
                                                               }
@@ -1666,7 +1666,7 @@ var render = function () {
                                           ],
                                           null,
                                           false,
-                                          954232865
+                                          2423635178
                                         ),
                                       }),
                                     ],

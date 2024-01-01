@@ -117,6 +117,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -318,10 +332,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Get_Orders: function Get_Orders(page) {
       var _this4 = this;
 
-      // Start the progress bar.
+      var id = this.$route.params.id; // Start the progress bar.
+
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("orders?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
+      axios.get("orders?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit + "&id=" + id).then(function (response) {
         _this4.orders = response.data.orders;
         _this4.sales = response.data.sales;
         _this4.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
@@ -361,6 +376,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this6 = this;
 
       var self = this;
+      var id = this.$route.params.id;
       self.SubmitProcessing = true;
       self.data.append("order_id", self.order.order_id);
       self.data.append("user_id", id);
@@ -540,57 +556,88 @@ var render = function () {
                         fn: function (props) {
                           return [
                             props.column.field == "actions"
-                              ? _c("span", [
-                                  _c(
-                                    "a",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true },
-                                        },
-                                      ],
-                                      attrs: { title: "Edit" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.Edit_Order(props.row)
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "i-Edit text-25 text-success",
-                                      }),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true },
-                                        },
-                                      ],
-                                      attrs: { title: "Delete" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.Delete_Order(props.row.id)
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "b-tooltip",
+                                            rawName: "v-b-tooltip.hover",
+                                            modifiers: { hover: true },
+                                          },
+                                        ],
+                                        attrs: { title: "Edit" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.Edit_Order(props.row)
+                                          },
                                         },
                                       },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "i-Close-Window text-25 text-danger",
-                                      }),
-                                    ]
-                                  ),
-                                ])
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "i-Edit text-25 text-success",
+                                        }),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "b-tooltip",
+                                            rawName: "v-b-tooltip.hover",
+                                            modifiers: { hover: true },
+                                          },
+                                        ],
+                                        attrs: { title: "Delete" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.Delete_Order(
+                                              props.row.id
+                                            )
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "i-Close-Window text-25 text-danger",
+                                        }),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "router-link",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "b-tooltip",
+                                            rawName: "v-b-tooltip.hover",
+                                            modifiers: { hover: true },
+                                          },
+                                        ],
+                                        attrs: {
+                                          title: "View",
+                                          to:
+                                            "/app/sales/detail/" +
+                                            props.row.order_id,
+                                        },
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "i-Eye text-25 text-info",
+                                        }),
+                                      ]
+                                    ),
+                                  ],
+                                  1
+                                )
                               : _vm._e(),
                           ]
                         },
@@ -598,7 +645,7 @@ var render = function () {
                     ],
                     null,
                     false,
-                    466292261
+                    487628567
                   ),
                 },
                 [

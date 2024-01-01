@@ -54,6 +54,7 @@
               <div>{{sale.client_email}}</div>
               <div>{{sale.client_phone}}</div>
               <div>{{sale.client_adr}}</div>
+              
             </b-col>
             <b-col lg="4" md="4" sm="12" class="mb-4">
               <h5 class="font-weight-bold">{{$t('Company_Info')}}</h5>
