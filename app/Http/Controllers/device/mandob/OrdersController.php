@@ -222,15 +222,15 @@ class OrdersController extends Controller
             $item['id'] = $da->id;
             $item['order_id'] = $da->order->id;
             $item['order_id'] = $da->order->id;
-            $item['client_name'] = $da->order->client->name;
+            $item['client_name'] = $da->order->client->firstname + $da->order->client->lastname;
             $item['phone'] = $da->order->client->phone;
             $item['GrandTotal'] = $da->order->GrandTotal;
             $item['Ref'] = $da->order->Ref;
             $item['status'] = $da->status;  //accepted /delivered /  
             // 'location_lat' ,  'location_long'
             
-            $item['location_lat'] =  $da->order->client->user == null ? "0.00"  :  ($da->order->client->user->location_lat == null ? "0.00" :$da->order->client->user->location_lat);
-            $item['location_long'] = $da->order->client->user == null ? "0.00"  :  ($da->order->client->user->location_long == null ? "0.00" :$da->order->client->user->location_long);
+            $item['location_lat'] =  $da->order->client == null ? "0.00"  :  ($da->order->client->location_lat == null ? "0.00" :$da->order->client->location_lat);
+            $item['location_long'] = $da->order->client == null ? "0.00"  :  ($da->order->client->location_long == null ? "0.00" :$da->order->client->location_long);
 
 
            array_push($locations , "1222" );
