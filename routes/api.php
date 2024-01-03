@@ -29,7 +29,7 @@ Route::post("/v1/device/auth/login/", "device\AuthController@login");
 
 Route::post("/v1/device/auth/register/", "device\AuthController@register");
 
-Route::post("/v1/device/version/{version}", "device\AuthController@version");
+Route::get("/v1/device/version/{version}", "device\AuthController@version");
 
 
 
