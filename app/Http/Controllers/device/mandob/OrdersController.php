@@ -30,8 +30,8 @@ class OrdersController extends Controller
 
         // $order = Order::where('order_id' , $sale->id)->first();
         $item['id'] = $sale->id;
-        $item['lat_location'] = $sale->client->user == null ? "0.00"  :  ($sale->client->user->location_lat == null ? "0.00" : $sale->client->user->location_lat);
-        $item['long_location'] = $sale->client->user == null ? "0.00"  :  ($sale->client->user->location_long == null ? "0.00" : $sale->client->user->location_long);
+        $item['lat_location'] = $sale->client == null ? "0.00"  :  ($sale->client->location_lat == null ? "0.00" : $sale->client->location_lat);
+        $item['long_location'] = $sale->client == null ? "0.00"  :  ($sale->client->location_long == null ? "0.00" : $sale->client->location_long);
         $item['GrandTotal'] = $sale->GrandTotal;
         $item['discount'] = $sale->discount;
         $item['statut'] = $sale->statut;
@@ -198,7 +198,8 @@ class OrdersController extends Controller
             //  return  $currentDate;
              $orders = Order::with('order.user')->whereDate('received_time_warehouse', $currentDate);
         }else{
-            $orders = Order::with('order.user')->where('status' , $status);
+
+             $orders = Order::with('order.user')->where('status' , $status);
         }
       
         $orders->where('deleted_at', '=', null)
