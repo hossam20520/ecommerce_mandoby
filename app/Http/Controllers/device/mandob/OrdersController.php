@@ -222,7 +222,7 @@ class OrdersController extends Controller
             $item['id'] = $da->id;
             $item['order_id'] = $da->order->id;
             $item['order_id'] = $da->order->id;
-            $item['client_name'] = $da->order->client->firstname + $da->order->client->lastname;
+            $item['client_name'] = $da->order->client->firstname  ." ". $da->order->client->lastname;
             $item['phone'] = $da->order->client->phone;
             $item['GrandTotal'] = $da->order->GrandTotal;
             $item['Ref'] = $da->order->Ref;
