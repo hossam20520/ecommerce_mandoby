@@ -52,8 +52,8 @@ class OrdersController extends Controller
 
 
       $user = Auth::user();
-      $client = Client::where('user_id' ,  $user->id)->first();
-      $sale = Sale::where('deleted_at' , '=' , null)->where('client_id' ,  $client->id);  //->where('statut' , $status )
+      // $client = Client::where('user_id' ,  $user->id)->first();
+      $sale = Sale::where('deleted_at' , '=' , null)->where('client_id' , $user->id);  //->where('statut' , $status )
 
 
 

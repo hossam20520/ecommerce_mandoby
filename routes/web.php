@@ -89,6 +89,18 @@ if ($installed === false) {
     });
 
 } else {
+
+    Route::get('/' ,     'web\HomeController@Home')->name('home');
+
+    // Route::get('/' ,     function(){
+    //     return 55;
+    // });
+    // Route::get('/profile' ,      function(){
+    //     return 55;
+    // });
+
+
+
     Route::any('/setup/{vue}', function () {
         abort(403);
     });
