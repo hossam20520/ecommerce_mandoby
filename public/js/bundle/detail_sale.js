@@ -629,33 +629,6 @@ var render = function () {
                             },
                             [
                               _c("h5", { staticClass: "font-weight-bold" }, [
-                                _vm._v(_vm._s(_vm.$t("Company_Info"))),
-                              ]),
-                              _vm._v(" "),
-                              _c("div", [
-                                _vm._v(_vm._s(_vm.company.CompanyName)),
-                              ]),
-                              _vm._v(" "),
-                              _c("div", [_vm._v(_vm._s(_vm.company.email))]),
-                              _vm._v(" "),
-                              _c("div", [
-                                _vm._v(_vm._s(_vm.company.CompanyPhone)),
-                              ]),
-                              _vm._v(" "),
-                              _c("div", [
-                                _vm._v(_vm._s(_vm.company.CompanyAdress)),
-                              ]),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            {
-                              staticClass: "mb-4",
-                              attrs: { lg: "4", md: "4", sm: "12" },
-                            },
-                            [
-                              _c("h5", { staticClass: "font-weight-bold" }, [
                                 _vm._v(_vm._s(_vm.$t("Invoice_Info"))),
                               ]),
                               _vm._v(" "),

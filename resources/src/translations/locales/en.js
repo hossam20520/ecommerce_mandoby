@@ -1,6 +1,14 @@
 //Language Anglais
 
 export default {
+    payment_type:'Payment Type',
+    bill_image:'Bill Image',
+    end_time:'Leaving Time',
+    start_time:'Arrival time',
+    status:'Status',
+    Grand_total:'Grand Total',
+    paid_cash:'Paid cash',
+    received_time_warehouse:'The Time the product is received from the store',
     Receipt:'Receipt',
     Pos_Settings:'Pos Settings (Receipt)',
     Note_to_customer:'Note to customer',

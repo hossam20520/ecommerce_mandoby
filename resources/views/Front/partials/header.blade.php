@@ -537,3 +537,5 @@
         </div>
     </div>
 </header>
+
+@include('Front.partials.mobile_menu')

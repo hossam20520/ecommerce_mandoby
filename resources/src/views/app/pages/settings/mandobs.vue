@@ -81,7 +81,7 @@
 
             <!-- Mandob -->
     
-               <!-- Category -->
+              
                <b-col md="6" class="mb-2">
                   <validation-provider name="orders" :rules="{ required: false}">
                     <b-form-group slot-scope="{ valid, errors }" :label="$t('orders')">

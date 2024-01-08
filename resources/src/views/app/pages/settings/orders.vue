@@ -65,6 +65,20 @@
             <!-- :to="{ name:'orders', params: { id: props.row.id} }" -->
           </span>
     
+
+          <span v-else-if="props.column.field == 'image'">
+            <a :href="'/images/orders/'+ props.row.image"  >  <b-img
+              thumbnail
+              height="50"
+              width="50"
+              fluid
+              :src="'/images/orders/' + props.row.image"
+              alt="image"
+            ></b-img>
+
+          </a>
+          </span>
+
         </template>
       </vue-good-table>
     </b-card>
@@ -79,13 +93,13 @@
 
             <!-- Category -->
             <b-col md="12" class="mb-2">
-                  <validation-provider name="category" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Categorie')">
+                  <validation-provider name="order" :rules="{ required: true}">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Orders')">
                       <v-select
                         :class="{'is-invalid': !!errors.length}"
                         :state="errors[0] ? false : (valid ? true : null)"
                         :reduce="label => label.value"
-                        :placeholder="$t('Choose_sales')"
+                        :placeholder="$t('choose_order')"
                         v-model="order.order_id"
                         :options="sales.map(sales => ({label: sales.Ref + ' ' +  '( '+sales.GrandTotal + ' ) EGP'  , value: sales.id}))"
                       />
@@ -166,14 +180,48 @@ export default {
           tdClass: "text-left",
           thClass: "text-left"
         },
+
+        {
+          label: this.$t("received_time_warehouse"),
+          field: "received_time_warehouse",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+        {
+          label: this.$t("start_time"),
+          field: "start_time",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+        {
+          label: this.$t("end_time"),
+          field: "end_time",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+       {
+          label: this.$t("bill_image"),
+          field: "image",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
         {
           label: this.$t("status"),
           field: "status",
           tdClass: "text-left",
           thClass: "text-left"
         },
-
-
+        {
+          label: this.$t("payment_type"),
+          field: "payment_type",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+        
  
         {
           label: this.$t("Action"),

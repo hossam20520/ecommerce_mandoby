@@ -56,13 +56,13 @@
               <div>{{sale.client_adr}}</div>
               
             </b-col>
-            <b-col lg="4" md="4" sm="12" class="mb-4">
+            <!-- <b-col lg="4" md="4" sm="12" class="mb-4">
               <h5 class="font-weight-bold">{{$t('Company_Info')}}</h5>
               <div>{{company.CompanyName}}</div>
               <div>{{company.email}}</div>
               <div>{{company.CompanyPhone}}</div>
               <div>{{company.CompanyAdress}}</div>
-            </b-col>
+            </b-col> -->
             <b-col lg="4" md="4" sm="12" class="mb-4">
               <h5 class="font-weight-bold">{{$t('Invoice_Info')}}</h5>
               <div>{{$t('Reference')}} : {{sale.Ref}}</div>

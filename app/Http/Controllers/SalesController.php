@@ -744,9 +744,9 @@ class SalesController extends BaseController
         $sale_details['shipping'] = $sale_data->shipping;
         $sale_details['tax_rate'] = $sale_data->tax_rate;
         $sale_details['TaxNet'] = $sale_data->TaxNet;
-        $sale_details['client_name'] = $sale_data['client']->name;
+        $sale_details['client_name'] = $sale_data['client']->firstname ." ". $sale_data['client']->lastname ;
         $sale_details['client_phone'] = $sale_data['client']->phone;
-        $sale_details['client_adr'] = $sale_data['client']->adresse;
+        $sale_details['client_adr'] = $sale_data['client']->address;
         $sale_details['client_email'] = $sale_data['client']->email;
         $sale_details['GrandTotal'] = number_format($sale_data->GrandTotal, 2, '.', '');
         $sale_details['paid_amount'] = number_format($sale_data->paid_amount, 2, '.', '');

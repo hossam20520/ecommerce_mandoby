@@ -10,9 +10,56 @@ use App\utils\helpers;
 use Carbon\Carbon;
 use App\Models\PaymentSale;
 use DB;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Auth;
 class OrdersController extends Controller
 {
+
+
+
+  public function addImage(Request $request ){
+    $helpers = new helpers();
+    $user =   Auth::user();
+    $currentAvatar = $user->avatar;
+    $oreder_ref = $request['oreder_ref'];
+
+     $image = $request->file('bill');
+     $path = public_path() . '/images/orders';
+     $filename = rand(11111111, 99999999) ."_".$oreder_ref."_". $image->getClientOriginalName();
+
+     $image_resize = Image::make($image->getRealPath());
+  
+     $image_resize->save(public_path('/images/orders/' . $filename));
+
+    //  $userPhoto = $path . '/' . $currentAvatar;
+    //  if (file_exists($userPhoto)) {
+    //      if ($user->avatar != 'no_avatar.png') {
+    //          @unlink($userPhoto);
+    //      }
+    //  }
+
+     // $filename = $currentAvatar;
+
+
+    // return $filename;
+
+
+Order::where( 'order_id' ,$oreder_ref)->update([
+
+ 'image' => $filename,
+
+]);
+
+
+
+
+return response()->json(['url' =>  "/images/orders/".  $filename   ], 200);
+
+
+
+  }
+
+
     public function OrderDetail(Request $request, $id)
     {
         $sale = Sale::with('user', 'details.product')
@@ -93,6 +140,18 @@ class OrdersController extends Controller
         $Reglement =  $request['Reglement'];
         $amount =  $request['amount'];
         $notes = $request['notes'];
+
+         $pyamentType = "Cash";  
+        if($Reglement == "Partial"){
+           $Reglement = "partial";
+           $pyamentType = "Partial";  
+        }else if($Reglement == "Cash"){
+            $pyamentType = "Cash";  
+            $Reglement = "paid";
+        }else{
+           $pyamentType = "Bill";  
+           $Reglement = "others";
+        }
         // Cash
        $order =  Order::where('order_id' ,  $request['sale_id'] )->where('user_id' , Auth::user()->id)->first();
   
@@ -108,6 +167,12 @@ class OrdersController extends Controller
 
        }
 
+      
+       $order->update([
+       "payment_type" => $pyamentType
+       ]);
+
+       
         if($sale){
 
 

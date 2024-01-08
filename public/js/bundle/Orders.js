@@ -131,6 +131,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -182,8 +196,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
+        label: this.$t("received_time_warehouse"),
+        field: "received_time_warehouse",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("start_time"),
+        field: "start_time",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("end_time"),
+        field: "end_time",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("bill_image"),
+        field: "image",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("status"),
         field: "status",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("payment_type"),
+        field: "payment_type",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -638,6 +677,32 @@ var render = function () {
                                   ],
                                   1
                                 )
+                              : props.column.field == "image"
+                              ? _c("span", [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href:
+                                          "/images/orders/" + props.row.image,
+                                      },
+                                    },
+                                    [
+                                      _c("b-img", {
+                                        attrs: {
+                                          thumbnail: "",
+                                          height: "50",
+                                          width: "50",
+                                          fluid: "",
+                                          src:
+                                            "/images/orders/" + props.row.image,
+                                          alt: "image",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ])
                               : _vm._e(),
                           ]
                         },
@@ -645,7 +710,7 @@ var render = function () {
                     ],
                     null,
                     false,
-                    487628567
+                    2246271835
                   ),
                 },
                 [
@@ -744,10 +809,7 @@ var render = function () {
                         { staticClass: "mb-2", attrs: { md: "12" } },
                         [
                           _c("validation-provider", {
-                            attrs: {
-                              name: "category",
-                              rules: { required: true },
-                            },
+                            attrs: { name: "order", rules: { required: true } },
                             scopedSlots: _vm._u([
                               {
                                 key: "default",
@@ -756,7 +818,7 @@ var render = function () {
                                   var errors = ref.errors
                                   return _c(
                                     "b-form-group",
-                                    { attrs: { label: _vm.$t("Categorie") } },
+                                    { attrs: { label: _vm.$t("Orders") } },
                                     [
                                       _c("v-select", {
                                         class: {
@@ -771,7 +833,7 @@ var render = function () {
                                           reduce: function (label) {
                                             return label.value
                                           },
-                                          placeholder: _vm.$t("Choose_sales"),
+                                          placeholder: _vm.$t("choose_order"),
                                           options: _vm.sales.map(function (
                                             sales
                                           ) {

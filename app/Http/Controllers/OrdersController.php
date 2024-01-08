@@ -51,7 +51,11 @@ class OrdersController extends Controller
           $item['Ref'] = $da->order->Ref;
           $item['status'] = $da->status;
           $item['paid_cash'] = $da->paid_cash;
-
+          $item['received_time_warehouse'] = $da->received_time_warehouse;
+          $item['start_time'] = $da->start_time;
+          $item['end_time'] = $da->end_time;
+          $item['image'] = $da->image;
+          $item['payment_type'] = $da->payment_type;
           
           $data[] = $item;
        }

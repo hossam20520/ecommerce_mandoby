@@ -2,7 +2,14 @@
 
 
 export default {
-
+    payment_type:'نوع الدفع',
+    bill_image:'صورة الفاتورة',
+    end_time:'وقت المغادرة',
+    start_time:'وقت الوصول للعميل',
+    status:'حالة الطلب',
+    Grand_total:'الفاتورة',
+    paid_cash:'المبلغ المحصل',
+    received_time_warehouse:'وقت الاستلام من المخزن',
     serial:'سيريال الخط',
     ffsss:'dddddd',
     number:'رقم الخط',

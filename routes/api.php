@@ -106,7 +106,11 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
   Route::post("/v1/device/mandob/order/pay", "device\mandob\OrdersController@pay"); 
 
-  
+
+  Route::post("/v1/device/mandob/bill/image", "device\mandob\OrdersController@addImage"); 
+
+
+ 
       //------------------------------- Orders--------------------------\
     //------------------------------------------------------------------\
     Route::resource('orders', 'OrdersController');
