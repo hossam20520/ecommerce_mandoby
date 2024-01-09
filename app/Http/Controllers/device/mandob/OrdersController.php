@@ -168,11 +168,9 @@ return response()->json(['url' =>  "/images/orders/".  $filename   ], 200);
        }
 
       
-       $order->update([
-       "payment_type" => $pyamentType
-       ]);
+     
 
-       
+
         if($sale){
 
 
@@ -199,6 +197,7 @@ return response()->json(['url' =>  "/images/orders/".  $filename   ], 200);
             }
             $order->update([
                'paid_cash'=> $total_paid,
+               "payment_type" => $pyamentType,
                'status' => "completed",
 
             ]);
