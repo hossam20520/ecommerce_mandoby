@@ -439,9 +439,10 @@
 </template>
 
 <script>
-import VueUploadMultipleImage from "vue-upload-multiple-image";
-import VueTagsInput from "@johmun/vue-tags-input";
 import NProgress from "nprogress";
+import VueUploadMultipleImage from "vue-upload-multiple-image";
+
+import VueTagsInput from "@johmun/vue-tags-input";
 
 export default {
   metaInfo: {
@@ -625,8 +626,7 @@ export default {
       self.data.append("_method", "put");
 
       //send Data with axios
-      axios
-        .post("Products/" + this.product.id, self.data)
+      axios.post("Products/" + this.product.id, self.data)
         .then(response => {
           NProgress.done();
           self.SubmitProcessing = false;

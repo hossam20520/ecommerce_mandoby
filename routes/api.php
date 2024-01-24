@@ -33,13 +33,17 @@ Route::get("/v1/device/version/{version}", "device\AuthController@version");
 
 
 
+// device/products/category?SortField=id&SortType=desc&search=&limit=6&page=1&category_id=1
 
-Route::get("/v1/device/products/", "device\ProductsController@Products");
 
 
 Route::get("/v1/device/product/{id}", "device\ProductsController@OneProduct");
 
+Route::get("/v1/device/products/category/noauth", "device\ProductsController@GetProductsByCategory");
 
+Route::get("/v1/device/products/noauth", "device\ProductsController@Products");
+
+Route::get('/v1/device/all/products/noauth', 'device\ProductsController@GetAllProducts');
 
 //--------------------------- Reset Password  ---------------------------
 
@@ -53,50 +57,55 @@ Route::group([
 
 Route::get("/v1/device/play", "device\PlayController@play");
 
-
+Route::get('/v1/device/home/noauth', 'device\HomeController@HomePage');
 
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
 
+
+
+    Route::get("/v1/device/products/", "device\ProductsController@Products");
+
+
     Route::get("/v1/device/products/brand", "device\ProductsController@GetProductsByBrand");
 
- Route::get('/v1/device/home', 'device\HomeController@HomePage');
+    Route::get('/v1/device/home', 'device\HomeController@HomePage');
 
- Route::get('/v1/device/wishlist', 'device\FavouritesController@GetFavourites');
+    Route::get('/v1/device/wishlist', 'device\FavouritesController@GetFavourites');
 
- Route::post('/v1/device/wishlist', 'device\FavouritesController@AddFavourites');
- Route::post('/v1/device/wishlist/delete', 'device\FavouritesController@RemoveProduct');
+    Route::post('/v1/device/wishlist', 'device\FavouritesController@AddFavourites');
+    Route::post('/v1/device/wishlist/delete', 'device\FavouritesController@RemoveProduct');
 
 
- Route::get('/v1/device/all/products', 'device\ProductsController@GetAllProducts');
+    Route::get('/v1/device/all/products', 'device\ProductsController@GetAllProducts');
  
 
- Route::get("device/profile", "device\AuthController@profile");
- Route::post("device/profile/image", "device\AuthController@changeImage");
+    Route::get("device/profile", "device\AuthController@profile");
+    Route::post("device/profile/image", "device\AuthController@changeImage");
 
- Route::post("device/profile/edit", "device\AuthController@EditProfile");
-
-
- Route::post("device/password/edit", "device\AuthController@changePassword");
+    Route::post("device/profile/edit", "device\AuthController@EditProfile");
 
 
-  Route::post("/v1/device/cart/add", "device\CartController@addToCart");
-  Route::post("/v1/device/cart/increase", "device\CartController@IncreaseProductQT");
-  Route::get("/v1/device/cart", "device\CartController@getCartByUserId");
+    Route::post("device/password/edit", "device\AuthController@changePassword");
+
+
+    Route::post("/v1/device/cart/add", "device\CartController@addToCart");
+    Route::post("/v1/device/cart/increase", "device\CartController@IncreaseProductQT");
+    Route::get("/v1/device/cart", "device\CartController@getCartByUserId");
     
-  Route::post("/v1/device/cart/decrease", "device\CartController@decreaseProductQT");  
+    Route::post("/v1/device/cart/decrease", "device\CartController@decreaseProductQT");  
  
-  Route::post("/v1/device/cart/remove", "device\CartController@removeProductfromCart");  
+    Route::post("/v1/device/cart/remove", "device\CartController@removeProductfromCart");  
  
 
-  Route::post("/v1/device/checkout", "device\CheckoutController@checkout");  
+    Route::post("/v1/device/checkout", "device\CheckoutController@checkout");  
 
-  Route::get("/v1/device/orders", "device\OrdersController@GetOrders");  
-  Route::get("/v1/device/order/{id}", "device\OrdersController@getorder"); 
-  Route::post("/v1/device/notification", "device\NotificationsController@updateFcm"); 
+    Route::get("/v1/device/orders", "device\OrdersController@GetOrders");  
+    Route::get("/v1/device/order/{id}", "device\OrdersController@getorder"); 
+    Route::post("/v1/device/notification", "device\NotificationsController@updateFcm"); 
 
-  Route::get("/v1/device/mandob/orders", "device\mandob\OrdersController@GetOrders"); 
+    Route::get("/v1/device/mandob/orders", "device\mandob\OrdersController@GetOrders"); 
 
 
   Route::get("/v1/device/mandob/order/{id}", "device\mandob\OrdersController@OrderDetail"); 

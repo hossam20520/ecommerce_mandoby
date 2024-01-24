@@ -184,6 +184,7 @@ class ProductsController extends Controller
         return response()->json([
             'products'=> $data, 
             'category'=>  $category ,
+            'total'=>  $totalRows
             // 'brand'=>  $brand,
 
         ]);

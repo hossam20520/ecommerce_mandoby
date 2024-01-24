@@ -14,6 +14,7 @@
         "barryvdh/laravel-dompdf": "^0.9.0",
         "doctrine/dbal": "2.*",
         "fideloper/proxy": "^4.2",
+        "fruitcake/laravel-cors": "^3.0",
         "google/apiclient": "2.15.0",
         "google/cloud-firestore": "^1.37",
         "grpc/grpc": "1.38",

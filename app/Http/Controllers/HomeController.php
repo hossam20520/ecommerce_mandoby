@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Slider;
+
 
 class HomeController extends Controller
 {
@@ -21,8 +23,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function home()
     {
-        return view('home');
+       
+
+        // $slider_section = Slider::where('deleted_at' , '='  , null)->get();
+        
+
+        // $homeObject = [
+        //     "slider"=> $slider_section
+        // ];
+    
+
+        return view('vue.index' );
     }
 }

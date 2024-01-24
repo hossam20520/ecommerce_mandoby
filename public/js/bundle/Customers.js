@@ -428,6 +428,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -465,8 +474,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       data: new FormData(),
       client: {
         id: "",
-        name: "",
-        code: "",
+        firstname: "",
+        lastname: "",
         email: "",
         phone: "",
         country: "",
@@ -478,13 +487,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUserPermissions"])), {}, {
     columns: function columns() {
       return [{
-        label: this.$t("Code"),
-        field: "code",
+        label: this.$t("image"),
+        field: "image",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("Name"),
-        field: "name",
+        label: this.$t("firstname"),
+        field: "firstname",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("firstname"),
+        field: "lastname",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -498,13 +512,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("Country"),
-        field: "country",
+        label: this.$t("area_name"),
+        field: "area_name",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("City"),
-        field: "city",
+        label: this.$t("address"),
+        field: "address",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -1145,61 +1159,6 @@ var render = function () {
                           ),
                         ]
                       ),
-                      _vm._v(" "),
-                      _c(
-                        "b-button",
-                        {
-                          attrs: { size: "sm", variant: "outline-success m-1" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.clients_PDF()
-                            },
-                          },
-                        },
-                        [
-                          _c("i", { staticClass: "i-File-Copy" }),
-                          _vm._v(" PDF\n        "),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-button",
-                        {
-                          attrs: { size: "sm", variant: "outline-danger m-1" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.clients_Excel()
-                            },
-                          },
-                        },
-                        [
-                          _c("i", { staticClass: "i-File-Excel" }),
-                          _vm._v(" EXCEL\n        "),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm.currentUserPermissions &&
-                      _vm.currentUserPermissions.includes("customers_import")
-                        ? _c(
-                            "b-button",
-                            {
-                              attrs: { size: "sm", variant: "info m-1" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.Show_import_clients()
-                                },
-                              },
-                            },
-                            [
-                              _c("i", { staticClass: "i-Download" }),
-                              _vm._v(
-                                "\n          " +
-                                  _vm._s(_vm.$t("Import_Customers")) +
-                                  "\n        "
-                              ),
-                            ]
-                          )
-                        : _vm._e(),
                       _vm._v(" "),
                       _vm.currentUserPermissions &&
                       _vm.currentUserPermissions.includes("Customers_add")
@@ -1912,9 +1871,15 @@ var render = function () {
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v(_vm._s(_vm.$t("CustomerName")))]),
+                        _c("td", [_vm._v(_vm._s(_vm.$t("firstname")))]),
                         _vm._v(" "),
-                        _c("th", [_vm._v(_vm._s(_vm.client.name))]),
+                        _c("th", [_vm._v(_vm._s(_vm.client.firstname))]),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v(_vm._s(_vm.$t("lastname")))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(_vm.client.lastname))]),
                       ]),
                       _vm._v(" "),
                       _c("tr", [

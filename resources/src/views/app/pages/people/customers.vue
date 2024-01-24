@@ -37,13 +37,13 @@
             <i class="i-Filter-2"></i>
             {{ $t("Filter") }}
           </b-button>
-          <b-button @click="clients_PDF()" size="sm" variant="outline-success m-1">
+          <!-- <b-button @click="clients_PDF()" size="sm" variant="outline-success m-1">
             <i class="i-File-Copy"></i> PDF
-          </b-button>
-          <b-button @click="clients_Excel()" size="sm" variant="outline-danger m-1">
+          </b-button> -->
+          <!-- <b-button @click="clients_Excel()" size="sm" variant="outline-danger m-1">
             <i class="i-File-Excel"></i> EXCEL
-          </b-button>
-          <b-button
+          </b-button> -->
+          <!-- <b-button
             @click="Show_import_clients()"
             size="sm"
             variant="info m-1"
@@ -51,7 +51,9 @@
           >
             <i class="i-Download"></i>
             {{ $t("Import_Customers") }}
-          </b-button>
+          </b-button> -->
+
+          
           <b-button
             @click="New_Client()"
             size="sm"
@@ -166,8 +168,7 @@
               <validation-provider
                 name="Email customer"
                 :rules="{ required: true}"
-                v-slot="validationContext"
-              >
+                v-slot="validationContext" >
                 <b-form-group :label="$t('Email')">
                   <b-form-input
                     :state="getValidationState(validationContext)"
@@ -287,9 +288,17 @@
               </tr>
               <tr>
                 <!-- Customer Name -->
-                <td>{{$t('CustomerName')}}</td>
-                <th>{{client.name}}</th>
+                <td>{{$t('firstname')}}</td>
+                <th>{{client.firstname}}</th>
               </tr>
+
+              <tr>
+                <!-- Customer Name -->
+                <td>{{$t('lastname')}}</td>
+                <th>{{client.lastname}}</th>
+              </tr>
+
+
               <tr>
                 <!-- Customer Phone -->
                 <td>{{$t('Phone')}}</td>
@@ -444,8 +453,8 @@ export default {
       data: new FormData(),
       client: {
         id: "",
-        name: "",
-        code: "",
+        firstname: "",
+        lastname: "",
         email: "",
         phone: "",
         country: "",
@@ -460,14 +469,21 @@ export default {
     columns() {
       return [
         {
-          label: this.$t("Code"),
-          field: "code",
+          label: this.$t("image"),
+          field: "image",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
-          label: this.$t("Name"),
-          field: "name",
+          label: this.$t("firstname"),
+          field: "firstname",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+        {
+          label: this.$t("firstname"),
+          field: "lastname",
           tdClass: "text-left",
           thClass: "text-left"
         },
@@ -485,14 +501,14 @@ export default {
           thClass: "text-left"
         },
         {
-          label: this.$t("Country"),
-          field: "country",
+          label: this.$t("area_name"),
+          field: "area_name",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
-          label: this.$t("City"),
-          field: "city",
+          label: this.$t("address"),
+          field: "address",
           tdClass: "text-left",
           thClass: "text-left"
         },

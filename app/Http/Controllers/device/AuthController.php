@@ -146,7 +146,7 @@ class AuthController extends Controller
         $user = Auth::user(); 
        
  
-        return response()->json(['user' =>  $user     ], 200);
+        return response()->json(['user' =>  $user  , "url"=> env('URL', 'http://192.168.1.5:8000')   ], 200);
 
     }
 
@@ -216,9 +216,9 @@ class AuthController extends Controller
         $User->location_lat    = $request['location_lat'];
         $User->location_long    = $request['location_long'];
         $User->address    = $request['address'];
- 
+        $User->role_id    =  3;
         $User->save();
- 
+        
     
         $accessToken = $User->createToken('AuthToken')->accessToken;
 

@@ -86,6 +86,7 @@ class helpers
         }
  
         $item['id'] = $product['product']->id;
+        $item['code'] = $product['product']->code;
         $item['en_name'] = $product['product']->name;
         $item['ar_name'] = $product['product']->ar_name;
         $item['ar_category'] = $product['product']['category']->name;
@@ -116,6 +117,17 @@ class helpers
         $firstimage = explode(',', $product['product']->image);
         $item['image'] = "/images/products/".$firstimage[0];
 
+
+        if ($product['product']->image != '') {
+            // $isFirstImage = true; 
+            foreach (explode(',', $product['product']->image) as $img) {
+                // $item['images'][] = "/public/images/products/".$img;
+                $item['gallery_full'][] =  env('URL', 'http://192.168.1.5:8000')."/images/products/". $img;
+            }
+        }
+
+
+        $item['full_image_url'] = env('URL', 'http://192.168.1.5:8000')."/images/products/".$firstimage[0];
 
         if ($product['product']['unitSale']->operator == '/') {
             $item['qte_sale'] = $product['product']->qte * $product['product']['unitSale']->operator_value;

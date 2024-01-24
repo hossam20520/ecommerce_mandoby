@@ -28,15 +28,7 @@
 
                         <div class="middle-box">
                             <div class="center-box">
-                                <div class="location-box-2">
-                                    <button class="btn location-button" data-bs-toggle="modal"
-                                        data-bs-target="#locationModal">
-                                        <i class="iconly-Location icli"></i>
-                                        <span>Location</span>
-                                        <i class="fa-solid fa-angle-down down-arrow"></i>
-                                    </button>
-                                </div>
-
+                              
                                 <div class="searchbar-box-2 input-group d-xl-flex d-none">
                                     <button class="btn search-icon" type="button">
                                         <i class="iconly-Search icli"></i>
@@ -48,18 +40,7 @@
                             </div>
                         </div>
 
-                        <div class="rightside-menu support-sidemenu">
-                            <div class="support-box">
-                                <div class="support-image">
-                                    <img src="../assets/images/icon/support.png" class="img-fluid blur-up lazyload"
-                                        alt="">
-                                </div>
-                                <div class="support-number">
-                                    <h2>(123) 456 7890</h2>
-                                    <h4>24/7 Support Center</h4>
-                                </div>
-                            </div>
-                        </div>
+               
                     </div>
                 </div>
             </div>
@@ -79,6 +60,8 @@
                             </div>
                             <div class="offcanvas-body">
                                 <ul class="navbar-nav">
+
+                                    
                                     <li class="nav-item dropdown dropdown-mega">
                                         <a class="nav-link dropdown-toggle ps-0" href="javascript:void(0)"
                                             data-bs-toggle="dropdown">Home</a>
@@ -423,6 +406,10 @@
                                             </li>
                                         </ul>
                                     </li>
+
+
+
+
                                 </ul>
                             </div>
                         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ClientsExport;
 use App\Models\Client;
+use App\Models\User;
 use App\utils\helpers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -33,19 +34,21 @@ class ClientController extends BaseController
         $param = array(0 => 'like', 1 => 'like', 2 => 'like', 3 => 'like');
         $data = array();
 
-        $clients = Client::where('deleted_at', '=', null);
+        $clients = User::where('deleted_at', '=', null)->where('role_id' , 3);
 
         //Multiple Filter
         $Filtred = $helpers->filter($clients, $columns, $param, $request)
         // Search With Multiple Param
             ->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
-                    return $query->where('name', 'LIKE', "%{$request->search}%")
-                        ->orWhere('code', 'LIKE', "%{$request->search}%")
+                    return $query->where('firstname', 'LIKE', "%{$request->search}%")
+                       ->orWhere('lastname', 'LIKE', "%{$request->search}%")
                         ->orWhere('phone', 'LIKE', "%{$request->search}%")
                         ->orWhere('email', 'LIKE', "%{$request->search}%");
                 });
             });
+
+
         $totalRows = $Filtred->count();
         $clients = $Filtred->offset($offSet)
             ->limit($perPage)
