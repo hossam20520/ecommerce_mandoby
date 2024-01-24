@@ -364,7 +364,8 @@ class ProductsController extends Controller
  
 
         return response()->json([
-            'products'=> $data 
+            'products'=> $data,
+            'total' => $totalRows
           
         ]);
 
