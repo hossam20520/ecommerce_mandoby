@@ -500,7 +500,15 @@
             </router-link>
           </li>
 
-
+          <li
+            class="nav-item"
+            v-if="currentUserPermissions && currentUserPermissions.includes('Customers_view')"
+          >
+            <router-link tag="a" class to="/app/People/sales_rep">
+              <i class="nav-icon i-Administrator"></i>
+              <span class="item-name">{{$t('Mandobs')}}</span>
+            </router-link>
+          </li>
 
           <!-- <li
             class="nav-item"
@@ -796,10 +804,13 @@
 </template>
 
 <script>
-import Topnav from "./TopNav";
 import { isMobile } from "mobile-device-detect";
+import {
+    mapActions,
+    mapGetters,
+} from "vuex";
 
-import { mapGetters, mapActions } from "vuex";
+import Topnav from "./TopNav";
 
 export default {
   components: {

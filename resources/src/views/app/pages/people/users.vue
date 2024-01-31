@@ -44,6 +44,10 @@
             <i class="i-Add"></i>
             {{$t('Add')}}
           </b-button>
+
+
+
+
         </div>
 
         <template slot="table-row" slot-scope="props">
@@ -56,6 +60,18 @@
             >
               <i class="i-Edit text-25 text-success"></i>
             </a>
+
+
+            <a
+              title="Delete"
+              v-b-tooltip.hover
+              v-if="currentUserPermissions && currentUserPermissions.includes('users_edit')"
+              @click="Remove_Provider(props.row.id)"
+            >
+              <i class="i-Close-Window text-25 text-danger"></i>
+            </a>
+
+            
           </span>
 
           <div v-else-if="props.column.field == 'statut'">
@@ -64,6 +80,11 @@
               <span class="slider"></span>
             </label>
           </div>
+
+
+       
+
+            
         </template>
       </vue-good-table>
     </div>
@@ -396,10 +417,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import NProgress from "nprogress";
-import jsPDF from "jspdf";
 import "jspdf-autotable";
+
+import jsPDF from "jspdf";
+import NProgress from "nprogress";
+import {
+    mapActions,
+    mapGetters,
+} from "vuex";
 
 export default {
   metaInfo: {
@@ -833,6 +858,41 @@ export default {
           this.makeToast("danger", this.$t("InvalidData"), this.$t("Failed"));
           self.SubmitProcessing = false;
         });
+    },
+
+
+    Remove_Provider(id) {
+      this.$swal({
+        title: this.$t("Delete.Title"),
+        text: this.$t("Delete.Text"),
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: this.$t("Delete.cancelButtonText"),
+        confirmButtonText: this.$t("Delete.confirmButtonText")
+      }).then(result => {
+        if (result.value) {
+          axios
+            .delete("users/" + id)
+            .then(() => {
+              this.$swal(
+                this.$t("Delete.Deleted"),
+                this.$t("Delete.SupplierDeleted"),
+                "success"
+              );
+
+              Fire.$emit("Delete_Provider");
+            })
+            .catch(() => {
+              this.$swal(
+                this.$t("Delete.Failed"),
+                this.$t("Delete.ProviderError"),
+                "warning"
+              );
+            });
+        }
+      });
     },
 
     //----------------------------- Reset Form ---------------------------\\

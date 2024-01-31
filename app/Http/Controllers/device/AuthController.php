@@ -21,6 +21,7 @@ class AuthController extends Controller
 
         $phone = $request->phone;
         $passowrd = $request->passowrd;
+        
         $user = User::where('phone',  $phone )->first();
         $pass = Hash::make($request->new_password);
         User::whereId($user->id)->update([

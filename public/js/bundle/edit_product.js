@@ -9,11 +9,11 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_upload_multiple_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-upload-multiple-image */ "./node_modules/vue-upload-multiple-image/src/main.js");
-/* harmony import */ var _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @johmun/vue-tags-input */ "./node_modules/@johmun/vue-tags-input/dist/vue-tags-input.js");
-/* harmony import */ var _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_upload_multiple_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-upload-multiple-image */ "./node_modules/vue-upload-multiple-image/src/main.js");
+/* harmony import */ var _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @johmun/vue-tags-input */ "./node_modules/@johmun/vue-tags-input/dist/vue-tags-input.js");
+/* harmony import */ var _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_2__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -515,8 +515,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     };
   },
   components: {
-    VueUploadMultipleImage: vue_upload_multiple_image__WEBPACK_IMPORTED_MODULE_0__["default"],
-    VueTagsInput: _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_1___default.a
+    VueUploadMultipleImage: vue_upload_multiple_image__WEBPACK_IMPORTED_MODULE_1__["default"],
+    VueTagsInput: _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   methods: {
     //------------- Submit Validation Update Product
@@ -605,8 +605,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     Update_Product: function Update_Product() {
       var _this4 = this;
 
-      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
       var self = this;
       self.SubmitProcessing = true;
 
@@ -651,7 +651,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       self.data.append("_method", "put"); //send Data with axios
 
       axios.post("Products/" + this.product.id, self.data).then(function (response) {
-        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
         self.SubmitProcessing = false;
 
         _this4.$router.push({
@@ -664,7 +664,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
           self.code_exist = error.errors.code[0];
         }
 
-        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
 
         _this4.makeToast("danger", _this4.$t("InvalidData"), _this4.$t("Failed"));
 

@@ -2,6 +2,7 @@
 
 
 export default {
+    Mandobs:'المناديب',
     payment_type:'نوع الدفع',
     bill_image:'صورة الفاتورة',
     end_time:'وقت المغادرة',
@@ -237,7 +238,7 @@ export default {
     Customers: 'الزبائن',
     Suppliers: 'الموردون',
     Quotations: 'عرض الأسعار',
-    Sales: 'المبيعات',
+    Sales: 'الطلبات',
     Purchases: 'المشتريات',
     Returns: 'العوائد',
     Settings: 'الإعدادات',

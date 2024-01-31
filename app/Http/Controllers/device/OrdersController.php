@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Auth;
 class OrdersController extends Controller
 {
 
-
-
- 
-
     public function getorder(Request $request , $id){
 
         $user = Auth::user();
@@ -68,10 +64,10 @@ class OrdersController extends Controller
 
 
       return response()->json([
-       'orders' =>    $orders,
-   
+       'orders' =>    $orders
    ]);
 
+   
   }
 
 }

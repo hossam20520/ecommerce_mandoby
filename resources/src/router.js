@@ -1,11 +1,10 @@
 import Vue from "vue";
-import store from "./store";
-import Router from "vue-router";
-import { i18n } from "./plugins/i18n";
-import authenticate from "./auth/authenticate";
-import IsConnected from "./auth/IsConnected";
 
 import NProgress from "nprogress";
+import Router from "vue-router";
+
+import { i18n } from "./plugins/i18n";
+import store from "./store";
 
 Vue.use(Router);
 
@@ -425,6 +424,14 @@ const routes = [
                         path: "Users",
                         component: () =>
                             import(/* webpackChunkName: "Users" */"./views/app/pages/people/users")
+                    },
+
+
+                    {
+                        name: "sales_rep",
+                        path: "sales_rep",
+                        component: () =>
+                            import(/* webpackChunkName: "Suppliers" */"./views/app/pages/people/sales_rep")
                     },
 
 

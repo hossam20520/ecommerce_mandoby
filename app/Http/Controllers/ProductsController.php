@@ -1060,8 +1060,11 @@ class ProductsController extends BaseController
                         } else {
                             $brand_id = null;
                         }
+
+
                         $Product = new Product;
                         $Product->name = $value['name'] == '' ? null : $value['name'];
+                        $Product->name = $value['ar_name'] == '' ? null : $value['ar_name'];
                         $Product->code = $value['code'] == '' ? '11111111' : $value['code'];
                         $Product->Type_barcode = 'CODE128';
                         $Product->price = $value['price'];
@@ -1076,6 +1079,9 @@ class ProductsController extends BaseController
                         $Product->unit_purchase_id = $unit_id;
                         $Product->stock_alert = $value['stock_alert'] ? $value['stock_alert'] : 0;
                         $Product->is_variant = 0;
+                        $Product->discount =  $value['discount'] == '' ? 0 : $value['discount'];
+                        $Product->status = $value['status']; //NORMAL_PRODUCT //NEW_PRODUCT //TOP_PRODUCT //OFFERS_PRODUCT
+
                         $Product->image = 'no-image.png';
                         $Product->save();
 

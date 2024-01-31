@@ -1,6 +1,8 @@
 //Language Anglais
 
 export default {
+    Mandobs:'MSales Rep',
+    Mandob:'Sales Rep',
     payment_type:'Payment Type',
     bill_image:'Bill Image',
     end_time:'Leaving Time',
@@ -217,7 +219,7 @@ export default {
     SearchByPhone: 'Search by Phone',
     Suppliers: 'Supplier List',
     Quotations: 'Quotations',
-    Sales: 'Sales',
+    Sales: 'Orders',
     Purchases: 'Purchases',
     Returns: 'Return',
     Settings: 'Settings',

@@ -13,10 +13,9 @@ class NotificationsController extends Controller
 
     public function AddFcm($user , $fcm){
 
-    
-    
+ 
         $device_token  = $fcm;
-    
+
         $fcm = Fcm::where('user_id' , $user->id)->first();
         if(!$fcm){
             $fc = new Fcm;
@@ -25,10 +24,13 @@ class NotificationsController extends Controller
             $fc->save();
     
         }else{
+
+
             $up = Fcm::where('user_id' , $user->id)->update([
                 'device_token'=>  $device_token,
                 
             ]);
+            
         }
     
         
@@ -51,8 +53,7 @@ class NotificationsController extends Controller
 
     }else{
         $up = Fcm::where('user_id' , $user->id)->update([
-            'device_token'=>  $device_token,
-            
+            'device_token'=>  $device_token, 
         ]);
     }
 

@@ -22,7 +22,7 @@ class UserController extends BaseController
 {
 
     //------------- GET ALL USERS---------\\
-
+    // sales_rep
     public function index(request $request)
     {
 
@@ -76,6 +76,62 @@ class UserController extends BaseController
         ]);
     }
 
+
+    public function getSalesRep(request $request)
+    {
+
+        $this->authorizeForUser($request->user('api'), 'view', User::class);
+        // How many items do you want to display.
+        $perPage = $request->limit;
+        $pageStart = \Request::get('page', 1);
+        // Start displaying items from this number;
+        $offSet = ($pageStart * $perPage) - $perPage;
+        $order = $request->SortField;
+        $dir = $request->SortType;
+        $helpers = new helpers();
+        // Filter fields With Params to retrieve
+        $columns = array(0 => 'username', 1 => 'statut', 2 => 'phone', 3 => 'email');
+        $param = array(0 => 'like', 1 => '=', 2 => 'like', 3 => 'like');
+        $data = array();
+
+        $Role = Auth::user()->roles()->first();
+        $ShowRecord = Role::findOrFail($Role->id)->inRole('record_view');
+
+        $users = User::where('role_id' , 3)->where(function ($query) use ($ShowRecord) {
+            if (!$ShowRecord) {
+                return $query->where('id', '=', Auth::user()->id);
+            }
+        });
+
+        //Multiple Filter
+        $Filtred = $helpers->filter($users, $columns, $param, $request)
+        // Search With Multiple Param
+            ->where(function ($query) use ($request) {
+                return $query->when($request->filled('search'), function ($query) use ($request) {
+                    return $query->where('username', 'LIKE', "%{$request->search}%")
+                        ->orWhere('firstname', 'LIKE', "%{$request->search}%")
+                        ->orWhere('lastname', 'LIKE', "%{$request->search}%")
+                        ->orWhere('email', 'LIKE', "%{$request->search}%")
+                        ->orWhere('phone', 'LIKE', "%{$request->search}%");
+                });
+            });
+        $totalRows = $Filtred->count();
+        $users = $Filtred->offset($offSet)
+            ->limit($perPage)
+            ->orderBy($order, $dir)
+            ->get();
+
+        $roles = Role::where('deleted_at', null)->get(['id', 'name']);
+
+        return response()->json([
+            'users' => $users,
+            'roles' => $roles,
+            'totalRows' => $totalRows,
+        ]);
+    }
+
+
+    
     //------------- GET USER Auth ---------\\
 
     public function GetUserAuth(Request $request)
@@ -119,6 +175,59 @@ class UserController extends BaseController
         }
 
     }
+
+
+    public function storeRep(Request $request)
+    {
+        $this->authorizeForUser($request->user('api'), 'create', User::class);
+        $this->validate($request, [
+            'email' => 'required|unique:users',
+        ], [
+            'email.unique' => 'This Email already taken.',
+        ]);
+        \DB::transaction(function () use ($request) {
+            if ($request->hasFile('avatar')) {
+
+                $image = $request->file('avatar');
+                $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
+
+                $image_resize = Image::make($image->getRealPath());
+                $image_resize->resize(128, 128);
+                $image_resize->save(public_path('/images/avatar/' . $filename));
+
+            } else {
+                $filename = 'no_avatar.png';
+            }
+
+            $User = new User;
+            $User->firstname = $request['firstname'];
+            $User->lastname  = $request['lastname'];
+            $User->username  = $request['username'];
+            $User->email     = $request['email'];
+            $User->phone     = $request['phone'];
+
+            $User->area_name     =  "";
+            $User->location_lat     =  "";
+            $User->address     = "";
+            $User->location_long     =  "";
+
+ 
+            $User->password  = Hash::make($request['password']);
+            $User->avatar    = $filename;
+            $User->role_id   =  3 ;
+            $User->save();
+
+            $role_user = new role_user;
+            $role_user->user_id = $User->id;
+            $role_user->role_id = 3;
+            $role_user->save();
+    
+        }, 10);
+
+        return response()->json(['success' => true]);
+    }
+
+
 
     //------------- STORE NEW USER ---------\\
 
@@ -256,6 +365,87 @@ class UserController extends BaseController
 
     }
 
+
+
+
+
+
+    public function updateRep(Request $request, $id)
+    {
+        $this->authorizeForUser($request->user('api'), 'update', User::class);
+        
+        $this->validate($request, [
+            'email' => 'required|email|unique:users',
+            'email' => Rule::unique('users')->ignore($id),
+        ], [
+            'email.unique' => 'This Email already taken.',
+        ]);
+
+        \DB::transaction(function () use ($id ,$request) {
+            $user = User::findOrFail($id);
+            $current = $user->password;
+
+            if ($request->NewPassword != 'null') {
+                if ($request->NewPassword != $current) {
+                    $pass = Hash::make($request->NewPassword);
+                } else {
+                    $pass = $user->password;
+                }
+
+            } else {
+                $pass = $user->password;
+            }
+
+            $currentAvatar = $user->avatar;
+            if ($request->avatar != $currentAvatar) {
+
+                $image = $request->file('avatar');
+                $path = public_path() . '/images/avatar';
+                $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
+
+                $image_resize = Image::make($image->getRealPath());
+                $image_resize->resize(128, 128);
+                $image_resize->save(public_path('/images/avatar/' . $filename));
+
+                $userPhoto = $path . '/' . $currentAvatar;
+                if (file_exists($userPhoto)) {
+                    if ($user->avatar != 'no_avatar.png') {
+                        @unlink($userPhoto);
+                    }
+                }
+            } else {
+                $filename = $currentAvatar;
+            }
+ 
+            User::whereId($id)->update([
+                'firstname' => $request['firstname'],
+                'lastname' => $request['lastname'],
+                'username' => $request['username'],
+                'email' => $request['email'],
+                'phone' => $request['phone'],
+                'password' => $pass,
+                'avatar' => $filename,
+                'statut' => $request['statut'],
+                'role_id' => 3,
+                'area_name' =>  "",
+                'location_lat' => "",
+                'address' => "",
+                'location_long' => "",
+            ]);
+
+            role_user::where('user_id' , $id)->update([
+                'user_id' => $id,
+                'role_id' => 3,
+            ]);
+
+        }, 10);
+        
+        return response()->json(['success' => true]);
+
+    }
+
+
+
     //------------- Export USERS to EXCEL ---------\\
 
     public function exportExcel(Request $request)
@@ -369,6 +559,27 @@ class UserController extends BaseController
     {
         $data = Auth::user();
         return response()->json(['success' => true, 'user' => $data]);
+    }
+
+
+    public function destroy(Request $request, $id)
+    {
+         
+
+        \DB::transaction(function () use ($id) {
+
+            User::whereId($id)->update([
+                'deleted_at' => Carbon::now(),
+                'email'=> Carbon::now(),
+                'phone'=> Carbon::now(),
+                'username'=> Carbon::now()
+            ]);
+
+
+
+        }, 10);
+
+        return response()->json(['success' => true]);
     }
 
 }

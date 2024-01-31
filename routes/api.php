@@ -33,6 +33,8 @@ Route::get("/v1/device/version/{version}", "device\AuthController@version");
 
 
 
+
+
 // device/products/category?SortField=id&SortType=desc&search=&limit=6&page=1&category_id=1
 
 
@@ -141,7 +143,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::resource('mandobs', 'MandobsController');
     Route::post('mandobs/delete/by_selection', 'MandobsController@delete_by_selection');
 
-        //------------------------------- Notifications--------------------------\
+    //------------------------------- Notifications--------------------------\
     //------------------------------------------------------------------\
     Route::resource('notifications', 'NotificationsController');
     Route::post('notifications/delete/by_selection', 'NotificationsController@delete_by_selection');
@@ -224,10 +226,6 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     //------------------------------------------------------------------\\
 
   
-   
-
-
-
     
 
     //------------------------------- Surveys--------------------------\
@@ -413,6 +411,14 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get('GetUserAuth', 'UserController@GetUserAuth');
     Route::get("/GetPermissions", "UserController@GetPermissions");
     Route::resource('users', 'UserController');
+
+    Route::get('sales_rep/user', 'UserController@getSalesRep');
+    Route::post('storerep/user', 'UserController@storeRep');
+  
+    
+
+    Route::put('updaterep/user/{id}', 'UserController@updateRep');
+    
     Route::put('users/Activated/{id}', 'UserController@IsActivated');
     Route::get('users/export/Excel', 'UserController@exportExcel');
     Route::get('users/Get_Info/Profile', 'UserController@GetInfoProfile');

@@ -146,6 +146,46 @@ class NotificationsController extends Controller
          return response()->json(['success' =>  $response]);
      }
 
+
+     public function sendNotification(Request $request, $id)
+     {
+        
+ 
+        $firebaseToken = Fcm::whereNotNull('device_token')->where('id' , $id)->pluck('device_token')->all();
+            
+        $SERVER_API_KEY = env('FCM_SERVER_KEY', 'AAAAjE4uqNk:APA91bGBl7CN2AnB3_SzsyQBSTnZzu5C35pwlJ_WSkePXTZVJcpYVB89qmI0vTqyG388krsWNYGK56g-I9WwSKhVcejju2yoJI4eRCTtaCGn4HauRiTsbEpJLXfLR4jKizOnT5pnIuxl') ;
+    
+        $data = [
+            "registration_ids" => $firebaseToken,
+            "notification" => [
+                "title" => $request->title,
+                "body" => $request->body,  
+            ]
+        ];
+        $dataString = json_encode($data);
+      
+        $headers = [
+            'Authorization: key=' . $SERVER_API_KEY,
+            'Content-Type: application/json',
+        ];
+      
+        $ch = curl_init();
+        
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+                 
+        $response = curl_exec($ch);
+ 
+ 
+         return response()->json(['success' =>  $response]);
+     }
+
+
+
     //------------ Delete Notification -----------\
 
     public function destroy(Request $request, $id)
