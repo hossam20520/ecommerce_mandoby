@@ -796,7 +796,7 @@ export default {
                 "success"
               );
 
-              Fire.$emit("Delete_Provider");
+              Fire.$emit("Delete_User");
             })
             .catch(() => {
               this.$swal(

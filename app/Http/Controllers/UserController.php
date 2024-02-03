@@ -97,7 +97,7 @@ class UserController extends BaseController
         $Role = Auth::user()->roles()->first();
         $ShowRecord = Role::findOrFail($Role->id)->inRole('record_view');
 
-        $users = User::where('role_id' , 3)->where(function ($query) use ($ShowRecord) {
+        $users = User::where('role_id' , 3)->where('deleted_at' , '=' , null)->where(function ($query) use ($ShowRecord) {
             if (!$ShowRecord) {
                 return $query->where('id', '=', Auth::user()->id);
             }

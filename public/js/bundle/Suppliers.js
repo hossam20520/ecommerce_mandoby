@@ -1708,7 +1708,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           axios["delete"]("rep/delete/mandob/" + id).then(function () {
             _this7.$swal(_this7.$t("Delete.Deleted"), _this7.$t("Delete.SupplierDeleted"), "success");
 
-            Fire.$emit("Delete_Provider");
+            Fire.$emit("Delete_User");
           })["catch"](function () {
             _this7.$swal(_this7.$t("Delete.Failed"), _this7.$t("Delete.ProviderError"), "warning");
           });
