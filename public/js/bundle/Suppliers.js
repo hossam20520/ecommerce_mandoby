@@ -1705,7 +1705,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: this.$t("Delete.confirmButtonText")
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]("users/" + id).then(function () {
+          axios["delete"]("rep/delete/mandob/" + id).then(function () {
             _this7.$swal(_this7.$t("Delete.Deleted"), _this7.$t("Delete.SupplierDeleted"), "success");
 
             Fire.$emit("Delete_Provider");

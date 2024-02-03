@@ -788,7 +788,7 @@ export default {
       }).then(result => {
         if (result.value) {
           axios
-            .delete("users/" + id)
+            .delete("rep/delete/mandob/" + id)
             .then(() => {
               this.$swal(
                 this.$t("Delete.Deleted"),
