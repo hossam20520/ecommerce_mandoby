@@ -537,6 +537,47 @@ class UserController extends BaseController
         }
     }
 
+
+
+    public function delete_by_selection(Request $request)
+    {
+        $this->authorizeForUser($request->user('api'), 'update', User::class);
+
+        $selectedIds = $request->selectedIds;
+
+        foreach ($selectedIds as $Client_id) {
+            User::whereId($Client_id)->update([
+                'deleted_at' => Carbon::now(),
+            ]);
+        }
+        return response()->json(['success' => true]);
+    }
+
+
+    public function delete_mandob(Request $request, $id)
+    {
+         
+
+        \DB::transaction(function () use ($id) {
+
+            User::whereId($id)->update([
+                'deleted_at' => Carbon::now(),
+                'email'=> Carbon::now(),
+                'phone'=> Carbon::now(),
+                'username'=> Carbon::now()
+            ]);
+
+
+
+        }, 10);
+
+        return response()->json(['success' => true]);
+    }
+
+
+
+
+
     public function GetPermissions()
     {
         $roles = Auth::user()->roles()->with('permissions')->first();

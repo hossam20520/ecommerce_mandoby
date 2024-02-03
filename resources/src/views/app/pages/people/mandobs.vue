@@ -406,10 +406,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import NProgress from "nprogress";
-import jsPDF from "jspdf";
 import "jspdf-autotable";
+
+import jsPDF from "jspdf";
+import NProgress from "nprogress";
+import {
+    mapActions,
+    mapGetters,
+} from "vuex";
 
 export default {
   metaInfo: {
@@ -870,7 +874,7 @@ export default {
       }).then(result => {
         if (result.value) {
           axios
-            .delete("clients/" + id)
+            .delete("rep/delete/mandob/" + id)
             .then(() => {
               this.$swal(
                 this.$t("Delete.Deleted"),
@@ -908,7 +912,7 @@ export default {
           NProgress.start();
           NProgress.set(0.1);
           axios
-            .post("clients/delete/by_selection", {
+            .post("rep/delete/by_selection", {
               selectedIds: this.selectedIds
             })
             .then(() => {

@@ -415,6 +415,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get('sales_rep/user', 'UserController@getSalesRep');
     Route::post('storerep/user', 'UserController@storeRep');
   
+    Route::post('rep/delete/by_selection', 'UserController@delete_by_selection');
+    Route::delete('rep/delete/mandob/{id}', 'UserController@delete_mandob');
     
 
     Route::put('updaterep/user/{id}', 'UserController@updateRep');
