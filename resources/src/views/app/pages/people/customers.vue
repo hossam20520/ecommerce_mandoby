@@ -1,13 +1,13 @@
 <template>
   <div class="main-content">
-    <breadcumb :page="$t('CustomerManagement')" :folder="$t('Customers')"/>
+    <breadcumb :page="$t('CustomerManagement')" :folder="$t('Users')"/>
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
     <div v-else>
       <vue-good-table
         mode="remote"
         :columns="columns"
         :totalRows="totalRows"
-        :rows="clients"
+        :rows="users"
         @on-page-change="onPageChange"
         @on-per-page-change="onPerPageChange"
         @on-sort-change="onSortChange"
@@ -16,11 +16,6 @@
         enabled: true,
         placeholder: $t('Search_this_table'),  
       }"
-        :select-options="{ 
-          enabled: true ,
-          clearSelectionText: '',
-        }"
-        @on-selected-rows-change="selectionChanged"
         :pagination-options="{
         enabled: true,
         mode: 'records',
@@ -29,102 +24,114 @@
       }"
         styleClass="table-hover tableOne vgt-table"
       >
-        <div slot="selected-row-actions">
-          <button class="btn btn-danger btn-sm" @click="delete_by_selected()">{{$t('Del')}}</button>
-        </div>
         <div slot="table-actions" class="mt-2 mb-3">
           <b-button variant="outline-info m-1" size="sm" v-b-toggle.sidebar-right>
             <i class="i-Filter-2"></i>
             {{ $t("Filter") }}
           </b-button>
-          <!-- <b-button @click="clients_PDF()" size="sm" variant="outline-success m-1">
+          <b-button @click="Users_PDF()" size="sm" variant="outline-success m-1">
             <i class="i-File-Copy"></i> PDF
-          </b-button> -->
-          <!-- <b-button @click="clients_Excel()" size="sm" variant="outline-danger m-1">
+          </b-button>
+          <b-button @click="Users_Excel()" size="sm" variant="outline-danger m-1">
             <i class="i-File-Excel"></i> EXCEL
-          </b-button> -->
-          <!-- <b-button
-            @click="Show_import_clients()"
-            size="sm"
-            variant="info m-1"
-            v-if="currentUserPermissions && currentUserPermissions.includes('customers_import')"
-          >
-            <i class="i-Download"></i>
-            {{ $t("Import_Customers") }}
-          </b-button> -->
-
-          
+          </b-button>
           <b-button
-            @click="New_Client()"
+            @click="New_User()"
             size="sm"
             variant="btn btn-primary btn-icon m-1"
-            v-if="currentUserPermissions && currentUserPermissions.includes('Customers_add')"
+            v-if="currentUserPermissions && currentUserPermissions.includes('users_add')"
           >
             <i class="i-Add"></i>
             {{$t('Add')}}
           </b-button>
+
+
+
+
         </div>
 
         <template slot="table-row" slot-scope="props">
           <span v-if="props.column.field == 'actions'">
-            <a title="View" v-b-tooltip.hover @click="showDetails(props.row)">
-              <i class="i-Eye text-25 text-info"></i>
-            </a>
             <a
-              @click="Edit_Client(props.row)"
-              v-if="currentUserPermissions && currentUserPermissions.includes('Customers_edit')"
+              @click="Edit_User(props.row)"
+              v-if="currentUserPermissions && currentUserPermissions.includes('users_edit')"
               title="Edit"
               v-b-tooltip.hover
             >
               <i class="i-Edit text-25 text-success"></i>
             </a>
+
+
             <a
               title="Delete"
               v-b-tooltip.hover
-              v-if="currentUserPermissions && currentUserPermissions.includes('Customers_delete')"
-              @click="Remove_Client(props.row.id)"
+              v-if="currentUserPermissions && currentUserPermissions.includes('users_edit')"
+              @click="Remove_Provider(props.row.id)"
             >
               <i class="i-Close-Window text-25 text-danger"></i>
             </a>
+
+            
           </span>
+
+          <div v-else-if="props.column.field == 'statut'">
+            <label class="switch switch-primary mr-3">
+              <input @change="isChecked(props.row)" type="checkbox" v-model="props.row.statut">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+
+       
+
+            
         </template>
       </vue-good-table>
     </div>
 
-    <!-- Multiple filters -->
+    <!-- Multiple Filters  -->
     <b-sidebar id="sidebar-right" :title="$t('Filter')" bg-variant="white" right shadow>
       <div class="px-3 py-2">
         <b-row>
-          <!-- Code Customer   -->
+          <!-- Name user  -->
           <b-col md="12">
-            <b-form-group :label="$t('CustomerCode')">
-              <b-form-input label="Code" :placeholder="$t('SearchByCode')" v-model="Filter_Code"></b-form-input>
+            <b-form-group :label="$t('username')">
+              <b-form-input label="Code" :placeholder="$t('username')" v-model="Filter_Name"></b-form-input>
             </b-form-group>
           </b-col>
 
-          <!-- Name Customer   -->
-          <b-col md="12">
-            <b-form-group :label="$t('CustomerName')">
-              <b-form-input label="Name" :placeholder="$t('SearchByName')" v-model="Filter_Name"></b-form-input>
-            </b-form-group>
-          </b-col>
-
-          <!-- Phone Customer   -->
+          <!-- User Phone -->
           <b-col md="12">
             <b-form-group :label="$t('Phone')">
               <b-form-input label="Phone" :placeholder="$t('SearchByPhone')" v-model="Filter_Phone"></b-form-input>
             </b-form-group>
           </b-col>
 
-          <!-- Email Customer   -->
+          <!-- User Email  -->
           <b-col md="12">
             <b-form-group :label="$t('Email')">
               <b-form-input label="Email" :placeholder="$t('SearchByEmail')" v-model="Filter_Email"></b-form-input>
             </b-form-group>
           </b-col>
 
+          <!-- Status  -->
+          <b-col md="12">
+            <b-form-group :label="$t('Status')">
+              <v-select
+                v-model="Filter_status"
+                :reduce="label => label.value"
+                :placeholder="$t('Choose_Status')"
+                :options="
+                        [
+                           {label: 'Actif', value: '1'},
+                           {label: 'Inactif', value: '0'}
+                        ]"
+              ></v-select>
+            </b-form-group>
+          </b-col>
+
           <b-col md="6" sm="12">
-            <b-button @click="Get_Clients(serverParams.page)" variant="primary m-1" size="sm" block>
+            <b-button @click="Get_Users(serverParams.page)" variant="primary m-1" size="sm" block>
               <i class="i-Filter-2"></i>
               {{ $t("Filter") }}
             </b-button>
@@ -139,42 +146,175 @@
       </div>
     </b-sidebar>
 
-    <!-- Modal Create & Edit Customer -->
-    <validation-observer ref="Create_Customer">
-      <b-modal hide-footer size="lg" id="New_Customer" :title="editmode?$t('Edit'):$t('Add')">
-        <b-form @submit.prevent="Submit_Customer">
+    <!-- Add & Edit User -->
+    <validation-observer ref="Create_User">
+      <b-modal hide-footer size="lg" id="New_User" :title="editmode?$t('Edit'):$t('Add')">
+        <b-form @submit.prevent="Submit_User" enctype="multipart/form-data">
           <b-row>
-            <!-- Customer Name -->
+            <!-- First name -->
             <b-col md="6" sm="12">
               <validation-provider
-                name="Name Customer"
-                :rules="{ required: true}"
+                name="Firstname"
+                :rules="{ required: true , min:3 , max:30}"
                 v-slot="validationContext"
               >
-                <b-form-group :label="$t('CustomerName')">
+                <b-form-group :label="$t('Firstname')">
                   <b-form-input
                     :state="getValidationState(validationContext)"
-                    aria-describedby="name-feedback"
-                    label="name"
-                    v-model="client.name"
+                    aria-describedby="Firstname-feedback"
+                    label="Firstname"
+                    v-model="user.firstname"
                   ></b-form-input>
-                  <b-form-invalid-feedback id="name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                  <b-form-invalid-feedback id="Firstname-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                 </b-form-group>
               </validation-provider>
             </b-col>
 
-            <!-- Customer Email -->
+            <!-- Last name -->
             <b-col md="6" sm="12">
               <validation-provider
-                name="Email customer"
+                name="lastname"
+                :rules="{ required: true , min:3 , max:30}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('lastname')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="lastname-feedback"
+                    label="lastname"
+                    v-model="user.lastname"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="lastname-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+            <!-- Username -->
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="username"
+                :rules="{ required: true , min:3 , max:30}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('username')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="username-feedback"
+                    label="username"
+                    v-model="user.username"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="username-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+            <!-- Phone -->
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="Phone"
                 :rules="{ required: true}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('Phone')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="Phone-feedback"
+                    label="Phone"
+                    v-model="user.phone"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="Phone-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+
+                        <!-- lat -->
+         <b-col md="6" sm="12">
+              <validation-provider
+                name="location_lat"
+                :rules="{ required: true , min:3 , max:30}"
                 v-slot="validationContext" >
+                <b-form-group :label="$t('location_lat')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="username-feedback"
+                    label="location_lat"
+                    v-model="user.location_lat"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="username-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+            <!-- location_long -->
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="location_long"
+                :rules="{ required: true}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('location_long')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="Phone-feedback"
+                    label="location_long"
+                    v-model="user.location_long"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="Phone-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="address"
+                :rules="{ required: true}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('address')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="Phone-feedback"
+                    label="address"
+                    v-model="user.address"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="Phone-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
+
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="area_name"
+                :rules="{ required: true}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('area_name')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="Phone-feedback"
+                    label="area_name"
+                    v-model="user.area_name"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="Phone-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+            <!-- Email -->
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="Email"
+                :rules="{ required: true}"
+                v-slot="validationContext"
+              >
                 <b-form-group :label="$t('Email')">
                   <b-form-input
                     :state="getValidationState(validationContext)"
                     aria-describedby="Email-feedback"
                     label="Email"
-                    v-model="client.email"
+                    v-model="user.email"
                   ></b-form-input>
                   <b-form-invalid-feedback id="Email-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                   <b-alert
@@ -187,78 +327,62 @@
               </validation-provider>
             </b-col>
 
-            <!-- Customer Phone -->
-            <b-col md="6" sm="12">
+            <!-- password -->
+            <b-col md="6" sm="12" v-if="!editmode">
               <validation-provider
-                name="Phone Customer"
-                :rules="{ required: true}"
+                name="password"
+                :rules="{ required: true , min:6 , max:14}"
                 v-slot="validationContext"
               >
-                <b-form-group :label="$t('Phone')">
+                <b-form-group :label="$t('password')">
                   <b-form-input
                     :state="getValidationState(validationContext)"
-                    aria-describedby="Phone-feedback"
-                    label="Phone"
-                    v-model="client.phone"
+                    aria-describedby="password-feedback"
+                    label="password"
+                    type="password"
+                    v-model="user.password"
                   ></b-form-input>
-                  <b-form-invalid-feedback id="Phone-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                  <b-form-invalid-feedback id="password-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                 </b-form-group>
               </validation-provider>
             </b-col>
 
-            <!-- Customer Country -->
+     
+
+            <!-- Avatar -->
             <b-col md="6" sm="12">
-              <validation-provider
-                name="Country customer"
-                :rules="{ required: true}"
-                v-slot="validationContext"
-              >
-                <b-form-group :label="$t('Country')">
-                  <b-form-input
-                    :state="getValidationState(validationContext)"
-                    aria-describedby="Country-feedback"
-                    label="Country"
-                    v-model="client.country"
-                  ></b-form-input>
-                  <b-form-invalid-feedback id="Country-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+              <validation-provider name="Avatar" ref="Avatar" rules="mimes:image/*|size:200">
+                <b-form-group slot-scope="{validate, valid, errors }" :label="$t('UserImage')">
+                  <input
+                    :state="errors[0] ? false : (valid ? true : null)"
+                    :class="{'is-invalid': !!errors.length}"
+                    @change="onFileSelected"
+                    label="Choose Avatar"
+                    type="file"
+                  >
+                  <b-form-invalid-feedback id="Avatar-feedback">{{ errors[0] }}</b-form-invalid-feedback>
                 </b-form-group>
               </validation-provider>
             </b-col>
 
-            <!-- Customer City -->
-            <b-col md="6" sm="12">
+            <!-- New Password -->
+            <b-col md="6" v-if="editmode">
               <validation-provider
-                name="City Customer"
-                :rules="{ required: true}"
+                name="New password"
+                :rules="{min:6 , max:14}"
                 v-slot="validationContext"
               >
-                <b-form-group :label="$t('City')">
+                <b-form-group :label="$t('Newpassword')">
                   <b-form-input
                     :state="getValidationState(validationContext)"
-                    aria-describedby="City-feedback"
-                    label="City"
-                    v-model="client.city"
+                    aria-describedby="Nawpassword-feedback"
+                    :placeholder="$t('LeaveBlank')"
+                    label="New password"
+                    v-model="user.NewPassword"
                   ></b-form-input>
-                  <b-form-invalid-feedback id="City-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                </b-form-group>
-              </validation-provider>
-            </b-col>
-
-            <!-- Customer Adress -->
-            <b-col md="6" sm="12">
-              <validation-provider
-                name="Adress customer"
-                :rules="{ required: true}"
-                v-slot="validationContext"
-              >
-                <b-form-group :label="$t('Adress')">
-                  <b-form-input
-                    :state="getValidationState(validationContext)"
-                    aria-describedby="Adress-feedback"
-                    label="Adress"
-                    v-model="client.adresse"
-                  ></b-form-input>
-                  <b-form-invalid-feedback id="Adress-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                  <b-form-invalid-feedback
+                    id="Nawpassword-feedback"
+                  >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                 </b-form-group>
               </validation-provider>
             </b-col>
@@ -274,161 +398,29 @@
         </b-form>
       </b-modal>
     </validation-observer>
-
-    <!-- Modal Show Customer Details -->
-    <b-modal ok-only size="md" id="showDetails" :title="$t('CustomerDetails')">
-      <b-row>
-        <b-col lg="12" md="12" sm="12" class="mt-3">
-          <table class="table table-striped table-md">
-            <tbody>
-              <tr>
-                <!-- Customer Code -->
-                <td>{{$t('CustomerCode')}}</td>
-                <th>{{client.code}}</th>
-              </tr>
-              <tr>
-                <!-- Customer Name -->
-                <td>{{$t('firstname')}}</td>
-                <th>{{client.firstname}}</th>
-              </tr>
-
-              <tr>
-                <!-- Customer Name -->
-                <td>{{$t('lastname')}}</td>
-                <th>{{client.lastname}}</th>
-              </tr>
-
-
-              <tr>
-                <!-- Customer Phone -->
-                <td>{{$t('Phone')}}</td>
-                <th>{{client.phone}}</th>
-              </tr>
-              <tr>
-                <!-- Customer Email -->
-                <td>{{$t('Email')}}</td>
-                <th>{{client.email}}</th>
-              </tr>
-              <tr>
-                <!-- Customer country -->
-                <td>{{$t('Country')}}</td>
-                <th>{{client.country}}</th>
-              </tr>
-              <tr>
-                <!-- Customer City -->
-                <td>{{$t('City')}}</td>
-                <th>{{client.city}}</th>
-              </tr>
-              <tr>
-                <!-- Customer Adress -->
-                <td>{{$t('Adress')}}</td>
-                <th>{{client.adresse.substring(0, 24)}}</th>
-              </tr>
-            </tbody>
-          </table>
-        </b-col>
-      </b-row>
-    </b-modal>
-
-    <!-- Modal Show Import Clients -->
-    <b-modal ok-only ok-title="Cancel" size="md" id="importClients" :title="$t('Import_Customers')">
-      <b-form @submit.prevent="Submit_import" enctype="multipart/form-data">
-        <b-row>
-          <!-- File -->
-          <b-col md="12" sm="12" class="mb-3">
-            <b-form-group>
-              <input type="file" @change="onFileSelected" label="Choose File">
-              <b-form-invalid-feedback
-                id="File-feedback"
-                class="d-block"
-              >{{$t('field_must_be_in_csv_format')}}</b-form-invalid-feedback>
-            </b-form-group>
-          </b-col>
-
-          <b-col md="6" sm="12">
-            <b-button type="submit" variant="primary" :disabled="ImportProcessing" size="sm" block>{{ $t("submit") }}</b-button>
-              <div v-once class="typo__p" v-if="ImportProcessing">
-                <div class="spinner sm spinner-primary mt-3"></div>
-              </div>
-          </b-col>
-
-          <b-col md="6" sm="12">
-            <b-button
-              :href="'/import/exemples/import_clients.csv'"
-              variant="info"
-              size="sm"
-              block
-            >{{ $t("Download_exemple") }}</b-button>
-          </b-col>
-
-          <b-col md="12" sm="12">
-            <table class="table table-bordered table-sm mt-4">
-              <tbody>
-                <tr>
-                  <td>{{$t('Name')}}</td>
-                  <th>
-                    <span class="badge badge-outline-success">{{$t('Field_is_required')}}</span>
-                  </th>
-                </tr>
-
-                <tr>
-                  <td>{{$t('Phone')}}</td>
-                  <th>
-                    <span class="badge badge-outline-success">{{$t('Field_is_required')}}</span>
-                  </th>
-                </tr>
-
-                <tr>
-                  <td>{{$t('Email')}}</td>
-                  <th>
-                    <span class="badge badge-outline-success">{{$t('Field_is_required')}} | unique</span>
-                  </th>
-                </tr>
-
-                <tr>
-                  <td>{{$t('Country')}}</td>
-                  <th>
-                    <span class="badge badge-outline-success">{{$t('Field_is_required')}}</span>
-                  </th>
-                </tr>
-
-                <tr>
-                  <td>{{$t('City')}}</td>
-                  <th>
-                    <span class="badge badge-outline-success">{{$t('Field_is_required')}}</span>
-                  </th>
-                </tr>
-
-                <tr>
-                  <td>{{$t('Adress')}}</td>
-                  <th>
-                    <span class="badge badge-outline-success">{{$t('Field_is_required')}}</span>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
-          </b-col>
-        </b-row>
-      </b-form>
-    </b-modal>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import NProgress from "nprogress";
-import jsPDF from "jspdf";
 import "jspdf-autotable";
+
+import jsPDF from "jspdf";
+import NProgress from "nprogress";
+import {
+    mapActions,
+    mapGetters,
+} from "vuex";
 
 export default {
   metaInfo: {
-    title: "Customer"
+    title: "Users"
   },
   data() {
     return {
+      editmode: false,
       isLoading: true,
       SubmitProcessing:false,
-      ImportProcessing:false,
+      email_exist:"",
       serverParams: {
         columnFilters: {},
         sort: {
@@ -438,28 +430,32 @@ export default {
         page: 1,
         perPage: 10
       },
-      email_exist:"",
-      selectedIds: [],
       totalRows: "",
       search: "",
       limit: "10",
       Filter_Name: "",
-      Filter_Code: "",
-      Filter_Phone: "",
       Filter_Email: "",
-      clients: [],
-      editmode: false,
-      import_clients: "",
+      Filter_status: "",
+      Filter_Phone: "",
+      permissions: {},
+      users: [],
+      roles: [],
       data: new FormData(),
-      client: {
-        id: "",
+      user: {
         firstname: "",
+        area_name:"",
+        location_lat:"",
+        address:"",
+        location_long:"",
         lastname: "",
+        username: "",
+        password: "",
+        NewPassword: null,
         email: "",
         phone: "",
-        country: "",
-        city: "",
-        adresse: ""
+        statut: "",
+        role_id: "",
+        avatar: ""
       }
     };
   },
@@ -469,28 +465,21 @@ export default {
     columns() {
       return [
         {
-          label: this.$t("image"),
-          field: "image",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
-        {
-          label: this.$t("firstname"),
+          label: this.$t("Firstname"),
           field: "firstname",
           tdClass: "text-left",
           thClass: "text-left"
         },
-
         {
-          label: this.$t("firstname"),
+          label: this.$t("lastname"),
           field: "lastname",
           tdClass: "text-left",
           thClass: "text-left"
         },
 
         {
-          label: this.$t("Phone"),
-          field: "phone",
+          label: this.$t("username"),
+          field: "username",
           tdClass: "text-left",
           thClass: "text-left"
         },
@@ -501,16 +490,18 @@ export default {
           thClass: "text-left"
         },
         {
-          label: this.$t("area_name"),
-          field: "area_name",
+          label: this.$t("Phone"),
+          field: "phone",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
-          label: this.$t("address"),
-          field: "address",
-          tdClass: "text-left",
-          thClass: "text-left"
+          label: this.$t("Status"),
+          field: "statut",
+          html: true,
+          sortable: false,
+          tdClass: "text-center",
+          thClass: "text-center"
         },
 
         {
@@ -526,9 +517,9 @@ export default {
   },
 
   methods: {
-    //------------- Submit Validation Create & Edit Customer
-    Submit_Customer() {
-      this.$refs.Create_Customer.validate().then(success => {
+    //------------- Submit Validation Create & Edit User
+    Submit_User() {
+      this.$refs.Create_User.validate().then(success => {
         if (!success) {
           this.makeToast(
             "danger",
@@ -537,9 +528,9 @@ export default {
           );
         } else {
           if (!this.editmode) {
-            this.Create_Client();
+            this.Create_User();
           } else {
-            this.Update_Client();
+            this.Update_User();
           }
         }
       });
@@ -554,7 +545,7 @@ export default {
     onPageChange({ currentPage }) {
       if (this.serverParams.page !== currentPage) {
         this.updateParams({ page: currentPage });
-        this.Get_Clients(currentPage);
+        this.Get_Users(currentPage);
       }
     },
 
@@ -563,16 +554,8 @@ export default {
       if (this.limit !== currentPerPage) {
         this.limit = currentPerPage;
         this.updateParams({ page: 1, perPage: currentPerPage });
-        this.Get_Clients(1);
+        this.Get_Users(1);
       }
-    },
-
-    //---- Event Select Rows
-    selectionChanged({ selectedRows }) {
-      this.selectedIds = [];
-      selectedRows.forEach((row, index) => {
-        this.selectedIds.push(row.id);
-      });
     },
 
     //------ Event Sort Change
@@ -583,13 +566,13 @@ export default {
           field: params[0].field
         }
       });
-      this.Get_Clients(this.serverParams.page);
+      this.Get_Users(this.serverParams.page);
     },
 
     //------ Event Search
     onSearch(value) {
       this.search = value.searchTerm;
-      this.Get_Clients(this.serverParams.page);
+      this.Get_Users(this.serverParams.page);
     },
 
     //------ Event Validation State
@@ -601,10 +584,10 @@ export default {
     Reset_Filter() {
       this.search = "";
       this.Filter_Name = "";
-      this.Filter_Code = "";
+      this.Filter_status = "";
       this.Filter_Phone = "";
       this.Filter_Email = "";
-      this.Get_Clients(this.serverParams.page);
+      this.Get_Users(this.serverParams.page);
     },
 
     //------ Toast
@@ -616,31 +599,73 @@ export default {
       });
     },
 
-    //--------------------------------- Customers PDF -------------------------------\\
-    clients_PDF() {
+    //------ Checked Status User
+    isChecked(user) {
+      axios
+        .put("users/Activated/" + user.id, {
+          statut: user.statut,
+          id: user.id
+        })
+        .then(response => {
+          if (response.data.success) {
+            if (user.statut) {
+              user.statut = 1;
+              this.makeToast(
+                "success",
+                this.$t("ActivateUser"),
+                this.$t("Success")
+              );
+            } else {
+              user.statut = 0;
+              this.makeToast(
+                "success",
+                this.$t("DisActivateUser"),
+                this.$t("Success")
+              );
+            }
+          } else {
+            user.statut = 1;
+            this.makeToast(
+              "warning",
+              this.$t("Delete.Therewassomethingwronge"),
+              this.$t("Warning")
+            );
+          }
+        })
+        .catch(error => {
+          user.statut = 1;
+          this.makeToast(
+            "warning",
+            this.$t("Delete.Therewassomethingwronge"),
+            this.$t("Warning")
+          );
+        });
+    },
+
+    //--------------------------- Users PDF ---------------------------\\
+    Users_PDF() {
       var self = this;
 
       let pdf = new jsPDF("p", "pt");
       let columns = [
-        { title: "Code", dataKey: "code" },
-        { title: "Name", dataKey: "name" },
-        { title: "Phone", dataKey: "phone" },
+        { title: "First Name", dataKey: "firstname" },
+        { title: "Last Name", dataKey: "lastname" },
+        { title: "Username", dataKey: "username" },
         { title: "Email", dataKey: "email" },
-        { title: "Country", dataKey: "country" },
-        { title: "City", dataKey: "city" }
+        { title: "Phone", dataKey: "phone" }
       ];
-      pdf.autoTable(columns, self.clients);
-      pdf.text("Customer List", 40, 25);
-      pdf.save("Customer_List.pdf");
+      pdf.autoTable(columns, self.users);
+      pdf.text("User List", 40, 25);
+      pdf.save("User_List.pdf");
     },
 
-    //--------------------------------- Clients Excel -------------------------------\\
-    clients_Excel() {
+    //------------------------ Users Excel ---------------------------\\
+    Users_Excel() {
       // Start the progress bar.
       NProgress.start();
       NProgress.set(0.1);
       axios
-        .get("clients/export/Excel", {
+        .get("users/export/Excel", {
           responseType: "blob", // important
           headers: {
             "Content-Type": "application/json"
@@ -650,7 +675,7 @@ export default {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", "List_Customers.xlsx");
+          link.setAttribute("download", "List_Users.xlsx");
           document.body.appendChild(link);
           link.click();
           // Complete the animation of theprogress bar.
@@ -662,19 +687,27 @@ export default {
         });
     },
 
-    //--------------------------------------- Get All Clients -------------------------------\\
-    Get_Clients(page) {
+    // Simply replaces null values with strings=''
+    setToStrings() {
+      if (this.Filter_status === null) {
+        this.Filter_status = "";
+      }
+    },
+
+    //----------------------------------- Get All Users  ---------------------------\\
+    Get_Users(page) {
       // Start the progress bar.
       NProgress.start();
       NProgress.set(0.1);
+      this.setToStrings();
       axios
         .get(
           "clients?page=" +
             page +
             "&name=" +
             this.Filter_Name +
-            "&code=" +
-            this.Filter_Code +
+            "&statut=" +
+            this.Filter_status +
             "&phone=" +
             this.Filter_Phone +
             "&email=" +
@@ -689,7 +722,8 @@ export default {
             this.limit
         )
         .then(response => {
-          this.clients = response.data.clients;
+          this.users = response.data.clients;
+          // this.roles = response.data.roles;
           this.totalRows = response.data.totalRows;
 
           // Complete the animation of theprogress bar.
@@ -705,175 +739,114 @@ export default {
         });
     },
 
-    //----------------------------------- Show import Client -------------------------------\\
-    Show_import_clients() {
-      this.$bvModal.show("importClients");
-    },
-
-    //------------------------------ Event Import clients -------------------------------\\
-    onFileSelected(e) {
-      this.import_clients = "";
-      let file = e.target.files[0];
-      let errorFilesize;
-
-      if (file["size"] < 1048576) {
-        // 1 mega = 1,048,576 Bytes
-        errorFilesize = false;
-      } else {
-        this.makeToast(
-          "danger",
-          this.$t("file_size_must_be_less_than_1_mega"),
-          this.$t("Failed")
-        );
-      }
-
-      if (errorFilesize === false) {
-        this.import_clients = file;
-      }
-    },
-
-    //----------------------------------------Submit  import clients-----------------\\
-    Submit_import() {
-      // Start the progress bar.
-      NProgress.start();
-      NProgress.set(0.1);
-      var self = this;
-      self.ImportProcessing = true;
-      self.data.append("clients", self.import_clients);
-      axios
-        .post("clients/import/csv", self.data)
-        .then(response => {
-          self.ImportProcessing = false;
-          if (response.data.status === true) {
-            this.makeToast(
-              "success",
-              this.$t("Successfully_Imported"),
-              this.$t("Success")
-            );
-            Fire.$emit("Event_import");
-          } else if (response.data.status === false) {
-            this.makeToast(
-              "danger",
-              this.$t("field_must_be_in_csv_format"),
-              this.$t("Failed")
-            );
-          }
-          // Complete the animation of theprogress bar.
-          NProgress.done();
-        })
-        .catch(error => {
-          self.ImportProcessing = false;
-          NProgress.done();
-            this.makeToast(
-              "danger",
-              this.$t("Please_follow_the_import_instructions"),
-              this.$t("Failed")
-            );
-        });
-    },
-
-    //----------------------------------- Show Details Client -------------------------------\\
-    showDetails(client) {
-      // Start the progress bar.
-      NProgress.start();
-      NProgress.set(0.1);
-      this.client = client;
-      Fire.$emit("Get_Details_customers");
-    },
-
-    //------------------------------ Show Modal (create Client) -------------------------------\\
-    New_Client() {
+    //------------------------------ Show Modal (Create User) -------------------------------\\
+    New_User() {
       this.reset_Form();
       this.editmode = false;
-      this.$bvModal.show("New_Customer");
+      this.$bvModal.show("New_User");
     },
 
-    //------------------------------ Show Modal (Edit Client) -------------------------------\\
-    Edit_Client(client) {
-      this.Get_Clients(this.serverParams.page);
+    //------------------------------ Show Modal (Update User) -------------------------------\\
+    Edit_User(user) {
+      this.Get_Users(this.serverParams.page);
       this.reset_Form();
-      this.client = client;
+      this.user = user;
+      this.user.NewPassword = null;
       this.editmode = true;
-      this.$bvModal.show("New_Customer");
+      this.$bvModal.show("New_User");
     },
 
-    //---------------------------------------- Create new Client -------------------------------\\
-    Create_Client() {
-      this.SubmitProcessing = true;
+    //------------------------------ Event Upload Avatar -------------------------------\\
+    async onFileSelected(e) {
+      const { valid } = await this.$refs.Avatar.validate(e);
+
+      if (valid) {
+        this.user.avatar = e.target.files[0];
+      } else {
+        this.user.avatar = "";
+      }
+    },
+
+    //------------------------ Create User ---------------------------\\
+    Create_User() {
+      var self = this;
+      self.SubmitProcessing = true;
+      self.data.append("firstname", self.user.firstname);
+      self.data.append("lastname", self.user.lastname);
+      self.data.append("username", self.user.username);
+      self.data.append("email", self.user.email);
+      self.data.append("password", self.user.password);
+      self.data.append("phone", self.user.phone);
+      self.data.append("role", self.user.role_id);
+      self.data.append("area_name", self.user.area_name);
+      self.data.append("location_lat", self.user.location_lat);
+      self.data.append("address", self.user.address);
+      self.data.append("location_long", self.user.location_long);
+      self.data.append("avatar", self.user.avatar);
+     
       axios
-        .post("clients", {
-          name: this.client.name,
-          email: this.client.email,
-          phone: this.client.phone,
-          country: this.client.country,
-          city: this.client.city,
-          adresse: this.client.adresse
-        })
+        .post("clients", self.data)
         .then(response => {
-          Fire.$emit("Event_Customer");
+          self.SubmitProcessing = false;
+          Fire.$emit("Event_User");
 
           this.makeToast(
             "success",
-            this.$t("Create.TitleCustomer"),
+            this.$t("Create.TitleUser"),
             this.$t("Success")
           );
-          this.SubmitProcessing = false;
         })
         .catch(error => {
+          self.SubmitProcessing = false;
           if (error.errors.email.length > 0) {
-            this.email_exist = error.errors.email[0];
+            self.email_exist = error.errors.email[0];
           }
           this.makeToast("danger", this.$t("InvalidData"), this.$t("Failed"));
-          this.SubmitProcessing = false;
         });
     },
 
-    //----------------------------------- Update Client -------------------------------\\
-    Update_Client() {
-      this.SubmitProcessing = true;
+    //----------------------- Update User ---------------------------\\
+    Update_User() {
+      var self = this;
+      self.SubmitProcessing = true;
+      self.data.append("firstname", self.user.firstname);
+      self.data.append("lastname", self.user.lastname);
+      self.data.append("username", self.user.username);
+      self.data.append("email", self.user.email);
+      self.data.append("NewPassword", self.user.NewPassword);
+      self.data.append("phone", self.user.phone);
+      self.data.append("role", self.user.role_id);
+      self.data.append("statut", self.user.statut);
+      self.data.append("avatar", self.user.avatar);
+      self.data.append("area_name", self.user.area_name);
+      self.data.append("location_lat", self.user.location_lat);
+      self.data.append("address", self.user.address);
+      self.data.append("location_long", self.user.location_long);
+
+      self.data.append("_method", "put");
+
       axios
-        .put("clients/" + this.client.id, {
-          name: this.client.name,
-          email: this.client.email,
-          phone: this.client.phone,
-          country: this.client.country,
-          city: this.client.city,
-          adresse: this.client.adresse
-        })
+        .post("clients/" + this.user.id, self.data)
         .then(response => {
-          Fire.$emit("Event_Customer");
           this.makeToast(
             "success",
-            this.$t("Update.TitleCustomer"),
+            this.$t("Update.TitleUser"),
             this.$t("Success")
           );
-          this.SubmitProcessing = false;
+          Fire.$emit("Event_User");
+          self.SubmitProcessing = false;
         })
         .catch(error => {
           if (error.errors.email.length > 0) {
-            this.email_exist = error.errors.email[0];
+            self.email_exist = error.errors.email[0];
           }
           this.makeToast("danger", this.$t("InvalidData"), this.$t("Failed"));
-          this.SubmitProcessing = false;
+          self.SubmitProcessing = false;
         });
     },
 
-    //-------------------------------- Reset Form -------------------------------\\
-    reset_Form() {
-      this.email_exist= "";
-      this.client = {
-        id: "",
-        name: "",
-        email: "",
-        phone: "",
-        country: "",
-        city: "",
-        adresse: ""
-      };
-    },
 
-    //------------------------------- Remove Client -------------------------------\\
-    Remove_Client(id) {
+    Remove_Provider(id) {
       this.$swal({
         title: this.$t("Delete.Title"),
         text: this.$t("Delete.Text"),
@@ -890,15 +863,16 @@ export default {
             .then(() => {
               this.$swal(
                 this.$t("Delete.Deleted"),
-                this.$t("Delete.CustomerDeleted"),
+                this.$t("Delete.SupplierDeleted"),
                 "success"
               );
-              Fire.$emit("Delete_Customer");
+
+              Fire.$emit("Delete_Provider");
             })
             .catch(() => {
               this.$swal(
                 this.$t("Delete.Failed"),
-                this.$t("Delete.ClientError"),
+                this.$t("Delete.ProviderError"),
                 "warning"
               );
             });
@@ -906,9 +880,32 @@ export default {
       });
     },
 
-    //---- Delete Clients by selection
+    //----------------------------- Reset Form ---------------------------\\
+    reset_Form() {
+      this.user = {
+        id: "",
+ 
+      area_name: "",
+      location_lat: "",
+      address: "",
+      location_long: "",
 
-    delete_by_selected() {
+        firstname: "",
+        lastname: "",
+        username: "",
+        password: "",
+        NewPassword: null,
+        email: "",
+        phone: "",
+        statut: "",
+        role_id: "",
+        avatar: "",
+      };
+      this.email_exist= "";
+    },
+
+    //--------------------------------- Remove User ---------------------------\\
+    Remove_User(id) {
       this.$swal({
         title: this.$t("Delete.Title"),
         text: this.$t("Delete.Text"),
@@ -920,28 +917,21 @@ export default {
         confirmButtonText: this.$t("Delete.confirmButtonText")
       }).then(result => {
         if (result.value) {
-          // Start the progress bar.
-          NProgress.start();
-          NProgress.set(0.1);
           axios
-            .post("clients/delete/by_selection", {
-              selectedIds: this.selectedIds
-            })
+            .delete("clients/" + id)
             .then(() => {
               this.$swal(
                 this.$t("Delete.Deleted"),
-                this.$t("Delete.CustomerDeleted"),
+                this.$t("Delete.UserDeleted"),
                 "success"
               );
 
-              Fire.$emit("Delete_Customer");
+              Fire.$emit("Delete_User");
             })
             .catch(() => {
-              // Complete the animation of theprogress bar.
-              setTimeout(() => NProgress.done(), 500);
               this.$swal(
                 this.$t("Delete.Failed"),
-                this.$t("Delete.Therewassomethingwronge"),
+                "this User already linked with other operation",
                 "warning"
               );
             });
@@ -951,33 +941,19 @@ export default {
   }, // END METHODS
 
   //----------------------------- Created function-------------------
-
   created: function() {
-    this.Get_Clients(1);
+    this.Get_Users(1);
 
-    Fire.$on("Get_Details_customers", () => {
-      // Complete the animation of theprogress bar.
-      setTimeout(() => NProgress.done(), 500);
-      this.$bvModal.show("showDetails");
-    });
-
-    Fire.$on("Event_Customer", () => {
+    Fire.$on("Event_User", () => {
       setTimeout(() => {
-        this.Get_Clients(this.serverParams.page);
-        this.$bvModal.hide("New_Customer");
+        this.Get_Users(this.serverParams.page);
+        this.$bvModal.hide("New_User");
       }, 500);
     });
 
-    Fire.$on("Delete_Customer", () => {
+    Fire.$on("Delete_User", () => {
       setTimeout(() => {
-        this.Get_Clients(this.serverParams.page);
-      }, 500);
-    });
-
-    Fire.$on("Event_import", () => {
-      setTimeout(() => {
-        this.Get_Clients(this.serverParams.page);
-        this.$bvModal.hide("importClients");
+        this.Get_Users(this.serverParams.page);
       }, 500);
     });
   }
