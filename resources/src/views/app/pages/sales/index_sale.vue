@@ -31,7 +31,13 @@
       >
         <div slot="selected-row-actions">
           <button class="btn btn-danger btn-sm" @click="delete_by_selected()">{{$t('Del')}}</button>
+
+          <button class="btn btn-success btn-sm" @click="openModel()">{{$t('assign_to_mandob')}}</button>
+
         </div>
+
+   
+
         <div slot="table-actions" class="mt-2 mb-3">
           <b-button variant="outline-info ripple m-1" size="sm" v-b-toggle.sidebar-right>
             <i class="i-Filter-2"></i>
@@ -90,8 +96,7 @@
 
                 <b-dropdown-item
                   v-if="currentUserPermissions.includes('payment_sales_view')"
-                  @click="Show_Payments(props.row.id , props.row)"
-                >
+                  @click="Show_Payments(props.row.id , props.row)">
                   <i class="nav-icon i-Money-Bag font-weight-bold mr-2"></i>
                   {{$t('ShowPayment')}}
                 </b-dropdown-item>
@@ -127,6 +132,9 @@
                   <i class="nav-icon i-Close-Window font-weight-bold mr-2"></i>
                   {{$t('DeleteSale')}}
                 </b-dropdown-item>
+
+
+                
               </b-dropdown>
             </div>
           </span>
@@ -482,6 +490,55 @@
       </b-modal>
     </validation-observer>
 
+
+
+        <!-- Modal Add Payment-->
+        <validation-observer ref="Driver">
+      <b-modal
+        hide-footer
+        size="lg"
+        id="Driver"
+        :title="EditPaiementMode?$t('Driver'):$t('Driver')"
+      >
+        <b-form @submit.prevent="Submit_Payment">
+          <b-row>
+ 
+            
+ 
+                  <!-- Category -->
+                  <b-col md="12" class="mb-2">
+                  <validation-provider name="category" :rules="{ required: true}">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Mandobs')">
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Mandobs')"
+                        v-model="mandob_id"
+                        :options="mandobs.map(mandobs => ({label: mandobs.email, value: mandobs.id}))"
+                      />
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+ 
+            <b-col md="12" class="mt-3">
+              <b-button
+                variant="primary"
+                type="submit"
+                :disabled="subProcessing"
+              >{{$t('submit')}}</b-button>
+              <div v-once class="typo__p" v-if="subProcessing">
+                <div class="spinner sm spinner-primary mt-3"></div>
+              </div>
+            </b-col>
+          </b-row>
+        </b-form>
+      </b-modal>
+    </validation-observer>
+
+
     <!-- Modal Show Invoice POS-->
     <b-modal hide-footer size="sm" scrollable id="Show_invoice" :title="$t('Invoice_POS')">
         <div id="invoice-POS">
@@ -595,13 +652,19 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import NProgress from "nprogress";
-import jsPDF from "jspdf";
 import "jspdf-autotable";
-import vueEasyPrint from "vue-easy-print";
+
+import jsPDF from "jspdf";
+import NProgress from "nprogress";
 import VueBarcode from "vue-barcode";
+import vueEasyPrint from "vue-easy-print";
+import {
+    mapActions,
+    mapGetters,
+} from "vuex";
+
 import { loadStripe } from "@stripe/stripe-js";
+
 export default {
   components: {
     vueEasyPrint,
@@ -618,6 +681,9 @@ export default {
       pos_settings:{},
       paymentProcessing: false,
       isLoading: true,
+      mandob_id: 0,
+      subProcessing:false,
+      mandobs:[],
       serverParams: {
         sort: {
           field: "id",
@@ -883,7 +949,32 @@ export default {
       } 
     },
 
-
+    Submit_Mandob(){
+          NProgress.start();
+          NProgress.set(0.1);
+          axios
+            .post("sales/assign/by_selection", {
+              selectedIds: this.selectedIds,
+              mandob_id:this.mandob_id
+            })
+            .then(() => {
+              this.$swal(
+                this.$t("assigned"),
+                this.$t("assigned"),
+                "success"
+              );
+              Fire.$emit("Delete_sale");
+            })
+            .catch(() => {
+              // Complete the animation of theprogress bar.
+              setTimeout(() => NProgress.done(), 500);
+              this.$swal(
+                this.$t("assign.Failed"),
+                this.$t("assign.Therewassomethingwronge"),
+                "warning"
+              );
+            });
+    },
     //------ Validate Form Submit_Payment
     Submit_Payment() {
       this.$refs.Add_payment.validate().then(success => {
@@ -1122,6 +1213,9 @@ export default {
           this.warehouses = response.data.warehouses;
           this.totalRows = response.data.totalRows;
           this.stripe_key = response.data.stripe_key;
+
+          this.mandobs = response.data.mandobs;
+       
           // Complete the animation of theprogress bar.
           NProgress.done();
           this.isLoading = false;
@@ -1419,6 +1513,10 @@ export default {
           });
       }
     },
+
+    openModel(){
+      this.$bvModal.show("Driver");
+    },
     //---------------------------------------- Update Payment ------------------------------\\
     Update_Payment() {
       this.paymentProcessing = true;
@@ -1635,6 +1733,7 @@ export default {
         NProgress.done();
       }, 500);
     });
+
     Fire.$on("Delete_sale", () => {
       setTimeout(() => {
         this.Get_Sales(this.serverParams.page);
@@ -1642,6 +1741,9 @@ export default {
         NProgress.done();
       }, 500);
     });
+
+
+
   }
 };
 </script>

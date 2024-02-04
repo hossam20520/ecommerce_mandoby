@@ -47,7 +47,7 @@ class UserController extends BaseController
             if (!$ShowRecord) {
                 return $query->where('id', '=', Auth::user()->id);
             }
-        });
+        })->whereNotIn('role_id', [2, 3]);
 
         //Multiple Filter
         $Filtred = $helpers->filter($users, $columns, $param, $request)

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["index_sales"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/views/app/pages/sales/index_sale.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************!*\
@@ -9,15 +9,15 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.es.min.js");
-/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jspdf-autotable */ "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js");
-/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jspdf_autotable__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jspdf-autotable */ "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js");
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jspdf_autotable__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.es.min.js");
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_barcode__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-barcode */ "./node_modules/vue-barcode/index.js");
+/* harmony import */ var vue_barcode__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_barcode__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vue_easy_print__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-easy-print */ "./node_modules/vue-easy-print/src/index.js");
-/* harmony import */ var vue_barcode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-barcode */ "./node_modules/vue-barcode/index.js");
-/* harmony import */ var vue_barcode__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_barcode__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -629,6 +629,63 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -639,7 +696,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     vueEasyPrint: vue_easy_print__WEBPACK_IMPORTED_MODULE_4__["default"],
-    barcode: vue_barcode__WEBPACK_IMPORTED_MODULE_5___default.a
+    barcode: vue_barcode__WEBPACK_IMPORTED_MODULE_3___default.a
   },
   metaInfo: {
     title: "Sales"
@@ -652,6 +709,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       pos_settings: {},
       paymentProcessing: false,
       isLoading: true,
+      mandob_id: 0,
+      subProcessing: false,
+      mandobs: [],
       serverParams: {
         sort: {
           field: "id",
@@ -729,7 +789,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this.showDropdown = false;
     });
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUserPermissions", "currentUser"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(["currentUserPermissions", "currentUser"])), {}, {
     columns: function columns() {
       return [{
         label: this.$t("date"),
@@ -921,25 +981,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.payment.received_amount = 0;
       }
     },
+    Submit_Mandob: function Submit_Mandob() {
+      var _this5 = this;
+
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
+      axios.post("sales/assign/by_selection", {
+        selectedIds: this.selectedIds,
+        mandob_id: this.mandob_id
+      }).then(function () {
+        _this5.$swal(_this5.$t("assigned"), _this5.$t("assigned"), "success");
+
+        Fire.$emit("Delete_sale");
+      })["catch"](function () {
+        // Complete the animation of theprogress bar.
+        setTimeout(function () {
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
+        }, 500);
+
+        _this5.$swal(_this5.$t("assign.Failed"), _this5.$t("assign.Therewassomethingwronge"), "warning");
+      });
+    },
     //------ Validate Form Submit_Payment
     Submit_Payment: function Submit_Payment() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.$refs.Add_payment.validate().then(function (success) {
         if (!success) {
           return;
-        } else if (_this5.payment.montant > _this5.payment.received_amount) {
-          _this5.makeToast("warning", _this5.$t("Paying_amount_is_greater_than_Received_amount"), _this5.$t("Warning"));
+        } else if (_this6.payment.montant > _this6.payment.received_amount) {
+          _this6.makeToast("warning", _this6.$t("Paying_amount_is_greater_than_Received_amount"), _this6.$t("Warning"));
 
-          _this5.payment.received_amount = 0;
-        } else if (_this5.payment.montant > _this5.due) {
-          _this5.makeToast("warning", _this5.$t("Paying_amount_is_greater_than_Grand_Total"), _this5.$t("Warning"));
+          _this6.payment.received_amount = 0;
+        } else if (_this6.payment.montant > _this6.due) {
+          _this6.makeToast("warning", _this6.$t("Paying_amount_is_greater_than_Grand_Total"), _this6.$t("Warning"));
 
-          _this5.payment.montant = 0;
-        } else if (!_this5.EditPaiementMode) {
-          _this5.Create_Payment();
+          _this6.payment.montant = 0;
+        } else if (!_this6.EditPaiementMode) {
+          _this6.Create_Payment();
         } else {
-          _this5.Update_Payment();
+          _this6.Update_Payment();
         }
       });
     },
@@ -985,7 +1066,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //----------------------------------- Sales PDF ------------------------------\\
     Sales_PDF: function Sales_PDF() {
       var self = this;
-      var pdf = new jspdf__WEBPACK_IMPORTED_MODULE_2__["default"]("p", "pt");
+      var pdf = new jspdf__WEBPACK_IMPORTED_MODULE_1__["default"]("p", "pt");
       var columns = [{
         title: "Ref",
         dataKey: "Ref"
@@ -1014,36 +1095,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //-------------------------------- Invoice POS ------------------------------\\
     Invoice_POS: function Invoice_POS(id) {
-      var _this6 = this;
+      var _this7 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       axios.get("Sales/Print_Invoice/" + id).then(function (response) {
-        _this6.invoice_pos = response.data;
-        _this6.payments = response.data.payments;
-        _this6.pos_settings = response.data.pos_settings;
+        _this7.invoice_pos = response.data;
+        _this7.payments = response.data.payments;
+        _this7.pos_settings = response.data.pos_settings;
         setTimeout(function () {
           // Complete the animation of the  progress bar.
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-          _this6.$bvModal.show("Show_invoice");
+          _this7.$bvModal.show("Show_invoice");
         }, 500);
         setTimeout(function () {
-          return _this6.print_it();
+          return _this7.print_it();
         }, 1000);
       })["catch"](function () {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
       });
     },
     //-------------------------------- Sales Excel ------------------------------\\
     Sales_Excel: function Sales_Excel() {
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       axios.get("sales/export/Excel", {
         responseType: "blob",
         // important
@@ -1059,20 +1140,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         link.click(); // Complete the animation of the  progress bar.
 
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
       })["catch"](function () {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
       });
     },
     //-----------------------------  Invoice PDF ------------------------------\\
     Invoice_PDF: function Invoice_PDF(sale, id) {
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       axios.get("Sale_PDF/" + id, {
         responseType: "blob",
         // important
@@ -1088,20 +1169,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         link.click(); // Complete the animation of the  progress bar.
 
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
       })["catch"](function () {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
       });
     },
     //------------------------ Payments Sale PDF ------------------------------\\
     Payment_Sale_PDF: function Payment_Sale_PDF(payment, id) {
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       axios.get("payment_Sale_PDF/" + id, {
         responseType: "blob",
         // important
@@ -1117,12 +1198,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         link.click(); // Complete the animation of the  progress bar.
 
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
       })["catch"](function () {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
       });
     },
@@ -1141,52 +1222,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //----------------------------------------- Get all Sales ------------------------------\\
     Get_Sales: function Get_Sales(page) {
-      var _this7 = this;
+      var _this8 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       this.setToStrings();
       axios.get("sales?page=" + page + "&Ref=" + this.Filter_Ref + "&date=" + this.Filter_date + "&client_id=" + this.Filter_Client + "&statut=" + this.Filter_status + "&warehouse_id=" + this.Filter_warehouse + "&payment_statut=" + this.Filter_Payment + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
-        _this7.sales = response.data.sales;
-        _this7.customers = response.data.customers;
-        _this7.warehouses = response.data.warehouses;
-        _this7.totalRows = response.data.totalRows;
-        _this7.stripe_key = response.data.stripe_key; // Complete the animation of theprogress bar.
+        _this8.sales = response.data.sales;
+        _this8.customers = response.data.customers;
+        _this8.warehouses = response.data.warehouses;
+        _this8.totalRows = response.data.totalRows;
+        _this8.stripe_key = response.data.stripe_key;
+        _this8.mandobs = response.data.mandobs; // Complete the animation of theprogress bar.
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
-        _this7.isLoading = false;
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
+        _this8.isLoading = false;
       })["catch"](function (response) {
         // Complete the animation of theprogress bar.
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         setTimeout(function () {
-          _this7.isLoading = false;
+          _this8.isLoading = false;
         }, 500);
       });
     },
     //---------SMS notification
     Payment_Sale_SMS: function Payment_Sale_SMS(payment) {
-      var _this8 = this;
+      var _this9 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       axios.post("payment/sale/send/sms", {
         id: payment.id
       }).then(function (response) {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
 
-        _this8.makeToast("success", _this8.$t("Send_SMS"), _this8.$t("Success"));
+        _this9.makeToast("success", _this9.$t("Send_SMS"), _this9.$t("Success"));
       })["catch"](function (error) {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
 
-        _this8.makeToast("danger", _this8.$t("sms_config_invalid"), _this8.$t("Failed"));
+        _this9.makeToast("danger", _this9.$t("sms_config_invalid"), _this9.$t("Failed"));
       });
     },
     //--------------------------------------------- Send Payment to Email -------------------------------\\
@@ -1198,11 +1280,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.Send_Email_Payment();
     },
     Send_Email_Payment: function Send_Email_Payment() {
-      var _this9 = this;
+      var _this10 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       axios.post("payment/sale/send/email", {
         id: this.emailPayment.id,
         to: this.emailPayment.to,
@@ -1211,17 +1293,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (response) {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
 
-        _this9.makeToast("success", _this9.$t("Send.TitleEmail"), _this9.$t("Success"));
+        _this10.makeToast("success", _this10.$t("Send.TitleEmail"), _this10.$t("Success"));
       })["catch"](function (error) {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
 
-        _this9.makeToast("danger", _this9.$t("SMTPIncorrect"), _this9.$t("Failed"));
+        _this10.makeToast("danger", _this10.$t("SMTPIncorrect"), _this10.$t("Failed"));
       });
     },
     //--------------------------------- Send Sale in Email ------------------------------\\
@@ -1232,11 +1314,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.Send_Email(sale.id);
     },
     Send_Email: function Send_Email(id) {
-      var _this10 = this;
+      var _this11 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       axios.post("sales/send/email", {
         id: id,
         to: this.email.to,
@@ -1245,30 +1327,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (response) {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
 
-        _this10.makeToast("success", _this10.$t("Send.TitleEmail"), _this10.$t("Success"));
+        _this11.makeToast("success", _this11.$t("Send.TitleEmail"), _this11.$t("Success"));
       })["catch"](function (error) {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
 
-        _this10.makeToast("danger", _this10.$t("SMTPIncorrect"), _this10.$t("Failed"));
+        _this11.makeToast("danger", _this11.$t("SMTPIncorrect"), _this11.$t("Failed"));
       });
     },
     Number_Order_Payment: function Number_Order_Payment() {
-      var _this11 = this;
+      var _this12 = this;
 
       axios.get("payment/sale/Number/Order").then(function (_ref5) {
         var data = _ref5.data;
-        return _this11.payment.Ref = data;
+        return _this12.payment.Ref = data;
       });
     },
     //----------------------------------- New Payment Sale ------------------------------\\
     New_Payment: function New_Payment(sale) {
-      var _this12 = this;
+      var _this13 = this;
 
       if (sale.payment_status == "paid") {
         this.$swal({
@@ -1278,8 +1360,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       } else {
         // Start the progress bar.
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
         this.reset_form_payment();
         this.EditPaiementMode = false;
         this.sale = sale;
@@ -1291,19 +1373,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.due = parseFloat(sale.due);
         setTimeout(function () {
           // Complete the animation of the  progress bar.
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-          _this12.$bvModal.show("Add_Payment");
+          _this13.$bvModal.show("Add_Payment");
         }, 500);
       }
     },
     //------------------------------------Edit Payment ------------------------------\\
     Edit_Payment: function Edit_Payment(payment) {
-      var _this13 = this;
+      var _this14 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       this.reset_form_payment();
       this.EditPaiementMode = true;
       this.payment.id = payment.id;
@@ -1317,22 +1399,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.due = parseFloat(this.sale_due) + payment.montant;
       setTimeout(function () {
         // Complete the animation of the  progress bar.
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-        _this13.$bvModal.show("Add_Payment");
+        _this14.$bvModal.show("Add_Payment");
       }, 1000);
 
       if (payment.Reglement == "credit card") {
         setTimeout(function () {
-          _this13.loadStripe_payment();
+          _this14.loadStripe_payment();
         }, 500);
       }
     },
     //-------------------------------Show All Payment with Sale ---------------------\\
     Show_Payments: function Show_Payments(id, sale) {
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       this.reset_form_payment();
       this.Sale_id = id;
       this.sale = sale;
@@ -1340,51 +1422,51 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //----------------------------------Process Payment (Mode Create) ------------------------------\\
     processPayment_Create: function processPayment_Create() {
-      var _this14 = this;
+      var _this15 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _yield$_this14$stripe, token, error;
+        var _yield$_this15$stripe, token, error;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this14.stripe.createToken(_this14.cardElement);
+                return _this15.stripe.createToken(_this15.cardElement);
 
               case 2:
-                _yield$_this14$stripe = _context2.sent;
-                token = _yield$_this14$stripe.token;
-                error = _yield$_this14$stripe.error;
+                _yield$_this15$stripe = _context2.sent;
+                token = _yield$_this15$stripe.token;
+                error = _yield$_this15$stripe.error;
 
                 if (error) {
-                  _this14.paymentProcessing = false;
-                  nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+                  _this15.paymentProcessing = false;
+                  nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-                  _this14.makeToast("danger", _this14.$t("InvalidData"), _this14.$t("Failed"));
+                  _this15.makeToast("danger", _this15.$t("InvalidData"), _this15.$t("Failed"));
                 } else {
                   axios.post("payment/sale", {
-                    sale_id: _this14.sale.id,
-                    client_email: _this14.sale.client_email,
-                    client_id: _this14.sale.client_id,
-                    date: _this14.payment.date,
-                    montant: parseFloat(_this14.payment.montant).toFixed(2),
-                    received_amount: parseFloat(_this14.payment.received_amount).toFixed(2),
-                    change: parseFloat(_this14.payment.received_amount - _this14.payment.montant).toFixed(2),
-                    Reglement: _this14.payment.Reglement,
-                    notes: _this14.payment.notes,
+                    sale_id: _this15.sale.id,
+                    client_email: _this15.sale.client_email,
+                    client_id: _this15.sale.client_id,
+                    date: _this15.payment.date,
+                    montant: parseFloat(_this15.payment.montant).toFixed(2),
+                    received_amount: parseFloat(_this15.payment.received_amount).toFixed(2),
+                    change: parseFloat(_this15.payment.received_amount - _this15.payment.montant).toFixed(2),
+                    Reglement: _this15.payment.Reglement,
+                    notes: _this15.payment.notes,
                     token: token.id
                   }).then(function (response) {
-                    _this14.paymentProcessing = false;
+                    _this15.paymentProcessing = false;
                     Fire.$emit("Create_Facture_sale");
 
-                    _this14.makeToast("success", _this14.$t("Create.TitlePayment"), _this14.$t("Success"));
+                    _this15.makeToast("success", _this15.$t("Create.TitlePayment"), _this15.$t("Success"));
                   })["catch"](function (error) {
-                    _this14.paymentProcessing = false; // Complete the animation of the  progress bar.
+                    _this15.paymentProcessing = false; // Complete the animation of the  progress bar.
 
-                    nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+                    nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-                    _this14.makeToast("danger", _this14.$t("InvalidData"), _this14.$t("Failed"));
+                    _this15.makeToast("danger", _this15.$t("InvalidData"), _this15.$t("Failed"));
                   });
                 }
 
@@ -1398,51 +1480,51 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //----------------------------------Process Payment (Mode Edit) ------------------------------\\
     processPayment_Update: function processPayment_Update() {
-      var _this15 = this;
+      var _this16 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var _yield$_this15$stripe, token, error;
+        var _yield$_this16$stripe, token, error;
 
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _this15.stripe.createToken(_this15.cardElement);
+                return _this16.stripe.createToken(_this16.cardElement);
 
               case 2:
-                _yield$_this15$stripe = _context3.sent;
-                token = _yield$_this15$stripe.token;
-                error = _yield$_this15$stripe.error;
+                _yield$_this16$stripe = _context3.sent;
+                token = _yield$_this16$stripe.token;
+                error = _yield$_this16$stripe.error;
 
                 if (error) {
-                  _this15.paymentProcessing = false;
-                  nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+                  _this16.paymentProcessing = false;
+                  nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-                  _this15.makeToast("danger", _this15.$t("InvalidData"), _this15.$t("Failed"));
+                  _this16.makeToast("danger", _this16.$t("InvalidData"), _this16.$t("Failed"));
                 } else {
-                  axios.put("payment/sale/" + _this15.payment.id, {
-                    sale_id: _this15.sale.id,
-                    client_email: _this15.sale.client_email,
-                    client_id: _this15.sale.client_id,
-                    date: _this15.payment.date,
-                    montant: parseFloat(_this15.payment.montant).toFixed(2),
-                    received_amount: parseFloat(_this15.payment.received_amount).toFixed(2),
-                    change: parseFloat(_this15.payment.received_amount - _this15.payment.montant).toFixed(2),
-                    Reglement: _this15.payment.Reglement,
-                    notes: _this15.payment.notes,
+                  axios.put("payment/sale/" + _this16.payment.id, {
+                    sale_id: _this16.sale.id,
+                    client_email: _this16.sale.client_email,
+                    client_id: _this16.sale.client_id,
+                    date: _this16.payment.date,
+                    montant: parseFloat(_this16.payment.montant).toFixed(2),
+                    received_amount: parseFloat(_this16.payment.received_amount).toFixed(2),
+                    change: parseFloat(_this16.payment.received_amount - _this16.payment.montant).toFixed(2),
+                    Reglement: _this16.payment.Reglement,
+                    notes: _this16.payment.notes,
                     token: token.id
                   }).then(function (response) {
-                    _this15.paymentProcessing = false;
+                    _this16.paymentProcessing = false;
                     Fire.$emit("Update_Facture_sale");
 
-                    _this15.makeToast("success", _this15.$t("Update.TitlePayment"), _this15.$t("Success"));
+                    _this16.makeToast("success", _this16.$t("Update.TitlePayment"), _this16.$t("Success"));
                   })["catch"](function (error) {
-                    _this15.paymentProcessing = false; // Complete the animation of the  progress bar.
+                    _this16.paymentProcessing = false; // Complete the animation of the  progress bar.
 
-                    nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+                    nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-                    _this15.makeToast("danger", _this15.$t("InvalidData"), _this15.$t("Failed"));
+                    _this16.makeToast("danger", _this16.$t("InvalidData"), _this16.$t("Failed"));
                   });
                 }
 
@@ -1456,18 +1538,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //----------------------------------Create Payment sale ------------------------------\\
     Create_Payment: function Create_Payment() {
-      var _this16 = this;
+      var _this17 = this;
 
       this.paymentProcessing = true;
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
 
       if (this.payment.Reglement == 'credit card') {
         if (this.stripe_key != '') {
           this.processPayment_Create();
         } else {
           this.makeToast("danger", this.$t("credit_card_account_not_available"), this.$t("Failed"));
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
           this.paymentProcessing = false;
         }
       } else {
@@ -1480,30 +1562,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           Reglement: this.payment.Reglement,
           notes: this.payment.notes
         }).then(function (response) {
-          _this16.paymentProcessing = false;
+          _this17.paymentProcessing = false;
           Fire.$emit("Create_Facture_sale");
 
-          _this16.makeToast("success", _this16.$t("Create.TitlePayment"), _this16.$t("Success"));
+          _this17.makeToast("success", _this17.$t("Create.TitlePayment"), _this17.$t("Success"));
         })["catch"](function (error) {
-          _this16.paymentProcessing = false;
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          _this17.paymentProcessing = false;
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         });
       }
     },
+    openModel: function openModel() {
+      this.$bvModal.show("Driver");
+    },
     //---------------------------------------- Update Payment ------------------------------\\
     Update_Payment: function Update_Payment() {
-      var _this17 = this;
+      var _this18 = this;
 
       this.paymentProcessing = true;
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
 
       if (this.payment.Reglement == 'credit card') {
         if (this.stripe_key != '') {
           this.processPayment_Update();
         } else {
           this.makeToast("danger", this.$t("credit_card_account_not_available"), this.$t("Failed"));
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
           this.paymentProcessing = false;
         }
       } else {
@@ -1516,19 +1601,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           Reglement: this.payment.Reglement,
           notes: this.payment.notes
         }).then(function (response) {
-          _this17.paymentProcessing = false;
+          _this18.paymentProcessing = false;
           Fire.$emit("Update_Facture_sale");
 
-          _this17.makeToast("success", _this17.$t("Update.TitlePayment"), _this17.$t("Success"));
+          _this18.makeToast("success", _this18.$t("Update.TitlePayment"), _this18.$t("Success"));
         })["catch"](function (error) {
-          _this17.paymentProcessing = false;
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          _this18.paymentProcessing = false;
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         });
       }
     },
     //----------------------------------------- Remove Payment ------------------------------\\
     Remove_Payment: function Remove_Payment(id) {
-      var _this18 = this;
+      var _this19 = this;
 
       this.$swal({
         title: this.$t("Delete.Title"),
@@ -1542,40 +1627,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (result) {
         if (result.value) {
           // Start the progress bar.
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
           axios["delete"]("payment/sale/" + id).then(function () {
-            _this18.$swal(_this18.$t("Delete.Deleted"), _this18.$t("Delete.PaymentDeleted"), "success");
+            _this19.$swal(_this19.$t("Delete.Deleted"), _this19.$t("Delete.PaymentDeleted"), "success");
 
             Fire.$emit("Delete_Facture_sale");
           })["catch"](function () {
             // Complete the animation of the  progress bar.
             setTimeout(function () {
-              return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+              return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
             }, 500);
 
-            _this18.$swal(_this18.$t("Delete.Failed"), _this18.$t("Delete.Therewassomethingwronge"), "warning");
+            _this19.$swal(_this19.$t("Delete.Failed"), _this19.$t("Delete.Therewassomethingwronge"), "warning");
           });
         }
       });
     },
     //----------------------------------------- Get Payments  -------------------------------\\
     Get_Payments: function Get_Payments(id) {
-      var _this19 = this;
+      var _this20 = this;
 
       axios.get("sales/payments/" + id).then(function (response) {
-        _this19.payments = response.data.payments;
-        _this19.sale_due = response.data.due;
+        _this20.payments = response.data.payments;
+        _this20.sale_due = response.data.due;
         setTimeout(function () {
           // Complete the animation of the  progress bar.
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-          _this19.$bvModal.show("Show_payment");
+          _this20.$bvModal.show("Show_payment");
         }, 500);
       })["catch"](function () {
         // Complete the animation of the  progress bar.
         setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         }, 500);
       });
     },
@@ -1595,39 +1680,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //------------------------------------------ Remove Sale ------------------------------\\
     Remove_Sale: function Remove_Sale(id) {
-      var _this20 = this;
-
-      this.$swal({
-        title: this.$t("Delete.Title"),
-        text: this.$t("Delete.Text"),
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        cancelButtonText: this.$t("Delete.cancelButtonText"),
-        confirmButtonText: this.$t("Delete.confirmButtonText")
-      }).then(function (result) {
-        if (result.value) {
-          // Start the progress bar.
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
-          axios["delete"]("sales/" + id).then(function () {
-            _this20.$swal(_this20.$t("Delete.Deleted"), _this20.$t("Delete.SaleDeleted"), "success");
-
-            Fire.$emit("Delete_sale");
-          })["catch"](function () {
-            // Complete the animation of the  progress bar.
-            setTimeout(function () {
-              return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
-            }, 500);
-
-            _this20.$swal(_this20.$t("Delete.Failed"), _this20.$t("Delete.Therewassomethingwronge"), "warning");
-          });
-        }
-      });
-    },
-    //---- Delete sales by selection
-    delete_by_selected: function delete_by_selected() {
       var _this21 = this;
 
       this.$swal({
@@ -1642,21 +1694,54 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (result) {
         if (result.value) {
           // Start the progress bar.
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
-          axios.post("sales/delete/by_selection", {
-            selectedIds: _this21.selectedIds
-          }).then(function () {
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
+          axios["delete"]("sales/" + id).then(function () {
             _this21.$swal(_this21.$t("Delete.Deleted"), _this21.$t("Delete.SaleDeleted"), "success");
+
+            Fire.$emit("Delete_sale");
+          })["catch"](function () {
+            // Complete the animation of the  progress bar.
+            setTimeout(function () {
+              return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
+            }, 500);
+
+            _this21.$swal(_this21.$t("Delete.Failed"), _this21.$t("Delete.Therewassomethingwronge"), "warning");
+          });
+        }
+      });
+    },
+    //---- Delete sales by selection
+    delete_by_selected: function delete_by_selected() {
+      var _this22 = this;
+
+      this.$swal({
+        title: this.$t("Delete.Title"),
+        text: this.$t("Delete.Text"),
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: this.$t("Delete.cancelButtonText"),
+        confirmButtonText: this.$t("Delete.confirmButtonText")
+      }).then(function (result) {
+        if (result.value) {
+          // Start the progress bar.
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
+          axios.post("sales/delete/by_selection", {
+            selectedIds: _this22.selectedIds
+          }).then(function () {
+            _this22.$swal(_this22.$t("Delete.Deleted"), _this22.$t("Delete.SaleDeleted"), "success");
 
             Fire.$emit("Delete_sale");
           })["catch"](function () {
             // Complete the animation of theprogress bar.
             setTimeout(function () {
-              return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+              return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
             }, 500);
 
-            _this21.$swal(_this21.$t("Delete.Failed"), _this21.$t("Delete.Therewassomethingwronge"), "warning");
+            _this22.$swal(_this22.$t("Delete.Failed"), _this22.$t("Delete.Therewassomethingwronge"), "warning");
           });
         }
       });
@@ -1664,47 +1749,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   //----------------------------- Created function-------------------\\
   created: function created() {
-    var _this22 = this;
+    var _this23 = this;
 
     this.Get_Sales(1);
     Fire.$on("Create_Facture_sale", function () {
       setTimeout(function () {
-        _this22.Get_Sales(_this22.serverParams.page); // Complete the animation of the  progress bar.
+        _this23.Get_Sales(_this23.serverParams.page); // Complete the animation of the  progress bar.
 
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-        _this22.$bvModal.hide("Add_Payment");
+        _this23.$bvModal.hide("Add_Payment");
       }, 500);
     });
     Fire.$on("Update_Facture_sale", function () {
       setTimeout(function () {
-        _this22.Get_Payments(_this22.Sale_id);
+        _this23.Get_Payments(_this23.Sale_id);
 
-        _this22.Get_Sales(_this22.serverParams.page); // Complete the animation of the  progress bar.
+        _this23.Get_Sales(_this23.serverParams.page); // Complete the animation of the  progress bar.
 
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
-        _this22.$bvModal.hide("Add_Payment");
+        _this23.$bvModal.hide("Add_Payment");
       }, 500);
     });
     Fire.$on("Delete_Facture_sale", function () {
       setTimeout(function () {
-        _this22.Get_Payments(_this22.Sale_id);
+        _this23.Get_Payments(_this23.Sale_id);
 
-        _this22.Get_Sales(_this22.serverParams.page); // Complete the animation of the  progress bar.
+        _this23.Get_Sales(_this23.serverParams.page); // Complete the animation of the  progress bar.
 
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
       }, 500);
     });
     Fire.$on("Delete_sale", function () {
       setTimeout(function () {
-        _this22.Get_Sales(_this22.serverParams.page); // Complete the animation of the  progress bar.
+        _this23.Get_Sales(_this23.serverParams.page); // Complete the animation of the  progress bar.
 
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
       }, 500);
     });
   }
@@ -2192,6 +2277,19 @@ var render = function () {
                           },
                         },
                         [_vm._v(_vm._s(_vm.$t("Del")))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-sm",
+                          on: {
+                            click: function ($event) {
+                              return _vm.openModel()
+                            },
+                          },
+                        },
+                        [_vm._v(_vm._s(_vm.$t("assign_to_mandob")))]
                       ),
                     ]
                   ),
@@ -3269,6 +3367,135 @@ var render = function () {
       ),
       _vm._v(" "),
       _c(
+        "validation-observer",
+        { ref: "Driver" },
+        [
+          _c(
+            "b-modal",
+            {
+              attrs: {
+                "hide-footer": "",
+                size: "lg",
+                id: "Driver",
+                title: _vm.EditPaiementMode
+                  ? _vm.$t("Driver")
+                  : _vm.$t("Driver"),
+              },
+            },
+            [
+              _c(
+                "b-form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.Submit_Payment($event)
+                    },
+                  },
+                },
+                [
+                  _c(
+                    "b-row",
+                    [
+                      _c(
+                        "b-col",
+                        { staticClass: "mb-2", attrs: { md: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "category",
+                              rules: { required: true },
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (ref) {
+                                  var valid = ref.valid
+                                  var errors = ref.errors
+                                  return _c(
+                                    "b-form-group",
+                                    { attrs: { label: _vm.$t("Mandobs") } },
+                                    [
+                                      _c("v-select", {
+                                        class: {
+                                          "is-invalid": !!errors.length,
+                                        },
+                                        attrs: {
+                                          state: errors[0]
+                                            ? false
+                                            : valid
+                                            ? true
+                                            : null,
+                                          reduce: function (label) {
+                                            return label.value
+                                          },
+                                          placeholder: _vm.$t("Mandobs"),
+                                          options: _vm.mandobs.map(function (
+                                            mandobs
+                                          ) {
+                                            return {
+                                              label: mandobs.email,
+                                              value: mandobs.id,
+                                            }
+                                          }),
+                                        },
+                                        model: {
+                                          value: _vm.mandob_id,
+                                          callback: function ($$v) {
+                                            _vm.mandob_id = $$v
+                                          },
+                                          expression: "mandob_id",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("b-form-invalid-feedback", [
+                                        _vm._v(_vm._s(errors[0])),
+                                      ]),
+                                    ],
+                                    1
+                                  )
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { staticClass: "mt-3", attrs: { md: "12" } },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              attrs: {
+                                variant: "primary",
+                                type: "submit",
+                                disabled: _vm.subProcessing,
+                              },
+                            },
+                            [_vm._v(_vm._s(_vm.$t("submit")))]
+                          ),
+                          _vm._v(" "),
+                          _vm.subProcessing ? _vm._m(1) : _vm._e(),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "b-modal",
         {
           attrs: {
@@ -3798,6 +4025,14 @@ var render = function () {
   )
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "typo__p" }, [
+      _c("div", { staticClass: "spinner sm spinner-primary mt-3" }),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

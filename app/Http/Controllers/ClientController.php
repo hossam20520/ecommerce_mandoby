@@ -34,7 +34,7 @@ class ClientController extends BaseController
         $param = array(0 => 'like', 1 => 'like', 2 => 'like', 3 => 'like');
         $data = array();
 
-        $clients = User::where('deleted_at', '=', null)->where('role_id' , 3);
+        $clients = User::where('deleted_at', '=', null)->where('role_id' , 2);
 
         //Multiple Filter
         $Filtred = $helpers->filter($clients, $columns, $param, $request)

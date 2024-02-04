@@ -319,8 +319,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::post('sales/send/sms', 'SalesController@Send_SMS');
     Route::get('sales/export/Excel', 'SalesController@exportExcel');
     Route::post('sales/delete/by_selection', 'SalesController@delete_by_selection');
-
-
+    Route::post('sales/assign/by_selection', 'SalesController@assgin_by_selection');
+    
     //------------------------------- Payments  Sales --------------------------\\
     //------------------------------------------------------------------\\
 

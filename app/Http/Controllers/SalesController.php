@@ -6,6 +6,8 @@ use App\Exports\SalesExport;
 use App\Mail\SaleMail;
 use App\Models\Client;
 use App\Models\Unit;
+use App\Models\Order;
+
 use App\Models\PaymentSale;
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -129,12 +131,13 @@ class SalesController extends BaseController
         // $customers = client::where('deleted_at', '=', null)->get(['id', 'name']);
         $customers = User::where('deleted_at', '=', null)->get(['id', 'email']);
         $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
-
+        $mandobs = User::where('deleted_at', '=', null)->where('role_id' , 3)->get(['id', 'email']);
         return response()->json([
             'stripe_key' => $stripe_key,
             'totalRows' => $totalRows,
             'sales' => $data,
             'customers' => $customers,
+            'mandobs' => $mandobs  ,
             'warehouses' => $warehouses,
         ]);
     }
@@ -602,6 +605,51 @@ class SalesController extends BaseController
      }
 
     //-------------- Delete by selection  ---------------\\
+    
+
+    public function assgin_by_selection(Request $request)
+    {
+
+        $this->authorizeForUser($request->user('api'), 'delete', Sale::class);
+
+        \DB::transaction(function () use ($request) {    
+       
+            $mandob_id = $request->mandob_id;
+            $selectedIds = $request->selectedIds;
+            foreach ($selectedIds as $sale_id) {  
+               
+               
+               
+                $order_id =  Sale::findOrFail($sale_id);
+
+                $order =  Order::where('deleted_at' , '=' , null)->where('order_id' , $sale_id)->where('user_id' ,  $mandob_id )->first();
+            
+                // current_Sale
+                if($order ){
+                    return response()->json(['fail' => false]);
+    
+                }
+                $Order = new Order;
+                $Order->user_id_action = Auth::user()->id;
+                $Order->user_id =  $mandob_id;
+                $Order->order_id =  $sale_id;
+                $Order->status = "pending";
+     
+                // $Order->image = $filename;
+                $Order->save();
+
+            }
+
+
+         }, 10);
+
+        return response()->json(['success' => true]);
+
+
+
+    }
+
+
 
     public function delete_by_selection(Request $request)
     {
