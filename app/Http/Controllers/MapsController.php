@@ -46,7 +46,26 @@ class MapsController extends Controller
 
     //---------------- STORE NEW Map -------------\
 
+      function GetData(Request $request){
+        return $this->getRestaurants();
 
+
+        $apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
+        $location = '37.7749,-122.4194'; // Replace with the desired location (latitude,longitude)
+    
+        $restaurants = getRestaurants($apiKey, $location);
+    
+
+        $locat = array();
+        foreach ($restaurants as $i => $restaurant) {
+            $name = $restaurant['name'];
+            $vicinity = $restaurant['vicinity'] ?? 'Address not available';
+            // echo "{$i}. {$name}, {$vicinity}\n";
+            array_push($name , $locat);
+        }
+        return response()->json(['success' => $locat]);
+
+      }
 
 
     function getRestaurants($apiKey, $location, $radius = 1000, $keyword = 'restaurant') {
