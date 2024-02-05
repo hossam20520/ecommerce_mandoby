@@ -23,6 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::post('maps/view/data', 'MapsController@getRestaurants');
+
+
 // Route::post("device/auth/login/", "device\AuthController@login");
 
 Route::post("/v1/device/auth/login/", "device\AuthController@login");
@@ -288,6 +291,15 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::resource('sliders', 'SlidersController');
     Route::post('sliders/delete/by_selection', 'SlidersController@delete_by_selection');
 
+
+
+    
+ 
+
+    //------------------------------- Maps--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('maps', 'MapsController');
+    Route::post('maps/delete/by_selection', 'MapsController@delete_by_selection');
 
 
 

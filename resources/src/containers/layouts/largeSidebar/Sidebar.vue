@@ -634,6 +634,17 @@
             </router-link>
           </li>
 
+
+          <li
+            class="nav-item" >
+            <router-link tag="a" class to="/app/settings/Maps">
+              <i class="nav-icon i-Bookmark"></i>
+              <span class="item-name">{{   $t('Map') }}</span>
+            </router-link>
+          </li>
+
+
+
           <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('setting_system')"

@@ -85,8 +85,12 @@ class OrdersController extends Controller
 
             if($order ){
                 return response()->json(['fail' => false]);
-
             }
+
+            $title = "اوردر جديد";
+            $body = "لديك اوردر جديد اضغط للاستلام";
+            app('App\Http\Controllers\NotificationsController')->sendNotification($request['user_id'] ,  $title , $body );  
+            
             $Order = new Order;
             $Order->user_id_action = Auth::user()->id;
             $Order->user_id = $request['user_id'];

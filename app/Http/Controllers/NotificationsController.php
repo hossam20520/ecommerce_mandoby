@@ -147,19 +147,25 @@ class NotificationsController extends Controller
      }
 
 
-     public function sendNotification(Request $request, $id)
+     public function sendNotification($id , $title , $body )
      {
         
  
-        $firebaseToken = Fcm::whereNotNull('device_token')->where('id' , $id)->pluck('device_token')->all();
-            
+        // $firebaseToken = Fcm::whereNotNull('device_token')->where('id' , $user)->pluck('device_token')->all();
+           
+        
+        $firebaseToken = Fcm::whereNotNull('device_token')->where('user_id' ,  $id)->first();
+            if(!$firebaseToken){
+               return false;
+            }
+        
         $SERVER_API_KEY = env('FCM_SERVER_KEY', 'AAAAjE4uqNk:APA91bGBl7CN2AnB3_SzsyQBSTnZzu5C35pwlJ_WSkePXTZVJcpYVB89qmI0vTqyG388krsWNYGK56g-I9WwSKhVcejju2yoJI4eRCTtaCGn4HauRiTsbEpJLXfLR4jKizOnT5pnIuxl') ;
     
         $data = [
-            "registration_ids" => $firebaseToken,
+            "registration_ids" => $firebaseToken->device_token,
             "notification" => [
-                "title" => $request->title,
-                "body" => $request->body,  
+                "title" => $title,
+                "body" =>  $body ,  
             ]
         ];
         $dataString = json_encode($data);
