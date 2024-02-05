@@ -61,7 +61,7 @@ class MapsController extends Controller
             $name = $restaurant['name'];
             $vicinity = $restaurant['vicinity'] ?? 'Address not available';
             // echo "{$i}. {$name}, {$vicinity}\n";
-            array_push($name , $locat);
+            array_push(  $locat , $name);
         }
         return response()->json(['success' => $locat]);
 
