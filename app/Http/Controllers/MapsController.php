@@ -53,7 +53,7 @@ class MapsController extends Controller
         $apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
         $location = '37.7749,-122.4194'; // Replace with the desired location (latitude,longitude)
     
-        $restaurants = getRestaurants($apiKey, $location);
+        $restaurants = $this->getRestaurants($apiKey, $location);
     
 
         $locat = array();
