@@ -1,10 +1,54 @@
 
 <template>
   <div class="main-content">
+
+    <GmapMap
+    :center="{lat:10, lng:10}"
+    :zoom="7"
+    map-type-id="terrain"
+    style="width: 100%; height: 500px"
+>
+  <GmapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          :clickable="true"
+          :draggable="true"
+          @click="center=m.position"
+  />
+</GmapMap>
+
+<button @click="addMarkerToCurrentPosition">Add Marker to Current Position</button>
+    <!-- <GMapMap
+      :center="center"
+      :zoom="7"
+      map-type-id="terrain"
+      style="width: 500px; height: 300px"
+  >
+    <GMapCluster>
+      <GMapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          :clickable="true"
+          :draggable="true"
+          @click="center=m.position"
+      />
+    </GMapCluster>
+  </GMapMap> -->
+
+
     <breadcumb :page="$t('Map')" :folder="$t('Settings')"/>
+
+ 
+
 
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
     <b-card class="wrapper" v-if="!isLoading">
+
+
+
+
       <vue-good-table
         mode="remote"
         :columns="columns"
@@ -35,10 +79,10 @@
           <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button>
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
-          <b-button @click="New_Map()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
+          <!-- <b-button @click="New_Map()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
             <i class="i-Add"></i>
              {{ $t('Add') }}
-          </b-button>
+          </b-button> -->
         </div>
 
         <template slot="table-row" slot-scope="props">
@@ -136,11 +180,19 @@
         </b-form>
       </b-modal>
     </validation-observer>
+
+
+
+
+
+
+
   </div>
 </template>
 
 <script>
 import NProgress from "nprogress";
+import { gmapApi } from "vue2-google-maps";
 
 export default {
   metaInfo: {
@@ -149,6 +201,17 @@ export default {
   data() {
     return {
       isLoading: true,
+
+      center: {lat: 51.093048, lng: 6.842120},
+      markers: [
+        {
+          position: {
+            lat: 51.093048, lng: 6.842120
+          },
+        }
+        , // Along list of clusters
+      ],
+
       SubmitProcessing:false,
       serverParams: {
         columnFilters: {},
@@ -162,6 +225,7 @@ export default {
       selectedIds: [],
       totalRows: "",
       search: "",
+      
       data: new FormData(),
       editmode: false,
       maps: [],
@@ -177,7 +241,9 @@ export default {
     };
   },
   computed: {
+    google: gmapApi,
     columns() {
+
       return [
   
         {
@@ -213,6 +279,49 @@ export default {
   },
 
   methods: {
+
+    addCircleAroundMarker(markerPosition) {
+    const circleOptions = {
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      center: markerPosition,
+      radius: 10000, // Set the radius of the circle in meters
+    };
+
+    this.circle = circleOptions;
+  },
+
+ 
+
+  addMarkerToCurrentPosition() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const currentPos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+
+        this.markers.push({
+          position: currentPos,
+          clickable: true,
+          draggable: true,
+        });
+
+        this.addCircleAroundMarker(currentPos);
+
+        this.center = currentPos;
+      },
+      (error) => {
+        console.error('Error getting current position:', error);
+      }
+    );
+  },
+  
+
+
     //---- update Params Table
     updateParams(newProps) {
       this.serverParams = Object.assign({}, this.serverParams, newProps);

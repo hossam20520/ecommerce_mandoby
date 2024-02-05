@@ -1,11 +1,30 @@
-import store from "./store";
+import "vue-select/dist/vue-select.css";
+// import Autocomplete from '@trevoreyre/autocomplete-vue';
+import "@trevoreyre/autocomplete-vue/dist/style.css";
+
 import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import Auth from './auth/index.js';
-window.auth = new Auth();
-import { ValidationObserver, ValidationProvider, extend, localize } from 'vee-validate';
+
+import {
+    extend,
+    localize,
+    ValidationObserver,
+    ValidationProvider,
+} from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
+import VueCookies from "vue-cookies";
+import vSelect from "vue-select";
+// import VueGoogleMaps from "gmap-vue";
+import * as VueGoogleMaps from "vue2-google-maps";
+
+import App from "./App.vue";
+import Auth from "./auth/index.js";
+import Breadcumb from "./components/breadcumb";
+import { i18n } from "./plugins/i18n";
+import StockyKit from "./plugins/stocky.kit";
+import router from "./router";
+import store from "./store";
+
+window.auth = new Auth();
 
 localize({
   en: {
@@ -29,10 +48,8 @@ Object.keys(rules).forEach(rule => {
 Vue.component("ValidationObserver", ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
 
-import StockyKit from "./plugins/stocky.kit";
 Vue.use(StockyKit);
 
-import VueCookies from 'vue-cookies'
 Vue.use(VueCookies);
 
 var VueCookie = require('vue-cookie');
@@ -65,24 +82,26 @@ axios.interceptors.response.use((response) => {
   return Promise.reject(error.message);
 });
 
-import vSelect from 'vue-select'
 Vue.component('v-select', vSelect)
-import 'vue-select/dist/vue-select.css';
-
-// import Autocomplete from '@trevoreyre/autocomplete-vue';
-import '@trevoreyre/autocomplete-vue/dist/style.css';
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc",
+    libraries: 'places',
+  },
+  
+  installComponents: true,
+});
 // Vue.use(Autocomplete);
 
 window.Fire = new Vue();
-
-import Breadcumb from "./components/breadcumb";
-import { i18n } from "./plugins/i18n";
 
 Vue.component("breadcumb", Breadcumb);
 
 Vue.config.productionTip = true;
 Vue.config.silent = true;
 Vue.config.devtools = false;
+
+
 
 new Vue({
   store,
