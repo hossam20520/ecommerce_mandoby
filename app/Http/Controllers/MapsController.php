@@ -59,9 +59,19 @@ class MapsController extends Controller
         $locat = array();
         foreach ($restaurants as $i => $restaurant) {
             $name = $restaurant['name'];
+            $lat = $restaurant['geometry']['location']['lat'];
+            $lng = $restaurant['geometry']['location']['lng'];
             $vicinity = $restaurant['vicinity'] ?? 'Address not available';
             // echo "{$i}. {$name}, {$vicinity}\n";
-            array_push(  $locat , $name);
+
+            // restaurant['geometry']['location']['lat']
+            $item = [
+               "name" =>  $name,
+               "lat" =>  $lat,
+               "lng" => $lng
+            ];
+
+            array_push(  $locat , $item );
         }
         return response()->json(['success' => $locat]);
 
