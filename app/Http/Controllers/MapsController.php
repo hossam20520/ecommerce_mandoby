@@ -81,7 +81,7 @@ class MapsController extends Controller
         
      
         return response()->json([
-            'maps' => $maps,
+            'maps' => $locat,
             'totalRows' => sizeof($locat),
         ]);
 
