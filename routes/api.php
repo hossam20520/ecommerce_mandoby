@@ -199,7 +199,9 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::resource('clients', 'ClientController');
     Route::get('clients/export/Excel', 'ClientController@exportExcel');
-    Route::post('clients/import/csv', 'ClientController@import_clients');
+  
+    
+
     Route::get('Get_Clients_Without_Paginate', 'ClientController@Get_Clients_Without_Paginate');
     Route::post('clients/delete/by_selection', 'ClientController@delete_by_selection');
 
@@ -425,6 +427,9 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get('users/export/Excel', 'UserController@exportExcel');
     Route::get('users/Get_Info/Profile', 'UserController@GetInfoProfile');
     Route::put('updateProfile/{id}', 'UserController@updateProfile');
+
+    Route::post('userss/import/csv', 'UserController@import_users');
+ 
 
     //------------------------------- Permission Groups user -----------\\
     //------------------------------------------------------------------\\

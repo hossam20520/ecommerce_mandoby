@@ -1,0 +1,4 @@
+firstname,lastname,username,email,phone,area_name,location_lat,location_long,address,role
+hossam,hassan,hossa2055,hossamhassan889@gmail.com,101555,Egypt,29.12255566,30.56988886,"25 , cairo , egypt",customer
+,,,,,,,,,driver
+,,,,,,,,,sales

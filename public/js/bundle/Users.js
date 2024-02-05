@@ -447,6 +447,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -456,7 +510,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     title: "Users"
   },
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       editmode: false,
       isLoading: true,
       SubmitProcessing: false,
@@ -478,26 +534,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       Filter_status: "",
       Filter_Phone: "",
       permissions: {},
-      users: [],
-      roles: [],
+      import_users: "",
       data: new FormData(),
-      user: {
-        firstname: "",
-        area_name: "",
-        location_lat: "",
-        address: "",
-        location_long: "",
-        lastname: "",
-        username: "",
-        password: "",
-        NewPassword: null,
-        email: "",
-        phone: "",
-        statut: "",
-        role_id: "",
-        avatar: ""
-      }
-    };
+      ImportProcessing: false,
+      users: [],
+      roles: []
+    }, _defineProperty(_ref, "data", new FormData()), _defineProperty(_ref, "user", {
+      firstname: "",
+      area_name: "",
+      location_lat: "",
+      address: "",
+      location_long: "",
+      lastname: "",
+      username: "",
+      password: "",
+      NewPassword: null,
+      email: "",
+      phone: "",
+      statut: "",
+      role_id: "",
+      avatar: ""
+    }), _ref;
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(["currentUserPermissions"])), {}, {
     columns: function columns() {
@@ -565,8 +622,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.serverParams = Object.assign({}, this.serverParams, newProps);
     },
     //---- Event Page Change
-    onPageChange: function onPageChange(_ref) {
-      var currentPage = _ref.currentPage;
+    onPageChange: function onPageChange(_ref2) {
+      var currentPage = _ref2.currentPage;
 
       if (this.serverParams.page !== currentPage) {
         this.updateParams({
@@ -576,8 +633,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     //---- Event Per Page Change
-    onPerPageChange: function onPerPageChange(_ref2) {
-      var currentPerPage = _ref2.currentPerPage;
+    onPerPageChange: function onPerPageChange(_ref3) {
+      var currentPerPage = _ref3.currentPerPage;
 
       if (this.limit !== currentPerPage) {
         this.limit = currentPerPage;
@@ -604,11 +661,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.Get_Users(this.serverParams.page);
     },
     //------ Event Validation State
-    getValidationState: function getValidationState(_ref3) {
-      var dirty = _ref3.dirty,
-          validated = _ref3.validated,
-          _ref3$valid = _ref3.valid,
-          valid = _ref3$valid === void 0 ? null : _ref3$valid;
+    getValidationState: function getValidationState(_ref4) {
+      var dirty = _ref4.dirty,
+          validated = _ref4.validated,
+          _ref4$valid = _ref4.valid,
+          valid = _ref4$valid === void 0 ? null : _ref4$valid;
       return dirty || validated ? valid : null;
     },
     //------ Reset Filter
@@ -681,6 +738,56 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       pdf.text("User List", 40, 25);
       pdf.save("User_List.pdf");
     },
+    Show_import_users: function Show_import_users() {
+      this.$bvModal.show("importUsers");
+    },
+    onFileSelectedimport: function onFileSelectedimport(e) {
+      this.import_users = "";
+      var file = e.target.files[0];
+      var errorFilesize;
+
+      if (file["size"] < 1048576) {
+        // 1 mega = 1,048,576 Bytes
+        errorFilesize = false;
+      } else {
+        this.makeToast("danger", this.$t("file_size_must_be_less_than_1_mega"), this.$t("Failed"));
+      }
+
+      if (errorFilesize === false) {
+        this.import_users = file;
+      }
+    },
+    //----------------------------------------Submit  import products-----------------\\
+    Submit_import: function Submit_import() {
+      var _this3 = this;
+
+      // Start the progress bar.
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
+      var self = this;
+      self.ImportProcessing = true;
+      self.data.append("usersfile", self.import_users);
+      axios.post("userss/import/csv", self.data).then(function (response) {
+        self.ImportProcessing = false;
+
+        if (response.data.status === true) {
+          _this3.makeToast("success", _this3.$t("Successfully_Imported"), _this3.$t("Success"));
+
+          Fire.$emit("Event_import");
+        } else if (response.data.status === false) {
+          _this3.makeToast("danger", _this3.$t("field_must_be_in_csv_format"), _this3.$t("Failed"));
+        } // Complete the animation of theprogress bar.
+
+
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
+      })["catch"](function (error) {
+        self.ImportProcessing = false; // Complete the animation of theprogress bar.
+
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
+
+        _this3.makeToast("danger", _this3.$t("Please_follow_the_import_instructions"), _this3.$t("Failed"));
+      });
+    },
     //------------------------ Users Excel ---------------------------\\
     Users_Excel: function Users_Excel() {
       // Start the progress bar.
@@ -718,24 +825,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //----------------------------------- Get All Users  ---------------------------\\
     Get_Users: function Get_Users(page) {
-      var _this3 = this;
+      var _this4 = this;
 
       // Start the progress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       this.setToStrings();
       axios.get("users?page=" + page + "&name=" + this.Filter_Name + "&statut=" + this.Filter_status + "&phone=" + this.Filter_Phone + "&email=" + this.Filter_Email + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
-        _this3.users = response.data.users;
-        _this3.roles = response.data.roles;
-        _this3.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
+        _this4.users = response.data.users;
+        _this4.roles = response.data.roles;
+        _this4.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
-        _this3.isLoading = false;
+        _this4.isLoading = false;
       })["catch"](function (response) {
         // Complete the animation of theprogress bar.
         nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         setTimeout(function () {
-          _this3.isLoading = false;
+          _this4.isLoading = false;
         }, 500);
       });
     },
@@ -756,26 +863,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //------------------------------ Event Upload Avatar -------------------------------\\
     onFileSelected: function onFileSelected(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _yield$_this4$$refs$A, valid;
+        var _yield$_this5$$refs$A, valid;
 
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this4.$refs.Avatar.validate(e);
+                return _this5.$refs.Avatar.validate(e);
 
               case 2:
-                _yield$_this4$$refs$A = _context.sent;
-                valid = _yield$_this4$$refs$A.valid;
+                _yield$_this5$$refs$A = _context.sent;
+                valid = _yield$_this5$$refs$A.valid;
 
                 if (valid) {
-                  _this4.user.avatar = e.target.files[0];
+                  _this5.user.avatar = e.target.files[0];
                 } else {
-                  _this4.user.avatar = "";
+                  _this5.user.avatar = "";
                 }
 
               case 5:
@@ -788,7 +895,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //------------------------ Create User ---------------------------\\
     Create_User: function Create_User() {
-      var _this5 = this;
+      var _this6 = this;
 
       var self = this;
       self.SubmitProcessing = true;
@@ -808,7 +915,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         self.SubmitProcessing = false;
         Fire.$emit("Event_User");
 
-        _this5.makeToast("success", _this5.$t("Create.TitleUser"), _this5.$t("Success"));
+        _this6.makeToast("success", _this6.$t("Create.TitleUser"), _this6.$t("Success"));
       })["catch"](function (error) {
         self.SubmitProcessing = false;
 
@@ -816,12 +923,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           self.email_exist = error.errors.email[0];
         }
 
-        _this5.makeToast("danger", _this5.$t("InvalidData"), _this5.$t("Failed"));
+        _this6.makeToast("danger", _this6.$t("InvalidData"), _this6.$t("Failed"));
       });
     },
     //----------------------- Update User ---------------------------\\
     Update_User: function Update_User() {
-      var _this6 = this;
+      var _this7 = this;
 
       var self = this;
       self.SubmitProcessing = true;
@@ -840,7 +947,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.data.append("location_long", self.user.location_long);
       self.data.append("_method", "put");
       axios.post("users/" + this.user.id, self.data).then(function (response) {
-        _this6.makeToast("success", _this6.$t("Update.TitleUser"), _this6.$t("Success"));
+        _this7.makeToast("success", _this7.$t("Update.TitleUser"), _this7.$t("Success"));
 
         Fire.$emit("Event_User");
         self.SubmitProcessing = false;
@@ -849,13 +956,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           self.email_exist = error.errors.email[0];
         }
 
-        _this6.makeToast("danger", _this6.$t("InvalidData"), _this6.$t("Failed"));
+        _this7.makeToast("danger", _this7.$t("InvalidData"), _this7.$t("Failed"));
 
         self.SubmitProcessing = false;
       });
     },
     Remove_Provider: function Remove_Provider(id) {
-      var _this7 = this;
+      var _this8 = this;
 
       this.$swal({
         title: this.$t("Delete.Title"),
@@ -869,11 +976,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (result) {
         if (result.value) {
           axios["delete"]("users/" + id).then(function () {
-            _this7.$swal(_this7.$t("Delete.Deleted"), _this7.$t("Delete.SupplierDeleted"), "success");
+            _this8.$swal(_this8.$t("Delete.Deleted"), _this8.$t("Delete.SupplierDeleted"), "success");
 
             Fire.$emit("Delete_Provider");
           })["catch"](function () {
-            _this7.$swal(_this7.$t("Delete.Failed"), _this7.$t("Delete.ProviderError"), "warning");
+            _this8.$swal(_this8.$t("Delete.Failed"), _this8.$t("Delete.ProviderError"), "warning");
           });
         }
       });
@@ -901,7 +1008,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //--------------------------------- Remove User ---------------------------\\
     Remove_User: function Remove_User(id) {
-      var _this8 = this;
+      var _this9 = this;
 
       this.$swal({
         title: this.$t("Delete.Title"),
@@ -915,11 +1022,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (result) {
         if (result.value) {
           axios["delete"]("users/" + id).then(function () {
-            _this8.$swal(_this8.$t("Delete.Deleted"), _this8.$t("Delete.UserDeleted"), "success");
+            _this9.$swal(_this9.$t("Delete.Deleted"), _this9.$t("Delete.UserDeleted"), "success");
 
             Fire.$emit("Delete_User");
           })["catch"](function () {
-            _this8.$swal(_this8.$t("Delete.Failed"), "this User already linked with other operation", "warning");
+            _this9.$swal(_this9.$t("Delete.Failed"), "this User already linked with other operation", "warning");
           });
         }
       });
@@ -928,19 +1035,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   // END METHODS
   //----------------------------- Created function-------------------
   created: function created() {
-    var _this9 = this;
+    var _this10 = this;
 
     this.Get_Users(1);
     Fire.$on("Event_User", function () {
       setTimeout(function () {
-        _this9.Get_Users(_this9.serverParams.page);
+        _this10.Get_Users(_this10.serverParams.page);
 
-        _this9.$bvModal.hide("New_User");
+        _this10.$bvModal.hide("New_User");
       }, 500);
     });
     Fire.$on("Delete_User", function () {
       setTimeout(function () {
-        _this9.Get_Users(_this9.serverParams.page);
+        _this10.Get_Users(_this10.serverParams.page);
       }, 500);
     });
   }
@@ -1226,6 +1333,29 @@ var render = function () {
                               _vm._v(
                                 "\n          " +
                                   _vm._s(_vm.$t("Add")) +
+                                  "\n        "
+                              ),
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.currentUserPermissions &&
+                      _vm.currentUserPermissions.includes("users_add")
+                        ? _c(
+                            "b-button",
+                            {
+                              attrs: { size: "sm", variant: "info m-1" },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.Show_import_users()
+                                },
+                              },
+                            },
+                            [
+                              _c("i", { staticClass: "i-Download" }),
+                              _vm._v(
+                                "\n          " +
+                                  _vm._s(_vm.$t("import_users")) +
                                   "\n        "
                               ),
                             ]
@@ -2376,11 +2506,129 @@ var render = function () {
         ],
         1
       ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "ok-only": "",
+            "ok-title": "Cancel",
+            size: "md",
+            id: "importUsers",
+            title: _vm.$t("import_users"),
+          },
+        },
+        [
+          _c(
+            "b-form",
+            {
+              attrs: { enctype: "multipart/form-data" },
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.Submit_import($event)
+                },
+              },
+            },
+            [
+              _c(
+                "b-row",
+                [
+                  _c(
+                    "b-col",
+                    { staticClass: "mb-3", attrs: { md: "12", sm: "12" } },
+                    [
+                      _c(
+                        "b-form-group",
+                        [
+                          _c("input", {
+                            attrs: { type: "file", label: "Choose File" },
+                            on: { change: _vm.onFileSelectedimport },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "b-form-invalid-feedback",
+                            {
+                              staticClass: "d-block",
+                              attrs: { id: "File-feedback" },
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.$t("field_must_be_in_csv_format"))
+                              ),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { md: "6", sm: "12" } },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            type: "submit",
+                            variant: "primary",
+                            disabled: _vm.ImportProcessing,
+                            size: "sm",
+                            block: "",
+                          },
+                        },
+                        [_vm._v(_vm._s(_vm.$t("submit")))]
+                      ),
+                      _vm._v(" "),
+                      _vm.ImportProcessing ? _vm._m(1) : _vm._e(),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { md: "6", sm: "12" } },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            href: "/import/exemples/import_users.csv",
+                            variant: "info",
+                            size: "sm",
+                            block: "",
+                          },
+                        },
+                        [_vm._v(_vm._s(_vm.$t("Download_exemple")))]
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
     ],
     1
   )
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "typo__p" }, [
+      _c("div", { staticClass: "spinner sm spinner-primary mt-3" }),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

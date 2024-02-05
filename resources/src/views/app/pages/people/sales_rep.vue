@@ -208,6 +208,11 @@
               </validation-provider>
             </b-col>
 
+
+
+
+
+
             <!-- Phone -->
             <b-col md="6" sm="12">
               <validation-provider
@@ -313,6 +318,32 @@
               </validation-provider>
             </b-col>
 
+
+
+            
+                            <!-- Barcode Symbology  -->
+           <b-col md="6" class="mb-2">
+                  <validation-provider name="type" :rules="{ required: true}">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('type')">
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        v-model="user.type"
+                        :reduce="label => label.value"
+                        :placeholder="$t('choose')"
+                        :options="
+                            [
+                              {label: 'Sales', value: '4'},
+                              {label: 'Driver', value: '3'},
+                 
+                            ]"
+                      ></v-select>
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+                
+
             <b-col md="12" class="mt-3">
                 <b-button variant="primary" type="submit"  :disabled="SubmitProcessing">{{$t('submit')}}</b-button>
                   <div v-once class="typo__p" v-if="SubmitProcessing">
@@ -368,6 +399,7 @@ export default {
       roles: [],
       data: new FormData(),
       user: {
+        type:"3",
         firstname: "",
         area_name:"",
         location_lat:"",

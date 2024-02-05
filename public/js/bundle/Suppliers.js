@@ -1283,6 +1283,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1318,6 +1349,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       roles: [],
       data: new FormData(),
       user: {
+        type: "3",
         firstname: "",
         area_name: "",
         location_lat: "",
@@ -4052,6 +4084,64 @@ var render = function () {
                             1
                           )
                         : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { staticClass: "mb-2", attrs: { md: "6" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: { name: "type", rules: { required: true } },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (ref) {
+                                  var valid = ref.valid
+                                  var errors = ref.errors
+                                  return _c(
+                                    "b-form-group",
+                                    { attrs: { label: _vm.$t("type") } },
+                                    [
+                                      _c("v-select", {
+                                        class: {
+                                          "is-invalid": !!errors.length,
+                                        },
+                                        attrs: {
+                                          state: errors[0]
+                                            ? false
+                                            : valid
+                                            ? true
+                                            : null,
+                                          reduce: function (label) {
+                                            return label.value
+                                          },
+                                          placeholder: _vm.$t("choose"),
+                                          options: [
+                                            { label: "Sales", value: "4" },
+                                            { label: "Driver", value: "3" },
+                                          ],
+                                        },
+                                        model: {
+                                          value: _vm.user.type,
+                                          callback: function ($$v) {
+                                            _vm.$set(_vm.user, "type", $$v)
+                                          },
+                                          expression: "user.type",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("b-form-invalid-feedback", [
+                                        _vm._v(_vm._s(errors[0])),
+                                      ]),
+                                    ],
+                                    1
+                                  )
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
                         "b-col",

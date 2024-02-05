@@ -45,7 +45,15 @@
             {{$t('Add')}}
           </b-button>
 
-
+          <b-button
+            @click="Show_import_users()"
+            size="sm"
+            variant="info m-1"
+            v-if="currentUserPermissions && currentUserPermissions.includes('users_add')"
+          >
+            <i class="i-Download"></i>
+            {{ $t("import_users") }}
+          </b-button>
 
 
         </div>
@@ -413,6 +421,52 @@
         </b-form>
       </b-modal>
     </validation-observer>
+
+
+
+          <!-- Modal Show Import Products -->
+          <b-modal
+        ok-only
+        ok-title="Cancel"
+        size="md"
+        id="importUsers"
+        :title="$t('import_users')"
+      >
+        <b-form @submit.prevent="Submit_import" enctype="multipart/form-data">
+          <b-row>
+            <!-- File -->
+            <b-col md="12" sm="12" class="mb-3">
+              <b-form-group>
+                <input type="file" @change="onFileSelectedimport" label="Choose File">
+                <b-form-invalid-feedback
+                  id="File-feedback"
+                  class="d-block"
+                >{{$t('field_must_be_in_csv_format')}}</b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
+
+             <b-col md="6" sm="12">
+            <b-button type="submit" variant="primary" :disabled="ImportProcessing" size="sm" block>{{ $t("submit") }}</b-button>
+              <div v-once class="typo__p" v-if="ImportProcessing">
+                <div class="spinner sm spinner-primary mt-3"></div>
+              </div>
+          </b-col>
+
+            <b-col md="6" sm="12">
+              <b-button
+                :href="'/import/exemples/import_users.csv'"
+                variant="info"
+                size="sm"
+                block
+              >{{ $t("Download_exemple") }}</b-button>
+            </b-col>
+
+            
+          </b-row>
+        </b-form>
+      </b-modal>
+
+
   </div>
 </template>
 
@@ -453,6 +507,9 @@ export default {
       Filter_status: "",
       Filter_Phone: "",
       permissions: {},
+      import_users: "",
+      data: new FormData(),
+      ImportProcessing:false,
       users: [],
       roles: [],
       data: new FormData(),
@@ -673,6 +730,75 @@ export default {
       pdf.text("User List", 40, 25);
       pdf.save("User_List.pdf");
     },
+
+
+    Show_import_users() {
+      this.$bvModal.show("importUsers");
+    },
+
+
+    onFileSelectedimport(e) {
+      this.import_users = "";
+      let file = e.target.files[0];
+      let errorFilesize;
+
+      if (file["size"] < 1048576) {
+        // 1 mega = 1,048,576 Bytes
+        errorFilesize = false;
+      } else {
+        this.makeToast(
+          "danger",
+          this.$t("file_size_must_be_less_than_1_mega"),
+          this.$t("Failed")
+        );
+      }
+
+      if (errorFilesize === false) {
+        this.import_users = file;
+      }
+    },
+
+        //----------------------------------------Submit  import products-----------------\\
+        Submit_import() {
+      // Start the progress bar.
+      NProgress.start();
+      NProgress.set(0.1);
+      var self = this;
+      self.ImportProcessing = true;
+      self.data.append("usersfile", self.import_users);
+      axios
+        .post("userss/import/csv", self.data)
+        .then(response => {
+          self.ImportProcessing = false;
+          if (response.data.status === true) {
+            this.makeToast(
+              "success",
+              this.$t("Successfully_Imported"),
+              this.$t("Success")
+            );
+            Fire.$emit("Event_import");
+          } else if (response.data.status === false) {
+            this.makeToast(
+              "danger",
+              this.$t("field_must_be_in_csv_format"),
+              this.$t("Failed")
+            );
+          }
+          // Complete the animation of theprogress bar.
+          NProgress.done();
+        })
+        .catch(error => {
+          self.ImportProcessing = false;
+          // Complete the animation of theprogress bar.
+          NProgress.done();
+          this.makeToast(
+            "danger",
+            this.$t("Please_follow_the_import_instructions"),
+            this.$t("Failed")
+          );
+        });
+    },
+
 
     //------------------------ Users Excel ---------------------------\\
     Users_Excel() {
