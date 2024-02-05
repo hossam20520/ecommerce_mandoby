@@ -24,7 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
  
-Route::post('maps/view/data', 'MapsController@GetData');
+Route::get('maps/view/data', 'MapsController@GetData');
 
 // Route::post("device/auth/login/", "device\AuthController@login");
 

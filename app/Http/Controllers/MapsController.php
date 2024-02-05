@@ -51,8 +51,10 @@ class MapsController extends Controller
 
 
         $apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
-        $location = '37.7749,-122.4194'; // Replace with the desired location (latitude,longitude)
-    
+       // Replace with the desired location (latitude,longitude)
+        $lat = $request->lat;
+        $lng = $request->lng;
+        $location = $lat.','.$lng; 
         $restaurants = $this->getRestaurants($apiKey, $location);
     
 
@@ -73,7 +75,16 @@ class MapsController extends Controller
 
             array_push(  $locat , $item );
         }
-        return response()->json(['success' => $locat]);
+        
+
+
+        
+     
+        return response()->json([
+            'maps' => $maps,
+            'totalRows' => sizeof($locat),
+        ]);
+
 
       }
 

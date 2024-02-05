@@ -185,6 +185,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       editmode: false,
       maps: [],
       limit: "10",
+      lat: "37.7749",
+      lng: "-122.4194",
       map: {
         id: "",
         ar_name: "",
@@ -196,18 +198,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     columns: function columns() {
       return [{
-        label: this.$t("MapImage"),
-        field: "image",
+        label: this.$t("name"),
+        field: "name",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("MapName"),
-        field: "en_name",
+        label: this.$t("lat"),
+        field: "lat",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("MapDescription"),
-        field: "ar_name",
+        label: this.$t("lng"),
+        field: "lng",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -359,7 +361,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // Start the progress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("maps?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
+      axios.get("maps/view/data?page=" + page + "&lat=" + this.lat + "&lng=" + this.lng + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
         _this4.maps = response.data.maps;
         _this4.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
 

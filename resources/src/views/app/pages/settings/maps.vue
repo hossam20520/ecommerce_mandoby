@@ -140,7 +140,7 @@
 </template>
 
 <script>
-import NProgress from 'nprogress';
+import NProgress from "nprogress";
 
 export default {
   metaInfo: {
@@ -166,6 +166,8 @@ export default {
       editmode: false,
       maps: [],
       limit: "10",
+      lat:"37.7749",
+      lng:"-122.4194",
       map: {
         id: "",
         ar_name: "",
@@ -177,24 +179,27 @@ export default {
   computed: {
     columns() {
       return [
+  
         {
-          label: this.$t("MapImage"),
-          field: "image",
+          label: this.$t("name"),
+          field: "name",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
-          label: this.$t("MapName"),
-          field: "en_name",
+          label: this.$t("lat"),
+          field: "lat",
           tdClass: "text-left",
           thClass: "text-left"
         },
+
         {
-          label: this.$t("MapDescription"),
-          field: "ar_name",
+          label: this.$t("lng"),
+          field: "lng",
           tdClass: "text-left",
           thClass: "text-left"
         },
+
         {
           label: this.$t("Action"),
           field: "actions",
@@ -324,12 +329,12 @@ export default {
       NProgress.set(0.1);
       axios
         .get(
-          "maps?page=" +
+          "maps/view/data?page=" +
             page +
-            "&SortField=" +
-            this.serverParams.sort.field +
-            "&SortType=" +
-            this.serverParams.sort.type +
+            "&lat=" +
+            this.lat +
+            "&lng=" +
+            this.lng +
             "&search=" +
             this.search +
             "&limit=" +
