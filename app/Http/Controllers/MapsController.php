@@ -47,7 +47,7 @@ class MapsController extends Controller
     //---------------- STORE NEW Map -------------\
 
       function GetData(Request $request){
-        return $this->getRestaurants();
+      
 
 
         $apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
