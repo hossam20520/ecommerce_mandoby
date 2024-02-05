@@ -3,7 +3,7 @@
   <div class="main-content">
 
     <GmapMap
-    :center="{lat:10, lng:10}"
+    :center="{lat:30.059813, lng:31.329825}"
     :zoom="7"
     map-type-id="terrain"
     style="width: 100%; height: 500px"
@@ -15,6 +15,21 @@
           :clickable="true"
           :draggable="true"
           @click="center=m.position"
+  />
+
+
+  <GmapCircle
+    :visible="true" 
+    :center="circle.center"
+    :radius="circle.radius"
+   
+    :options="{
+      strokeColor: circle.strokeColor,
+      strokeOpacity: circle.strokeOpacity,
+      strokeWeight: circle.strokeWeight,
+      fillColor: circle.fillColor,
+      fillOpacity: circle.fillOpacity
+    }"
   />
 </GmapMap>
 
@@ -202,11 +217,11 @@ export default {
     return {
       isLoading: true,
 
-      center: {lat: 51.093048, lng: 6.842120},
+      center: {lat: 30.059813, lng: 31.329825},
       markers: [
         {
           position: {
-            lat: 51.093048, lng: 6.842120
+            lat: 30.059813, lng: 31.329825
           },
         }
         , // Along list of clusters
@@ -225,13 +240,25 @@ export default {
       selectedIds: [],
       totalRows: "",
       search: "",
-      
+      circle: {
+      center: {  lat: 30.059813, lng: 31.329825 },
+      radius: 100000,
+      options: {
+        strokeColor: 'red',
+        strokeOpacity:1.0,
+        strokeWeight: 2,
+        fillColor: 'red',
+        fillOpacity: 0.35,
+      },
+    },
+      // center: {  lat: 51.093048, lng: 6.842120 },
       data: new FormData(),
       editmode: false,
       maps: [],
       limit: "10",
       lat:"37.7749",
       lng:"-122.4194",
+      circle:true,
       map: {
         id: "",
         ar_name: "",
@@ -277,8 +304,70 @@ export default {
       ];
     }
   },
-
+  mounted() {
+    // Fetch restaurant places using the Google Places API
+   this.fetchPlaces();
+  },
   methods: {
+
+
+
+
+    fetchPlaces() {
+      // Use the Google Places API to fetch restaurant places based on the map's center
+      // You need to replace 'YOUR_API_KEY' with your actual Google Places API key
+      // const apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
+      // const radius = 10000; // Set the radius for the search in meters
+ 
+
+      axios
+        .get(
+          "maps/view/data?page=" +
+            page +
+            "&lat=" +
+            this.lat +
+            "&lng=" +
+            this.lng +
+            "&search=" +
+            this.search +
+            "&limit=" +
+            this.limit
+        )
+        .then(response => {
+          this.maps = response.data.maps;
+          this.totalRows = response.data.totalRows;
+
+          
+          response.data.maps.forEach((place, index) => {
+            const marker = {
+              position: {
+                lat: place.lat,
+                lng: place.lng,
+              },
+              clickable: true,
+              draggable: false,
+            };
+
+            // Push the marker to the markers array
+            this.markers.push(marker);
+          });
+
+          // Complete the animation of theprogress bar.
+          NProgress.done();
+          this.isLoading = false;
+        })
+        .catch(response => {
+          // Complete the animation of theprogress bar.
+          NProgress.done();
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 500);
+        });
+
+
+ 
+    },
+
 
     addCircleAroundMarker(markerPosition) {
     const circleOptions = {
@@ -319,7 +408,7 @@ export default {
       }
     );
   },
-  
+
 
 
     //---- update Params Table
@@ -608,6 +697,7 @@ export default {
     }
   }, //end Methods
   created: function() {
+  
     this.Get_Maps(1);
 
     Fire.$on("Event_Map", () => {
