@@ -15,7 +15,7 @@ class MapsController extends Controller
 
     public function index(Request $request)
     {
-        $this->authorizeForUser($request->user('api'), 'view', Map::class);
+        // $this->authorizeForUser($request->user('api'), 'view', Map::class);
         // How many items do you want to display.
         $perPage = $request->limit;
         $pageStart = \Request::get('page', 1);
@@ -67,10 +67,10 @@ class MapsController extends Controller
     }
 
 
-    
+
     public function store(Request $request)
     {
-        $this->authorizeForUser($request->user('api'), 'create', Map::class);
+        // $this->authorizeForUser($request->user('api'), 'create', Map::class);
 
         request()->validate([
             'ar_name' => 'required',
@@ -116,7 +116,7 @@ class MapsController extends Controller
      public function update(Request $request, $id)
      {
  
-         $this->authorizeForUser($request->user('api'), 'update', Map::class);
+        //  $this->authorizeForUser($request->user('api'), 'update', Map::class);
  
          request()->validate([
              'ar_name' => 'required',
@@ -170,7 +170,7 @@ class MapsController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $this->authorizeForUser($request->user('api'), 'delete', Map::class);
+        // $this->authorizeForUser($request->user('api'), 'delete', Map::class);
 
         Map::whereId($id)->update([
             'deleted_at' => Carbon::now(),
