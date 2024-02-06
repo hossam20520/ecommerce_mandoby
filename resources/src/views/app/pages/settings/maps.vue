@@ -40,7 +40,7 @@
   />
 </GmapMap>
 
-<button @click="addMarkerToCurrentPosition">Add Marker to Current Position</button>
+<!-- <button @click="addMarkerToCurrentPosition">Add Marker to Current Position</button> -->
 
 
 <b-form @submit.prevent="Submit_Product" enctype="multipart/form-data">

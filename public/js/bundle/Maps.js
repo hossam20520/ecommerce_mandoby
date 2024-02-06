@@ -881,10 +881,6 @@ var render = function () {
         2
       ),
       _vm._v(" "),
-      _c("button", { on: { click: _vm.addMarkerToCurrentPosition } }, [
-        _vm._v("Add Marker to Current Position"),
-      ]),
-      _vm._v(" "),
       _c(
         "b-form",
         {
