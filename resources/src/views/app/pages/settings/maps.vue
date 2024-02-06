@@ -10,12 +10,27 @@
     map-type-id="terrain"
     style="width: 100%; height: 500px"
 >
+
+
+<GmapMarker
+          :key="index"
+          v-for="(m, index) in shops_marker"
+          :position="m.position"
+          :clickable="true"
+          :draggable="true"
+          :icon="m.showIcon ? getMarkerIcon() : null"
+          
+        
+  />
+
+  
   <GmapMarker
           :key="index"
           v-for="(m, index) in markers"
           :position="m.position"
           :clickable="true"
           :draggable="true"
+          :icon="m.showIcon ? getMarkerIcon() : null"
           @drag="onMarkerDrag(index, $event)"
           @click="center=m.position"
   />
@@ -302,11 +317,21 @@ export default {
       isLoading: true,
 
       center: {lat: 30.059813, lng: 31.329825},
+      
+      shops_marker: [
+        {
+          position: {
+            lat: 30.059813, lng: 31.329825
+          } , showIcon: true,
+        }
+        , // Along list of clusters
+      ],
+
       markers: [
         {
           position: {
             lat: 30.059813, lng: 31.329825
-          },
+          } , showIcon: false,
         }
         , // Along list of clusters
       ],
@@ -326,7 +351,7 @@ export default {
       search: "",
       radius:10000,
       circle: {
-      center: {  lat: 30.059813, lng: 31.329825 },
+      center: {  lat: 30.059813, lng: 31.329825 ,  },
       radius: 10000,
       options: {
         strokeColor: 'red',
@@ -395,6 +420,14 @@ export default {
   },
   methods: {
 
+    getMarkerIcon() {
+      // Customize the marker icon here
+      return {
+        url: 'https://cdn-icons-png.flaticon.com/512/10726/10726411.png', // Provide the path to your custom icon
+        scaledSize: {width: 60, height: 60},
+      };
+    },
+
 
     handleChange(selectedValue){
       this.keyword = selectedValue;
@@ -409,7 +442,7 @@ export default {
 
     this.circle.radius = this.radius;
 
-    this.fetchPlaces();
+    // this.fetchPlaces();
     // console.log('Radius changed:', this.radius);
   },
 
@@ -434,7 +467,7 @@ export default {
        this.markers[0].position = newCenter;
 
 
-       this.fetchPlaces();
+      //  this.fetchPlaces();
       // this.markers.forEach((marker) => {
       //   marker.position = newCenter;
       // });
@@ -498,12 +531,14 @@ export default {
                 lat: place.lat,
                 lng: place.lng,
               },
+              showIcon: true,
               clickable: true,
               draggable: false,
             };
 
             // Push the marker to the markers array
-            this.markers.push(marker);
+            this.shops_marker = marker;
+            
           });
 
           // Complete the animation of theprogress bar.
@@ -693,7 +728,7 @@ export default {
         .then(response => {
           this.maps = response.data.maps;
           this.totalRows = response.data.totalRows;
-
+          this.shops_marker = marker;
           // Complete the animation of theprogress bar.
           NProgress.done();
           this.isLoading = false;

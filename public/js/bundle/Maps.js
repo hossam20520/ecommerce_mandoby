@@ -312,6 +312,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -325,11 +340,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         lat: 30.059813,
         lng: 31.329825
       },
+      shops_marker: [{
+        position: {
+          lat: 30.059813,
+          lng: 31.329825
+        },
+        showIcon: true
+      } // Along list of clusters
+      ],
       markers: [{
         position: {
           lat: 30.059813,
           lng: 31.329825
-        }
+        },
+        showIcon: false
       } // Along list of clusters
       ],
       SubmitProcessing: false,
@@ -409,6 +433,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.fetchPlaces();
   },
   methods: {
+    getMarkerIcon: function getMarkerIcon() {
+      // Customize the marker icon here
+      return {
+        url: 'https://cdn-icons-png.flaticon.com/512/10726/10726411.png',
+        // Provide the path to your custom icon
+        scaledSize: {
+          width: 60,
+          height: 60
+        }
+      };
+    },
     handleChange: function handleChange(selectedValue) {
       this.keyword = selectedValue;
       this.fetchPlaces();
@@ -416,8 +451,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     handleRadiusChange: function handleRadiusChange() {
       // Add your logic here to handle the onchange event
       // circle.radius
-      this.circle.radius = this.radius;
-      this.fetchPlaces(); // console.log('Radius changed:', this.radius);
+      this.circle.radius = this.radius; // this.fetchPlaces();
+      // console.log('Radius changed:', this.radius);
     },
     onMarkerDrag: function onMarkerDrag(index, event) {
       var draggedMarker = this.markers[index];
@@ -434,8 +469,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         lat: event.lat(),
         lng: event.lng()
       };
-      this.markers[0].position = newCenter;
-      this.fetchPlaces(); // this.markers.forEach((marker) => {
+      this.markers[0].position = newCenter; //  this.fetchPlaces();
+      // this.markers.forEach((marker) => {
       //   marker.position = newCenter;
       // });
       // Update the circle's center
@@ -476,11 +511,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               lat: place.lat,
               lng: place.lng
             },
+            showIcon: true,
             clickable: true,
             draggable: false
           }; // Push the marker to the markers array
 
-          _this.markers.push(marker);
+          _this.shops_marker = marker;
         }); // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
@@ -668,7 +704,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
       axios.get("maps/view/data?lat=" + this.markers[0].position.lat + "&lng=" + this.markers[0].position.lng + "&radius=" + this.radius + "&keyword=" + this.keyword).then(function (response) {
         _this6.maps = response.data.maps;
-        _this6.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
+        _this6.totalRows = response.data.totalRows;
+        _this6.shops_marker = marker; // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
         _this6.isLoading = false;
@@ -844,10 +881,27 @@ var render = function () {
           },
         },
         [
+          _vm._l(_vm.shops_marker, function (m, index) {
+            return _c("GmapMarker", {
+              key: index,
+              attrs: {
+                position: m.position,
+                clickable: true,
+                draggable: true,
+                icon: m.showIcon ? _vm.getMarkerIcon() : null,
+              },
+            })
+          }),
+          _vm._v(" "),
           _vm._l(_vm.markers, function (m, index) {
             return _c("GmapMarker", {
               key: index,
-              attrs: { position: m.position, clickable: true, draggable: true },
+              attrs: {
+                position: m.position,
+                clickable: true,
+                draggable: true,
+                icon: m.showIcon ? _vm.getMarkerIcon() : null,
+              },
               on: {
                 drag: function ($event) {
                   return _vm.onMarkerDrag(index, $event)
