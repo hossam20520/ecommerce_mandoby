@@ -442,7 +442,7 @@ export default {
 
     this.circle.radius = this.radius;
 
-    // this.fetchPlaces();
+    this.fetchPlaces();
     // console.log('Radius changed:', this.radius);
   },
 
@@ -467,7 +467,7 @@ export default {
        this.markers[0].position = newCenter;
 
 
-      //  this.fetchPlaces();
+       this.fetchPlaces();
       // this.markers.forEach((marker) => {
       //   marker.position = newCenter;
       // });
@@ -484,6 +484,7 @@ export default {
 
       this.circle.radius = event;
       this.radius = event;
+      this.fetchPlaces();
     },
 
     onCircleDrag(event) {
@@ -498,6 +499,7 @@ export default {
 
       // Update the circle's center
       this.circle.center = newCenter;
+      this.fetchPlaces();
     },
    
 
