@@ -21,8 +21,90 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -237,9 +319,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     title: "Map"
   },
   data: function data() {
-    var _ref;
-
-    return _ref = {
+    return {
       isLoading: true,
       center: {
         lat: 30.059813,
@@ -260,17 +340,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           type: "desc"
         },
         page: 1,
-        perPage: 10
+        perPage: 500
       },
       selectedIds: [],
       totalRows: "",
       search: "",
+      radius: 10000,
       circle: {
         center: {
           lat: 30.059813,
           lng: 31.329825
         },
-        radius: 100000,
+        radius: 10000,
         options: {
           strokeColor: 'red',
           strokeOpacity: 1.0,
@@ -285,13 +366,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       maps: [],
       limit: "10",
       lat: "37.7749",
-      lng: "-122.4194"
-    }, _defineProperty(_ref, "circle", true), _defineProperty(_ref, "map", {
-      id: "",
-      ar_name: "",
-      en_name: "",
-      image: ""
-    }), _ref;
+      lng: "-122.4194",
+      keyword: "restaurant",
+      map: {
+        id: "",
+        ar_name: "",
+        en_name: "",
+        image: ""
+      }
+    };
   },
   computed: {
     google: vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__["gmapApi"],
@@ -326,6 +409,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.fetchPlaces();
   },
   methods: {
+    handleChange: function handleChange(selectedValue) {
+      this.keyword = selectedValue;
+      fetchPlaces();
+    },
+    handleRadiusChange: function handleRadiusChange() {
+      // Add your logic here to handle the onchange event
+      // circle.radius
+      this.circle.radius = this.radius; // console.log('Radius changed:', this.radius);
+    },
+    onMarkerDrag: function onMarkerDrag(index, event) {
+      var draggedMarker = this.markers[index];
+      draggedMarker.position = {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng()
+      }; // Update the circle's center when the marker is dragged
+
+      this.circle.center = draggedMarker.position;
+    },
+    onCircleCenterChanged: function onCircleCenterChanged(event) {
+      // Update the marker's position when the circle's center is changed
+      var newCenter = {
+        lat: event.lat(),
+        lng: event.lng()
+      };
+      this.markers[0].position = newCenter; // this.markers.forEach((marker) => {
+      //   marker.position = newCenter;
+      // });
+      // Update the circle's center
+      // this.circle.center = newCenter;
+    },
+    onCircleRadiusChanged: function onCircleRadiusChanged(event) {
+      // Update the circle's radius when it is changed
+      // alert(55)
+      // console.log(event)
+      this.circle.radius = event;
+      this.radius = event;
+    },
+    onCircleDrag: function onCircleDrag(event) {
+      // Update the marker's position when the circle is dragged
+      var newCenter = {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng()
+      };
+      this.markers.forEach(function (marker) {
+        marker.position = newCenter;
+      }); // Update the circle's center
+
+      this.circle.center = newCenter;
+    },
     fetchPlaces: function fetchPlaces() {
       var _this = this;
 
@@ -333,7 +465,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // You need to replace 'YOUR_API_KEY' with your actual Google Places API key
       // const apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
       // const radius = 10000; // Set the radius for the search in meters
-      axios.get("maps/view/data?page=" + page + "&lat=" + this.lat + "&lng=" + this.lng + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
+      axios.get("maps/view/data?lat=" + this.markers[0].position.lat + "&lng=" + this.markers[0].position.lng + "&radius=" + this.radius + "&keyword=" + this.keyword).then(function (response) {
         _this.maps = response.data.maps;
         _this.totalRows = response.data.totalRows;
         response.data.maps.forEach(function (place, index) {
@@ -367,7 +499,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         fillColor: '#FF0000',
         fillOpacity: 0.35,
         center: markerPosition,
-        radius: 10000 // Set the radius of the circle in meters
+        radius: 2 // Set the radius of the circle in meters
 
       };
       this.circle = circleOptions;
@@ -399,8 +531,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.serverParams = Object.assign({}, this.serverParams, newProps);
     },
     //---- Event Page Change
-    onPageChange: function onPageChange(_ref2) {
-      var currentPage = _ref2.currentPage;
+    onPageChange: function onPageChange(_ref) {
+      var currentPage = _ref.currentPage;
 
       if (this.serverParams.page !== currentPage) {
         this.updateParams({
@@ -410,8 +542,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     //---- Event Per Page Change
-    onPerPageChange: function onPerPageChange(_ref3) {
-      var currentPerPage = _ref3.currentPerPage;
+    onPerPageChange: function onPerPageChange(_ref2) {
+      var currentPerPage = _ref2.currentPerPage;
 
       if (this.limit !== currentPerPage) {
         this.limit = currentPerPage;
@@ -433,10 +565,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.Get_Maps(this.serverParams.page);
     },
     //---- Event Select Rows
-    selectionChanged: function selectionChanged(_ref4) {
+    selectionChanged: function selectionChanged(_ref3) {
       var _this3 = this;
 
-      var selectedRows = _ref4.selectedRows;
+      var selectedRows = _ref3.selectedRows;
       this.selectedIds = [];
       selectedRows.forEach(function (row, index) {
         _this3.selectedIds.push(row.id);
@@ -448,11 +580,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.Get_Maps(this.serverParams.page);
     },
     //---- Validation State Form
-    getValidationState: function getValidationState(_ref5) {
-      var dirty = _ref5.dirty,
-          validated = _ref5.validated,
-          _ref5$valid = _ref5.valid,
-          valid = _ref5$valid === void 0 ? null : _ref5$valid;
+    getValidationState: function getValidationState(_ref4) {
+      var dirty = _ref4.dirty,
+          validated = _ref4.validated,
+          _ref4$valid = _ref4.valid,
+          valid = _ref4$valid === void 0 ? null : _ref4$valid;
       return dirty || validated ? valid : null;
     },
     //------------- Submit Validation Create & Edit Map
@@ -532,7 +664,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // Start the progress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("maps/view/data?page=" + page + "&lat=" + this.lat + "&lng=" + this.lng + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
+      axios.get("maps/view/data?lat=" + this.markers[0].position.lat + "&lng=" + this.markers[0].position.lng + "&radius=" + this.radius + "&keyword=" + this.keyword).then(function (response) {
         _this6.maps = response.data.maps;
         _this6.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
 
@@ -715,6 +847,9 @@ var render = function () {
               key: index,
               attrs: { position: m.position, clickable: true, draggable: true },
               on: {
+                drag: function ($event) {
+                  return _vm.onMarkerDrag(index, $event)
+                },
                 click: function ($event) {
                   _vm.center = m.position
                 },
@@ -727,6 +862,7 @@ var render = function () {
               visible: true,
               center: _vm.circle.center,
               radius: _vm.circle.radius,
+              editable: true,
               options: {
                 strokeColor: _vm.circle.strokeColor,
                 strokeOpacity: _vm.circle.strokeOpacity,
@@ -734,6 +870,11 @@ var render = function () {
                 fillColor: _vm.circle.fillColor,
                 fillOpacity: _vm.circle.fillOpacity,
               },
+            },
+            on: {
+              center_changed: _vm.onCircleCenterChanged,
+              radius_changed: _vm.onCircleRadiusChanged,
+              drag: _vm.onCircleDrag,
             },
           }),
         ],
@@ -743,6 +884,207 @@ var render = function () {
       _c("button", { on: { click: _vm.addMarkerToCurrentPosition } }, [
         _vm._v("Add Marker to Current Position"),
       ]),
+      _vm._v(" "),
+      _c(
+        "b-form",
+        {
+          attrs: { enctype: "multipart/form-data" },
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.Submit_Product($event)
+            },
+          },
+        },
+        [
+          _c(
+            "b-row",
+            [
+              _c(
+                "b-col",
+                { attrs: { md: "8" } },
+                [
+                  _c(
+                    "b-card",
+                    [
+                      _c(
+                        "b-row",
+                        [
+                          _c(
+                            "b-col",
+                            {
+                              staticClass: "mb-2",
+                              attrs: { lg: "6", md: "6", sm: "12" },
+                            },
+                            [
+                              _c("validation-provider", {
+                                attrs: {
+                                  name: "Category",
+                                  rules: { required: true },
+                                },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "default",
+                                    fn: function (ref) {
+                                      var valid = ref.valid
+                                      var errors = ref.errors
+                                      return _c(
+                                        "b-form-group",
+                                        {
+                                          attrs: { label: _vm.$t("Category") },
+                                        },
+                                        [
+                                          _c("v-select", {
+                                            class: {
+                                              "is-invalid": !!errors.length,
+                                            },
+                                            attrs: {
+                                              state: errors[0]
+                                                ? false
+                                                : valid
+                                                ? true
+                                                : null,
+                                              reduce: function (label) {
+                                                return label.value
+                                              },
+                                              placeholder:
+                                                _vm.$t("Choose_Category"),
+                                              options: [
+                                                {
+                                                  label: "Restaurants",
+                                                  value: "restaurant",
+                                                },
+                                                {
+                                                  label: "Cafe",
+                                                  value: "cafe",
+                                                },
+                                                {
+                                                  label: "food",
+                                                  value: "food",
+                                                },
+                                                {
+                                                  label: "diner",
+                                                  value: "diner",
+                                                },
+                                                { label: "pub", value: "pub" },
+                                                { label: "bar", value: "bar" },
+                                              ],
+                                            },
+                                            on: { input: _vm.handleChange },
+                                            model: {
+                                              value: _vm.keyword,
+                                              callback: function ($$v) {
+                                                _vm.keyword = $$v
+                                              },
+                                              expression: "keyword",
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c("b-form-invalid-feedback", [
+                                            _vm._v(_vm._s(errors[0])),
+                                          ]),
+                                        ],
+                                        1
+                                      )
+                                    },
+                                  },
+                                ]),
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-col",
+                            { staticClass: "mb-2", attrs: { md: "6" } },
+                            [
+                              _c("validation-provider", {
+                                attrs: {
+                                  name: "radius",
+                                  rules: {
+                                    required: true,
+                                    regex: /^\d*\.?\d*$/,
+                                  },
+                                },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "default",
+                                    fn: function (validationContext) {
+                                      return [
+                                        _c(
+                                          "b-form-group",
+                                          {
+                                            attrs: {
+                                              label: _vm.$t("Distance(KM)"),
+                                            },
+                                          },
+                                          [
+                                            _c("b-form-input", {
+                                              attrs: {
+                                                state:
+                                                  _vm.getValidationState(
+                                                    validationContext
+                                                  ),
+                                                "aria-describedby":
+                                                  "ProductPrice-feedback",
+                                                label: "radius",
+                                                placeholder:
+                                                  _vm.$t("Enter_radius"),
+                                                disabled: "",
+                                              },
+                                              on: {
+                                                input: _vm.handleRadiusChange,
+                                              },
+                                              model: {
+                                                value: _vm.radius,
+                                                callback: function ($$v) {
+                                                  _vm.radius = $$v
+                                                },
+                                                expression: "radius",
+                                              },
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "b-form-invalid-feedback",
+                                              {
+                                                attrs: {
+                                                  id: "ProductPrice-feedback",
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    validationContext.errors[0]
+                                                  )
+                                                ),
+                                              ]
+                                            ),
+                                          ],
+                                          1
+                                        ),
+                                      ]
+                                    },
+                                  },
+                                ]),
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("breadcumb", {
         attrs: { page: _vm.$t("Map"), folder: _vm.$t("Settings") },

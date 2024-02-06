@@ -48,14 +48,22 @@ class MapsController extends Controller
 
       function GetData(Request $request){
       
-
+        // restaurant
+        // cafe
+        // food
+        // bar
+        // diner
+        // pub
 
         $apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
        // Replace with the desired location (latitude,longitude)
         $lat = $request->lat;
         $lng = $request->lng;
         $location = $lat.','.$lng; 
-        $restaurants = $this->getRestaurants($apiKey, $location);
+        $radius = $request->radius;
+        $keyword = $request->keyword;
+         
+        $restaurants = $this->getRestaurants($apiKey, $location , $radius , $keyword);
     
 
         $locat = array();

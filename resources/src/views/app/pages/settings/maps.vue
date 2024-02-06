@@ -2,6 +2,8 @@
 <template>
   <div class="main-content">
 
+
+
     <GmapMap
     :center="{lat:30.059813, lng:31.329825}"
     :zoom="7"
@@ -14,6 +16,7 @@
           :position="m.position"
           :clickable="true"
           :draggable="true"
+          @drag="onMarkerDrag(index, $event)"
           @click="center=m.position"
   />
 
@@ -22,7 +25,11 @@
     :visible="true" 
     :center="circle.center"
     :radius="circle.radius"
-   
+    :editable="true"
+
+    @center_changed="onCircleCenterChanged"
+    @radius_changed="onCircleRadiusChanged"
+        @drag="onCircleDrag"
     :options="{
       strokeColor: circle.strokeColor,
       strokeOpacity: circle.strokeOpacity,
@@ -34,6 +41,83 @@
 </GmapMap>
 
 <button @click="addMarkerToCurrentPosition">Add Marker to Current Position</button>
+
+
+<b-form @submit.prevent="Submit_Product" enctype="multipart/form-data">
+        <b-row>
+          <b-col md="8">
+            <b-card>
+              <b-row>
+   
+    
+                <!-- Tax Method -->
+                <b-col lg="6" md="6" sm="12" class="mb-2">
+                  <validation-provider name="Category" :rules="{ required: true}">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Category')">
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        v-model="keyword"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Choose_Category')"
+                        v-on:input="handleChange"
+                        :options="
+                           [
+                            {label: 'Restaurants', value: 'restaurant'},
+                            {label: 'Cafe', value: 'cafe'},
+                            {label: 'food', value: 'food'},
+                            {label: 'diner', value: 'diner'},
+                            {label: 'pub', value: 'pub'},
+                            {label: 'bar', value: 'bar'},
+                           ]"
+                      ></v-select>
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+
+
+          
+              <b-col md="6" class="mb-2">
+                  <validation-provider
+                    name="radius"
+                    :rules="{ required: true , regex: /^\d*\.?\d*$/}"
+                    v-slot="validationContext">
+                    <b-form-group :label="$t('Distance(KM)')">
+                      <b-form-input
+                        :state="getValidationState(validationContext)"
+                        aria-describedby="ProductPrice-feedback"
+                        label="radius"
+                        :placeholder="$t('Enter_radius')"
+                        v-model="radius"
+                         disabled
+                        @input="handleRadiusChange"
+
+                      ></b-form-input>
+
+                      <b-form-invalid-feedback
+                        id="ProductPrice-feedback"
+                      >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+    
+
+
+
+
+          
+              </b-row>
+            </b-card>
+          </b-col>
+      
+    
+        </b-row>
+      </b-form>
+
+
     <!-- <GMapMap
       :center="center"
       :zoom="7"
@@ -235,14 +319,15 @@ export default {
           type: "desc"
         },
         page: 1,
-        perPage: 10
+        perPage: 500
       },
       selectedIds: [],
       totalRows: "",
       search: "",
+      radius:10000,
       circle: {
       center: {  lat: 30.059813, lng: 31.329825 },
-      radius: 100000,
+      radius: 10000,
       options: {
         strokeColor: 'red',
         strokeOpacity:1.0,
@@ -258,7 +343,7 @@ export default {
       limit: "10",
       lat:"37.7749",
       lng:"-122.4194",
-      circle:true,
+      keyword:"restaurant",
       map: {
         id: "",
         ar_name: "",
@@ -311,7 +396,74 @@ export default {
   methods: {
 
 
+    handleChange(selectedValue){
+      this.keyword = selectedValue;
+      fetchPlaces();
 
+    },
+
+
+    handleRadiusChange() {
+    // Add your logic here to handle the onchange event
+    // circle.radius
+
+    this.circle.radius = this.radius;
+
+  
+    // console.log('Radius changed:', this.radius);
+  },
+
+    onMarkerDrag(index, event) {
+      const draggedMarker = this.markers[index];
+      draggedMarker.position = {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+      };
+
+      // Update the circle's center when the marker is dragged
+      this.circle.center = draggedMarker.position;
+    },
+
+    onCircleCenterChanged(event) {
+ 
+      // Update the marker's position when the circle's center is changed
+      const newCenter = {
+        lat: event.lat(),
+        lng: event.lng(),
+      };
+       this.markers[0].position = newCenter;
+      // this.markers.forEach((marker) => {
+      //   marker.position = newCenter;
+      // });
+
+      // Update the circle's center
+      // this.circle.center = newCenter;
+    },
+
+
+    onCircleRadiusChanged(event) {
+      // Update the circle's radius when it is changed
+      // alert(55)
+      // console.log(event)
+
+      this.circle.radius = event;
+      this.radius = event;
+    },
+
+    onCircleDrag(event) {
+      // Update the marker's position when the circle is dragged
+      const newCenter = {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+      };
+      this.markers.forEach((marker) => {
+        marker.position = newCenter;
+      });
+
+      // Update the circle's center
+      this.circle.center = newCenter;
+    },
+   
 
     fetchPlaces() {
       // Use the Google Places API to fetch restaurant places based on the map's center
@@ -322,16 +474,15 @@ export default {
 
       axios
         .get(
-          "maps/view/data?page=" +
-            page +
-            "&lat=" +
-            this.lat +
+          "maps/view/data?lat=" +
+            this.markers[0].position.lat +
             "&lng=" +
-            this.lng +
-            "&search=" +
-            this.search +
-            "&limit=" +
-            this.limit
+            this.markers[0].position.lng +
+            "&radius=" +
+            this.radius +
+            "&keyword=" +
+            this.keyword
+            
         )
         .then(response => {
           this.maps = response.data.maps;
@@ -377,7 +528,7 @@ export default {
       fillColor: '#FF0000',
       fillOpacity: 0.35,
       center: markerPosition,
-      radius: 10000, // Set the radius of the circle in meters
+      radius: 2, // Set the radius of the circle in meters
     };
 
     this.circle = circleOptions;
@@ -527,16 +678,14 @@ export default {
       NProgress.set(0.1);
       axios
         .get(
-          "maps/view/data?page=" +
-            page +
-            "&lat=" +
-            this.lat +
+          "maps/view/data?lat=" +
+            this.markers[0].position.lat +
             "&lng=" +
-            this.lng +
-            "&search=" +
-            this.search +
-            "&limit=" +
-            this.limit
+            this.markers[0].position.lng +
+            "&radius=" +
+            this.radius +
+            "&keyword=" +
+            this.keyword
         )
         .then(response => {
           this.maps = response.data.maps;
