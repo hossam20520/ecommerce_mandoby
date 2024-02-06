@@ -398,7 +398,7 @@ export default {
 
     handleChange(selectedValue){
       this.keyword = selectedValue;
-      fetchPlaces();
+      this.fetchPlaces();
 
     },
 
@@ -409,7 +409,7 @@ export default {
 
     this.circle.radius = this.radius;
 
-  
+    this.fetchPlaces();
     // console.log('Radius changed:', this.radius);
   },
 
@@ -432,6 +432,9 @@ export default {
         lng: event.lng(),
       };
        this.markers[0].position = newCenter;
+
+
+       this.fetchPlaces();
       // this.markers.forEach((marker) => {
       //   marker.position = newCenter;
       // });

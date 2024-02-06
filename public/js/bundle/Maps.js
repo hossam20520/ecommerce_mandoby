@@ -411,12 +411,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     handleChange: function handleChange(selectedValue) {
       this.keyword = selectedValue;
-      fetchPlaces();
+      this.fetchPlaces();
     },
     handleRadiusChange: function handleRadiusChange() {
       // Add your logic here to handle the onchange event
       // circle.radius
-      this.circle.radius = this.radius; // console.log('Radius changed:', this.radius);
+      this.circle.radius = this.radius;
+      this.fetchPlaces(); // console.log('Radius changed:', this.radius);
     },
     onMarkerDrag: function onMarkerDrag(index, event) {
       var draggedMarker = this.markers[index];
@@ -433,7 +434,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         lat: event.lat(),
         lng: event.lng()
       };
-      this.markers[0].position = newCenter; // this.markers.forEach((marker) => {
+      this.markers[0].position = newCenter;
+      this.fetchPlaces(); // this.markers.forEach((marker) => {
       //   marker.position = newCenter;
       // });
       // Update the circle's center
