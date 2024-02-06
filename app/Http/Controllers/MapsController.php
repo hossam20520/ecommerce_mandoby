@@ -67,6 +67,7 @@ class MapsController extends Controller
     
 
         $locat = array();
+        $itemMap = array();
         foreach ($restaurants as $i => $restaurant) {
             $name = $restaurant['name'];
             $lat = $restaurant['geometry']['location']['lat'];
@@ -81,15 +82,31 @@ class MapsController extends Controller
                "lng" => $lng
             ];
 
+
+            $item_map = [
+                "position" =>  [
+                    "lat"=>  $lat,
+                    "lng"=> $lng
+                ],
+                "showIcon"=>true,
+                "draggable"=> false,
+                "clickable"=> true,
+
+                 
+             ];
+
+             
+             array_push(  $itemMap , $item_map );
             array_push(  $locat , $item );
         }
         
 
-
+  
         
      
         return response()->json([
             'maps' => $locat,
+            'map_items' => $itemMap,
             'totalRows' => sizeof($locat),
         ]);
 

@@ -327,6 +327,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -444,6 +445,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       };
     },
+    onCircleDragEnd: function onCircleDragEnd(event) {
+      this.fetchPlaces();
+    },
     handleChange: function handleChange(selectedValue) {
       this.keyword = selectedValue;
       this.fetchPlaces();
@@ -469,8 +473,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         lat: event.lat(),
         lng: event.lng()
       };
-      this.markers[0].position = newCenter;
-      this.fetchPlaces(); // this.markers.forEach((marker) => {
+      this.markers[0].position = newCenter; //  this.fetchPlaces();
+      // this.markers.forEach((marker) => {
       //   marker.position = newCenter;
       // });
       // Update the circle's center
@@ -481,8 +485,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // alert(55)
       // console.log(event)
       this.circle.radius = event;
-      this.radius = event;
-      this.fetchPlaces();
+      this.radius = event; // this.fetchPlaces();
     },
     onCircleDrag: function onCircleDrag(event) {
       // Update the marker's position when the circle is dragged
@@ -494,42 +497,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         marker.position = newCenter;
       }); // Update the circle's center
 
-      this.circle.center = newCenter;
-      this.fetchPlaces();
+      this.circle.center = newCenter; // this.fetchPlaces();
     },
     fetchPlaces: function fetchPlaces() {
-      var _this = this;
-
       // Use the Google Places API to fetch restaurant places based on the map's center
       // You need to replace 'YOUR_API_KEY' with your actual Google Places API key
       // const apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
       // const radius = 10000; // Set the radius for the search in meters
-      axios.get("maps/view/data?lat=" + this.markers[0].position.lat + "&lng=" + this.markers[0].position.lng + "&radius=" + this.radius + "&keyword=" + this.keyword).then(function (response) {
-        _this.maps = response.data.maps;
-        _this.totalRows = response.data.totalRows;
-        response.data.maps.forEach(function (place, index) {
-          var marker = {
-            position: {
-              lat: place.lat,
-              lng: place.lng
-            },
-            showIcon: true,
-            clickable: true,
-            draggable: false
-          }; // Push the marker to the markers array
-
-          _this.shops_marker = marker;
-        }); // Complete the animation of theprogress bar.
-
-        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
-        _this.isLoading = false;
-      })["catch"](function (response) {
-        // Complete the animation of theprogress bar.
-        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
-        setTimeout(function () {
-          _this.isLoading = false;
-        }, 500);
-      });
+      this.Get_Maps(1);
     },
     addCircleAroundMarker: function addCircleAroundMarker(markerPosition) {
       var circleOptions = {
@@ -545,7 +520,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.circle = circleOptions;
     },
     addMarkerToCurrentPosition: function addMarkerToCurrentPosition() {
-      var _this2 = this;
+      var _this = this;
 
       navigator.geolocation.getCurrentPosition(function (position) {
         var currentPos = {
@@ -553,15 +528,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           lng: position.coords.longitude
         };
 
-        _this2.markers.push({
+        _this.markers.push({
           position: currentPos,
           clickable: true,
           draggable: true
         });
 
-        _this2.addCircleAroundMarker(currentPos);
+        _this.addCircleAroundMarker(currentPos);
 
-        _this2.center = currentPos;
+        _this.center = currentPos;
       }, function (error) {
         console.error('Error getting current position:', error);
       });
@@ -606,12 +581,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //---- Event Select Rows
     selectionChanged: function selectionChanged(_ref3) {
-      var _this3 = this;
+      var _this2 = this;
 
       var selectedRows = _ref3.selectedRows;
       this.selectedIds = [];
       selectedRows.forEach(function (row, index) {
-        _this3.selectedIds.push(row.id);
+        _this2.selectedIds.push(row.id);
       });
     },
     //---- Event on Search
@@ -629,16 +604,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //------------- Submit Validation Create & Edit Map
     Submit_Map: function Submit_Map() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.$refs.Create_map.validate().then(function (success) {
         if (!success) {
-          _this4.makeToast("danger", _this4.$t("Please_fill_the_form_correctly"), _this4.$t("Failed"));
+          _this3.makeToast("danger", _this3.$t("Please_fill_the_form_correctly"), _this3.$t("Failed"));
         } else {
-          if (!_this4.editmode) {
-            _this4.Create_Map();
+          if (!_this3.editmode) {
+            _this3.Create_Map();
           } else {
-            _this4.Update_Map();
+            _this3.Update_Map();
           }
         }
       });
@@ -653,26 +628,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //------------------------------ Event Upload Image -------------------------------\
     onFileSelected: function onFileSelected(e) {
-      var _this5 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _yield$_this5$$refs$I, valid;
+        var _yield$_this4$$refs$I, valid;
 
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this5.$refs.Image.validate(e);
+                return _this4.$refs.Image.validate(e);
 
               case 2:
-                _yield$_this5$$refs$I = _context.sent;
-                valid = _yield$_this5$$refs$I.valid;
+                _yield$_this4$$refs$I = _context.sent;
+                valid = _yield$_this4$$refs$I.valid;
 
                 if (valid) {
-                  _this5.map.image = e.target.files[0];
+                  _this4.map.image = e.target.files[0];
                 } else {
-                  _this5.map.image = "";
+                  _this4.map.image = "";
                 }
 
               case 5:
@@ -699,29 +674,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //---------------------------------------- Get All maps-----------------\
     Get_Maps: function Get_Maps(page) {
-      var _this6 = this;
+      var _this5 = this;
 
       // Start the progress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
       axios.get("maps/view/data?lat=" + this.markers[0].position.lat + "&lng=" + this.markers[0].position.lng + "&radius=" + this.radius + "&keyword=" + this.keyword).then(function (response) {
-        _this6.maps = response.data.maps;
-        _this6.totalRows = response.data.totalRows;
-        _this6.shops_marker = marker; // Complete the animation of theprogress bar.
+        _this5.maps = response.data.maps;
+        _this5.totalRows = response.data.totalRows;
+        _this5.shops_marker = response.data.map_items; // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
-        _this6.isLoading = false;
+        _this5.isLoading = false;
       })["catch"](function (response) {
         // Complete the animation of theprogress bar.
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
         setTimeout(function () {
-          _this6.isLoading = false;
+          _this5.isLoading = false;
         }, 500);
       });
     },
     //---------------------------------------- Create new map-----------------\
     Create_Map: function Create_Map() {
-      var _this7 = this;
+      var _this6 = this;
 
       var self = this;
       self.SubmitProcessing = true;
@@ -732,16 +707,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         self.SubmitProcessing = false;
         Fire.$emit("Event_Map");
 
-        _this7.makeToast("success", _this7.$t("Create.TitleMap"), _this7.$t("Success"));
+        _this6.makeToast("success", _this6.$t("Create.TitleMap"), _this6.$t("Success"));
       })["catch"](function (error) {
         self.SubmitProcessing = false;
 
-        _this7.makeToast("danger", _this7.$t("InvalidData"), _this7.$t("Failed"));
+        _this6.makeToast("danger", _this6.$t("InvalidData"), _this6.$t("Failed"));
       });
     },
     //---------------------------------------- Update Map-----------------\
     Update_Map: function Update_Map() {
-      var _this8 = this;
+      var _this7 = this;
 
       var self = this;
       self.SubmitProcessing = true;
@@ -753,11 +728,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         self.SubmitProcessing = false;
         Fire.$emit("Event_Map");
 
-        _this8.makeToast("success", _this8.$t("Update.TitleMap"), _this8.$t("Success"));
+        _this7.makeToast("success", _this7.$t("Update.TitleMap"), _this7.$t("Success"));
       })["catch"](function (error) {
         self.SubmitProcessing = false;
 
-        _this8.makeToast("danger", _this8.$t("InvalidData"), _this8.$t("Failed"));
+        _this7.makeToast("danger", _this7.$t("InvalidData"), _this7.$t("Failed"));
       });
     },
     //---------------------------------------- Reset Form -----------------\
@@ -772,7 +747,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //---------------------------------------- Delete Map -----------------\
     Delete_Map: function Delete_Map(id) {
-      var _this9 = this;
+      var _this8 = this;
 
       this.$swal({
         title: this.$t("Delete.Title"),
@@ -786,18 +761,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }).then(function (result) {
         if (result.value) {
           axios["delete"]("maps/" + id).then(function () {
-            _this9.$swal(_this9.$t("Delete.Deleted"), _this9.$t("Delete.TitleMap"), "success");
+            _this8.$swal(_this8.$t("Delete.Deleted"), _this8.$t("Delete.TitleMap"), "success");
 
             Fire.$emit("Delete_Map");
           })["catch"](function () {
-            _this9.$swal(_this9.$t("Delete.Failed"), _this9.$t("Delete.Therewassomethingwronge"), "warning");
+            _this8.$swal(_this8.$t("Delete.Failed"), _this8.$t("Delete.Therewassomethingwronge"), "warning");
           });
         }
       });
     },
     //---- Delete maps by selection
     delete_by_selected: function delete_by_selected() {
-      var _this10 = this;
+      var _this9 = this;
 
       this.$swal({
         title: this.$t("Delete.Title"),
@@ -814,9 +789,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
           nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
           axios.post("maps/delete/by_selection", {
-            selectedIds: _this10.selectedIds
+            selectedIds: _this9.selectedIds
           }).then(function () {
-            _this10.$swal(_this10.$t("Delete.Deleted"), _this10.$t("Delete.TitleMap"), "success");
+            _this9.$swal(_this9.$t("Delete.Deleted"), _this9.$t("Delete.TitleMap"), "success");
 
             Fire.$emit("Delete_Map");
           })["catch"](function () {
@@ -825,7 +800,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
             }, 500);
 
-            _this10.$swal(_this10.$t("Delete.Failed"), _this10.$t("Delete.Therewassomethingwronge"), "warning");
+            _this9.$swal(_this9.$t("Delete.Failed"), _this9.$t("Delete.Therewassomethingwronge"), "warning");
           });
         }
       });
@@ -833,19 +808,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   //end Methods
   created: function created() {
-    var _this11 = this;
+    var _this10 = this;
 
     this.Get_Maps(1);
     Fire.$on("Event_Map", function () {
       setTimeout(function () {
-        _this11.Get_Maps(_this11.serverParams.page);
+        _this10.Get_Maps(_this10.serverParams.page);
 
-        _this11.$bvModal.hide("New_map");
+        _this10.$bvModal.hide("New_map");
       }, 500);
     });
     Fire.$on("Delete_Map", function () {
       setTimeout(function () {
-        _this11.Get_Maps(_this11.serverParams.page);
+        _this10.Get_Maps(_this10.serverParams.page);
       }, 500);
     });
   }
@@ -905,6 +880,7 @@ var render = function () {
                 icon: m.showIcon ? _vm.getMarkerIcon() : null,
               },
               on: {
+                dragend: _vm.onCircleDragEnd,
                 drag: function ($event) {
                   return _vm.onMarkerDrag(index, $event)
                 },

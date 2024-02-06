@@ -30,6 +30,7 @@
           :position="m.position"
           :clickable="true"
           :draggable="true"
+          @dragend="onCircleDragEnd"
           :icon="m.showIcon ? getMarkerIcon() : null"
           @drag="onMarkerDrag(index, $event)"
           @click="center=m.position"
@@ -429,6 +430,9 @@ export default {
     },
 
 
+    onCircleDragEnd(event){
+      this.fetchPlaces();
+    },
     handleChange(selectedValue){
       this.keyword = selectedValue;
       this.fetchPlaces();
@@ -467,7 +471,7 @@ export default {
        this.markers[0].position = newCenter;
 
 
-       this.fetchPlaces();
+      //  this.fetchPlaces();
       // this.markers.forEach((marker) => {
       //   marker.position = newCenter;
       // });
@@ -484,7 +488,7 @@ export default {
 
       this.circle.radius = event;
       this.radius = event;
-      this.fetchPlaces();
+      // this.fetchPlaces();
     },
 
     onCircleDrag(event) {
@@ -499,7 +503,7 @@ export default {
 
       // Update the circle's center
       this.circle.center = newCenter;
-      this.fetchPlaces();
+      // this.fetchPlaces();
     },
    
 
@@ -509,52 +513,7 @@ export default {
       // const apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
       // const radius = 10000; // Set the radius for the search in meters
  
-
-      axios
-        .get(
-          "maps/view/data?lat=" +
-            this.markers[0].position.lat +
-            "&lng=" +
-            this.markers[0].position.lng +
-            "&radius=" +
-            this.radius +
-            "&keyword=" +
-            this.keyword
-            
-        )
-        .then(response => {
-          this.maps = response.data.maps;
-          this.totalRows = response.data.totalRows;
-
-          
-          response.data.maps.forEach((place, index) => {
-            const marker = {
-              position: {
-                lat: place.lat,
-                lng: place.lng,
-              },
-              showIcon: true,
-              clickable: true,
-              draggable: false,
-            };
-
-            // Push the marker to the markers array
-            this.shops_marker = marker;
-            
-          });
-
-          // Complete the animation of theprogress bar.
-          NProgress.done();
-          this.isLoading = false;
-        })
-        .catch(response => {
-          // Complete the animation of theprogress bar.
-          NProgress.done();
-          setTimeout(() => {
-            this.isLoading = false;
-          }, 500);
-        });
-
+         this.Get_Maps(1);
 
  
     },
@@ -730,7 +689,7 @@ export default {
         .then(response => {
           this.maps = response.data.maps;
           this.totalRows = response.data.totalRows;
-          this.shops_marker = marker;
+          this.shops_marker = response.data.map_items;
           // Complete the animation of theprogress bar.
           NProgress.done();
           this.isLoading = false;
