@@ -329,6 +329,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -394,6 +456,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       lat: "37.7749",
       lng: "-122.4194",
       keyword: ["restaurant"],
+      from_date: "",
+      to_date: "",
+      mandob_id: 0,
+      mandobs: [],
       map: {
         id: "",
         ar_name: "",
@@ -452,6 +518,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     handleChange: function handleChange(selectedValue) {
       this.keyword = selectedValue;
       this.fetchPlaces();
+    },
+    openModel: function openModel() {
+      this.$bvModal.show("Driver");
     },
     handleRadiusChange: function handleRadiusChange() {
       // Add your logic here to handle the onchange event
@@ -678,13 +747,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       // Start the progress bar.
-      console.log(this.keyword.join(','));
+      console.log(this.keyword);
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("maps/view/data?lat=" + this.markers[0].position.lat + "&lng=" + this.markers[0].position.lng + "&radius=" + this.radius + "&keyword=" + this.keyword.join(',')).then(function (response) {
+      axios.get("maps/view/data?lat=" + this.markers[0].position.lat + "&lng=" + this.markers[0].position.lng + "&radius=" + this.radius + "&keyword=" + this.keyword.join(",")).then(function (response) {
         _this5.maps = response.data.maps;
         _this5.totalRows = response.data.totalRows;
-        _this5.shops_marker = response.data.map_items; // Complete the animation of theprogress bar.
+        _this5.shops_marker = response.data.map_items;
+        _this5.mandobs = response.data.mandobs; // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
         _this5.isLoading = false;
@@ -1270,6 +1340,19 @@ var render = function () {
                         },
                         [_vm._v(" " + _vm._s(_vm.$t("Del")))]
                       ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-sm",
+                          on: {
+                            click: function ($event) {
+                              return _vm.openModel()
+                            },
+                          },
+                        },
+                        [_vm._v(_vm._s(_vm.$t("assign_to_mandob")))]
+                      ),
                     ]
                   ),
                   _vm._v(" "),
@@ -1530,11 +1613,198 @@ var render = function () {
         ],
         1
       ),
+      _vm._v(" "),
+      _c(
+        "validation-observer",
+        { ref: "Driver" },
+        [
+          _c(
+            "b-modal",
+            {
+              attrs: {
+                "hide-footer": "",
+                size: "lg",
+                id: "Driver",
+                title: _vm.EditPaiementMode
+                  ? _vm.$t("Driver")
+                  : _vm.$t("Driver"),
+              },
+            },
+            [
+              _c(
+                "b-form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.Submit_Payment($event)
+                    },
+                  },
+                },
+                [
+                  _c(
+                    "b-row",
+                    [
+                      _c(
+                        "b-col",
+                        { staticClass: "mb-2", attrs: { md: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "category",
+                              rules: { required: true },
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (ref) {
+                                  var valid = ref.valid
+                                  var errors = ref.errors
+                                  return _c(
+                                    "b-form-group",
+                                    { attrs: { label: _vm.$t("Mandobs") } },
+                                    [
+                                      _c("v-select", {
+                                        class: {
+                                          "is-invalid": !!errors.length,
+                                        },
+                                        attrs: {
+                                          state: errors[0]
+                                            ? false
+                                            : valid
+                                            ? true
+                                            : null,
+                                          reduce: function (label) {
+                                            return label.value
+                                          },
+                                          placeholder: _vm.$t("Mandobs"),
+                                          options: _vm.mandobs.map(function (
+                                            mandobs
+                                          ) {
+                                            return {
+                                              label: mandobs.email,
+                                              value: mandobs.id,
+                                            }
+                                          }),
+                                        },
+                                        model: {
+                                          value: _vm.mandob_id,
+                                          callback: function ($$v) {
+                                            _vm.mandob_id = $$v
+                                          },
+                                          expression: "mandob_id",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("b-form-invalid-feedback", [
+                                        _vm._v(_vm._s(errors[0])),
+                                      ]),
+                                    ],
+                                    1
+                                  )
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "6" } },
+                        [
+                          _c(
+                            "b-form-group",
+                            { attrs: { label: _vm.$t("from_date") } },
+                            [
+                              _c("b-form-input", {
+                                attrs: { type: "date" },
+                                model: {
+                                  value: _vm.from_date,
+                                  callback: function ($$v) {
+                                    _vm.from_date = $$v
+                                  },
+                                  expression: "from_date",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "6" } },
+                        [
+                          _c(
+                            "b-form-group",
+                            { attrs: { label: _vm.$t("to_date") } },
+                            [
+                              _c("b-form-input", {
+                                attrs: { type: "date" },
+                                model: {
+                                  value: _vm.to_date,
+                                  callback: function ($$v) {
+                                    _vm.to_date = $$v
+                                  },
+                                  expression: "to_date",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { staticClass: "mt-3", attrs: { md: "12" } },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              attrs: {
+                                variant: "primary",
+                                type: "submit",
+                                disabled: _vm.subProcessing,
+                              },
+                            },
+                            [_vm._v(_vm._s(_vm.$t("submit")))]
+                          ),
+                          _vm._v(" "),
+                          _vm.subProcessing ? _vm._m(1) : _vm._e(),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
     ],
     1
   )
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "typo__p" }, [
+      _c("div", { staticClass: "spinner sm spinner-primary mt-3" }),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

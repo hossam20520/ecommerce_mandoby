@@ -124,7 +124,6 @@
 
 
 
-
           
               </b-row>
             </b-card>
@@ -193,6 +192,8 @@
       >
         <div slot="selected-row-actions">
           <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button>
+
+          <button class="btn btn-success btn-sm" @click="openModel()">{{$t('assign_to_mandob')}}</button>
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
           <!-- <b-button @click="New_Map()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
@@ -301,6 +302,67 @@
 
 
 
+            <!-- Modal Add Payment-->
+            <validation-observer ref="Driver">
+      <b-modal
+        hide-footer
+        size="lg"
+        id="Driver"
+        :title="EditPaiementMode?$t('Driver'):$t('Driver')"
+      >
+        <b-form @submit.prevent="Submit_Payment">
+          <b-row>
+ 
+            
+ 
+                  <!-- Category -->
+                  <b-col md="12" class="mb-2">
+                  <validation-provider name="category" :rules="{ required: true}">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Mandobs')">
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Mandobs')"
+                        v-model="mandob_id"
+                        :options="mandobs.map(mandobs => ({label: mandobs.email, value: mandobs.id}))"
+                      />
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+ 
+
+                
+                <b-col md="6">
+            <b-form-group :label="$t('from_date')">
+              <b-form-input type="date" v-model="from_date"></b-form-input>
+            </b-form-group>
+          </b-col>
+
+
+          <b-col md="6">
+            <b-form-group :label="$t('to_date')">
+              <b-form-input type="date" v-model="to_date"></b-form-input>
+            </b-form-group>
+          </b-col>
+
+            <b-col md="12" class="mt-3">
+              <b-button
+                variant="primary"
+                type="submit"
+                :disabled="subProcessing"
+              >{{$t('submit')}}</b-button>
+              <div v-once class="typo__p" v-if="subProcessing">
+                <div class="spinner sm spinner-primary mt-3"></div>
+              </div>
+            </b-col>
+          </b-row>
+        </b-form>
+      </b-modal>
+    </validation-observer>
+
 
 
   </div>
@@ -371,6 +433,10 @@ export default {
       lat:"37.7749",
       lng:"-122.4194",
       keyword:["restaurant"],
+      from_date:"",
+      to_date:"",
+      mandob_id:0,
+      mandobs:[],
       map: {
         id: "",
         ar_name: "",
@@ -440,6 +506,10 @@ export default {
 
     },
 
+
+    openModel(){
+      this.$bvModal.show("Driver");
+    },
 
     handleRadiusChange() {
     // Add your logic here to handle the onchange event
@@ -674,7 +744,7 @@ export default {
     //---------------------------------------- Get All maps-----------------\
     Get_Maps(page) {
       // Start the progress bar.
-      console.log(this.keyword.join(','))
+      console.log(this.keyword)
       
       NProgress.start();
       NProgress.set(0.1);
@@ -687,12 +757,13 @@ export default {
             "&radius=" +
             this.radius +
             "&keyword=" +
-            this.keyword.join(',')
+            this.keyword.join(",")
         )
         .then(response => {
           this.maps = response.data.maps;
           this.totalRows = response.data.totalRows;
           this.shops_marker = response.data.map_items;
+          this.mandobs = response.data.mandobs;
           // Complete the animation of theprogress bar.
           NProgress.done();
           this.isLoading = false;

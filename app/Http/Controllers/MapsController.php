@@ -6,6 +6,7 @@ use App\utils\helpers;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class MapsController extends Controller
@@ -47,7 +48,7 @@ class MapsController extends Controller
     //---------------- STORE NEW Map -------------\
 
       function GetData(Request $request){
-      
+        $mandobs = User::where('deleted_at', '=', null)->where('role_id' , 3)->get(['id', 'email']);
         // restaurant
         // cafe
         // food
@@ -62,7 +63,7 @@ class MapsController extends Controller
         $location = $lat.','.$lng; 
         $radius = $request->radius;
         $keyword = $request->keyword;
-        return $keyword;
+    
          
         $restaurants = $this->getRestaurants($apiKey, $location , $radius , $keyword);
     
@@ -108,6 +109,7 @@ class MapsController extends Controller
         return response()->json([
             'maps' => $locat,
             'map_items' => $itemMap,
+            'mandobs' => $mandobs  ,
             'totalRows' => sizeof($locat),
         ]);
 
