@@ -687,7 +687,6 @@ export default {
             "&radius=" +
             this.radius +
             "&keyword=" +
-         
             this.keyword.join(',')
         )
         .then(response => {
