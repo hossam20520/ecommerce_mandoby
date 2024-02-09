@@ -91,7 +91,7 @@ class MapsController extends Controller
                 ],
                 "showIcon"=>true,
                 "draggable"=> false,
-                "clickable"=> true,
+                "clickable"=> false,
 
                  
              ];
