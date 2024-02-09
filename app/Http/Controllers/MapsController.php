@@ -62,6 +62,7 @@ class MapsController extends Controller
         $location = $lat.','.$lng; 
         $radius = $request->radius;
         $keyword = $request->keyword;
+        return $keyword;
          
         $restaurants = $this->getRestaurants($apiKey, $location , $radius , $keyword);
     

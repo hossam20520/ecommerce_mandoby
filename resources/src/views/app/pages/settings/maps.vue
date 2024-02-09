@@ -674,6 +674,8 @@ export default {
     //---------------------------------------- Get All maps-----------------\
     Get_Maps(page) {
       // Start the progress bar.
+      console.log(this.keyword.join(','))
+      
       NProgress.start();
       NProgress.set(0.1);
       axios
@@ -685,7 +687,8 @@ export default {
             "&radius=" +
             this.radius +
             "&keyword=" +
-            this.keyword
+         
+            this.keyword.join(',')
         )
         .then(response => {
           this.maps = response.data.maps;

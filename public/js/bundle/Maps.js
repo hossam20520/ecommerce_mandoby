@@ -678,9 +678,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       // Start the progress bar.
+      console.log(this.keyword.join(','));
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("maps/view/data?lat=" + this.markers[0].position.lat + "&lng=" + this.markers[0].position.lng + "&radius=" + this.radius + "&keyword=" + this.keyword).then(function (response) {
+      axios.get("maps/view/data?lat=" + this.markers[0].position.lat + "&lng=" + this.markers[0].position.lng + "&radius=" + this.radius + "&keyword=" + this.keyword.join(',')).then(function (response) {
         _this5.maps = response.data.maps;
         _this5.totalRows = response.data.totalRows;
         _this5.shops_marker = response.data.map_items; // Complete the animation of theprogress bar.
