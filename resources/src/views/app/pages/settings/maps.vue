@@ -77,6 +77,7 @@
                         :reduce="label => label.value"
                         :placeholder="$t('Choose_Category')"
                         v-on:input="handleChange"
+                        multiple
                         :options="
                            [
                             {label: 'Restaurants', value: 'restaurant'},
@@ -306,8 +307,8 @@
 </template>
 
 <script>
-import NProgress from "nprogress";
-import { gmapApi } from "vue2-google-maps";
+import NProgress from 'nprogress';
+import { gmapApi } from 'vue2-google-maps';
 
 export default {
   metaInfo: {
@@ -513,7 +514,7 @@ export default {
       // const apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
       // const radius = 10000; // Set the radius for the search in meters
  
-         this.Get_Maps(1);
+     this.Get_Maps(1);
 
  
     },
