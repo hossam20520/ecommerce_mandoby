@@ -576,6 +576,20 @@
           </li>
 
 
+  
+
+
+          <li
+            class="nav-item"
+            v-if="currentUserPermissions && currentUserPermissions.includes('category')"
+          >
+            <router-link tag="a" class to="/app/settings/Achivments">
+              <i class="nav-icon i-Bookmark"></i>
+              <span class="item-name">{{   $t('Achivment') }}</span>
+            </router-link>
+          </li>
+
+
           <li
             class="nav-item"
             
@@ -815,13 +829,13 @@
 </template>
 
 <script>
-import { isMobile } from "mobile-device-detect";
+import { isMobile } from 'mobile-device-detect';
 import {
-    mapActions,
-    mapGetters,
-} from "vuex";
+  mapActions,
+  mapGetters,
+} from 'vuex';
 
-import Topnav from "./TopNav";
+import Topnav from './TopNav';
 
 export default {
   components: {

@@ -1,10 +1,10 @@
-import Vue from "vue";
+import Vue from 'vue';
 
-import NProgress from "nprogress";
-import Router from "vue-router";
+import NProgress from 'nprogress';
+import Router from 'vue-router';
 
-import { i18n } from "./plugins/i18n";
-import store from "./store";
+import { i18n } from './plugins/i18n';
+import store from './store';
 
 Vue.use(Router);
 
@@ -503,6 +503,15 @@ const routes = [
                         component: () =>
                             import(/* webpackChunkName: "Mandobs" */"./views/app/pages/settings/mandobs")
                     },
+
+                                         // achivments
+                                         {
+                                            name: "achivments",
+                                            path: "Achivments",
+                                            component: () =>
+                                                import(/* webpackChunkName: "Achivments" */"./views/app/pages/settings/achivments")
+                                        },
+                                        
 
                                          // orders
                                          {
