@@ -393,7 +393,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       limit: "10",
       lat: "37.7749",
       lng: "-122.4194",
-      keyword: "restaurant",
+      keyword: ["restaurant"],
       map: {
         id: "",
         ar_name: "",

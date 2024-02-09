@@ -370,7 +370,7 @@ export default {
       limit: "10",
       lat:"37.7749",
       lng:"-122.4194",
-      keyword:"restaurant",
+      keyword:["restaurant"],
       map: {
         id: "",
         ar_name: "",
