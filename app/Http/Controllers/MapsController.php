@@ -131,7 +131,7 @@ class MapsController extends Controller
     
 
 
-
+        $all_results = [];
         while (true) {
             $response = Http::get($baseURL, $params);
     
