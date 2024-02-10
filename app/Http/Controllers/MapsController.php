@@ -127,6 +127,37 @@ class MapsController extends Controller
             'keyword' => $keyword,
         ];
     
+
+
+
+        while (true) {
+            $response = Http::get($base_url, $params);
+    
+            if ($response->status() !== 200) {
+                // Handle error or break if the API does not return a 200 response
+                echo "Error fetching data from Google Places API\n";
+                break;
+            }
+    
+            $json_response = $response->json();
+            $all_results = array_merge($all_results, $json_response['results']);
+    
+            // Check if there's a next page token; if so, prepare for the next request
+            $next_page_token = $json_response['next_page_token'];
+            if (!$next_page_token) {
+                break; // Exit the loop if there's no next page token
+            }
+    
+            $params['pagetoken'] = $next_page_token;
+    
+            // Google requires a short delay before making a request for the next page
+            sleep(2);
+        }
+    
+        return $all_results;
+
+
+
         $client = new \GuzzleHttp\Client();
         $response = $client->get($baseURL, ['query' => $params]);
         $results = json_decode($response->getBody(), true)['results'] ?? [];

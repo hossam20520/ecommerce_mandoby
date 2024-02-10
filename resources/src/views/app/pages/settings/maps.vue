@@ -12,12 +12,12 @@
 >
 
 
-<GmapMarker
+         <GmapMarker
           :key="index"
           v-for="(m, index) in shops_marker"
           :position="m.position"
-          :clickable="true"
-          :draggable="true"
+          :clickable="false"
+          :draggable="false"
           :icon="m.showIcon ? getMarkerIcon() : null"
           
         
@@ -122,7 +122,7 @@
 
     
 
-
+                <button class="btn btn-success btn-sm" @click="GetDataMap()"> {{ $t('Excute') }}</button>
 
           
               </b-row>
@@ -484,7 +484,7 @@ export default {
   },
   mounted() {
     // Fetch restaurant places using the Google Places API
-   this.fetchPlaces();
+  //  this.fetchPlaces();
   },
   methods: {
 
@@ -498,11 +498,11 @@ export default {
 
 
     onCircleDragEnd(event){
-      this.fetchPlaces();
+      // this.fetchPlaces();
     },
     handleChange(selectedValue){
       this.keyword = selectedValue;
-      this.fetchPlaces();
+      // this.fetchPlaces();
 
     },
 
@@ -517,7 +517,7 @@ export default {
 
     this.circle.radius = this.radius;
 
-    this.fetchPlaces();
+    // this.fetchPlaces();
     // console.log('Radius changed:', this.radius);
   },
 
@@ -578,6 +578,9 @@ export default {
     },
    
 
+    GetDataMap(){
+      fetchPlaces();
+    },
     fetchPlaces() {
       // Use the Google Places API to fetch restaurant places based on the map's center
       // You need to replace 'YOUR_API_KEY' with your actual Google Places API key

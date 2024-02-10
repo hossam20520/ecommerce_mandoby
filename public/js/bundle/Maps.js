@@ -496,9 +496,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }];
     }
   },
-  mounted: function mounted() {
-    // Fetch restaurant places using the Google Places API
-    this.fetchPlaces();
+  mounted: function mounted() {// Fetch restaurant places using the Google Places API
+    //  this.fetchPlaces();
   },
   methods: {
     getMarkerIcon: function getMarkerIcon() {
@@ -512,12 +511,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       };
     },
-    onCircleDragEnd: function onCircleDragEnd(event) {
-      this.fetchPlaces();
+    onCircleDragEnd: function onCircleDragEnd(event) {// this.fetchPlaces();
     },
     handleChange: function handleChange(selectedValue) {
-      this.keyword = selectedValue;
-      this.fetchPlaces();
+      this.keyword = selectedValue; // this.fetchPlaces();
     },
     openModel: function openModel() {
       this.$bvModal.show("Driver");
@@ -525,8 +522,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     handleRadiusChange: function handleRadiusChange() {
       // Add your logic here to handle the onchange event
       // circle.radius
-      this.circle.radius = this.radius;
-      this.fetchPlaces(); // console.log('Radius changed:', this.radius);
+      this.circle.radius = this.radius; // this.fetchPlaces();
+      // console.log('Radius changed:', this.radius);
     },
     onMarkerDrag: function onMarkerDrag(index, event) {
       var draggedMarker = this.markers[index];
@@ -568,6 +565,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }); // Update the circle's center
 
       this.circle.center = newCenter; // this.fetchPlaces();
+    },
+    GetDataMap: function GetDataMap() {
+      fetchPlaces();
     },
     fetchPlaces: function fetchPlaces() {
       // Use the Google Places API to fetch restaurant places based on the map's center
@@ -935,8 +935,8 @@ var render = function () {
               key: index,
               attrs: {
                 position: m.position,
-                clickable: true,
-                draggable: true,
+                clickable: false,
+                draggable: false,
                 icon: m.showIcon ? _vm.getMarkerIcon() : null,
               },
             })
@@ -1172,6 +1172,19 @@ var render = function () {
                               }),
                             ],
                             1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.GetDataMap()
+                                },
+                              },
+                            },
+                            [_vm._v(" " + _vm._s(_vm.$t("Excute")))]
                           ),
                         ],
                         1
