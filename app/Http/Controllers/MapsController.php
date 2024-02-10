@@ -142,6 +142,8 @@ class MapsController extends Controller
             }
     
             $json_response = $response->json();
+
+            return $json_response();
             $all_results = array_merge($all_results, $json_response['results']);
     
             // Check if there's a next page token; if so, prepare for the next request
