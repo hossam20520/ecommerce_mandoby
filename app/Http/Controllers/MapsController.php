@@ -130,6 +130,28 @@ class MapsController extends Controller
         ];
     
 
+ 
+
+        $client = new \GuzzleHttp\Client();
+        $response = $client->get($baseURL, ['query' => $params]);
+        $results = json_decode($response->getBody(), true)['results'] ?? [];
+    
+        return $results;
+    }
+
+
+
+    function getRestaurantsTest($apiKey, $location, $radius = 1000, $keyword = 'restaurant') {
+        $baseURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+        
+        $params = [
+            'key' => $apiKey,
+            'location' => $location,
+            'radius' => $radius,
+            'keyword' => $keyword,
+        ];
+    
+
 
         $all_results = [];
         while (true) {
