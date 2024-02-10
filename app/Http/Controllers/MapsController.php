@@ -67,7 +67,7 @@ class MapsController extends Controller
         $keyword = $request->keyword;
     
          
-        $restaurants = $this->getRestaurantsTest($apiKey, $location , $radius , $keyword);
+        $restaurants = $this->getRestaurantsTest($apiKey, $location ,  $radius , $keyword);
     
 
         $locat = array();
@@ -163,7 +163,7 @@ class MapsController extends Controller
 
 }
 
-    function getRestaurantsTest($apiKey, $location, $radius = 1000, $keyword = 'restaurant') {
+    function getRestaurantsTest($apiKey, $location, $radius  , $keyword = 'restaurant') {
         $baseURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
         
         $params = [

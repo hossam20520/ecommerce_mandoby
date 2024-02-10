@@ -747,7 +747,7 @@ export default {
     //---------------------------------------- Get All maps-----------------\
     Get_Maps(page) {
       // Start the progress bar.
-      console.log(this.keyword)
+      console.log(this.radius)
       
       NProgress.start();
       NProgress.set(0.1);
