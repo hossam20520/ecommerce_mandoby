@@ -579,7 +579,7 @@ export default {
    
 
     GetDataMap(){
-      fetchPlaces();
+      this.fetchPlaces();
     },
     fetchPlaces() {
       // Use the Google Places API to fetch restaurant places based on the map's center

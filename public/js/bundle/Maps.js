@@ -567,7 +567,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.circle.center = newCenter; // this.fetchPlaces();
     },
     GetDataMap: function GetDataMap() {
-      fetchPlaces();
+      this.fetchPlaces();
     },
     fetchPlaces: function fetchPlaces() {
       // Use the Google Places API to fetch restaurant places based on the map's center
