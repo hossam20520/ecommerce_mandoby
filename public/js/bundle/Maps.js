@@ -452,7 +452,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       data: new FormData(),
       editmode: false,
       maps: [],
-      limit: "10",
+      limit: 1000,
       lat: "37.7749",
       lng: "-122.4194",
       keyword: ["restaurant"],
