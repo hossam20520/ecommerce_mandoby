@@ -390,7 +390,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1234,7 +1233,7 @@ var render = function () {
                       clearSelectionText: "",
                     },
                     "pagination-options": {
-                      enabled: true,
+                      enabled: false,
                       mode: "records",
                       nextLabel: "next",
                       prevLabel: "prev",
@@ -1242,8 +1241,6 @@ var render = function () {
                     styleClass: "table-hover tableOne vgt-table",
                   },
                   on: {
-                    "on-page-change": _vm.onPageChange,
-                    "on-per-page-change": _vm.onPerPageChange,
                     "on-sort-change": _vm.onSortChange,
                     "on-search": _vm.onSearch,
                     "on-selected-rows-change": _vm.selectionChanged,

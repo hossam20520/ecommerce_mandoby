@@ -169,8 +169,7 @@
         :columns="columns"
         :totalRows="totalRows"
         :rows="maps"
-        @on-page-change="onPageChange"
-        @on-per-page-change="onPerPageChange"
+ 
         @on-sort-change="onSortChange"
         @on-search="onSearch"
         :search-options="{
@@ -183,7 +182,7 @@
         }"
         @on-selected-rows-change="selectionChanged"
         :pagination-options="{
-        enabled: true,
+        enabled: false,
         mode: 'records',
         nextLabel: 'next',
         prevLabel: 'prev',
