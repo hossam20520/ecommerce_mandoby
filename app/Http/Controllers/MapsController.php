@@ -8,6 +8,8 @@ use DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Http;
+
 
 class MapsController extends Controller
 {
@@ -131,7 +133,7 @@ class MapsController extends Controller
 
 
         while (true) {
-            $response = Http::get($base_url, $params);
+            $response = Http::get($baseURL, $params);
     
             if ($response->status() !== 200) {
                 // Handle error or break if the API does not return a 200 response
@@ -158,11 +160,11 @@ class MapsController extends Controller
 
 
 
-        $client = new \GuzzleHttp\Client();
-        $response = $client->get($baseURL, ['query' => $params]);
-        $results = json_decode($response->getBody(), true)['results'] ?? [];
+        // $client = new \GuzzleHttp\Client();
+        // $response = $client->get($baseURL, ['query' => $params]);
+        // $results = json_decode($response->getBody(), true)['results'] ?? [];
     
-        return $results;
+        // return $results;
     }
 
 
