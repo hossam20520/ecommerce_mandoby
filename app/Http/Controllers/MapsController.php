@@ -191,12 +191,23 @@ class MapsController extends Controller
             $all_results = array_merge($all_results, $json_response['results']);
     
             // Check if there's a next page token; if so, prepare for the next request
-            $next_page_token = $json_response['next_page_token'];
-            if (!$next_page_token) {
+            // $next_page_token = $json_response['next_page_token'];
+            // if (!$next_page_token) {
+            //     break; // Exit the loop if there's no next page token
+            // }
+
+            if (isset($json_response['next_page_token'])) {
+                $next_page_token = $json_response['next_page_token'];
+                $params['pagetoken'] = $next_page_token;
+    
+                // Google requires a short delay before making a request for the next page
+                sleep(2);
+            } else {
                 break; // Exit the loop if there's no next page token
             }
+
     
-            $params['pagetoken'] = $next_page_token;
+            // $params['pagetoken'] = $next_page_token;
     
             // Google requires a short delay before making a request for the next page
             sleep(2);
