@@ -150,7 +150,7 @@ class MapsController extends Controller
      $keyword = $request->keyword;
  
       
-     $restaurants = $this->getRestaurants($apiKey, $location , $radius , $keyword);
+     $restaurants = $this->getRestaurantsTest($apiKey, $location , $radius , $keyword);
 
     
      return response()->json([
