@@ -139,7 +139,29 @@ class MapsController extends Controller
         return $results;
     }
 
+  function getRestaurantTestAPI(Request $request){
 
+    $apiKey = 'AIzaSyDH03s8Su2fbRDr3M03PWY7-TTtGB6xCpc';
+    // Replace with the desired location (latitude,longitude)
+     $lat = $request->lat;
+     $lng = $request->lng;
+     $location = $lat.','.$lng; 
+     $radius = $request->radius;
+     $keyword = $request->keyword;
+ 
+      
+     $restaurants = $this->getRestaurants($apiKey, $location , $radius , $keyword);
+
+    
+     return response()->json([
+        'maps' => $restaurants,
+ 
+    ]);
+  
+
+
+
+}
 
     function getRestaurantsTest($apiKey, $location, $radius = 1000, $keyword = 'restaurant') {
         $baseURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
