@@ -29,6 +29,10 @@ Route::get('maps/view/data/test', 'MapsController@getRestaurantTestAPI');
 Route::get('maps/view/data/testa', 'MapsController@getRestaurants');
 
 
+Route::post('/v1/device/survey', 'device\surveyController@surveyData');
+
+
+
 // Route::post("device/auth/login/", "device\AuthController@login");
 
 Route::post("/v1/device/auth/login/", "device\AuthController@login");
@@ -74,6 +78,11 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
 
     Route::get("/v1/device/products/", "device\ProductsController@Products");
+
+    // 
+    Route::get("/v1/device/sales/", "device\sales\TasksController@getTasks");
+
+
 
 
     Route::get("/v1/device/products/brand", "device\ProductsController@GetProductsByBrand");
@@ -305,6 +314,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::post('maps/delete/by_selection', 'MapsController@delete_by_selection');
 
 
+    Route::post('maps/save/by_selection', 'MapsController@save_by_selection');
+    
 
     //------------------------------- PURCHASES --------------------------\\
     //------------------------------------------------------------------\\

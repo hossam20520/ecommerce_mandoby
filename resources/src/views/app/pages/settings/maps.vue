@@ -190,7 +190,7 @@
         styleClass="table-hover tableOne vgt-table"
       >
         <div slot="selected-row-actions">
-          <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button>
+          <button class="btn btn-success btn-sm" @click="delete_by_selected()"> {{ $t('Save') }}</button>
 
           <button class="btn btn-success btn-sm" @click="openModel()">{{$t('assign_to_mandob')}}</button>
         </div>
@@ -879,6 +879,37 @@ export default {
 
     //---- Delete maps by selection
 
+
+    save_select(){
+
+
+      NProgress.start();
+          NProgress.set(0.1);
+          axios.post("maps/save/by_selection", {
+              selectedIds: this.selectedIds
+            })
+            .then(() => {
+              this.$swal(
+                this.$t("Delete.Deleted"),
+                this.$t("Delete.TitleMap"),
+                "success"
+              );
+
+              Fire.$emit("Delete_Map");
+            })
+            .catch(() => {
+              // Complete the animation of theprogress bar.
+              setTimeout(() => NProgress.done(), 500);
+              this.$swal(
+                this.$t("Delete.Failed"),
+                this.$t("Delete.Therewassomethingwronge"),
+                "warning"
+              );
+            });
+
+
+
+    },
     delete_by_selected() {
       this.$swal({
         title: this.$t("Delete.Title"),

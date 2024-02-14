@@ -842,8 +842,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     //---- Delete maps by selection
-    delete_by_selected: function delete_by_selected() {
+    save_select: function save_select() {
       var _this9 = this;
+
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
+      axios.post("maps/save/by_selection", {
+        selectedIds: this.selectedIds
+      }).then(function () {
+        _this9.$swal(_this9.$t("Delete.Deleted"), _this9.$t("Delete.TitleMap"), "success");
+
+        Fire.$emit("Delete_Map");
+      })["catch"](function () {
+        // Complete the animation of theprogress bar.
+        setTimeout(function () {
+          return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
+        }, 500);
+
+        _this9.$swal(_this9.$t("Delete.Failed"), _this9.$t("Delete.Therewassomethingwronge"), "warning");
+      });
+    },
+    delete_by_selected: function delete_by_selected() {
+      var _this10 = this;
 
       this.$swal({
         title: this.$t("Delete.Title"),
@@ -860,9 +880,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
           nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
           axios.post("maps/delete/by_selection", {
-            selectedIds: _this9.selectedIds
+            selectedIds: _this10.selectedIds
           }).then(function () {
-            _this9.$swal(_this9.$t("Delete.Deleted"), _this9.$t("Delete.TitleMap"), "success");
+            _this10.$swal(_this10.$t("Delete.Deleted"), _this10.$t("Delete.TitleMap"), "success");
 
             Fire.$emit("Delete_Map");
           })["catch"](function () {
@@ -871,7 +891,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
             }, 500);
 
-            _this9.$swal(_this9.$t("Delete.Failed"), _this9.$t("Delete.Therewassomethingwronge"), "warning");
+            _this10.$swal(_this10.$t("Delete.Failed"), _this10.$t("Delete.Therewassomethingwronge"), "warning");
           });
         }
       });
@@ -879,19 +899,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   //end Methods
   created: function created() {
-    var _this10 = this;
+    var _this11 = this;
 
     this.Get_Maps(1);
     Fire.$on("Event_Map", function () {
       setTimeout(function () {
-        _this10.Get_Maps(_this10.serverParams.page);
+        _this11.Get_Maps(_this11.serverParams.page);
 
-        _this10.$bvModal.hide("New_map");
+        _this11.$bvModal.hide("New_map");
       }, 500);
     });
     Fire.$on("Delete_Map", function () {
       setTimeout(function () {
-        _this10.Get_Maps(_this10.serverParams.page);
+        _this11.Get_Maps(_this11.serverParams.page);
       }, 500);
     });
   }
@@ -1341,14 +1361,14 @@ var render = function () {
                       _c(
                         "button",
                         {
-                          staticClass: "btn btn-danger btn-sm",
+                          staticClass: "btn btn-success btn-sm",
                           on: {
                             click: function ($event) {
                               return _vm.delete_by_selected()
                             },
                           },
                         },
-                        [_vm._v(" " + _vm._s(_vm.$t("Del")))]
+                        [_vm._v(" " + _vm._s(_vm.$t("Save")))]
                       ),
                       _vm._v(" "),
                       _c(

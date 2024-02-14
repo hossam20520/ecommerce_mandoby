@@ -1349,7 +1349,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       roles: [],
       data: new FormData(),
       user: {
-        type: "3",
+        type: 3,
         firstname: "",
         area_name: "",
         location_lat: "",
@@ -1665,7 +1665,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.data.append("username", self.user.username);
       self.data.append("email", self.user.email);
       self.data.append("password", self.user.password);
-      self.data.append("phone", self.user.phone); // self.data.append("role", self.user.role_id);
+      self.data.append("phone", self.user.phone);
+      self.data.append("type", self.user.type); // self.data.append("role", self.user.role_id);
       // self.data.append("area_name", self.user.area_name);
       // self.data.append("location_lat", self.user.location_lat);
       // self.data.append("address", self.user.address);
@@ -1702,7 +1703,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.data.append("phone", self.user.phone);
       self.data.append("role", self.user.role_id);
       self.data.append("statut", self.user.statut);
-      self.data.append("avatar", self.user.avatar); // self.data.append("area_name", self.user.area_name);
+      self.data.append("avatar", self.user.avatar);
+      self.data.append("type", self.user.type); // self.data.append("area_name", self.user.area_name);
       // self.data.append("location_lat", self.user.location_lat);
       // self.data.append("address", self.user.address);
       // self.data.append("location_long", self.user.location_long);
@@ -4116,8 +4118,8 @@ var render = function () {
                                           },
                                           placeholder: _vm.$t("choose"),
                                           options: [
-                                            { label: "Sales", value: "4" },
-                                            { label: "Driver", value: "3" },
+                                            { label: "Sales", value: 4 },
+                                            { label: "Driver", value: 3 },
                                           ],
                                         },
                                         model: {

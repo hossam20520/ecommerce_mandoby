@@ -140,7 +140,7 @@
 </template>
 
 <script>
-import NProgress from "nprogress";
+import NProgress from 'nprogress';
 
 export default {
   metaInfo: {
@@ -168,9 +168,35 @@ export default {
       limit: "10",
       survey: {
         id: "",
-        ar_name: "",
-        en_name: "",
-        image: ""
+        name:"",
+        nameselectaStatus:"",
+        city:"",
+        area:"",
+        DIDMeatResponsiblePerson:"",
+        NameResponsible:"",
+        Phone:"",
+        activityType:"",
+        address_Detail:"",
+        delevery_detail:"",
+        reasonVisit:"",
+        usingApplication:"",
+        milkused:"",
+        kreemUsed:"",
+        spices:"",
+        cheeseUsed:"",
+        SelectedBatter:"",
+        oilUsed:"",
+        teaused:"",
+        seeeds:"",
+        sauce:"",
+        sauceCompany:"",
+        watergasused:"",
+        pastaUsed:"",
+        bonUsed:"",
+        branchNumber:"",
+        summryVisit:"",
+        productUsesClient:"",
+        activity:"",
       }
     };
   },
@@ -232,13 +258,13 @@ export default {
     thClass: "text-left"
   },
   {
-    label: this.$t("delevery_detail"),
+    label: this.$t("عنوان التوصيل"),
     field: "delevery_detail",
     tdClass: "text-left",
     thClass: "text-left"
   },
   {
-    label: this.$t("عنوان التوصيل"),
+    label: this.$t("سبب الزيارة"),
     field: "reasonVisit",
     tdClass: "text-left",
     thClass: "text-left"

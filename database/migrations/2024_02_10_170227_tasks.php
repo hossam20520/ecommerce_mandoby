@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Maps extends Migration
+class Tasks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,23 @@ class Maps extends Migration
      */
     public function up()
     {
-
-
-        Schema::create('maps', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 			$table->integer('id', true);
- 
-            $table->text('name')->nullable();
+            $table->integer('user_id')->nullable()->index('user_id');
+            $table->text('place_name')->nullable();
             $table->text('lat')->nullable();
             $table->text('lng')->nullable();
 
+            $table->text('from')->nullable();
+            $table->text('to')->nullable();
+            $table->string('status', 100);
+
+ 
         
 			$table->timestamps(6);
 			$table->softDeletes();
         });
-
-
     }
 
     /**

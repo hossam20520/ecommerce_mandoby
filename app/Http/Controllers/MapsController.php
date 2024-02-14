@@ -338,6 +338,24 @@ class MapsController extends Controller
 
     //-------------- Delete by selection  ---------------\
 
+    // save_by_selection
+
+    public function save_by_selection(Request $request)
+    {
+
+   
+
+        $selectedIds = $request->selectedIds;
+        foreach ($selectedIds as $map_id) {
+            Map::whereId($map_id)->update([
+                'deleted_at' => Carbon::now(),
+            ]);
+        }
+        return response()->json(['success' => true]);
+
+    }
+
+
     public function delete_by_selection(Request $request)
     {
 
