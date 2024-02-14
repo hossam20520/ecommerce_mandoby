@@ -21,7 +21,7 @@ class surveyController extends Controller
         \DB::transaction(function () use ($request) {
 
       
-            $surveyData = $request->input('payload.survey');
+            $surveyData = $request->input('payload');
 
 
             $Survey = new Survey;
