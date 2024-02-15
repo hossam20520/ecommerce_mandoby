@@ -198,7 +198,7 @@ class MapsController extends Controller
 
             if (isset($json_response['next_page_token'])) {
                 $next_page_token = $json_response['next_page_token'];
-                $params['pagetoken'] = $next_page_token;
+                $params['next_page_token'] = $next_page_token;
     
                 // Google requires a short delay before making a request for the next page
                 sleep(2);
