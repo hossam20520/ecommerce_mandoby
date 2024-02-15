@@ -1013,7 +1013,7 @@ var render = function () {
           on: {
             submit: function ($event) {
               $event.preventDefault()
-              return _vm.Submit_Product($event)
+              return _vm.GetDataMap($event)
             },
           },
         },

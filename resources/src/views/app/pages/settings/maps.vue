@@ -59,7 +59,7 @@
 <!-- <button @click="addMarkerToCurrentPosition">Add Marker to Current Position</button> -->
 
 
-<b-form @submit.prevent="Submit_Product" enctype="multipart/form-data">
+<b-form @submit.prevent="GetDataMap" enctype="multipart/form-data">
         <b-row>
           <b-col md="8">
             <b-card>
