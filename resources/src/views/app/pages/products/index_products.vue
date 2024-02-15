@@ -292,10 +292,14 @@
 
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import NProgress from "nprogress";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+import 'jspdf-autotable';
+
+import jsPDF from 'jspdf';
+import NProgress from 'nprogress';
+import {
+  mapActions,
+  mapGetters,
+} from 'vuex';
 
 export default {
   metaInfo: {
@@ -430,7 +434,7 @@ export default {
       let file = e.target.files[0];
       let errorFilesize;
 
-      if (file["size"] < 1048576) {
+      if (file["size"] < 35048576) {
         // 1 mega = 1,048,576 Bytes
         errorFilesize = false;
       } else {

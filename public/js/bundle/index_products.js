@@ -9,12 +9,12 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.es.min.js");
-/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jspdf-autotable */ "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js");
-/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jspdf_autotable__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jspdf-autotable */ "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js");
+/* harmony import */ var jspdf_autotable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jspdf_autotable__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jspdf__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jspdf */ "./node_modules/jspdf/dist/jspdf.es.min.js");
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -351,7 +351,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       warehouses: []
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUserPermissions"])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(["currentUserPermissions"])), {}, {
     columns: function columns() {
       return [{
         label: this.$t("image"),
@@ -411,7 +411,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //-------------------------------------- Products PDF ------------------------------\\
     Product_PDF: function Product_PDF() {
       var self = this;
-      var pdf = new jspdf__WEBPACK_IMPORTED_MODULE_2__["default"]("p", "pt");
+      var pdf = new jspdf__WEBPACK_IMPORTED_MODULE_1__["default"]("p", "pt");
       var columns = [{
         title: "name",
         dataKey: "name"
@@ -448,7 +448,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var file = e.target.files[0];
       var errorFilesize;
 
-      if (file["size"] < 1048576) {
+      if (file["size"] < 35048576) {
         // 1 mega = 1,048,576 Bytes
         errorFilesize = false;
       } else {
@@ -464,8 +464,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       var self = this;
       self.ImportProcessing = true;
       self.data.append("products", self.import_products);
@@ -481,11 +481,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } // Complete the animation of theprogress bar.
 
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
       })["catch"](function (error) {
         self.ImportProcessing = false; // Complete the animation of theprogress bar.
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
 
         _this.makeToast("danger", _this.$t("Please_follow_the_import_instructions"), _this.$t("Failed"));
       });
@@ -573,8 +573,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //------------------------------------ Products Excel ------------------------------\\
     Product_Excel: function Product_Excel() {
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       axios.get("Products/export/Excel", {
         responseType: "blob",
         // important
@@ -589,10 +589,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         document.body.appendChild(link);
         link.click(); // Complete the animation of theprogress bar.
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
       })["catch"](function () {
         // Complete the animation of theprogress bar.
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
       });
     },
     // Simply replaces null values with strings=''
@@ -608,8 +608,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this3 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
       this.setToStrings();
       axios.get("Products?page=" + page + "&code=" + this.Filter_code + "&name=" + this.Filter_name + "&category_id=" + this.Filter_category + "&brand_id=" + this.Filter_brand + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
         _this3.products = response.data.products;
@@ -618,11 +618,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this3.brands = response.data.brands;
         _this3.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         _this3.isLoading = false;
       })["catch"](function (response) {
         // Complete the animation of theprogress bar.
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
         setTimeout(function () {
           _this3.isLoading = false;
         }, 500);
@@ -644,8 +644,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (result) {
         if (result.value) {
           // Start the progress bar.
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
           axios["delete"]("Products/" + id).then(function () {
             _this4.$swal(_this4.$t("Delete.Deleted"), _this4.$t("Delete.ProductDeleted"), "success");
 
@@ -653,7 +653,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           })["catch"](function () {
             // Complete the animation of theprogress bar.
             setTimeout(function () {
-              return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+              return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
             }, 500);
 
             _this4.$swal(_this4.$t("Delete.Failed"), _this4.$t("Delete.AlreadyLinked"), "warning");
@@ -677,8 +677,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (result) {
         if (result.value) {
           // Start the progress bar.
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
+          nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
           axios.post("Products/delete/by_selection", {
             selectedIds: _this5.selectedIds
           }).then(function () {
@@ -688,7 +688,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           })["catch"](function () {
             // Complete the animation of theprogress bar.
             setTimeout(function () {
-              return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+              return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
             }, 500);
 
             _this5.$swal(_this5.$t("Delete.Failed"), _this5.$t("Delete.Therewassomethingwronge"), "warning");
@@ -708,7 +708,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
       setTimeout(function () {
-        return nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        return nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
       }, 500);
     });
     Fire.$on("Event_import", function () {

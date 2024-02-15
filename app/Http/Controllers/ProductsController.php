@@ -1061,10 +1061,13 @@ class ProductsController extends BaseController
                             $brand_id = null;
                         }
 
-
+                        //  $producta = Product::where('code' , $value['code'])->first();
+                        // if(aa){
+                        //     $this->updateData($code , $value);
+                        // }
                         $Product = new Product;
                         $Product->name = $value['name'] == '' ? null : $value['name'];
-                        $Product->name = $value['ar_name'] == '' ? null : $value['ar_name'];
+                        $Product->ar_name = $value['ar_name'] == '' ? null : $value['ar_name'];
                         $Product->code = $value['code'] == '' ? '11111111' : $value['code'];
                         $Product->Type_barcode = 'CODE128';
                         $Product->price = $value['price'];
@@ -1094,9 +1097,13 @@ class ProductsController extends BaseController
                             }
                         }
                     }
+
+
                     if ($warehouses) {
                         product_warehouse::insert($product_warehouse);
                     }
+
+
                 }
             }, 10);
             return response()->json([
@@ -1111,6 +1118,38 @@ class ProductsController extends BaseController
             ]);
         }
 
+    }
+
+    public function updateData($code , $value){
+
+        $Product = Product::where('code', $code)
+        ->where('deleted_at', '=', null)
+        ->first();
+
+    //-- Update Product
+                           $Product->name = $value['name'] == '' ? null : $value['name'];
+                        // $Product->name = $value['ar_name'] == '' ? null : $value['ar_name'];
+                        $Product->code = $value['code'] == '' ? '11111111' : $value['code'];
+                        $Product->Type_barcode = 'CODE128';
+                        $Product->price = $value['price'];
+                        $Product->cost = $value['cost'];
+                        $Product->category_id = $category_id;
+                        $Product->brand_id = $brand_id;
+                        $Product->TaxNet = 0;
+                        $Product->tax_method = 1;
+                        $Product->note = $value['note'] ? $value['note'] : '';
+                        $Product->unit_id = $unit_id;
+                        $Product->unit_sale_id = $unit_id;
+                        $Product->unit_purchase_id = $unit_id;
+                        $Product->stock_alert = $value['stock_alert'] ? $value['stock_alert'] : 0;
+                        $Product->is_variant = 0;
+                        $Product->discount =  $value['discount'] == '' ? 0 : $value['discount'];
+                        $Product->status = $value['status']; //NORMAL_PRODUCT //NEW_PRODUCT //TOP_PRODUCT //OFFERS_PRODUCT
+
+                        $Product->image = 'no-image.png';
+                        $Product->save();
+
+   
     }
 
     // Generate_random_code

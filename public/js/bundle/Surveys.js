@@ -187,9 +187,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       limit: "10",
       survey: {
         id: "",
-        ar_name: "",
-        en_name: "",
-        image: ""
+        name: "",
+        nameselectaStatus: "",
+        city: "",
+        area: "",
+        DIDMeatResponsiblePerson: "",
+        NameResponsible: "",
+        Phone: "",
+        activityType: "",
+        address_Detail: "",
+        delevery_detail: "",
+        reasonVisit: "",
+        usingApplication: "",
+        milkused: "",
+        kreemUsed: "",
+        spices: "",
+        cheeseUsed: "",
+        SelectedBatter: "",
+        oilUsed: "",
+        teaused: "",
+        seeeds: "",
+        sauce: "",
+        sauceCompany: "",
+        watergasused: "",
+        pastaUsed: "",
+        bonUsed: "",
+        branchNumber: "",
+        summryVisit: "",
+        productUsesClient: "",
+        activity: ""
       }
     };
   },
@@ -241,12 +267,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("delevery_detail"),
+        label: this.$t("عنوان التوصيل"),
         field: "delevery_detail",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("عنوان التوصيل"),
+        label: this.$t("سبب الزيارة"),
         field: "reasonVisit",
         tdClass: "text-left",
         thClass: "text-left"
