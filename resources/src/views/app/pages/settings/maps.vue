@@ -953,7 +953,7 @@ export default {
   }, //end Methods
   created: function() {
   
-    this.Get_Maps(1);
+    // this.Get_Maps(1);
 
     Fire.$on("Event_Map", () => {
       setTimeout(() => {

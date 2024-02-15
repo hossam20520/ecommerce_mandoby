@@ -901,7 +901,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   created: function created() {
     var _this11 = this;
 
-    this.Get_Maps(1);
+    // this.Get_Maps(1);
     Fire.$on("Event_Map", function () {
       setTimeout(function () {
         _this11.Get_Maps(_this11.serverParams.page);
