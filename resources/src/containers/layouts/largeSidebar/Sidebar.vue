@@ -577,11 +577,28 @@
 
 
   
-
+          <li
+            class="nav-item"
+            v-if="currentUserPermissions && currentUserPermissions.includes('setting_system')"
+          >
+            <router-link tag="a" class to="/app/settings/Governments">
+              <i class="nav-icon i-Bookmark"></i>
+              <span class="item-name">{{   $t('Government') }}</span>
+            </router-link>
+          </li>
 
           <li
             class="nav-item"
-            v-if="currentUserPermissions && currentUserPermissions.includes('category')"
+            v-if="currentUserPermissions && currentUserPermissions.includes('setting_system')"
+          >
+            <router-link tag="a" class to="/app/settings/Shipping_areas">
+              <i class="nav-icon i-Bookmark"></i>
+              <span class="item-name">{{   $t('Shipping_area') }}</span>
+            </router-link>
+          </li>
+          <li
+            class="nav-item"
+            v-if="currentUserPermissions && currentUserPermissions.includes('setting_system')"
           >
             <router-link tag="a" class to="/app/settings/Achivments">
               <i class="nav-icon i-Bookmark"></i>

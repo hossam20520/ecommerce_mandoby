@@ -504,6 +504,29 @@ const routes = [
                             import(/* webpackChunkName: "Mandobs" */"./views/app/pages/settings/mandobs")
                     },
 
+
+                                              // governments
+                                              {
+                                                name: "governments",
+                                                path: "Governments",
+                                                component: () =>
+                                                    import(/* webpackChunkName: "Governments" */"./views/app/pages/settings/governments")
+                                            },
+              // governments
+              {
+                name: "area",
+                path: "area/:id",
+                component: () =>
+                    import(/* webpackChunkName: "Governments" */"./views/app/pages/settings/areas")
+            },
+
+                                      // Shipping_areas
+                                      {
+                                        name: "Shipping_areas",
+                                        path: "Shipping_areas",
+                                        component: () =>
+                                            import(/* webpackChunkName: "Shipping_areas" */"./views/app/pages/settings/Shipping_areas")
+                                    },
                                          // achivments
                                          {
                                             name: "achivments",

@@ -904,6 +904,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2563,7 +2580,61 @@ var render = function () {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.currentUserPermissions &&
-                _vm.currentUserPermissions.includes("category")
+                _vm.currentUserPermissions.includes("setting_system")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              tag: "a",
+                              to: "/app/settings/Governments",
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon i-Bookmark" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("Government"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("setting_system")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              tag: "a",
+                              to: "/app/settings/Shipping_areas",
+                            },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon i-Bookmark" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("Shipping_area"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("setting_system")
                   ? _c(
                       "li",
                       { staticClass: "nav-item" },

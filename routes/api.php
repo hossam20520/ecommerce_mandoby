@@ -466,6 +466,26 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::post('roles/delete/by_selection', 'PermissionsController@delete_by_selection');
 
     
+
+     //------------------------------- Governments--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('governments', 'GovernmentsController');
+    Route::post('governments/delete/by_selection', 'GovernmentsController@delete_by_selection');
+
+
+        //------------------------------- Areas--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('areas', 'AreasController');
+    Route::post('areas/delete/by_selection', 'AreasController@delete_by_selection');
+
+
+        //------------------------------- Shipping_areas--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('Shipping_areas', 'Shipping_areasController');
+    Route::post('Shipping_areas/delete/by_selection', 'Shipping_areasController@delete_by_selection');
+    Route::get('dropdown/get', 'Shipping_areasController@getAreas');
+    
+
     //------------------------------- Settings ------------------------\\
     //------------------------------------------------------------------\\    
     Route::resource('settings', 'SettingsController');
