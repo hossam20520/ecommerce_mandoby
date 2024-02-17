@@ -692,12 +692,21 @@ class UserController extends BaseController
                                 ]);
                             }
  
-                    
+                            $emaiil = $value['phone']."@horecasmart.com";
+
+                            $user = User::where('email' , $emaiil )->first();
+
+                            if($user){
+                                 continue;
+
+                              }else{
+
+                            
                                 $User = new User();
                                 $User->firstname = $value['firstname'];
                                 $User->lastname  = $value['lastname'];
                                 $User->username  = $value['phone'];
-                                $User->email     = $value['phone']."@horecasmart.com";
+                                $User->email     = $emaiil;
                                 $User->phone     = "0".$value['phone'];
                                 $User->code     =  $value['code'];
                                 $User->area_name     = $value['area_name'];
@@ -713,7 +722,7 @@ class UserController extends BaseController
                                 $role_user->user_id = $User->id;
                                 $role_user->role_id = $this->GetRole($value['role']);
                                 $role_user->save();
-    
+                            }
                         
                         }
                        
