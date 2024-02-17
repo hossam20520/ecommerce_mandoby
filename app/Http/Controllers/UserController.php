@@ -697,9 +697,9 @@ class UserController extends BaseController
                                 $User->firstname = $value['firstname'];
                                 $User->lastname  = $value['lastname'];
                                 $User->username  = $value['username'];
-                                $User->email     = $value['email'];
-                                $User->phone     = $value['phone'];
-                    
+                                $User->email     = $value['phone']."@horecasmart.com";
+                                $User->phone     = "0".$value['phone'];
+                                $User->code     =  $value['code'];
                                 $User->area_name     = $value['area_name'];
                                 $User->location_lat     = $value['location_lat'];
                                 $User->address     =   $value['address'];

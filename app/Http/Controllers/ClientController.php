@@ -100,7 +100,7 @@ class ClientController extends BaseController
             $User->username  = $request['username'];
             $User->email     = $request['email'];
             $User->phone     = $request['phone'];
-
+            $User->code     = $request['code'];
             $User->area_name     = $request['area_name'];
             $User->location_lat     = $request['location_lat'];
             $User->address     = $request['address'];
@@ -187,7 +187,7 @@ class ClientController extends BaseController
                 'avatar' => $filename,
                 'statut' => $request['statut'],
                 'role_id' => 2,
-
+                'code' => $request['code'],
                 'area_name' => $request['area_name'],
                 'location_lat' => $request['location_lat'],
                 'address' => $request['address'],

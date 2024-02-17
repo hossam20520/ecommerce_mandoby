@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration {
 			$table->string('avatar')->nullable();
 			$table->string('phone', 192);
 			$table->integer('role_id');
+			$table->string('code')->nullable();
 			$table->boolean('statut')->default(1);
 			
 			$table->timestamps(6);

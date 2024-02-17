@@ -208,6 +208,26 @@
               </validation-provider>
             </b-col>
 
+
+                 <!-- code -->
+            <b-col md="6" sm="12">
+              <validation-provider
+                name="code"
+                :rules="{ required: true , min:3 , max:30}"
+                v-slot="validationContext"
+              >
+                <b-form-group :label="$t('code')">
+                  <b-form-input
+                    :state="getValidationState(validationContext)"
+                    aria-describedby="username-feedback"
+                    label="code"
+                    v-model="user.code"
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="username-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                </b-form-group>
+              </validation-provider>
+            </b-col>
+
             <!-- Phone -->
             <b-col md="6" sm="12">
               <validation-provider
@@ -402,14 +422,14 @@
 </template>
 
 <script>
-import "jspdf-autotable";
+import 'jspdf-autotable';
 
-import jsPDF from "jspdf";
-import NProgress from "nprogress";
+import jsPDF from 'jspdf';
+import NProgress from 'nprogress';
 import {
-    mapActions,
-    mapGetters,
-} from "vuex";
+  mapActions,
+  mapGetters,
+} from 'vuex';
 
 export default {
   metaInfo: {
@@ -442,6 +462,7 @@ export default {
       roles: [],
       data: new FormData(),
       user: {
+         code:"",
         firstname: "",
         area_name:"",
         location_lat:"",
@@ -464,6 +485,13 @@ export default {
     ...mapGetters(["currentUserPermissions"]),
     columns() {
       return [
+      {
+          label: this.$t("code"),
+          field: "firstname",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
         {
           label: this.$t("Firstname"),
           field: "firstname",
@@ -782,6 +810,7 @@ export default {
       self.data.append("location_lat", self.user.location_lat);
       self.data.append("address", self.user.address);
       self.data.append("location_long", self.user.location_long);
+      self.data.append("code", self.user.code);
       self.data.append("avatar", self.user.avatar);
      
       axios
@@ -822,7 +851,7 @@ export default {
       self.data.append("location_lat", self.user.location_lat);
       self.data.append("address", self.user.address);
       self.data.append("location_long", self.user.location_long);
-
+      self.data.append("code", self.user.code);
       self.data.append("_method", "put");
 
       axios

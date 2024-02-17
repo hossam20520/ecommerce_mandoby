@@ -432,6 +432,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -467,6 +487,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       roles: [],
       data: new FormData(),
       user: {
+        code: "",
         firstname: "",
         area_name: "",
         location_lat: "",
@@ -487,6 +508,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(["currentUserPermissions"])), {}, {
     columns: function columns() {
       return [{
+        label: this.$t("code"),
+        field: "firstname",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("Firstname"),
         field: "firstname",
         tdClass: "text-left",
@@ -788,6 +814,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.data.append("location_lat", self.user.location_lat);
       self.data.append("address", self.user.address);
       self.data.append("location_long", self.user.location_long);
+      self.data.append("code", self.user.code);
       self.data.append("avatar", self.user.avatar);
       axios.post("clients", self.data).then(function (response) {
         self.SubmitProcessing = false;
@@ -823,6 +850,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       self.data.append("location_lat", self.user.location_lat);
       self.data.append("address", self.user.address);
       self.data.append("location_long", self.user.location_long);
+      self.data.append("code", self.user.code);
       self.data.append("_method", "put");
       axios.post("clients/" + this.user.id, self.data).then(function (response) {
         _this6.makeToast("success", _this6.$t("Update.TitleUser"), _this6.$t("Success"));
@@ -1632,6 +1660,68 @@ var render = function () {
                                               )
                                             },
                                             expression: "user.username",
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-form-invalid-feedback",
+                                          {
+                                            attrs: { id: "username-feedback" },
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                validationContext.errors[0]
+                                              )
+                                            ),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "6", sm: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "code",
+                              rules: { required: true, min: 3, max: 30 },
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (validationContext) {
+                                  return [
+                                    _c(
+                                      "b-form-group",
+                                      { attrs: { label: _vm.$t("code") } },
+                                      [
+                                        _c("b-form-input", {
+                                          attrs: {
+                                            state:
+                                              _vm.getValidationState(
+                                                validationContext
+                                              ),
+                                            "aria-describedby":
+                                              "username-feedback",
+                                            label: "code",
+                                          },
+                                          model: {
+                                            value: _vm.user.code,
+                                            callback: function ($$v) {
+                                              _vm.$set(_vm.user, "code", $$v)
+                                            },
+                                            expression: "user.code",
                                           },
                                         }),
                                         _vm._v(" "),
