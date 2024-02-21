@@ -728,7 +728,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     columns: function columns() {
       return [{
         label: this.$t("Section"),
-        field: "Shop.Section",
+        field: "shop.Section",
         tdClass: "text-left",
         thClass: "text-left"
       }, {

@@ -187,7 +187,7 @@ export default {
       return [
         {
           label: this.$t("Section"),
-          field: "Shop.Section",
+          field: "shop.Section",
           tdClass: "text-left",
           thClass: "text-left"
         },
