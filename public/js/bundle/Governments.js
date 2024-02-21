@@ -1235,11 +1235,11 @@ var render = function () {
                             _c("tbody", [
                               _c("tr", [
                                 _c("td", [
-                                  _vm._v(" " + _vm._s(_vm.$t("ar_name"))),
+                                  _vm._v(" " + _vm._s(_vm.$t("name"))),
                                 ]),
                                 _vm._v(" "),
                                 _c("th", [
-                                  _vm._v(" " + _vm._s(_vm.task.ar_name)),
+                                  _vm._v(" " + _vm._s(_vm.task.survey.name)),
                                 ]),
                               ]),
                               _vm._v(" "),

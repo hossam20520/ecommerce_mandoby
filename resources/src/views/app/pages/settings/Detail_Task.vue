@@ -19,8 +19,8 @@
             <table class="table table-hover table-bordered table-md">
               <tbody>
                 <tr>
-                  <td> {{  $t('ar_name') }}</td>
-                  <th> {{  task.ar_name  }}</th>
+                  <td> {{  $t('name') }}</td>
+                  <th> {{  task.survey.name  }}</th>
                 </tr>
                 <tr>
                   <td> {{  $t('en_name')  }}</td>

@@ -87,8 +87,17 @@ class TasksController extends Controller
      //------------ function show -----------\
 
      public function getDetail(Request $request, $id){
-        //
-    
+         
+        $data_surv = Survey::where('deleted_at' , '=' , null)->where('task_id' , $id )->first();
+        
+        $item['survey'] = $data_surv;
+ 
+ 
+
+        
+        $data[] = $item;
+
+        return response()->json($data[0]);
     }
 
      //---------------- UPDATE Task -------------\
