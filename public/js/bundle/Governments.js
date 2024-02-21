@@ -87,6 +87,115 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1224,7 +1333,7 @@ var render = function () {
                     "b-row",
                     { attrs: { id: "print_task" } },
                     [
-                      _c("b-col", { attrs: { md: "8" } }, [
+                      _c("b-col", { attrs: { md: "12" } }, [
                         _c(
                           "table",
                           {
@@ -1234,9 +1343,7 @@ var render = function () {
                           [
                             _c("tbody", [
                               _c("tr", [
-                                _c("td", [
-                                  _vm._v(" " + _vm._s(_vm.$t("name"))),
-                                ]),
+                                _c("td", [_vm._v('  "اسم العميل" ')]),
                                 _vm._v(" "),
                                 _c("th", [
                                   _vm._v(" " + _vm._s(_vm.task.survey.name)),
@@ -1244,12 +1351,261 @@ var render = function () {
                               ]),
                               _vm._v(" "),
                               _c("tr", [
+                                _c("td", [_vm._v('  "المدينة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(" " + _vm._s(_vm.task.survey.city)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v(' "المنطقة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(" " + _vm._s(_vm.task.survey.area)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v(' "هل قابلت الشخص المسؤل" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        _vm.task.survey.DIDMeatResponsiblePerson
+                                      )
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "اسم المسؤل"  ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(_vm.task.survey.NameResponsible)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v(' "رقم التليفون" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(" " + _vm._s(_vm.task.survey.Phone)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "نوع النشاط" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.activityType)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v(' "عنوان الإدارة"')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.address_Detail)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "عنوان التوصيل" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(_vm.task.survey.delevery_detail)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "سبب االمكالمة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.reason_call)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
                                 _c("td", [
-                                  _vm._v(" " + _vm._s(_vm.$t("en_name"))),
+                                  _vm._v('   "هل يستخدم ابلكيشن للطلب" '),
                                 ]),
                                 _vm._v(" "),
                                 _c("th", [
-                                  _vm._v(" " + _vm._s(_vm.task.en_name)),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(_vm.task.survey.usingApplication)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "اللبن المستخدم" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.milkused)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "الكريمة المستخدمة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.kreemUsed)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v(' "التوابل المستخدمة"')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(" " + _vm._s(_vm.task.survey.spices)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('"الجبن المستخدمة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.cheeseUsed)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "الذبدة المستخدمة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.SelectedBatter)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "الزيوت المستخدمة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(" " + _vm._s(_vm.task.survey.oilUsed)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v(' "الشاى المستخدم" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(" " + _vm._s(_vm.task.survey.teaused)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "ارز و بقوليات" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(" " + _vm._s(_vm.task.survey.seeeds)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v(' "الصوصات المستخدمة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(" " + _vm._s(_vm.task.survey.sauce)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [
+                                  _vm._v('  "الشركة المنتجة للصوصات" '),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.sauceCompany)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [
+                                  _vm._v(' "المشروبات الغازية المستخدمة" '),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.watergasused)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v(' " المكرونة المستخدمة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.pastaUsed)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "البن المستخدم" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(" " + _vm._s(_vm.task.survey.bonUsed)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v(' "عدد فروع العميل" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.branchNumber)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v('  "ملخص الزيارة" ')]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " + _vm._s(_vm.task.survey.summryVisit)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [
+                                  _vm._v(
+                                    " " + _vm._s("منتجات اخرى يستخدمها العميل")
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(_vm.task.survey.productUsesClient)
+                                  ),
                                 ]),
                               ]),
                             ]),
