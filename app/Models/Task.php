@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    use HasFactory;
+    protected $dates = ['deleted_at'];
+    protected $table = 'tasks';
+
+    protected $fillable = [
+        'user_id', 'location_id', 'from', 'to', 'status',  
+    ];
+
+    public function Shop()
+    {
+        return $this->belongsTo('App\Models\Map'  , 'location_id');
+    }
 }

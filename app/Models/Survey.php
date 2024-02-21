@@ -39,6 +39,7 @@ class Survey extends Model
         'summryVisit',
         'productUsesClient',
         'activity',
+        'task_id',
         // Add more fields here...
     ];
 }

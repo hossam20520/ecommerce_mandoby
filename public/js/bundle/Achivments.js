@@ -206,16 +206,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("Total_orders"),
-        field: "total_orders",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("completed_orders"),
-        field: "completed_orders",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
         label: this.$t("Action"),
         field: "actions",
         html: true,
@@ -560,7 +550,7 @@ var render = function () {
                       placeholder: _vm.$t("Search_this_table"),
                     },
                     "select-options": {
-                      enabled: true,
+                      enabled: false,
                       clearSelectionText: "",
                     },
                     "pagination-options": {
@@ -601,7 +591,7 @@ var render = function () {
                                         attrs: {
                                           title: "View",
                                           to: {
-                                            name: "orders",
+                                            name: "tasks",
                                             params: { id: props.row.id },
                                           },
                                         },
@@ -623,31 +613,14 @@ var render = function () {
                     ],
                     null,
                     false,
-                    3709147160
+                    2344271035
                   ),
                 },
                 [
-                  _c(
-                    "div",
-                    {
-                      attrs: { slot: "selected-row-actions" },
-                      slot: "selected-row-actions",
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function ($event) {
-                              return _vm.delete_by_selected()
-                            },
-                          },
-                        },
-                        [_vm._v(" " + _vm._s(_vm.$t("Del")))]
-                      ),
-                    ]
-                  ),
+                  _c("div", {
+                    attrs: { slot: "selected-row-actions" },
+                    slot: "selected-row-actions",
+                  }),
                 ]
               ),
             ],

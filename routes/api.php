@@ -23,8 +23,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
- 
-Route::get('maps/view/data', 'MapsController@GetData');
+
+// Route::get('maps/view/data', 'MapsController@GetData');
+
+Route::get('maps/view/data', 'MapsController@index');
+
 Route::get('maps/view/data/test', 'MapsController@getRestaurantTestAPI');
 Route::get('maps/view/data/testa', 'MapsController@getRestaurants');
 
@@ -79,7 +82,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::get("/v1/device/products/", "device\ProductsController@Products");
 
-    // 
+    //
     Route::get("/v1/device/sales/", "device\sales\TasksController@getTasks");
 
 
@@ -96,7 +99,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
 
     Route::get('/v1/device/all/products', 'device\ProductsController@GetAllProducts');
- 
+
 
     Route::get("device/profile", "device\AuthController@profile");
     Route::post("device/profile/image", "device\AuthController@changeImage");
@@ -110,59 +113,68 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::post("/v1/device/cart/add", "device\CartController@addToCart");
     Route::post("/v1/device/cart/increase", "device\CartController@IncreaseProductQT");
     Route::get("/v1/device/cart", "device\CartController@getCartByUserId");
-    
-    Route::post("/v1/device/cart/decrease", "device\CartController@decreaseProductQT");  
- 
-    Route::post("/v1/device/cart/remove", "device\CartController@removeProductfromCart");  
- 
 
-    Route::post("/v1/device/checkout", "device\CheckoutController@checkout");  
+    Route::post("/v1/device/cart/decrease", "device\CartController@decreaseProductQT");
 
-    Route::get("/v1/device/orders", "device\OrdersController@GetOrders");  
-    Route::get("/v1/device/order/{id}", "device\OrdersController@getorder"); 
-    Route::post("/v1/device/notification", "device\NotificationsController@updateFcm"); 
-
-    Route::get("/v1/device/mandob/orders", "device\mandob\OrdersController@GetOrders"); 
+    Route::post("/v1/device/cart/remove", "device\CartController@removeProductfromCart");
 
 
-  Route::get("/v1/device/mandob/order/{id}", "device\mandob\OrdersController@OrderDetail"); 
-  
-  Route::post("/v1/device/mandob/order/accept", "device\mandob\OrdersController@acceptOrder"); 
- 
+    Route::post("/v1/device/checkout", "device\CheckoutController@checkout");
 
-  Route::post("/v1/device/mandob/order/pay", "device\mandob\OrdersController@pay"); 
+    Route::get("/v1/device/orders", "device\OrdersController@GetOrders");
+    Route::get("/v1/device/order/{id}", "device\OrdersController@getorder");
+    Route::post("/v1/device/notification", "device\NotificationsController@updateFcm");
 
-
-  Route::post("/v1/device/mandob/bill/image", "device\mandob\OrdersController@addImage"); 
+    Route::get("/v1/device/mandob/orders", "device\mandob\OrdersController@GetOrders");
 
 
- 
+  Route::get("/v1/device/mandob/order/{id}", "device\mandob\OrdersController@OrderDetail");
+
+  Route::post("/v1/device/mandob/order/accept", "device\mandob\OrdersController@acceptOrder");
+
+
+  Route::post("/v1/device/mandob/order/pay", "device\mandob\OrdersController@pay");
+
+
+  Route::post("/v1/device/mandob/bill/image", "device\mandob\OrdersController@addImage");
+
+
+
       //------------------------------- Orders--------------------------\
     //------------------------------------------------------------------\
     Route::resource('orders', 'OrdersController');
     Route::post('orders/delete/by_selection', 'OrdersController@delete_by_selection');
- 
+
 //   OrdersController
 
-//   Route::get("/v1/device/checkout", "device\ProductsController@search"); 
+//   Route::get("/v1/device/checkout", "device\ProductsController@search");
 
-  Route::post("/v1/device/promo", "device\CheckoutController@applyPromoCode"); 
-  
+  Route::post("/v1/device/promo", "device\CheckoutController@applyPromoCode");
+
     //------------------------------- Promos--------------------------\
     //------------------------------------------------------------------\
     Route::resource('promos', 'PromosController');
     Route::post('promos/delete/by_selection', 'PromosController@delete_by_selection');
-  
+
     //------------------------------- Mandobs--------------------------\
     //------------------------------------------------------------------\
     Route::resource('mandobs', 'MandobsController');
     Route::post('mandobs/delete/by_selection', 'MandobsController@delete_by_selection');
 
+
+
+    //------------------------------- Tasks--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('tasks', 'TasksController');
+    Route::post('tasks/delete/by_selection', 'TasksController@delete_by_selection');
+
+
+
     //------------------------------- Notifications--------------------------\
     //------------------------------------------------------------------\
     Route::resource('notifications', 'NotificationsController');
     Route::post('notifications/delete/by_selection', 'NotificationsController@delete_by_selection');
-  
+
     //-------------------------- Clear Cache ---------------------------
 
     Route::get("Clear_Cache", "SettingsController@Clear_Cache");
@@ -214,8 +226,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::resource('clients', 'ClientController');
     Route::get('clients/export/Excel', 'ClientController@exportExcel');
-  
-    
+
+
 
     Route::get('Get_Clients_Without_Paginate', 'ClientController@Get_Clients_Without_Paginate');
     Route::post('clients/delete/by_selection', 'ClientController@delete_by_selection');
@@ -242,15 +254,15 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     //------------------------------- PRODUCTS --------------------------\\
     //------------------------------------------------------------------\\
 
-  
-    
+
+
 
     //------------------------------- Surveys--------------------------\
     //------------------------------------------------------------------\
     Route::resource('surveys', 'SurveysController');
     Route::post('surveys/delete/by_selection', 'SurveysController@delete_by_selection');
 
- 
+
 
 
     Route::resource('Products', 'ProductsController');
@@ -305,17 +317,20 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
 
 
-    
- 
+
+
 
     //------------------------------- Maps--------------------------\
     //------------------------------------------------------------------\
     Route::resource('maps', 'MapsController');
     Route::post('maps/delete/by_selection', 'MapsController@delete_by_selection');
-
+   
+    Route::get('Tasks/Detail/{id}', 'TasksController@getDetail');
+   
+    
 
     Route::post('maps/save/by_selection', 'MapsController@save_by_selection');
-    
+
 
     //------------------------------- PURCHASES --------------------------\\
     //------------------------------------------------------------------\\
@@ -348,7 +363,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get('sales/export/Excel', 'SalesController@exportExcel');
     Route::post('sales/delete/by_selection', 'SalesController@delete_by_selection');
     Route::post('sales/assign/by_selection', 'SalesController@assgin_by_selection');
-    
+
     //------------------------------- Payments  Sales --------------------------\\
     //------------------------------------------------------------------\\
 
@@ -442,20 +457,20 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::get('sales_rep/user', 'UserController@getSalesRep');
     Route::post('storerep/user', 'UserController@storeRep');
-  
+
     Route::post('rep/delete/by_selection', 'UserController@delete_by_selection');
     Route::delete('rep/delete/mandob/{id}', 'UserController@delete_mandob');
-    
+
 
     Route::put('updaterep/user/{id}', 'UserController@updateRep');
-    
+
     Route::put('users/Activated/{id}', 'UserController@IsActivated');
     Route::get('users/export/Excel', 'UserController@exportExcel');
     Route::get('users/Get_Info/Profile', 'UserController@GetInfoProfile');
     Route::put('updateProfile/{id}', 'UserController@updateProfile');
 
     Route::post('userss/import/csv', 'UserController@import_users');
- 
+
 
     //------------------------------- Permission Groups user -----------\\
     //------------------------------------------------------------------\\
@@ -465,7 +480,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get('getRoleswithoutpaginate', 'PermissionsController@getRoleswithoutpaginate');
     Route::post('roles/delete/by_selection', 'PermissionsController@delete_by_selection');
 
-    
+
 
      //------------------------------- Governments--------------------------\
     //------------------------------------------------------------------\
@@ -484,15 +499,15 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::resource('Shipping_areas', 'Shipping_areasController');
     Route::post('Shipping_areas/delete/by_selection', 'Shipping_areasController@delete_by_selection');
     Route::get('dropdown/get', 'Shipping_areasController@getAreas');
-    
+
 
     //------------------------------- Settings ------------------------\\
-    //------------------------------------------------------------------\\    
+    //------------------------------------------------------------------\\
     Route::resource('settings', 'SettingsController');
 
     Route::put('pos_settings/{id}', 'SettingsController@update_pos_settings');
     Route::get('get_pos_Settings', 'SettingsController@get_pos_Settings');
-    
+
     Route::put('SMTP/{id}', 'SettingsController@updateSMTP');
     Route::post('SMTP', 'SettingsController@CreateSMTP');
     Route::get('getSettings', 'SettingsController@getSettings');
@@ -506,7 +521,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     //------------------------------- Backup --------------------------\\
     //------------------------------------------------------------------\\
-    
+
     Route::get("GetBackup", "ReportController@GetBackup");
     Route::get("GenerateBackup", "ReportController@GenerateBackup");
     Route::delete("DeleteBackup/{name}", "ReportController@DeleteBackup");
@@ -527,5 +542,5 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get('payment_Sale_PDF/{id}', 'PaymentSalesController@payment_sale');
     Route::get('Sales/Print_Invoice/{id}', 'SalesController@Print_Invoice_POS');
 
-   
+
     Route::get('Products/filter/{id}/{input}', 'ProductsController@Filter_Products');

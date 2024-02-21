@@ -5,6 +5,8 @@ namespace App\Http\Controllers\device;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Survey;
+use App\Models\Task;
+
 use App\utils\helpers;
 use Carbon\Carbon;
 use DB;
@@ -56,7 +58,16 @@ class surveyController extends Controller
             $Survey->summryVisit = $surveyData['summryVisit'] ?? null;
             $Survey->productUsesClient = $surveyData['productUsesClient'] ?? null;
             $Survey->activity = $surveyData['activity'] ?? null;
+            $Survey->task_id = $request['task_id'] ?? null;
+ 
             $Survey->save();
+
+
+
+     Task::whereId($request['task_id'])->update([
+            'status' => "done",
+        ]);
+
 
 
         }, 10);

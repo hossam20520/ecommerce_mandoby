@@ -519,8 +519,14 @@ const routes = [
                 component: () =>
                     import(/* webpackChunkName: "Governments" */"./views/app/pages/settings/areas")
             },
-
-                                      // Shipping_areas
+              // governments
+              {
+                name: "detail_task",
+                path: "detail_task/:id",
+                component: () =>
+                    import(/* webpackChunkName: "Governments" */"./views/app/pages/settings/Detail_Task")
+            },
+                                // Shipping_areas
                                       {
                                         name: "Shipping_areas",
                                         path: "Shipping_areas",
@@ -542,6 +548,15 @@ const routes = [
                                             path: "orders/:id",
                                             component: () =>
                                                 import(/* webpackChunkName: "Orders" */"./views/app/pages/settings/orders")
+                                        },
+
+
+
+                                        {
+                                            name: "tasks",
+                                            path: "tasks/:id",
+                                            component: () =>
+                                                import(/* webpackChunkName: "Orders" */"./views/app/pages/settings/tasks")
                                         },
 
 

@@ -48,6 +48,8 @@ class Survey extends Migration
             $table->string('summryVisit')->nullable();
             $table->string('productUsesClient')->nullable();
             $table->string('activity')->nullable();
+            $table->string('task_id')->nullable();
+            
 			$table->timestamps(6);
 			$table->softDeletes();
 		});

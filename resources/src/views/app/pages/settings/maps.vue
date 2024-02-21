@@ -67,7 +67,7 @@
    
     
                 <!-- Tax Method -->
-                <b-col lg="6" md="6" sm="12" class="mb-2">
+                <!-- <b-col lg="6" md="6" sm="12" class="mb-2">
                   <validation-provider name="Category" :rules="{ required: true}">
                     <b-form-group slot-scope="{ valid, errors }" :label="$t('Category')">
                       <v-select
@@ -91,7 +91,7 @@
                       <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
-                </b-col>
+                </b-col> -->
 
 
 
@@ -119,10 +119,8 @@
                     </b-form-group>
                   </validation-provider>
                 </b-col>
-
-    
-
-                <button class="btn btn-success btn-sm" @click="GetDataMap()"> {{ $t('Excute') }}</button>
+ 
+                <!-- <button class="btn btn-success btn-sm" @click="GetDataMap()"> {{ $t('ShowInMap') }}</button> -->
 
           
               </b-row>
@@ -169,7 +167,8 @@
         :columns="columns"
         :totalRows="totalRows"
         :rows="maps"
- 
+        @on-page-change="onPageChange"
+        @on-per-page-change="onPerPageChange"
         @on-sort-change="onSortChange"
         @on-search="onSearch"
         :search-options="{
@@ -182,7 +181,7 @@
         }"
         @on-selected-rows-change="selectionChanged"
         :pagination-options="{
-        enabled: false,
+        enabled: true,
         mode: 'records',
         nextLabel: 'next',
         prevLabel: 'prev',
@@ -190,11 +189,16 @@
         styleClass="table-hover tableOne vgt-table"
       >
         <div slot="selected-row-actions">
-          <button class="btn btn-success btn-sm" @click="delete_by_selected()"> {{ $t('Save') }}</button>
+          <!-- <button class="btn btn-success btn-sm" @click="delete_by_selected()"> {{ $t('Save') }}</button> -->
 
           <button class="btn btn-success btn-sm" @click="openModel()">{{$t('assign_to_mandob')}}</button>
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
+
+          <b-button variant="outline-info m-1" size="sm" v-b-toggle.sidebar-right>
+            <i class="i-Filter-2"></i>
+            {{ $t("Filter") }}
+          </b-button>
           <!-- <b-button @click="New_Map()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
             <i class="i-Add"></i>
              {{ $t('Add') }}
@@ -222,6 +226,102 @@
           </span>
         </template>
       </vue-good-table>
+
+
+
+
+      <b-sidebar id="sidebar-right" :title="$t('Filter')" bg-variant="white" right shadow>
+        <div class="px-3 py-2">
+          <b-row>
+    
+    
+
+            <!-- Category  -->
+            <b-col md="12">
+              <b-form-group :label="$t('Section')">
+                <v-select
+                  :reduce="label => label.value"
+                  :placeholder="$t('Choose_Section')"
+                  v-model="Filter_Sections"
+                  :options="Sections.map(Sections => ({label: Sections , value: Sections }))"
+                />
+              </b-form-group>
+            </b-col>
+
+
+            <b-col md="12">
+              <b-form-group :label="$t('Shiakha_Name')">
+                <v-select
+                  :reduce="label => label.value"
+                  :placeholder="$t('Choose_Shiakha_Name')"
+                  v-model="Filter_Shiakha_Name"
+                  :options="Shiakha_Name.map(Shiakha_Name => ({label: Shiakha_Name , value: Shiakha_Name }))"
+                />
+              </b-form-group>
+            </b-col>
+
+
+
+            <b-col md="12">
+              <b-form-group :label="$t('Zone_Name')">
+                <v-select
+                  :reduce="label => label.value"
+                  :placeholder="$t('Choose_Zone_Name')"
+                  v-model="Filter_Zone_Name"
+                  :options="Zone_Name.map(Zone_Name => ({label: Zone_Name , value: Zone_Name }))"
+                />
+              </b-form-group>
+            </b-col>
+
+
+
+            <b-col md="12">
+              <b-form-group :label="$t('Street')">
+                <v-select
+                  :reduce="label => label.value"
+                  :placeholder="$t('Choose_Street')"
+                  v-model="Filter_street"
+                  :options="Street.map(Street => ({label: Street , value: Street }))"
+                />
+              </b-form-group>
+            </b-col>
+            
+
+            <!-- Brand  -->
+            <!-- <b-col md="12">
+              <b-form-group :label="$t('Brand')">
+                <v-select
+                  :reduce="label => label.value"
+                  :placeholder="$t('Choose_Brand')"
+                  v-model="Filter_brand"
+                  :options="brands.map(brands => ({label: brands.name, value: brands.id}))"
+                />
+              </b-form-group>
+            </b-col> -->
+
+            <b-col md="6" sm="12">
+              <b-button
+                @click="GetDataMap(serverParams.page)"
+                variant="primary m-1"
+                size="sm"
+                block
+              >
+                <i class="i-Filter-2"></i>
+                {{ $t("Filter") }}
+              </b-button>
+            </b-col>
+
+            <b-col md="6" sm="12">
+              <b-button @click="Reset_Filter()" variant="danger m-1" size="sm" block>
+                <i class="i-Power-2"></i>
+                {{ $t("Reset") }}
+              </b-button>
+            </b-col>
+          </b-row>
+        </div>
+      </b-sidebar>
+
+
     </b-card>
 
     <validation-observer ref="Create_map">
@@ -301,15 +401,16 @@
 
 
 
-            <!-- Modal Add Payment-->
-            <validation-observer ref="Driver">
+            <!-- Modal Add  -->
+    <validation-observer ref="Driver">
       <b-modal
         hide-footer
         size="lg"
         id="Driver"
         :title="EditPaiementMode?$t('Driver'):$t('Driver')"
       >
-        <b-form @submit.prevent="Submit_Payment">
+     
+        <b-form @submit.prevent="save_select">
           <b-row>
  
             
@@ -323,7 +424,7 @@
                         :state="errors[0] ? false : (valid ? true : null)"
                         :reduce="label => label.value"
                         :placeholder="$t('Mandobs')"
-                        v-model="mandob_id"
+                        v-model="user_id"
                         :options="mandobs.map(mandobs => ({label: mandobs.email, value: mandobs.id}))"
                       />
                       <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
@@ -351,6 +452,7 @@
               <b-button
                 variant="primary"
                 type="submit"
+              
                 :disabled="subProcessing"
               >{{$t('submit')}}</b-button>
               <div v-once class="typo__p" v-if="subProcessing">
@@ -363,7 +465,7 @@
     </validation-observer>
 
 
-
+ 
   </div>
 </template>
 
@@ -377,6 +479,17 @@ export default {
   },
   data() {
     return {
+
+
+    
+      Filter_Shiakha_Name: "",
+      Filter_Zone_Name:"",
+      Filter_street:"",
+      Filter_Sections: "",
+
+      Sections:[],
+      Zone_Name:[],
+      Shiakha_Name:[],
       isLoading: true,
 
       center: {lat: 30.059813, lng: 31.329825},
@@ -407,9 +520,11 @@ export default {
           type: "desc"
         },
         page: 1,
-        perPage: 500
+        perPage: 100
       },
       selectedIds: [],
+      user_id:0,
+
       totalRows: "",
       search: "",
       radius:10000,
@@ -428,7 +543,7 @@ export default {
       data: new FormData(),
       editmode: false,
       maps: [],
-      limit: 1000,
+      limit: 100,
       lat:"37.7749",
       lng:"-122.4194",
       keyword:["restaurant"],
@@ -451,33 +566,70 @@ export default {
       return [
   
         {
-          label: this.$t("name"),
-          field: "name",
+          label: this.$t("Point_X_Geo"),
+          field: "Point_X_Geo",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
-          label: this.$t("lat"),
-          field: "lat",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
-
-        {
-          label: this.$t("lng"),
-          field: "lng",
+          label: this.$t("Point_Y_Geo"),
+          field: "Point_Y_Geo",
           tdClass: "text-left",
           thClass: "text-left"
         },
 
         {
-          label: this.$t("Action"),
-          field: "actions",
-          html: true,
-          tdClass: "text-right",
-          thClass: "text-right",
-          sortable: false
-        }
+          label: this.$t("Section"),
+          field: "Section",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+        {
+          label: this.$t("Shiakha_Name"),
+          field: "Shiakha_Name",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+        {
+          label: this.$t("Zone_Name"),
+          field: "Zone_Name",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+
+        {
+          label: this.$t("Outlet_Name"),
+          field: "Outlet_Name",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+
+ 
+
+        {
+          label: this.$t("Street"),
+          field: "Street",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+        {
+          label: this.$t("Mobile"),
+          field: "Mobile",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+        // {
+        //   label: this.$t("Action"),
+        //   field: "actions",
+        //   html: true,
+        //   tdClass: "text-right",
+        //   thClass: "text-right",
+        //   sortable: false
+        // }
       ];
     }
   },
@@ -505,6 +657,9 @@ export default {
 
     },
 
+    assign(){
+
+    },
 
     openModel(){
       this.$bvModal.show("Driver");
@@ -743,30 +898,98 @@ export default {
       this.$bvModal.show("New_map");
     },
 
+    showInMap(){
+     
+      // this.shops_marker = response.data.map_items;
+
+    },
+
     //---------------------------------------- Get All maps-----------------\
+    // Get_Maps(page) {
+    //   // Start the progress bar.
+    //   console.log(this.radius)
+      
+    //   NProgress.start();
+    //   NProgress.set(0.1);
+    //   axios
+    //     .get(
+    //       "maps/view/data?lat=" +
+    //         this.markers[0].position.lat +
+    //         "&lng=" +
+    //         this.markers[0].position.lng +
+    //         "&radius=" +
+    //         this.radius +
+    //         "&keyword=" +
+    //         this.keyword.join(",")
+    //     )
+    //     .then(response => {
+    //       this.maps = response.data.maps;
+    //       this.totalRows = response.data.totalRows;
+    //       this.shops_marker = response.data.map_items;
+    //       this.mandobs = response.data.mandobs;
+    //       // Complete the animation of theprogress bar.
+    //       NProgress.done();
+    //       this.isLoading = false;
+    //     })
+    //     .catch(response => {
+    //       // Complete the animation of theprogress bar.
+    //       NProgress.done();
+    //       setTimeout(() => {
+    //         this.isLoading = false;
+    //       }, 500);
+    //     });
+    // },
+
+    Reset_Filter() {
+      this.search = "";
+      this.Filter_Sections = "";
+      this.Filter_Zone_Name = "";
+      this.Filter_street = "";
+      this.Filter_Shiakha_Name = "";
+ 
+      this.Get_Maps(this.serverParams.page);
+    },
     Get_Maps(page) {
       // Start the progress bar.
-      console.log(this.radius)
+     
       
       NProgress.start();
       NProgress.set(0.1);
       axios
         .get(
-          "maps/view/data?lat=" +
-            this.markers[0].position.lat +
-            "&lng=" +
-            this.markers[0].position.lng +
-            "&radius=" +
-            this.radius +
-            "&keyword=" +
-            this.keyword.join(",")
+          "maps/view/data?page=" +
+            page +
+            "&Section=" +
+            this.Filter_Sections +
+            "&Zone_Name=" +
+            this.Filter_Zone_Name +
+            "&Street=" +
+            this.Filter_street +
+            "&Shiakha_Name=" +
+            this.Filter_Shiakha_Name +
+            "&SortField=" +
+            this.serverParams.sort.field +
+            "&SortType=" +
+            this.serverParams.sort.type +
+            "&search=" +
+            this.search +
+            "&limit=" +
+            this.limit
         )
         .then(response => {
           this.maps = response.data.maps;
-          this.totalRows = response.data.totalRows;
-          this.shops_marker = response.data.map_items;
-          this.mandobs = response.data.mandobs;
+          // this.totalRows = response.data.totalRows;
+          // this.shops_marker = response.data.map_items;
+          // this.mandobs = response.data.mandobs;
           // Complete the animation of theprogress bar.
+           this.shops_marker = response.data.itemMap;
+           this.mandobs = response.data.mandobs;
+           this.Zone_Name = response.data.Zone_Name;
+          this.Shiakha_Name = response.data.Shiakha_Name;
+          console.log(response.data.itemMap);
+          this.Sections = response.data.Sections;
+          this.Street = response.data.Street;
+          this.totalRows = response.data.totalRows;
           NProgress.done();
           this.isLoading = false;
         })
@@ -778,6 +1001,7 @@ export default {
           }, 500);
         });
     },
+
 
     //---------------------------------------- Create new map-----------------\
     Create_Map() {
@@ -882,20 +1106,24 @@ export default {
 
     save_select(){
 
-
-      NProgress.start();
+   
+         NProgress.start();
           NProgress.set(0.1);
           axios.post("maps/save/by_selection", {
-              selectedIds: this.selectedIds
+              selectedIds: this.selectedIds ,
+              user_id: this.user_id,
+              from: this.from_date,
+              to: this.to_date
             })
             .then(() => {
               this.$swal(
-                this.$t("Delete.Deleted"),
-                this.$t("Delete.TitleMap"),
+                this.$t("Success"),
+                this.$t("Success Assign"),
                 "success"
               );
-
-              Fire.$emit("Delete_Map");
+              this.$bvModal.hide("Driver");
+              NProgress.done();
+              // Fire.$emit("Delete_Map");
             })
             .catch(() => {
               // Complete the animation of theprogress bar.
@@ -953,7 +1181,7 @@ export default {
   }, //end Methods
   created: function() {
   
-    // this.Get_Maps(1);
+    this.Get_Maps(1);
 
     Fire.$on("Event_Map", () => {
       setTimeout(() => {

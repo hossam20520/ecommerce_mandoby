@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Task;
+
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Http;
 
@@ -28,10 +30,24 @@ class MapsController extends Controller
         $dir = $request->SortType;
         $helpers = new helpers();
 
-        $maps = Map::where('deleted_at', '=', null)->where(function ($query) use ($request) {
+
+
+        // Filter_Shiakha_Name: "",
+        // Filter_Zone_Name:"",
+        // Filter_street:"",
+        // Filter_Sections: "",
+        $columns = array(0 => 'Shiakha_Name', 1 => 'Zone_Name', 2 => 'Street', 3 => 'Section');
+        $param = array(0 => '=', 1 => '=', 2 => '=', 3 => '=');
+        $data = array();
+
+        $daat = Map::where('deleted_at', '=', null);
+
+        $maps = $helpers->filter($daat, $columns, $param, $request)->where('deleted_at', '=', null)->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
-                    return $query->where('ar_name', 'LIKE', "%{$request->search}%")
-                        ->orWhere('en_name', 'LIKE', "%{$request->search}%");
+                    return $query->where('Shiakha_Name', 'LIKE', "%{$request->search}%")
+                        ->orWhere('Zone_Name', 'LIKE', "%{$request->search}%")
+                        ->orWhere('Street', 'LIKE', "%{$request->search}%") 
+                        ->orWhere('Section', 'LIKE', "%{$request->search}%");
                 });
             });
         $totalRows = $maps->count();
@@ -40,8 +56,47 @@ class MapsController extends Controller
             ->orderBy($order, $dir)
             ->get();
 
-        return response()->json([
+    //    $mapsv = Map::where('deleted_at', '=', null)->where('Sections', '!=', null)->unique('Sections')->pluck('Sections');
+       
+       $mapsva  =  Map::whereNull('deleted_at')->whereNotNull('Section')->pluck('Section')->unique()->values()->toArray();
+         
+       $Shiakha_Name  =  Map::whereNull('deleted_at')->whereNotNull('Shiakha_Name')->pluck('Shiakha_Name')->unique()->values()->toArray();
+                  
+       $Zone_Name  =  Map::whereNull('deleted_at')->whereNotNull('Zone_Name')->pluck('Zone_Name')->unique()->values()->toArray();
+       $Street  =  Map::whereNull('deleted_at')->whereNotNull('Street')->pluck('Street')->unique()->values()->toArray();
+         
+       
+       $mandobs = User::where('deleted_at', '=', null)->where('role_id' , 3)->get(['id', 'email']);
+
+ 
+       $itemMap = array();
+       foreach ($maps as $i => $da) {
+           $lat = $da['Point_X_Geo'];
+           $lng = $da['Point_Y_Geo'];
+
+           $item_map = [
+               "position" =>  [
+                   "lat"=>  floatval($lng) ,
+                   "lng"=>  floatval($lat)
+               ],
+               "showIcon"=>true,
+               "draggable"=> false,
+               "clickable"=> false, 
+            ];
+ 
+            array_push(  $itemMap , $item_map );
+       
+       }
+
+
+       return response()->json([
             'maps' => $maps,
+            'Sections' => $mapsva,
+            'Shiakha_Name'=> $Shiakha_Name,
+            'Zone_Name' => $Zone_Name,
+            'itemMap' => $itemMap,
+            'Street'=> $Street,
+            'mandobs' => $mandobs  ,
             'totalRows' => $totalRows,
         ]);
 
@@ -94,14 +149,12 @@ class MapsController extends Controller
                 ],
                 "showIcon"=>true,
                 "draggable"=> false,
-                "clickable"=> false,
-
-                 
+                "clickable"=> false, 
              ];
 
              
              array_push(  $itemMap , $item_map );
-            array_push(  $locat , $item );
+             array_push(  $locat , $item );
         }
         
 
@@ -344,12 +397,30 @@ class MapsController extends Controller
     {
 
    
-
+        $user_id = $request->user_id;
+        $from = $request->from;
+        $to = $request->to;
         $selectedIds = $request->selectedIds;
         foreach ($selectedIds as $map_id) {
-            Map::whereId($map_id)->update([
-                'deleted_at' => Carbon::now(),
-            ]);
+    
+
+            $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user_id)->where('location_id' , $map_id)->first();
+           if($tas){
+
+           }else{
+            $tasks = new Task;
+            $tasks->location_id = $map_id;
+            $tasks->user_id = $user_id;
+            $tasks->from = $from;
+            $tasks->to = $to;
+
+            $tasks->status = "pending";
+            $tasks->save();
+           }
+           
+
+       
+
         }
         return response()->json(['success' => true]);
 

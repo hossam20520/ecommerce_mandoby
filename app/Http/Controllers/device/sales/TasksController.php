@@ -12,10 +12,22 @@ class TasksController extends Controller
     public function getTasks(Request $request){
         
          $user =   Auth::user();
-         $tasks = Task::where('deleted_at' , '=' , null)->where('user_id' ,  $user->id )->get();
+         $tasks = Task::with('Shop')->where('deleted_at' , '=' , null)->where('user_id' ,  $user->id )->get();
 
+
+        $dataa = array();
+
+         foreach ($tasks as   $itm) {
+            $item['task_id']  = strval($itm->id);
+            $item['location_id']  = $itm->Shop->id;
+            $item['place_name']  = $itm->Shop->Outlet_Name;
+            $item['lng']  = $itm->Shop->Point_X_Geo;
+            $item['lat']  = $itm->Shop->Point_Y_Geo;
+            $item['status'] = $itm->status;
+            $dataa[] = $item;
+         }
          return response()->json([
-            'tasks' => $tasks
+            'tasks' =>  $dataa
         ]);
       
     }

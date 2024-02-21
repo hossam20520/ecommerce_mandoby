@@ -7,6 +7,7 @@
     "/js/bundle/Categories.js": "/js/bundle/Categories.js",
     "/js/bundle/Currencies.js": "/js/bundle/Currencies.js",
     "/js/bundle/Customers.js": "/js/bundle/Customers.js",
+    "/js/bundle/Governments.js": "/js/bundle/Governments.js",
     "/js/bundle/Mandobs.js": "/js/bundle/Mandobs.js",
     "/js/bundle/Maps.js": "/js/bundle/Maps.js",
     "/js/bundle/NotFound.js": "/js/bundle/NotFound.js",
@@ -14,6 +15,7 @@
     "/js/bundle/Orders.js": "/js/bundle/Orders.js",
     "/js/bundle/People.js": "/js/bundle/People.js",
     "/js/bundle/Promos.js": "/js/bundle/Promos.js",
+    "/js/bundle/Shipping_areas.js": "/js/bundle/Shipping_areas.js",
     "/js/bundle/Sliders.js": "/js/bundle/Sliders.js",
     "/js/bundle/Suppliers.js": "/js/bundle/Suppliers.js",
     "/js/bundle/Surveys.js": "/js/bundle/Surveys.js",
@@ -88,15 +90,13 @@
     "/js/bundle/store_transfer.js": "/js/bundle/store_transfer.js",
     "/js/bundle/transfers.js": "/js/bundle/transfers.js",
     "/js/bundle/units.js": "/js/bundle/units.js",
+    "/js/bundle/vendors~Governments~barcode~detail_product~index_sales~pos.js": "/js/bundle/vendors~Governments~barcode~detail_product~index_sales~pos.js",
     "/js/bundle/vendors~Maps.js": "/js/bundle/vendors~Maps.js",
-    "/js/bundle/vendors~barcode~detail_product~index_sales~pos.js": "/js/bundle/vendors~barcode~detail_product~index_sales~pos.js",
     "/js/bundle/vendors~dashboard~warehouse_report.js": "/js/bundle/vendors~dashboard~warehouse_report.js",
     "/js/bundle/vendors~edit_product~store_product.js": "/js/bundle/vendors~edit_product~store_product.js",
     "/js/bundle/vendors~index_sales~pos.js": "/js/bundle/vendors~index_sales~pos.js",
     "/js/bundle/vendors~largeSidebar.js": "/js/bundle/vendors~largeSidebar.js",
     "/js/bundle/vendors~largeSidebar~pos.js": "/js/bundle/vendors~largeSidebar~pos.js",
     "/js/bundle/vendors~vue-perfect-scrollbar.js": "/js/bundle/vendors~vue-perfect-scrollbar.js",
-    "/js/bundle/warehouse_report.js": "/js/bundle/warehouse_report.js",
-    "/js/bundle/Governments.js": "/js/bundle/Governments.js",
-    "/js/bundle/Shipping_areas.js": "/js/bundle/Shipping_areas.js"
+    "/js/bundle/warehouse_report.js": "/js/bundle/warehouse_report.js"
 }

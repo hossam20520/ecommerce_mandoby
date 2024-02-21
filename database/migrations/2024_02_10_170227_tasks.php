@@ -17,16 +17,11 @@ class Tasks extends Migration
             $table->engine = 'InnoDB';
 			$table->integer('id', true);
             $table->integer('user_id')->nullable()->index('user_id');
-            $table->text('place_name')->nullable();
-            $table->text('lat')->nullable();
-            $table->text('lng')->nullable();
-
+            $table->text('location_id')->nullable();
             $table->text('from')->nullable();
             $table->text('to')->nullable();
             $table->string('status', 100);
-
  
-        
 			$table->timestamps(6);
 			$table->softDeletes();
         });

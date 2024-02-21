@@ -19,7 +19,7 @@
         placeholder: $t('Search_this_table'),  
       }"
         :select-options="{ 
-          enabled: true ,
+          enabled: false ,
           clearSelectionText: '',
         }"
         @on-selected-rows-change="selectionChanged"
@@ -32,7 +32,7 @@
         styleClass="table-hover tableOne vgt-table"
       >
         <div slot="selected-row-actions">
-          <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button>
+          <!-- <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button> -->
         </div>
   
 
@@ -43,7 +43,7 @@
               
               v-b-tooltip.hover
               title="View"
-              :to="{ name:'orders', params: { id: props.row.id} }">
+              :to="{ name:'tasks', params: { id: props.row.id} }">
               <i class="i-Eye text-25 text-info"></i>
             </router-link>
         
@@ -194,21 +194,9 @@ export default {
           thClass: "text-left"
         },
 
-        {
-          label: this.$t("Total_orders"),
-          field: "total_orders",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
+ 
 
-
-        {
-          label: this.$t("completed_orders"),
-          field: "completed_orders",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
-
+  
         {
           label: this.$t("Action"),
           field: "actions",
