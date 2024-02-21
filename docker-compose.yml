@@ -31,7 +31,7 @@ services:
       DB_PASSWORD: root@8441144vva25
       PHP_UPLOAD_MAX_FILESIZE: 40M  # Set the upload_max_filesize
       PHP_POST_MAX_SIZE: 40M  
-      
+
     command: php artisan serve --host=0.0.0.0 --port=8000
   db:
     image: mariadb
@@ -50,8 +50,9 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: root@8441144vva25
-      PHP_UPLOAD_MAX_FILESIZE: 40M  # Set the upload_max_filesize
-      PHP_POST_MAX_SIZE: 40M       # Set
+      UPLOAD_LIMIT: 40M       # Set
+      # MEMORY_LIMIT:400M
+      # MAX_EXECUTION_TIME
  
  
 volumes:
