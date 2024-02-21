@@ -193,13 +193,13 @@ export default {
         },
         {
           label: this.$t("Shiakha_Name"),
-          field: "Shop.Shiakha_Name",
+          field: "shop.Shiakha_Name",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
           label: this.$t("Zone_Name"),
-          field: "Shop.Zone_Name",
+          field: "shop.Zone_Name",
           tdClass: "text-left",
           thClass: "text-left"
         },
@@ -207,7 +207,7 @@ export default {
 
         {
           label: this.$t("Outlet_Type"),
-          field: "Shop.Outlet_Type",
+          field: "shop.Outlet_Type",
           tdClass: "text-left",
           thClass: "text-left"
         },
