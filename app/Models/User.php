@@ -46,11 +46,11 @@ class User extends Authenticatable
     ];
 
 
-    public function getAvatarAttribute($value)
-    {
-        // Manipulate the retrieved value before returning it
-        return    '/images/avatar/'.$value;
-    }
+    // public function getImageAttribute($value)
+    // {
+    //     // Manipulate the retrieved value before returning it
+    //     return    '/images/avatar/'.$value;
+    // }
 
     public function oauthAccessToken()
     {
