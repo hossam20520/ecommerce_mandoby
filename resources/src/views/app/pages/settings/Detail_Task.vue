@@ -149,8 +149,9 @@
                 img-width="1024"
                 img-height="480"
                 @sliding-start="onSlideStart"
-                @sliding-end="onSlideEnd"
-              >
+                @sliding-end="onSlideEnd">
+
+                
                 <b-carousel-slide
                   v-for="(image, index) in task.images"
                   :key="index"

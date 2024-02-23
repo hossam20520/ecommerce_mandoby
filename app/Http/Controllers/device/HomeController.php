@@ -24,7 +24,7 @@ class HomeController extends Controller
 
           
        
-        $slider = Slider::where('deleted_at', '=', null)->get(['image']);
+          $slider = Slider::where('deleted_at', '=', null)->where('device' , 'mobile')->get(['image']);
 
 
 
@@ -41,7 +41,7 @@ class HomeController extends Controller
         $data = array();
         foreach ( $slider  as $slide) {
             $item['image'] =  "/images/sliders/".$slide->image;
-            $item['image_desktop'] =  env('URL', 'http://localhost:8000')."/images/sliders/".$slide->image;
+            // $item['image_desktop'] =  env('URL', 'http://localhost:8000')."/images/sliders/".$slide->image;
             $data[] = $item;
         }
 
