@@ -216,12 +216,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     columns: function columns() {
       return [{
-        label: this.$t("en_Name"),
+        label: this.$t("ar_Name"),
         field: "name",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("ar_name"),
+        label: this.$t("en_name"),
         field: "ShortName",
         tdClass: "text-left",
         thClass: "text-left"
@@ -721,12 +721,12 @@ var render = function () {
                                   return [
                                     _c(
                                       "b-form-group",
-                                      { attrs: { label: _vm.$t("en_Name") } },
+                                      { attrs: { label: _vm.$t("ar_Name") } },
                                       [
                                         _c("b-form-input", {
                                           attrs: {
                                             placeholder:
-                                              _vm.$t("Enter_en_Name_Unit"),
+                                              _vm.$t("Enter_ar_Name_Unit"),
                                             state:
                                               _vm.getValidationState(
                                                 validationContext
@@ -782,11 +782,11 @@ var render = function () {
                                   return [
                                     _c(
                                       "b-form-group",
-                                      { attrs: { label: _vm.$t("ar_Name") } },
+                                      { attrs: { label: _vm.$t("en_Name") } },
                                       [
                                         _c("b-form-input", {
                                           attrs: {
-                                            placeholder: _vm.$t("ar_Name_Unit"),
+                                            placeholder: _vm.$t("en_Name_Unit"),
                                             state:
                                               _vm.getValidationState(
                                                 validationContext

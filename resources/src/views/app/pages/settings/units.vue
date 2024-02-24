@@ -64,9 +64,9 @@
                 :rules="{ required: true , max:15}"
                 v-slot="validationContext"
               >
-                <b-form-group :label="$t('en_Name')">
+                <b-form-group :label="$t('ar_Name')">
                   <b-form-input
-                    :placeholder="$t('Enter_en_Name_Unit')"
+                    :placeholder="$t('Enter_ar_Name_Unit')"
                     :state="getValidationState(validationContext)"
                     aria-describedby="Name-feedback"
                     label="Name"
@@ -86,9 +86,9 @@
                 :rules="{ required: true , max:15}"
                 v-slot="validationContext"
               >
-                <b-form-group :label="$t('ar_Name')">
+                <b-form-group :label="$t('en_Name')">
                   <b-form-input
-                    :placeholder="$t('ar_Name_Unit')"
+                    :placeholder="$t('en_Name_Unit')"
                     :state="getValidationState(validationContext)"
                     aria-describedby="Name-feedback"
                     label="Name"
@@ -207,13 +207,13 @@ export default {
     columns() {
       return [
         {
-          label: this.$t("en_Name"),
+          label: this.$t("ar_Name"),
           field: "name",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
-          label: this.$t("ar_name"),
+          label: this.$t("en_name"),
           field: "ShortName",
           tdClass: "text-left",
           thClass: "text-left"
