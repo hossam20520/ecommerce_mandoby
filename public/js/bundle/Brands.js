@@ -202,12 +202,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("BrandName"),
+        label: this.$t("en_name"),
         field: "name",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("BrandDescription"),
+        label: this.$t("ar_name"),
         field: "description",
         tdClass: "text-left",
         thClass: "text-left"
@@ -766,12 +766,11 @@ var render = function () {
                                   return [
                                     _c(
                                       "b-form-group",
-                                      { attrs: { label: _vm.$t("BrandName") } },
+                                      { attrs: { label: _vm.$t("en_name") } },
                                       [
                                         _c("b-form-input", {
                                           attrs: {
-                                            placeholder:
-                                              _vm.$t("Enter_Name_Brand"),
+                                            placeholder: _vm.$t("en_name"),
                                             state:
                                               _vm.getValidationState(
                                                 validationContext
@@ -817,8 +816,8 @@ var render = function () {
                         [
                           _c("validation-provider", {
                             attrs: {
-                              name: "Brand Description",
-                              rules: { max: 30 },
+                              name: "Brand Name",
+                              rules: { required: true, min: 3, max: 20 },
                             },
                             scopedSlots: _vm._u([
                               {
@@ -827,25 +826,17 @@ var render = function () {
                                   return [
                                     _c(
                                       "b-form-group",
-                                      {
-                                        attrs: {
-                                          label: _vm.$t("BrandDescription"),
-                                        },
-                                      },
+                                      { attrs: { label: _vm.$t("ar_name") } },
                                       [
-                                        _c("b-form-textarea", {
+                                        _c("b-form-input", {
                                           attrs: {
-                                            rows: "3",
-                                            placeholder: _vm.$t(
-                                              "Enter_Description_Brand"
-                                            ),
+                                            placeholder: _vm.$t("ar_name"),
                                             state:
                                               _vm.getValidationState(
                                                 validationContext
                                               ),
-                                            "aria-describedby":
-                                              "Description-feedback",
-                                            label: "Description",
+                                            "aria-describedby": "Name-feedback",
+                                            label: "Name",
                                           },
                                           model: {
                                             value: _vm.brand.description,
@@ -862,11 +853,7 @@ var render = function () {
                                         _vm._v(" "),
                                         _c(
                                           "b-form-invalid-feedback",
-                                          {
-                                            attrs: {
-                                              id: "Description-feedback",
-                                            },
-                                          },
+                                          { attrs: { id: "Name-feedback" } },
                                           [
                                             _vm._v(
                                               _vm._s(

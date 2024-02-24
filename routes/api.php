@@ -343,6 +343,20 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::post('purchases/delete/by_selection', 'PurchasesController@delete_by_selection');
 
 
+
+    
+     //------------------------------- Shops --------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('Shops', 'ShopsController');
+    Route::get('Shops/export/Excel', 'ShopsController@export_Excel');
+    Route::post('Shops/import/csv', 'ShopsController@import_shops');
+    Route::post('Shops/delete/by_selection', 'ShopsController@delete_by_selection');
+    Route::get('Shops/Detail/{id}', 'ShopsController@Get_Shops_Details');
+
+
+
+
+
     //------------------------------- Payments  Purchases --------------------------\\
     //------------------------------------------------------------------------------\\
 

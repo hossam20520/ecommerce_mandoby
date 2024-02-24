@@ -74,9 +74,9 @@
                 :rules="{ required: true , min:3 , max:20}"
                 v-slot="validationContext"
               >
-                <b-form-group :label="$t('BrandName')">
+                <b-form-group :label="$t('en_name')">
                   <b-form-input
-                    :placeholder="$t('Enter_Name_Brand')"
+                    :placeholder="$t('en_name')"
                     :state="getValidationState(validationContext)"
                     aria-describedby="Name-feedback"
                     label="Name"
@@ -90,24 +90,24 @@
             <!-- Brand Description -->
             <b-col md="12">
               <validation-provider
-                name="Brand Description"
-                :rules="{ max:30}"
+                name="Brand Name"
+                :rules="{ required: true , min:3 , max:20}"
                 v-slot="validationContext"
               >
-                <b-form-group :label="$t('BrandDescription')">
-                  <b-form-textarea
-                    rows="3"
-                    :placeholder="$t('Enter_Description_Brand')"
+                <b-form-group :label="$t('ar_name')">
+                  <b-form-input
+                    :placeholder="$t('ar_name')"
                     :state="getValidationState(validationContext)"
-                    aria-describedby="Description-feedback"
-                    label="Description"
+                    aria-describedby="Name-feedback"
+                    label="Name"
                     v-model="brand.description"
-                  ></b-form-textarea>
-                  <b-form-invalid-feedback
-                    id="Description-feedback"
-                  >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                  ></b-form-input>
+                  <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                 </b-form-group>
               </validation-provider>
+
+
+ 
             </b-col>
 
             <!-- -Brand Image -->
@@ -185,13 +185,13 @@ export default {
           thClass: "text-left"
         },
         {
-          label: this.$t("BrandName"),
+          label: this.$t("en_name"),
           field: "name",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
-          label: this.$t("BrandDescription"),
+          label: this.$t("ar_name"),
           field: "description",
           tdClass: "text-left",
           thClass: "text-left"

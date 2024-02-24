@@ -63,6 +63,41 @@ const routes = [
             ]
         },
 
+
+                       //Shops
+                       {
+                        path: "/app/shops",
+                        component: () => import(/* webpackChunkName: "shops" */ "./views/app/pages/shops"),
+                        redirect: "app/shops/list",
+                        children: [
+                            {
+                                name: "index_shops",
+                                path: "list",
+                                component: () =>
+                                    import(/* webpackChunkName: "index_shops" */"./views/app/pages/shops/index_shops")
+                            },
+                            {
+                                path: "store",
+                                name: "store_shop",
+                                component: () =>
+                                    import(/* webpackChunkName: "store_shop" */"./views/app/pages/shops/Add_shop")
+                            },
+                            {
+                                path: "edit/:id",
+                                name: "edit_shop",
+                                component: () =>
+                                    import(/* webpackChunkName: "edit_shop" */"./views/app/pages/shops/Edit_shop")
+                            },
+                            {
+                                path: "detail/:id",
+                                name: "detail_shop",
+                                component: () =>
+                                    import(/* webpackChunkName: "detail_shop" */"./views/app/pages/shops/Detail_Shop")
+                            }
+                       
+                        ]
+                    },
+
             //Products
             {
                 path: "/app/products",

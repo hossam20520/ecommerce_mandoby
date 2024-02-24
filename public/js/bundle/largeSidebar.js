@@ -921,6 +921,52 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1549,6 +1595,31 @@ var render = function () {
               _c(
                 "li",
                 {
+                  staticClass: "nav-item",
+                  class: { active: _vm.selectedParentMenu == "shops" },
+                  attrs: { "data-item": "shops", "data-submenu": true },
+                  on: { mouseenter: _vm.toggleSubMenu },
+                },
+                [
+                  _c(
+                    "a",
+                    { staticClass: "nav-item-hold", attrs: { href: "#" } },
+                    [
+                      _c("i", { staticClass: "nav-icon i-Library-2" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "nav-text" }, [
+                        _vm._v(_vm._s(_vm.$t("Shops"))),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "triangle" }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
                   directives: [
                     {
                       name: "show",
@@ -1815,6 +1886,54 @@ var render = function () {
         },
         [
           _c("div", { ref: "sidebarChild" }, [
+            _c(
+              "ul",
+              {
+                staticClass: "childNav d-none",
+                class: { "d-block": _vm.selectedParentMenu == "shops" },
+                attrs: { "data-parent": "shops" },
+              },
+              [
+                _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { tag: "a", to: "/app/shops/store" } },
+                      [
+                        _c("i", { staticClass: "nav-icon i-Add-File" }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "item-name" }, [
+                          _vm._v(_vm._s(_vm.$t("AddShop"))),
+                        ]),
+                      ]
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { tag: "a", to: "/app/shops/list" } },
+                      [
+                        _c("i", { staticClass: "nav-icon i-Files" }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "item-name" }, [
+                          _vm._v(_vm._s(_vm.$t("shopsList"))),
+                        ]),
+                      ]
+                    ),
+                  ],
+                  1
+                ),
+              ]
+            ),
+            _vm._v(" "),
             _c(
               "ul",
               {

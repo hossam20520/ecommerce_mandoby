@@ -41,6 +41,23 @@
             </a>
             <div class="triangle"></div>
           </li>
+
+
+
+          <li
+          
+            @mouseenter="toggleSubMenu"
+            class="nav-item"
+            :class="{ active: selectedParentMenu == 'shops' }"
+            data-item="shops"
+            :data-submenu="true">
+            <a class="nav-item-hold" href="#">
+              <i class="nav-icon i-Library-2"></i>
+              <span class="nav-text">{{   $t('Shops')  }}</span>
+            </a>
+            <div class="triangle"></div>
+          </li>
+          
           <!-- <li
             v-show="currentUserPermissions 
               && (currentUserPermissions.includes('adjustment_view')
@@ -234,6 +251,35 @@
       class="sidebar-left-secondary ps rtl-ps-none"
     >
       <div ref="sidebarChild">
+
+        <ul
+          class="childNav d-none"
+          data-parent="shops"
+          :class="{ 'd-block': selectedParentMenu == 'shops' }">
+
+          <li
+            class="nav-item"
+            >
+            <router-link tag="a" class to="/app/shops/store">
+              <i class="nav-icon i-Add-File"></i>
+              <span class="item-name">{{  $t('AddShop')  }}</span>
+            </router-link>
+          </li>
+
+
+          <li
+            class="nav-item"
+            >
+            <router-link tag="a" class to="/app/shops/list">
+              <i class="nav-icon i-Files"></i>
+              <span class="item-name">{{  $t('shopsList') }}</span>
+            </router-link>
+          </li>
+ 
+        </ul>
+
+
+
         <ul
           class="childNav d-none"
           data-parent="products"
