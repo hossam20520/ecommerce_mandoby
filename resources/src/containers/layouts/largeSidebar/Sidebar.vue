@@ -44,7 +44,7 @@
 
 
 
-          <li
+          <!-- <li
           
             @mouseenter="toggleSubMenu"
             class="nav-item"
@@ -56,7 +56,7 @@
               <span class="nav-text">{{   $t('Shops')  }}</span>
             </a>
             <div class="triangle"></div>
-          </li>
+          </li> -->
           
           <!-- <li
             v-show="currentUserPermissions 

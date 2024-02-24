@@ -1595,31 +1595,6 @@ var render = function () {
               _c(
                 "li",
                 {
-                  staticClass: "nav-item",
-                  class: { active: _vm.selectedParentMenu == "shops" },
-                  attrs: { "data-item": "shops", "data-submenu": true },
-                  on: { mouseenter: _vm.toggleSubMenu },
-                },
-                [
-                  _c(
-                    "a",
-                    { staticClass: "nav-item-hold", attrs: { href: "#" } },
-                    [
-                      _c("i", { staticClass: "nav-icon i-Library-2" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "nav-text" }, [
-                        _vm._v(_vm._s(_vm.$t("Shops"))),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "triangle" }),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
                   directives: [
                     {
                       name: "show",
