@@ -64,9 +64,9 @@
                 :rules="{ required: true , max:15}"
                 v-slot="validationContext"
               >
-                <b-form-group :label="$t('Name')">
+                <b-form-group :label="$t('en_Name')">
                   <b-form-input
-                    :placeholder="$t('Enter_Name_Unit')"
+                    :placeholder="$t('Enter_en_Name_Unit')"
                     :state="getValidationState(validationContext)"
                     aria-describedby="Name-feedback"
                     label="Name"
@@ -79,22 +79,27 @@
 
             <!-- ShortName -->
             <b-col md="12">
+
+
               <validation-provider
-                name="ShortName"
+                name="Code Currency"
                 :rules="{ required: true , max:15}"
                 v-slot="validationContext"
               >
-                <b-form-group :label="$t('ShortName')">
+                <b-form-group :label="$t('ar_Name')">
                   <b-form-input
-                    :placeholder="$t('Enter_ShortName_Unit')"
+                    :placeholder="$t('ar_Name_Unit')"
                     :state="getValidationState(validationContext)"
-                    aria-describedby="ShortName-feedback"
-                    label="ShortName"
+                    aria-describedby="Name-feedback"
+                    label="Name"
                     v-model="unit.ShortName"
                   ></b-form-input>
-                  <b-form-invalid-feedback id="ShortName-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                  <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                 </b-form-group>
               </validation-provider>
+
+
+            
             </b-col>
             <!-- Base unit -->
             <b-col md="12">
@@ -160,7 +165,7 @@
 
 
 <script>
-import NProgress from "nprogress";
+import NProgress from 'nprogress';
 
 export default {
   metaInfo: {

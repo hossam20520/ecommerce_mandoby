@@ -172,6 +172,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -716,12 +721,12 @@ var render = function () {
                                   return [
                                     _c(
                                       "b-form-group",
-                                      { attrs: { label: _vm.$t("Name") } },
+                                      { attrs: { label: _vm.$t("en_Name") } },
                                       [
                                         _c("b-form-input", {
                                           attrs: {
                                             placeholder:
-                                              _vm.$t("Enter_Name_Unit"),
+                                              _vm.$t("Enter_en_Name_Unit"),
                                             state:
                                               _vm.getValidationState(
                                                 validationContext
@@ -767,7 +772,7 @@ var render = function () {
                         [
                           _c("validation-provider", {
                             attrs: {
-                              name: "ShortName",
+                              name: "Code Currency",
                               rules: { required: true, max: 15 },
                             },
                             scopedSlots: _vm._u([
@@ -777,20 +782,17 @@ var render = function () {
                                   return [
                                     _c(
                                       "b-form-group",
-                                      { attrs: { label: _vm.$t("ShortName") } },
+                                      { attrs: { label: _vm.$t("ar_Name") } },
                                       [
                                         _c("b-form-input", {
                                           attrs: {
-                                            placeholder: _vm.$t(
-                                              "Enter_ShortName_Unit"
-                                            ),
+                                            placeholder: _vm.$t("ar_Name_Unit"),
                                             state:
                                               _vm.getValidationState(
                                                 validationContext
                                               ),
-                                            "aria-describedby":
-                                              "ShortName-feedback",
-                                            label: "ShortName",
+                                            "aria-describedby": "Name-feedback",
+                                            label: "Name",
                                           },
                                           model: {
                                             value: _vm.unit.ShortName,
@@ -807,9 +809,7 @@ var render = function () {
                                         _vm._v(" "),
                                         _c(
                                           "b-form-invalid-feedback",
-                                          {
-                                            attrs: { id: "ShortName-feedback" },
-                                          },
+                                          { attrs: { id: "Name-feedback" } },
                                           [
                                             _vm._v(
                                               _vm._s(
