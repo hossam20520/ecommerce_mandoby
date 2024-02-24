@@ -72,8 +72,13 @@ class CartController extends Controller
         $cart = Cart::where('user_id', $user->id)->whereNull('order_id')->first();
 
         if($productexist){
-             $cart->increaseProductQuantity($product_id);
-          }
+            if($cart){
+                $cart->increaseProductQuantity($product_id);
+            }else{
+                $this->addToCart($request);
+            }
+            
+          } 
        
 
         // $product  = $this->GetProductFromStock($product_id);
