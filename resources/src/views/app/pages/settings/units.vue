@@ -207,13 +207,13 @@ export default {
     columns() {
       return [
         {
-          label: this.$t("Name"),
+          label: this.$t("en_Name"),
           field: "name",
           tdClass: "text-left",
           thClass: "text-left"
         },
         {
-          label: this.$t("ShortName"),
+          label: this.$t("ar_name"),
           field: "ShortName",
           tdClass: "text-left",
           thClass: "text-left"
