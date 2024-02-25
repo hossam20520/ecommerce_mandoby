@@ -327,7 +327,7 @@ class ProductsController extends Controller
         $product_warehouse_data = product_warehouse::with('warehouse', 'product', 'productVariant')
         ->where('warehouse_id', $settings->warehouse_id)
         ->where('deleted_at', '=', null)
-        ->where('qte', '>', 0) // Filter for quantity > 0
+       
         ->whereHas('product', function ($query) use ($type ) {
               $query->where('status', $type);
         });
