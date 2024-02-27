@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\role_user;
+use App\Models\Area;
 use App\Models\product_warehouse;
 use App\utils\helpers;
 use Illuminate\Support\Facades\Validator;
@@ -639,7 +640,15 @@ class UserController extends BaseController
 
     }
 
+    public function getArea_id($id){
+      $area =   Area::where('deleted_at' , '=' , null)->where('code' , $id)->first();
+      if($area){
+        return $area->id;
+      }else{
+        return 0;
+      }
 
+    }
         // import Products
         public function import_users(Request $request)
         {
@@ -706,10 +715,11 @@ class UserController extends BaseController
                                 $User->firstname = $value['firstname'];
                                 $User->lastname  = $value['lastname'];
                                 $User->username  = $value['phone'];
-                                $User->email     = $emaiil;
-                                $User->phone     = "0".$value['phone'];
-                                $User->code     =  $value['code'];
+                                $User->email         = $emaiil;
+                                $User->phone         = "0".$value['phone'];
+                                $User->code          =  $value['code'];
                                 $User->area_name     = $value['area_name'];
+                                $User->area_id       =    $this->getArea_id($value['area_code']);
                                 $User->location_lat     = $value['location_lat'];
                                 $User->address     =   $value['address'];
                                 $User->location_long     =  $value['location_long'];

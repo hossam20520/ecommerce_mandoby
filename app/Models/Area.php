@@ -10,7 +10,7 @@ class Area extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'ar_name', 'en_name', 'code' , 'gov_id'
+        'ar_name', 'en_name', 'code' , 'gov_id' 
     ];
 
     protected $casts = [

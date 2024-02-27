@@ -15,7 +15,7 @@ class Fcm extends Model
     protected $fillable = [
           'user_id',  
          'device_token' ,
-         'type' 
+         'type' ,
     ];
 
 
