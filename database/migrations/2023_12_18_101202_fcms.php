@@ -18,6 +18,7 @@ class Fcms extends Migration
 			$table->integer('id', true);
             $table->integer('user_id')->nullable()->index('user_id');
             $table->text('device_token')->nullable();
+            $table->text('type')->nullable();
 			$table->timestamps(6);
 			$table->softDeletes();
         });

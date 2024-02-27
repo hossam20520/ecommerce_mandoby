@@ -9,7 +9,14 @@ class Fcm extends Model
 {
   
     
+    protected $table = 'fcms';
+    protected $dates = ['deleted_at'];
 
+    protected $fillable = [
+          'user_id',  
+         'device_token' ,
+         'type' 
+    ];
 
 
     public function user()

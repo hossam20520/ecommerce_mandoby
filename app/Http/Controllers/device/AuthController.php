@@ -257,7 +257,7 @@ class AuthController extends Controller
         
             $accessToken = $user->createToken('AuthToken')->accessToken;
 
-            app('App\Http\Controllers\device\NotificationsController')->AddFcm($user ,  $request['fcm']);
+            app('App\Http\Controllers\device\NotificationsController')->AddFcm($user ,  $request['fcm'] , $request['type'] );
 
             $user = array( 'user'=>   $user   ,   'token' => $accessToken   );
             return response()->json(['status' => "success" ,  'message'=> 'success' 

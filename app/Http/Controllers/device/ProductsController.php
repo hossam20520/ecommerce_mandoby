@@ -327,11 +327,10 @@ class ProductsController extends Controller
         $product_warehouse_data = product_warehouse::with('warehouse', 'product', 'productVariant')
         ->where('warehouse_id', $settings->warehouse_id)
         ->where('deleted_at', '=', null)
-       
         ->whereHas('product', function ($query) use ($type ) {
               $query->where('status', $type);
         });
-    
+      //  ->where('qte', '>', 0) // Filter for quantity > 0
     $totalRows = $product_warehouse_data->count();
     
     $products = $product_warehouse_data

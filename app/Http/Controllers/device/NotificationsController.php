@@ -11,7 +11,7 @@ class NotificationsController extends Controller
 {
     
 
-    public function AddFcm($user , $fcm){
+    public function AddFcm($user , $fcm ,$type){
 
  
         $device_token  = $fcm;
@@ -21,6 +21,7 @@ class NotificationsController extends Controller
             $fc = new Fcm;
             $fc->device_token = $device_token;
             $fc->user_id = $user->id;
+            $fc->type = $type;
             $fc->save();
     
         }else{
