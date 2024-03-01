@@ -92,6 +92,16 @@ if ($installed === false) {
 
     
     Route::get('/info' ,    function () {
+        $gdInfo = gd_info();
+
+if ($gdInfo['JPEG Support']) {
+    echo "JPEG support is enabled in GD.\n";
+} else {
+    echo "JPEG support is not enabled in GD.\n";
+}
+
+// Optionally, print the full GD info array
+       print_r($gdInfo);
        echo phpinfo();
     });
 
