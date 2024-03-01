@@ -68,7 +68,7 @@ class OrdersController extends Controller
 
 Order::where( 'order_id' ,$oreder_ref)->update([
 
- 'image' => $imageUrl,
+ 'image' => "storage/".$imageUrl,
 
 ]);
 
