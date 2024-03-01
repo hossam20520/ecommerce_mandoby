@@ -10,7 +10,9 @@ use App\utils\helpers;
 use Carbon\Carbon;
 use App\Models\PaymentSale;
 use DB;
-use Intervention\Image\ImageManagerStatic as Image;
+// use Intervention\Image\ImageManagerStatic as Image;
+
+
 use Illuminate\Support\Facades\Auth;
 class OrdersController extends Controller
 {
@@ -27,9 +29,16 @@ class OrdersController extends Controller
      $path = public_path() . '/images/orders';
      $filename = rand(11111111, 99999999) ."_".$oreder_ref."_". $image->getClientOriginalName();
 
-     $image_resize = Image::make($image->getRealPath());
+
+     Storage::disk('public')->put("$path/$filename", file_get_contents($image->getRealPath()));
+
+// Optionally, you can get the URL of the stored image
+     $imageUrl = Storage::disk('public')->url("$path/$filename");
+
+
+    //  $image_resize = Image::make($image->getRealPath());
   
-     $image_resize->save(public_path('/images/orders/' . $filename));
+    //  $image_resize->save(public_path('/images/orders/' . $filename));
 
     //  $userPhoto = $path . '/' . $currentAvatar;
     //  if (file_exists($userPhoto)) {
@@ -46,7 +55,7 @@ class OrdersController extends Controller
 
 Order::where( 'order_id' ,$oreder_ref)->update([
 
- 'image' => $filename,
+ 'image' => $imageUrl,
 
 ]);
 
