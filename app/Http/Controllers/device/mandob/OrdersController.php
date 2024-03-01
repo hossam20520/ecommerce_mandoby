@@ -27,17 +27,29 @@ class OrdersController extends Controller
     $oreder_ref = $request['oreder_ref'];
 
      $image = $request->file('bill');
-     $path = public_path() . '/images/orders';
-     $filename = rand(11111111, 99999999) ."_".$oreder_ref."_". $image->getClientOriginalName();
 
 
-     Storage::disk('public')->put("$path/$filename", file_get_contents($image->getRealPath()));
+     $directory = 'images/orders';
+
+   $filename = rand(11111111, 99999999) . "_" . $oreder_ref . "_" . $image->getClientOriginalName();
+
+// Save the original image to the 'public' storage disk
+     Storage::disk('public')->put("$directory/$filename", file_get_contents($image->getRealPath()));
 
 // Optionally, you can get the URL of the stored image
-     $imageUrl = Storage::disk('public')->url("$path/$filename");
+      $imageUrl = Storage::disk('public')->url("$directory/$filename");
+
+    //  $path = public_path() . '/images/orders';
+    //  $filename = rand(11111111, 99999999) ."_".$oreder_ref."_". $image->getClientOriginalName();
 
 
-    //  $image_resize = Image::make($image->getRealPath());
+    //  Storage::disk('public')->put("$path/$filename", file_get_contents($image->getRealPath()));
+
+     // Optionally, you can get the URL of the stored image
+    //  $imageUrl = Storage::disk('public')->url("$path/$filename");
+
+
+     //  $image_resize = Image::make($image->getRealPath());
   
     //  $image_resize->save(public_path('/images/orders/' . $filename));
 
