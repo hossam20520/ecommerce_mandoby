@@ -9,8 +9,32 @@
           <b-col lg="12" md="12" sm="12">
             <b-card>
               <b-row>
+
+
+                <b-col lg="3" md="3" sm="12" class="mb-3">
+                  <validation-provider
+                    name="odoo_refrence"
+                    :rules="{required:false , min:2 , max:55}"
+                    v-slot="validationContext"
+                  >
+                    <b-form-group :label="$t('odoo_refrence')">
+                      <b-form-input
+                        :state="getValidationState(validationContext)"
+                        aria-describedby="Name-feedback"
+                        label="odoo_refrence"
+                        :placeholder="$t('odoo_refrence')"
+                        v-model="sale.odoo_refrence"
+                      ></b-form-input>
+                      <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+
+
+
                 <!-- date  -->
-                <b-col lg="4" md="4" sm="12" class="mb-3">
+                <b-col lg="3" md="3" sm="12" class="mb-3">
                   <validation-provider
                     name="date"
                     :rules="{ required: true}"
@@ -29,8 +53,15 @@
                     </b-form-group>
                   </validation-provider>
                 </b-col>
+
+
+
+
+
+
+
                 <!-- Customer -->
-                <b-col lg="4" md="4" sm="12" class="mb-3">
+                <b-col lg="3" md="3" sm="12" class="mb-3">
                   <validation-provider name="Customer" :rules="{ required: true}">
                     <b-form-group slot-scope="{ valid, errors }" :label="$t('Customer')">
                       <v-select
@@ -47,7 +78,7 @@
                 </b-col>
 
                 <!-- warehouse -->
-                <b-col lg="4" md="4" sm="12" class="mb-3">
+                <b-col lg="3" md="3" sm="12" class="mb-3">
                   <validation-provider name="warehouse" :rules="{ required: true}">
                     <b-form-group slot-scope="{ valid, errors }" :label="$t('warehouse')">
                       <v-select
@@ -580,9 +611,13 @@
 
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import NProgress from "nprogress";
-import { loadStripe } from "@stripe/stripe-js";
+import NProgress from 'nprogress';
+import {
+  mapActions,
+  mapGetters,
+} from 'vuex';
+
+import { loadStripe } from '@stripe/stripe-js';
 
 export default {
   metaInfo: {
@@ -619,6 +654,7 @@ export default {
         notes: "",
         client_id: "",
         warehouse_id: "",
+        odoo_refrence:"",
         tax_rate: 0,
         TaxNet: 0,
         shipping: 0,
@@ -1191,6 +1227,7 @@ export default {
             date: this.sale.date,
             client_id: this.sale.client_id,
             warehouse_id: this.sale.warehouse_id,
+            odoo_refrence: this.sale.odoo_refrence,
             statut: this.sale.statut,
             notes: this.sale.notes,
             tax_rate: this.sale.tax_rate,

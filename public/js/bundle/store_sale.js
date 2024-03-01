@@ -152,9 +152,9 @@ var loadStripe = function loadStripe() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -170,6 +170,37 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -791,6 +822,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         notes: "",
         client_id: "",
         warehouse_id: "",
+        odoo_refrence: "",
         tax_rate: 0,
         TaxNet: 0,
         shipping: 0,
@@ -821,7 +853,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       product_variant_id: ""
     }), _ref;
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUser"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["currentUser"])),
   methods: {
     loadStripe_payment: function loadStripe_payment() {
       var _this = this;
@@ -1101,11 +1133,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this7 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
       axios.get("Products/Warehouse/" + id + "?stock=" + 1).then(function (response) {
         _this7.products = response.data;
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
       })["catch"](function (error) {});
     },
     //----------------------------------------- Add Product to order list -------------------------\\
@@ -1279,7 +1311,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 if (error) {
                   _this8.paymentProcessing = false;
-                  nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+                  nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
 
                   _this8.makeToast("danger", _this8.$t("InvalidData"), _this8.$t("Failed"));
                 } else {
@@ -1287,6 +1319,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     date: _this8.sale.date,
                     client_id: _this8.sale.client_id,
                     warehouse_id: _this8.sale.warehouse_id,
+                    odoo_refrence: _this8.sale.odoo_refrence,
                     statut: _this8.sale.statut,
                     notes: _this8.sale.notes,
                     tax_rate: _this8.sale.tax_rate,
@@ -1305,14 +1338,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                     _this8.makeToast("success", _this8.$t("Create.TitleSale"), _this8.$t("Success"));
 
-                    nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+                    nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
 
                     _this8.$router.push({
                       name: "index_sales"
                     });
                   })["catch"](function (error) {
                     _this8.paymentProcessing = false;
-                    nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+                    nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
 
                     _this8.makeToast("danger", _this8.$t("InvalidData"), _this8.$t("Failed"));
                   });
@@ -1332,15 +1365,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (this.verifiedForm()) {
         // Start the progress bar.
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
 
         if (this.payment.Reglement == 'credit card') {
           if (this.stripe_key != '') {
             this.processPayment();
           } else {
             this.makeToast("danger", this.$t("credit_card_account_not_available"), this.$t("Failed"));
-            nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+            nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
           }
         } else {
           this.paymentProcessing = true;
@@ -1363,14 +1396,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }).then(function (response) {
             _this9.makeToast("success", _this9.$t("Create.TitleSale"), _this9.$t("Success"));
 
-            nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+            nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
             _this9.paymentProcessing = false;
 
             _this9.$router.push({
               name: "index_sales"
             });
           })["catch"](function (error) {
-            nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+            nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
             _this9.paymentProcessing = false;
 
             _this9.makeToast("danger", _this9.$t("InvalidData"), _this9.$t("Failed"));
@@ -1494,7 +1527,105 @@ var render = function () {
                                     "b-col",
                                     {
                                       staticClass: "mb-3",
-                                      attrs: { lg: "4", md: "4", sm: "12" },
+                                      attrs: { lg: "3", md: "3", sm: "12" },
+                                    },
+                                    [
+                                      _c("validation-provider", {
+                                        attrs: {
+                                          name: "odoo_refrence",
+                                          rules: {
+                                            required: false,
+                                            min: 2,
+                                            max: 55,
+                                          },
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function (validationContext) {
+                                                return [
+                                                  _c(
+                                                    "b-form-group",
+                                                    {
+                                                      attrs: {
+                                                        label:
+                                                          _vm.$t(
+                                                            "odoo_refrence"
+                                                          ),
+                                                      },
+                                                    },
+                                                    [
+                                                      _c("b-form-input", {
+                                                        attrs: {
+                                                          state:
+                                                            _vm.getValidationState(
+                                                              validationContext
+                                                            ),
+                                                          "aria-describedby":
+                                                            "Name-feedback",
+                                                          label:
+                                                            "odoo_refrence",
+                                                          placeholder:
+                                                            _vm.$t(
+                                                              "odoo_refrence"
+                                                            ),
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.sale
+                                                              .odoo_refrence,
+                                                          callback: function (
+                                                            $$v
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.sale,
+                                                              "odoo_refrence",
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "sale.odoo_refrence",
+                                                        },
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "b-form-invalid-feedback",
+                                                        {
+                                                          attrs: {
+                                                            id: "Name-feedback",
+                                                          },
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              validationContext
+                                                                .errors[0]
+                                                            )
+                                                          ),
+                                                        ]
+                                                      ),
+                                                    ],
+                                                    1
+                                                  ),
+                                                ]
+                                              },
+                                            },
+                                          ],
+                                          null,
+                                          false,
+                                          2230426769
+                                        ),
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-col",
+                                    {
+                                      staticClass: "mb-3",
+                                      attrs: { lg: "3", md: "3", sm: "12" },
                                     },
                                     [
                                       _c("validation-provider", {
@@ -1578,7 +1709,7 @@ var render = function () {
                                     "b-col",
                                     {
                                       staticClass: "mb-3",
-                                      attrs: { lg: "4", md: "4", sm: "12" },
+                                      attrs: { lg: "3", md: "3", sm: "12" },
                                     },
                                     [
                                       _c("validation-provider", {
@@ -1677,7 +1808,7 @@ var render = function () {
                                     "b-col",
                                     {
                                       staticClass: "mb-3",
-                                      attrs: { lg: "4", md: "4", sm: "12" },
+                                      attrs: { lg: "3", md: "3", sm: "12" },
                                     },
                                     [
                                       _c("validation-provider", {

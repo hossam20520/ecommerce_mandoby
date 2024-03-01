@@ -30,6 +30,7 @@ class CreateSalesTable extends Migration {
 			$table->float('GrandTotal', 10, 0)->default(0);
 			$table->float('paid_amount', 10, 0)->default(0);
 			$table->string('payment_statut', 192);
+			$table->string('odoo_refrence', 192);
 			$table->string('statut');
 			$table->text('notes')->nullable();
 			$table->timestamps(6);
