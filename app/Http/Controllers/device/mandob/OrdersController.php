@@ -34,11 +34,11 @@ class OrdersController extends Controller
    $filename = rand(11111111, 99999999) . "_" . $oreder_ref . "_" . $image->getClientOriginalName();
 
 // Save the original image to the 'public' storage disk
-     Storage::disk('public')->put("$directory/$filename", file_get_contents($image->getRealPath()));
+    Storage::disk('public')->put("$directory/$filename", file_get_contents($image->getRealPath()));
 
 // Optionally, you can get the URL of the stored image
-      $imageUrl = Storage::disk('public')->url("$directory/$filename");
-
+    //   $imageUrl = Storage::disk('public')->url("$directory/$filename");
+      $imageUrl =  url(Storage::disk('public')->url("images/orders/{$filename}"));
     //  $path = public_path() . '/images/orders';
     //  $filename = rand(11111111, 99999999) ."_".$oreder_ref."_". $image->getClientOriginalName();
 
