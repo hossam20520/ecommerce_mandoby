@@ -68,14 +68,14 @@ class OrdersController extends Controller
 
 Order::where( 'order_id' ,$oreder_ref)->update([
 
- 'image' => "storage/".$imageUrl,
+ 'image' =>  $filename,
 
 ]);
 
 
-// "/images/orders/".
 
-return response()->json(['url' =>   $imageUrl  ], 200);
+
+return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 200);
 
 
 
