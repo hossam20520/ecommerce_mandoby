@@ -73,9 +73,9 @@ Order::where( 'order_id' ,$oreder_ref)->update([
 ]);
 
 
+// "/images/orders/".
 
-
-return response()->json(['url' =>  "/images/orders/".  $filename   ], 200);
+return response()->json(['url' =>   $imageUrl  ], 200);
 
 
 
