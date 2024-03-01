@@ -91,7 +91,9 @@ if ($installed === false) {
 } else {
 
     
-    // Route::get('/' ,     'web\HomeController@Home')->name('home');
+    Route::get('/info' ,    function () {
+       echo phpinfo();
+    });
 
     // Route::get('/' ,     function(){
     //     return 55;
