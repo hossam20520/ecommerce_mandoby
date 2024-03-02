@@ -56,7 +56,6 @@
             
               v-b-tooltip.hover
               title="View"
-             
               :to="'/app/sales/detail/'+props.row.order_id"
               >
               <i class="i-Eye text-25 text-info"></i>
@@ -67,12 +66,12 @@
     
 
           <span v-else-if="props.column.field == 'image'">
-            <a :href="'/images/orders/'+ props.row.image"  >  <b-img
+            <a :href="'/storage/images/orders/'+ props.row.image"  >  <b-img
               thumbnail
               height="50"
               width="50"
               fluid
-              :src="'/images/orders/' + props.row.image"
+              :src="'/storage/images/orders/' + props.row.image"
               alt="image"
             ></b-img>
 

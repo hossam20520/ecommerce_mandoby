@@ -102,6 +102,13 @@ class MapsController extends Controller
 
     }
 
+    // function getfilterData(Request $request){ 
+    //       $data = $request->fill;
+
+
+    // }
+
+
     //---------------- STORE NEW Map -------------\
 
       function GetData(Request $request){

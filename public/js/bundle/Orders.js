@@ -144,7 +144,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -1221,7 +1220,8 @@ var render = function () {
                                     {
                                       attrs: {
                                         href:
-                                          "/images/orders/" + props.row.image,
+                                          "/storage/images/orders/" +
+                                          props.row.image,
                                       },
                                     },
                                     [
@@ -1232,7 +1232,8 @@ var render = function () {
                                           width: "50",
                                           fluid: "",
                                           src:
-                                            "/images/orders/" + props.row.image,
+                                            "/storage/images/orders/" +
+                                            props.row.image,
                                           alt: "image",
                                         },
                                       }),
@@ -1247,7 +1248,7 @@ var render = function () {
                     ],
                     null,
                     false,
-                    2246271835
+                    240250203
                   ),
                 },
                 [
