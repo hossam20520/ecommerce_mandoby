@@ -166,6 +166,9 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
         $Reglement =  $request['Reglement'];
         $amount =  $request['amount'];
         $notes = $request['notes'];
+        $reason = $request['reason'];
+
+        
 
          $pyamentType = "Cash";  
         if($Reglement == "Partial"){
@@ -225,6 +228,7 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
                'paid_cash'=> $total_paid,
                "payment_type" => $pyamentType,
                'status' => "completed",
+               'reason' => $reason,
 
             ]);
             
@@ -232,6 +236,7 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
                 'statut' => "completed",
                 'paid_amount' => $total_paid,
                 'payment_statut' => $payment_statut,
+                'reason' => $reason,
             ]);
 
 

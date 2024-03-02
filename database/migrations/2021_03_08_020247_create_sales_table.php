@@ -33,7 +33,7 @@ class CreateSalesTable extends Migration {
 			$table->string('odoo_refrence', 192)->nullable();
 
 			$table->string('odoo_ref', 192)->nullable();
-			
+			$table->text('reason')->nullable();
 			$table->string('statut');
 			$table->text('notes')->nullable();
 			$table->timestamps(6);

@@ -31,6 +31,7 @@ class Orders extends Migration
             $table->text('image');
             $table->string('status', 100);
             $table->string('odoo_ref', 192)->nullable();
+            $table->text('reason')->nullable();
             
 			$table->timestamps(6);
 			$table->softDeletes();
