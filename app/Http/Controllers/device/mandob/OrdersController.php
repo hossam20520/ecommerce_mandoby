@@ -25,10 +25,12 @@ class OrdersController extends Controller
     
     public function addClients(Request $request ){
         $user =   Auth::user();
+
+        
         // try {
             // Retrieve the JSON data from the request
             $data = json_decode($request->getContent(), true);
-
+  return $data;
             // Assuming you have a model named Msearch
             foreach ($data as $item) {
                 Nclient::create([
