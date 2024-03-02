@@ -243,7 +243,7 @@ class AuthController extends Controller
     public function version(Request $request , $version){
  
     
-        return response()->json(['version' => '1.2' ,  'needupdate'=> false , 'message'=> "hello" , 'url' => 'url' ], 200);
+        return response()->json(['version' => '1.2' ,  'needupdate'=> true , 'message'=> "hello" , 'url' => 'url' ], 200);
     }
 
 
