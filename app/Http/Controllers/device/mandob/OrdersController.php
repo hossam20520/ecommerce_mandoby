@@ -117,6 +117,9 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
 
     public function acceptOrder(Request $request){
         $order_id = $request->id;
+        $code  = $request->code;
+
+
         $user = Auth::user();
         $order =  Order::where('order_id' ,  $order_id )->where('user_id' ,  $user->id)->first();
         if( !$order ){
@@ -127,11 +130,12 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
         }
         Order::where('order_id' ,  $order_id )->where('user_id' ,  $user->id)->update([
             'status'=> "accepted",
-            'received_time_warehouse' =>  Carbon::now()
+            'received_time_warehouse' =>  Carbon::now(),
+            'odoo_ref' => $code,
           
         ]);
 
-        Sale::where('id' , $order_id)->update(  [ 'statut'=> 'shipping' ] );
+        Sale::where('id' , $order_id)->update(  [ 'statut'=> 'shipping'  , 'odoo_ref' => $code, ] );
 
         return response()->json([
             'success' => true,

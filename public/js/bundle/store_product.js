@@ -389,11 +389,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_upload_multiple_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-upload-multiple-image */ "./node_modules/vue-upload-multiple-image/src/main.js");
-/* harmony import */ var _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @johmun/vue-tags-input */ "./node_modules/@johmun/vue-tags-input/dist/vue-tags-input.js");
-/* harmony import */ var _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_upload_multiple_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-upload-multiple-image */ "./node_modules/vue-upload-multiple-image/src/main.js");
+/* harmony import */ var _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @johmun/vue-tags-input */ "./node_modules/@johmun/vue-tags-input/dist/vue-tags-input.js");
+/* harmony import */ var _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_2__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -406,6 +406,62 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -872,6 +928,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       variants: [],
       product: {
         name: "",
+        mini: 1,
+        max: 3,
         status: "",
         discount: "",
         ar_name: "",
@@ -895,8 +953,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     };
   },
   components: {
-    VueUploadMultipleImage: vue_upload_multiple_image__WEBPACK_IMPORTED_MODULE_0__["default"],
-    VueTagsInput: _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_1___default.a
+    VueUploadMultipleImage: vue_upload_multiple_image__WEBPACK_IMPORTED_MODULE_1__["default"],
+    VueTagsInput: _johmun_vue_tags_input__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   methods: {
     //------------- Submit Validation Create Product
@@ -982,8 +1040,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var _this4 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
       var self = this;
       self.SubmitProcessing = true;
 
@@ -1022,7 +1080,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
       axios.post("Products", self.data).then(function (response) {
         // Complete the animation of theprogress bar.
-        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
         self.SubmitProcessing = false;
 
         _this4.$router.push({
@@ -1032,7 +1090,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         _this4.makeToast("success", _this4.$t("Successfully_Created"), _this4.$t("Success"));
       })["catch"](function (error) {
         // Complete the animation of theprogress bar.
-        nprogress__WEBPACK_IMPORTED_MODULE_2___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
 
         if (error.errors.code.length > 0) {
           self.code_exist = error.errors.code[0];
@@ -2827,6 +2885,267 @@ var render = function () {
                                           null,
                                           false,
                                           2796358256
+                                        ),
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-col",
+                                    { staticClass: "mb-2", attrs: { md: "6" } },
+                                    [
+                                      _c("validation-provider", {
+                                        attrs: {
+                                          name: "Mini",
+                                          rules: { regex: /^\d*\.?\d*$/ },
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function (validationContext) {
+                                                return [
+                                                  _c(
+                                                    "b-form-group",
+                                                    {
+                                                      attrs: {
+                                                        label: _vm.$t("Mini"),
+                                                      },
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "input-group",
+                                                        },
+                                                        [
+                                                          _c("input", {
+                                                            directives: [
+                                                              {
+                                                                name: "model",
+                                                                rawName:
+                                                                  "v-model",
+                                                                value:
+                                                                  _vm.product
+                                                                    .mini,
+                                                                expression:
+                                                                  "product.mini",
+                                                              },
+                                                            ],
+                                                            staticClass:
+                                                              "form-control",
+                                                            attrs: {
+                                                              state:
+                                                                _vm.getValidationState(
+                                                                  validationContext
+                                                                ),
+                                                              "aria-describedby":
+                                                                "OrderTax-feedback",
+                                                              type: "number",
+                                                            },
+                                                            domProps: {
+                                                              value:
+                                                                _vm.product
+                                                                  .mini,
+                                                            },
+                                                            on: {
+                                                              input: function (
+                                                                $event
+                                                              ) {
+                                                                if (
+                                                                  $event.target
+                                                                    .composing
+                                                                ) {
+                                                                  return
+                                                                }
+                                                                _vm.$set(
+                                                                  _vm.product,
+                                                                  "mini",
+                                                                  $event.target
+                                                                    .value
+                                                                )
+                                                              },
+                                                            },
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "input-group-append",
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "span",
+                                                                {
+                                                                  staticClass:
+                                                                    "input-group-text",
+                                                                },
+                                                                [_vm._v("%")]
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "b-form-invalid-feedback",
+                                                        {
+                                                          attrs: {
+                                                            id: "OrderTax-feedback",
+                                                          },
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              validationContext
+                                                                .errors[0]
+                                                            )
+                                                          ),
+                                                        ]
+                                                      ),
+                                                    ],
+                                                    1
+                                                  ),
+                                                ]
+                                              },
+                                            },
+                                          ],
+                                          null,
+                                          false,
+                                          37470352
+                                        ),
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-col",
+                                    { staticClass: "mb-2", attrs: { md: "6" } },
+                                    [
+                                      _c("validation-provider", {
+                                        attrs: {
+                                          name: "Max",
+                                          rules: { regex: /^\d*\.?\d*$/ },
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function (validationContext) {
+                                                return [
+                                                  _c(
+                                                    "b-form-group",
+                                                    {
+                                                      attrs: {
+                                                        label: _vm.$t("Max"),
+                                                      },
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "input-group",
+                                                        },
+                                                        [
+                                                          _c("input", {
+                                                            directives: [
+                                                              {
+                                                                name: "model",
+                                                                rawName:
+                                                                  "v-model",
+                                                                value:
+                                                                  _vm.product
+                                                                    .max,
+                                                                expression:
+                                                                  "product.max",
+                                                              },
+                                                            ],
+                                                            staticClass:
+                                                              "form-control",
+                                                            attrs: {
+                                                              state:
+                                                                _vm.getValidationState(
+                                                                  validationContext
+                                                                ),
+                                                              "aria-describedby":
+                                                                "OrderTax-feedback",
+                                                              type: "number",
+                                                            },
+                                                            domProps: {
+                                                              value:
+                                                                _vm.product.max,
+                                                            },
+                                                            on: {
+                                                              input: function (
+                                                                $event
+                                                              ) {
+                                                                if (
+                                                                  $event.target
+                                                                    .composing
+                                                                ) {
+                                                                  return
+                                                                }
+                                                                _vm.$set(
+                                                                  _vm.product,
+                                                                  "max",
+                                                                  $event.target
+                                                                    .value
+                                                                )
+                                                              },
+                                                            },
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "input-group-append",
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "span",
+                                                                {
+                                                                  staticClass:
+                                                                    "input-group-text",
+                                                                },
+                                                                [_vm._v("%")]
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "b-form-invalid-feedback",
+                                                        {
+                                                          attrs: {
+                                                            id: "OrderTax-feedback",
+                                                          },
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              validationContext
+                                                                .errors[0]
+                                                            )
+                                                          ),
+                                                        ]
+                                                      ),
+                                                    ],
+                                                    1
+                                                  ),
+                                                ]
+                                              },
+                                            },
+                                          ],
+                                          null,
+                                          false,
+                                          3701257159
                                         ),
                                       }),
                                     ],

@@ -152,6 +152,10 @@ class ProductsController extends BaseController
                 $Product->unit_purchase_id = $request['unit_purchase_id'];
                 $Product->stock_alert = $request['stock_alert'] ? $request['stock_alert'] : 0;
                 $Product->is_variant = $request['is_variant'] == 'true' ? 1 : 0;
+                $Product->mini_qty = $request['mini'];
+                $Product->max_qty = $request['max'];
+    
+
 
 
                 $Product->status = $request['status'];
@@ -267,6 +271,10 @@ class ProductsController extends BaseController
                 $Product->tax_method = $request['tax_method'];
                 $Product->note = $request['note'];
                 $Product->cost = $request['cost'];
+                $Product->mini_qty = $request['mini'];
+                $Product->max_qty = $request['max'];
+
+      
 
                 $Product->status = $request['status'];
                 $Product->discount = $request['discount'];
@@ -940,6 +948,8 @@ class ProductsController extends BaseController
         $item['discount'] = $Product->discount;
         $item['stock_alert'] = $Product->stock_alert;
         $item['TaxNet'] = $Product->TaxNet;
+        $item['mini_qty'] = $Product->mini;
+        $item['max_qty'] = $Product->max;
         $item['note'] = $Product->note ? $Product->note : '';
         $item['images'] = [];
         if ($Product->image != '' && $Product->image != 'no-image.png') {

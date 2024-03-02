@@ -30,6 +30,8 @@ class Orders extends Migration
             $table->string('payment_type', 100);
             $table->text('image');
             $table->string('status', 100);
+            $table->string('odoo_ref', 192)->nullable();
+            
 			$table->timestamps(6);
 			$table->softDeletes();
         });

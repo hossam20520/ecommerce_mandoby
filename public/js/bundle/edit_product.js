@@ -466,6 +466,61 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -492,6 +547,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       variants: [],
       product: {
         ar_name: "",
+        mini: 1,
+        max: 3,
         status: "",
         discount: "",
         name: "",
@@ -2315,6 +2372,296 @@ var render = function () {
                                               null,
                                               false,
                                               279820969
+                                            ),
+                                          }),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        {
+                                          staticClass: "mb-2",
+                                          attrs: { md: "6" },
+                                        },
+                                        [
+                                          _c("validation-provider", {
+                                            attrs: {
+                                              name: "Mini",
+                                              rules: { regex: /^\d*\.?\d*$/ },
+                                            },
+                                            scopedSlots: _vm._u(
+                                              [
+                                                {
+                                                  key: "default",
+                                                  fn: function (
+                                                    validationContext
+                                                  ) {
+                                                    return [
+                                                      _c(
+                                                        "b-form-group",
+                                                        {
+                                                          attrs: {
+                                                            label:
+                                                              _vm.$t("Mini"),
+                                                          },
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "input-group",
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .product
+                                                                        .mini,
+                                                                    expression:
+                                                                      "product.mini",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "form-control",
+                                                                attrs: {
+                                                                  state:
+                                                                    _vm.getValidationState(
+                                                                      validationContext
+                                                                    ),
+                                                                  "aria-describedby":
+                                                                    "OrderTax-feedback",
+                                                                  type: "number",
+                                                                },
+                                                                domProps: {
+                                                                  value:
+                                                                    _vm.product
+                                                                      .mini,
+                                                                },
+                                                                on: {
+                                                                  input:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      if (
+                                                                        $event
+                                                                          .target
+                                                                          .composing
+                                                                      ) {
+                                                                        return
+                                                                      }
+                                                                      _vm.$set(
+                                                                        _vm.product,
+                                                                        "mini",
+                                                                        $event
+                                                                          .target
+                                                                          .value
+                                                                      )
+                                                                    },
+                                                                },
+                                                              }),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "input-group-append",
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "span",
+                                                                    {
+                                                                      staticClass:
+                                                                        "input-group-text",
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "%"
+                                                                      ),
+                                                                    ]
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "b-form-invalid-feedback",
+                                                            {
+                                                              attrs: {
+                                                                id: "OrderTax-feedback",
+                                                              },
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  validationContext
+                                                                    .errors[0]
+                                                                )
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ],
+                                                        1
+                                                      ),
+                                                    ]
+                                                  },
+                                                },
+                                              ],
+                                              null,
+                                              false,
+                                              37470352
+                                            ),
+                                          }),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        {
+                                          staticClass: "mb-2",
+                                          attrs: { md: "6" },
+                                        },
+                                        [
+                                          _c("validation-provider", {
+                                            attrs: {
+                                              name: "Max",
+                                              rules: { regex: /^\d*\.?\d*$/ },
+                                            },
+                                            scopedSlots: _vm._u(
+                                              [
+                                                {
+                                                  key: "default",
+                                                  fn: function (
+                                                    validationContext
+                                                  ) {
+                                                    return [
+                                                      _c(
+                                                        "b-form-group",
+                                                        {
+                                                          attrs: {
+                                                            label:
+                                                              _vm.$t("Max"),
+                                                          },
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "input-group",
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .product
+                                                                        .max,
+                                                                    expression:
+                                                                      "product.max",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "form-control",
+                                                                attrs: {
+                                                                  state:
+                                                                    _vm.getValidationState(
+                                                                      validationContext
+                                                                    ),
+                                                                  "aria-describedby":
+                                                                    "OrderTax-feedback",
+                                                                  type: "number",
+                                                                },
+                                                                domProps: {
+                                                                  value:
+                                                                    _vm.product
+                                                                      .max,
+                                                                },
+                                                                on: {
+                                                                  input:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      if (
+                                                                        $event
+                                                                          .target
+                                                                          .composing
+                                                                      ) {
+                                                                        return
+                                                                      }
+                                                                      _vm.$set(
+                                                                        _vm.product,
+                                                                        "max",
+                                                                        $event
+                                                                          .target
+                                                                          .value
+                                                                      )
+                                                                    },
+                                                                },
+                                                              }),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "input-group-append",
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "span",
+                                                                    {
+                                                                      staticClass:
+                                                                        "input-group-text",
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "%"
+                                                                      ),
+                                                                    ]
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "b-form-invalid-feedback",
+                                                            {
+                                                              attrs: {
+                                                                id: "OrderTax-feedback",
+                                                              },
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  validationContext
+                                                                    .errors[0]
+                                                                )
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ],
+                                                        1
+                                                      ),
+                                                    ]
+                                                  },
+                                                },
+                                              ],
+                                              null,
+                                              false,
+                                              3701257159
                                             ),
                                           }),
                                         ],

@@ -333,6 +333,61 @@
                   </validation-provider>
                 </b-col>
 
+
+                <b-col md="6" class="mb-2">
+                  <validation-provider
+                    name="Mini"
+                    :rules="{regex: /^\d*\.?\d*$/}"
+                    v-slot="validationContext"
+                  >
+                    <b-form-group :label="$t('Mini')">
+                      <div class="input-group">
+                        <input
+                          :state="getValidationState(validationContext)"
+                          aria-describedby="OrderTax-feedback"
+                          v-model="product.mini"
+                          type="number"
+                          class="form-control"
+                        >
+                        <div class="input-group-append">
+                          <span class="input-group-text">%</span>
+                        </div>
+                      </div>
+                      <b-form-invalid-feedback
+                        id="OrderTax-feedback"
+                      >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+
+
+
+                <b-col md="6" class="mb-2">
+                  <validation-provider
+                    name="Max"
+                    :rules="{regex: /^\d*\.?\d*$/}"
+                    v-slot="validationContext"
+                  >
+                    <b-form-group :label="$t('Max')">
+                      <div class="input-group">
+                        <input
+                          :state="getValidationState(validationContext)"
+                          aria-describedby="OrderTax-feedback"
+                          v-model="product.max"
+                          type="number"
+                          class="form-control"
+                        >
+                        <div class="input-group-append">
+                          <span class="input-group-text">%</span>
+                        </div>
+                      </div>
+                      <b-form-invalid-feedback
+                        id="OrderTax-feedback"
+                      >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
                 
                 <!-- Tax Method -->
                 <b-col lg="6" md="6" sm="12" class="mb-2">
@@ -439,10 +494,10 @@
 </template>
 
 <script>
-import NProgress from "nprogress";
-import VueUploadMultipleImage from "vue-upload-multiple-image";
+import NProgress from 'nprogress';
+import VueUploadMultipleImage from 'vue-upload-multiple-image';
 
-import VueTagsInput from "@johmun/vue-tags-input";
+import VueTagsInput from '@johmun/vue-tags-input';
 
 export default {
   metaInfo: {
@@ -467,6 +522,8 @@ export default {
       variants: [],
       product: {
         ar_name:"",
+        mini:1,
+        max:3,
         status:"",
         discount:"",
         name: "",

@@ -37,6 +37,14 @@ class CreateProductsTable extends Migration {
 			$table->float('stock_alert', 10, 0)->nullable()->default(0);
 			$table->boolean('is_variant')->default(0);
 			$table->boolean('is_active')->nullable()->default(1);
+
+
+			$table->integer('mini_qty')->nullable()->default(1);
+			$table->integer('max_qty')->nullable()->default(3);
+
+	 
+
+
 			$table->timestamps(6);
 			$table->softDeletes();
 		});
