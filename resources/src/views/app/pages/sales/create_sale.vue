@@ -70,7 +70,7 @@
                         v-model="sale.client_id"
                         :reduce="label => label.value"
                         :placeholder="$t('Choose_Customer')"
-                        :options="clients.map(clients => ({label: clients.username, value: clients.id}))"
+                        :options="clients.map(clients => ({label: clients.firstname, value: clients.id}))"
                       />
                       <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
