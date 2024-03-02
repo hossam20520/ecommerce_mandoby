@@ -1082,7 +1082,7 @@ class SalesController extends BaseController
         $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
         // $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
 
-        $clients = User::where('deleted_at', '=', null)->get(['id', 'email']);
+        $clients = User::where('deleted_at', '=', null)->get(['id', 'email' , 'username']);
         $stripe_key = config('app.STRIPE_KEY');
 
         return response()->json([
