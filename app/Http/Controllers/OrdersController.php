@@ -28,7 +28,7 @@ class OrdersController extends Controller
         $dir = $request->SortType;
         $helpers = new helpers();
 
-        $orders = Order::where('deleted_at', '=', null)->where('user_id' , $request->id)->where(function ($query) use ($request) {
+        $orders = Order::with('order')->where('deleted_at', '=', null)->where('user_id' , $request->id)->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('ar_name', 'LIKE', "%{$request->search}%")
                         ->orWhere('en_name', 'LIKE', "%{$request->search}%");
