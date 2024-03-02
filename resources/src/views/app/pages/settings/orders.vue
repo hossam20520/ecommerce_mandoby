@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import NProgress from "nprogress";
+import NProgress from 'nprogress';
 
 export default {
   metaInfo: {

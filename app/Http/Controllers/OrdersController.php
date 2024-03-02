@@ -89,7 +89,7 @@ class OrdersController extends Controller
 
             $title = "اوردر جديد";
             $body = "لديك اوردر جديد اضغط للاستلام";
-            app('App\Http\Controllers\NotificationsController')->sendNotification($request['user_id'] ,  $title , $body );  
+            // app('App\Http\Controllers\NotificationsController')->sendNotification($request['user_id'] ,  $title , $body );  
             
             $Order = new Order;
             $Order->user_id_action = Auth::user()->id;
