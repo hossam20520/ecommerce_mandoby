@@ -29,21 +29,21 @@ class OrdersController extends Controller
          return $request;
         // try {
             // Retrieve the JSON data from the request
-            $data = json_decode($request->getContent(), true);
-              return $data;
+            // $data = json_decode($request->getContent(), true);
+            //   return $data;
             // Assuming you have a model named Msearch
-            foreach ($data as $item) {
-                Nclient::create([
-                    'name' => $item['name'],
-                    'lat' => $item['lat'],
-                    'lng' => $item['lng'],
-                    'user_id' => $user->id,
-                    'status' =>  "pending",
-                    // Add more fields as needed
-                ]);
-            }
+            // foreach ($data as $item) {
+            //     Nclient::create([
+            //         'name' => $item['name'],
+            //         'lat' => $item['lat'],
+            //         'lng' => $item['lng'],
+            //         'user_id' => $user->id,
+            //         'status' =>  "pending",
+            //         // Add more fields as needed
+            //     ]);
+            // }
 
-            return response()->json(['message' => 'Data saved successfully'], 200);
+            // return response()->json(['message' => 'Data saved successfully'], 200);
         // } catch (\Exception $e) {
         //     return response()->json(['error' => 'Failed to save data'], 500);
         // }
