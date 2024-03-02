@@ -25,7 +25,7 @@ class OrdersController extends Controller
     
     public function addClients(Request $request ){
         $user =   Auth::user();
-        try {
+        // try {
             // Retrieve the JSON data from the request
             $data = json_decode($request->getContent(), true);
 
@@ -42,9 +42,9 @@ class OrdersController extends Controller
             }
 
             return response()->json(['message' => 'Data saved successfully'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to save data'], 500);
-        }
+        // } catch (\Exception $e) {
+        //     return response()->json(['error' => 'Failed to save data'], 500);
+        // }
   
         
     }
