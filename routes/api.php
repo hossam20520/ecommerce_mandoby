@@ -79,6 +79,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
 
 
+    Route::post("/v1/device/mandob/clients/add", "mandob\OrdersController@addClients");
+    
 
     Route::get("/v1/device/products/", "device\ProductsController@Products");
 

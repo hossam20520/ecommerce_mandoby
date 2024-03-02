@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Sale;
+use App\Models\Nclient;
+
 use App\utils\helpers;
 use Carbon\Carbon;
 use App\Models\PaymentSale;
@@ -17,6 +19,38 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 class OrdersController extends Controller
 {
+
+
+
+    
+    public function addClients(Request $request ){
+        $user =   Auth::user();
+        try {
+            // Retrieve the JSON data from the request
+            $data = json_decode($request->getContent(), true);
+
+            // Assuming you have a model named Msearch
+            foreach ($data as $item) {
+                Nclient::create([
+                    'name' => $item['name'],
+                    'lat' => $item['lat'],
+                    'lng' => $item['lng'],
+                    'user_id' => $user->id,
+                    'status' =>  "pending",
+                    // Add more fields as needed
+                ]);
+            }
+
+            return response()->json(['message' => 'Data saved successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to save data'], 500);
+        }
+  
+        
+    }
+
+
+
 
 
 
