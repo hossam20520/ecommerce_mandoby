@@ -31,14 +31,20 @@ class OrdersController extends Controller
 
             // Assuming you have a model named Msearch
             foreach ($data as $item) {
-                Nclient::create([
-                    'name' => $item['name'],
-                    'lat' => $item['lat'],
-                    'lng' => $item['lng'],
-                    'user_id' => $user->id,
-                    'status' =>  "pending",
-                    // Add more fields as needed
-                ]);
+               $nclient =  Nclient::where('name' ,$item['name'] )->first();
+                if($nclient){
+
+                }else{
+                    Nclient::create([
+                        'name' => $item['name'],
+                        'lat' => $item['lat'],
+                        'lng' => $item['lng'],
+                        'user_id' => $user->id,
+                        'status' =>  "pending",
+                        // Add more fields as needed
+                    ]);
+                }
+           
             }
 
             return response()->json(['message' => 'Data saved successfully'], 200);
