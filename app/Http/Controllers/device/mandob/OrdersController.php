@@ -57,7 +57,7 @@ class OrdersController extends Controller
 
                     $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' , $mda->id)->first();
 
-                    if($tas){
+                    if(!$tas){
                         $tasks = new Task;
                         $tasks->location_id =  $mda->id;
                         $tasks->user_id = $user->id;
