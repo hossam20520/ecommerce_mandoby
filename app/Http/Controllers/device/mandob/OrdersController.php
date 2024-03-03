@@ -44,28 +44,28 @@ class OrdersController extends Controller
                         // Add more fields as needed
                     ]);
 
-                    $mda =  Map::where('name' , $item['name'])->first();
-                    // if(!$mda){
-                    //     $mda = Map::create([
-                    //         'name' => $item['name'],
-                    //         'lat' => $item['lat'],
-                    //         'lng' => $item['lng'],
-                    //         ]);
+                    $mda =  Map::where('Outlet_Name' , $item['name'])->first();
+                    if(!$mda){
+                        $mda = Map::create([
+                            'Outlet_Name' => $item['name'],
+                            'Point_X_Geo' => $item['lng'],
+                            'Point_Y_Geo' => $item['lat'],
+                            ]);
 
 
-                    // }
+                    }
 
-                    // $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' , $mda->id)->first();
+                    $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' , $mda->id)->first();
 
-                    // if($tas){
-                    //     $tasks = new Task;
-                    //     $tasks->location_id =  $mda->id;
-                    //     $tasks->user_id = $user->id;
-                    //     $tasks->from = "0";
-                    //     $tasks->to = "0";
-                    //     $tasks->status = "pending";
-                    //     $tasks->save();
-                    // }
+                    if($tas){
+                        $tasks = new Task;
+                        $tasks->location_id =  $mda->id;
+                        $tasks->user_id = $user->id;
+                        $tasks->from = "0";
+                        $tasks->to = "0";
+                        $tasks->status = "pending";
+                        $tasks->save();
+                    }
               
 
 

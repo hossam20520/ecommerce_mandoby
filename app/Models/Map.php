@@ -9,9 +9,9 @@ class Map extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'lat' , 'lng',  
+        'Outlet_Name', 'Point_X_Geo' , 'Point_Y_Geo',  
     ];
-
+ 
     protected $casts = [
  
     ];
