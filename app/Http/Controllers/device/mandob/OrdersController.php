@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Sale;
 use App\Models\Nclient;
+use App\Models\Map;
+use App\Models\Task;
 
 use App\utils\helpers;
 use Carbon\Carbon;
@@ -44,6 +46,38 @@ class OrdersController extends Controller
                         // Add more fields as needed
                     ]);
                 }
+
+               $mda =  Map::where('name' , $item['name'])->first();
+               if($mda){
+
+               }else{
+                $mda = Map::create([
+                    'name' => $item['name'],
+                    'lat' => $item['lat'],
+                    'lng' => $item['lng'],
+                    ]);
+   
+
+                    $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' , $mda->id)->first();
+                    if($tas){
+         
+                    }else{
+                     $tasks = new Task;
+                     $tasks->location_id =  $mda->id;
+                     $tasks->user_id = $user->id;
+                     $tasks->from = "0";
+                     $tasks->to = "0";
+                     $tasks->status = "pending";
+                     $tasks->save();
+                    }       
+
+
+
+
+
+               }
+           
+
            
             }
 
