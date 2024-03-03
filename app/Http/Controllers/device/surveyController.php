@@ -30,10 +30,10 @@ class surveyController extends Controller
 
 
     public function Addclient(Request $request){
-        $surveyData = $request->input('payload');
+  
 
         \DB::transaction(function () use ($request) {
-
+         $surveyData = $request->input('payload');
          $map = new Map;
          $map->Outlet_Name = $surveyData['Outlet_Name'] ?? null;
          $map->Point_Y_Geo = $request['lat'] ?? null;
