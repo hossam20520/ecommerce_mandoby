@@ -44,18 +44,18 @@ class OrdersController extends Controller
                         // Add more fields as needed
                     ]);
 
-                    $mda =  Map::where('name' , $item['name'])->first();
-                    if(!$mda){
-                        $mda = Map::create([
-                            'name' => $item['name'],
-                            'lat' => $item['lat'],
-                            'lng' => $item['lng'],
-                            ]);
+                    // $mda =  Map::where('name' , $item['name'])->first();
+                    // if(!$mda){
+                    //     $mda = Map::create([
+                    //         'name' => $item['name'],
+                    //         'lat' => $item['lat'],
+                    //         'lng' => $item['lng'],
+                    //         ]);
 
 
-                    }
+                    // }
 
-                    $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' , $mda->id)->first();
+                    $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' ,00)->first();
 
                     if(!$tas){
                         $tasks = new Task;
