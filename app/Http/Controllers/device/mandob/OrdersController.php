@@ -45,15 +45,15 @@ class OrdersController extends Controller
                     ]);
 
                     $mda =  Map::where('name' , $item['name'])->first();
-                    if(!$mda){
-                        $mda = Map::create([
-                            'name' => $item['name'],
-                            'lat' => $item['lat'],
-                            'lng' => $item['lng'],
-                            ]);
+                    // if(!$mda){
+                    //     $mda = Map::create([
+                    //         'name' => $item['name'],
+                    //         'lat' => $item['lat'],
+                    //         'lng' => $item['lng'],
+                    //         ]);
 
 
-                    }
+                    // }
 
                     // $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' , $mda->id)->first();
 
