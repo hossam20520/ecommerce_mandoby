@@ -66,6 +66,11 @@ Route::get('/v1/device/all/products/noauth', 'device\ProductsController@GetAllPr
 Route::get('/v1/device/getgovs', 'device\surveyController@getGoves');
 
 Route::get('/v1/device/get/area', 'device\surveyController@getarea');
+
+Route::get('/v1/device/add/client', 'device\surveyController@Addclient');
+
+
+
 Route::group([
     'prefix' => 'password',
 ], function () {
