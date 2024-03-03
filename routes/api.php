@@ -62,6 +62,10 @@ Route::get('/v1/device/all/products/noauth', 'device\ProductsController@GetAllPr
 
 //--------------------------- Reset Password  ---------------------------
 
+
+Route::get('/v1/device/getgovs', 'device\surveyController@getGoves');
+
+
 Route::group([
     'prefix' => 'password',
 ], function () {

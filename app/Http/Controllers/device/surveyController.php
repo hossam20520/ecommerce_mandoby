@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Survey;
 use App\Models\Task;
+use App\Models\Government;
 
 use App\utils\helpers;
 use Carbon\Carbon;
@@ -15,6 +16,12 @@ class surveyController extends Controller
 {
 
 
+
+    public function getGoves(Request $request){
+        $govs   = Government::where('deleted_at' ,'=' , null)->get();
+
+        return response()->json(['goves' => $govs]);
+    }
 
      public function surveyData(Request $request){
 
