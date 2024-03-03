@@ -35,7 +35,7 @@ class surveyController extends Controller
         \DB::transaction(function () use ($request) {
 
          $map = new Map;
-         $map->name = $surveyData['Outlet_Name'] ?? null;
+         $map->Outlet_Name = $surveyData['Outlet_Name'] ?? null;
          $map->Point_Y_Geo = $request['lat'] ?? null;
          $map->Point_X_Geo = $request['lng'] ?? null;
          $map->Gov_Name = $surveyData['Gov_Name'] ?? null;
