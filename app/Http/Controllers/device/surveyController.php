@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Survey;
 use App\Models\Task;
+use App\Models\Area;
 use App\Models\Government;
 
 use App\utils\helpers;
@@ -15,11 +16,28 @@ use DB;
 class surveyController extends Controller
 {
 
+    
+
+
+
+    public function getarea(Request $request){
+ 
+        $govs = Government::where('deleted_at' ,'=' , null)->where('ar_name' , $request->area )->first();
+        if( $govs ){
+
+            $area = Area::where('deleted_at' ,'=' , null)->where('gov_id' , $govs->id )->get();
+            return response()->json(['area' => $area ]);
+        }else{
+            return response()->json(['area' => [] ]);
+        }
+       
+    }
 
 
     public function getGoves(Request $request){
-        $govs   = Government::where('deleted_at' ,'=' , null)->get();
-
+ 
+        $govs = Government::where('deleted_at' ,'=' , null)->get();
+        
         return response()->json(['goves' => $govs]);
     }
 
