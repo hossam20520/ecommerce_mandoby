@@ -55,17 +55,17 @@ class OrdersController extends Controller
 
                     // }
 
-                    $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' ,00)->first();
+                    // $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' , $mda->id)->first();
 
-                    if(!$tas){
-                        $tasks = new Task;
-                        $tasks->location_id =  $mda->id;
-                        $tasks->user_id = $user->id;
-                        $tasks->from = "0";
-                        $tasks->to = "0";
-                        $tasks->status = "pending";
-                        $tasks->save();
-                    }
+                    // if($tas){
+                    //     $tasks = new Task;
+                    //     $tasks->location_id =  $mda->id;
+                    //     $tasks->user_id = $user->id;
+                    //     $tasks->from = "0";
+                    //     $tasks->to = "0";
+                    //     $tasks->status = "pending";
+                    //     $tasks->save();
+                    // }
               
 
 
