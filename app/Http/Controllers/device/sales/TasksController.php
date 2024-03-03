@@ -12,7 +12,7 @@ class TasksController extends Controller
     public function getTasks(Request $request){
         
          $user =   Auth::user();
-         $tasks = Task::with('Shop')->where('deleted_at' , '=' , null)->where('user_id' ,  $user->id )->get();
+         $tasks = Task::with('Shop')->where('deleted_at' , '=' , null)->where('user_id' ,  $user->id )->orderBy('id', 'desc')->get();
 
 
         $dataa = array();

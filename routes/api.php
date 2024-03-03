@@ -94,9 +94,9 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get("/v1/device/products/", "device\ProductsController@Products");
 
     //
-    Route::get("/v1/device/sales/", "device\sales\TasksController@getTasks");
+    // Route::get("/v1/device/sales/", "device\sales\TasksController@getTasks");
 
-
+    Route::get("/v1/device/tasks/", "device\sales\TasksController@getTasks");
 
 
     Route::get("/v1/device/products/brand", "device\ProductsController@GetProductsByBrand");
