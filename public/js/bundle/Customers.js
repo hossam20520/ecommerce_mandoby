@@ -510,7 +510,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     columns: function columns() {
       return [{
         label: this.$t("code"),
-        field: "firstname",
+        field: "code",
         tdClass: "text-left",
         thClass: "text-left"
       }, {

@@ -1453,7 +1453,7 @@ var render = function () {
               _c("div", [
                 _c("p", { staticClass: "m-0" }, [
                   _vm._v(
-                    "© 2021 " +
+                    "© 2024 " +
                       _vm._s(_vm.$t("developed_by")) +
                       " " +
                       _vm._s(_vm.currentUser.developed_by)
@@ -1461,7 +1461,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "m-0" }, [
-                  _vm._v("All rights reserved - v3.7.0"),
+                  _vm._v("All rights reserved - v3.8.0"),
                 ]),
               ]),
             ]),

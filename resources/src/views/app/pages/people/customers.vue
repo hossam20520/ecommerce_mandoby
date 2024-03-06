@@ -488,7 +488,7 @@ export default {
       return [
       {
           label: this.$t("code"),
-          field: "firstname",
+          field: "code",
           tdClass: "text-left",
           thClass: "text-left"
         },
