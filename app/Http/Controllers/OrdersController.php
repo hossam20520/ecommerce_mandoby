@@ -100,8 +100,7 @@ class OrdersController extends Controller
             $Order->user_id = $request['user_id'];
             $Order->order_id =  $order_id;
             $Order->status = "pending";
- 
-            // $Order->image = $filename;
+            $Order->image = "default.png";
             $Order->save();
 
         }, 10);
