@@ -144,6 +144,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -166,6 +170,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       totalRows: "",
       search: "",
       sales: [],
+      user: {},
       data: new FormData(),
       editmode: false,
       orders: [],
@@ -366,6 +371,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editmode = true;
       this.$bvModal.show("New_order");
     },
+    handleChange: function handleChange(e) {// this.Get_Orders(this.serverParams.page);
+    },
     //---------------------------------------- Get All orders-----------------\
     Get_Orders: function Get_Orders(page) {
       var _this4 = this;
@@ -377,7 +384,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios.get("orders?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit + "&id=" + id).then(function (response) {
         _this4.orders = response.data.orders;
         _this4.sales = response.data.sales;
-        _this4.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
+        _this4.totalRows = response.data.totalRows;
+        _this4.user = response.data.user; // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
         _this4.isLoading = false;
@@ -1082,6 +1090,12 @@ var render = function () {
         attrs: { page: _vm.$t("Order"), folder: _vm.$t("Settings") },
       }),
       _vm._v(" "),
+      _c("h3", [
+        _vm._v(_vm._s(_vm.user.firstname) + "  " + _vm._s(_vm.user.lastname)),
+      ]),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Email: " + _vm._s(_vm.user.email))]),
+      _vm._v(" "),
       _vm.isLoading
         ? _c("div", {
             staticClass: "loading_page spinner spinner-primary mr-3",
@@ -1134,57 +1148,61 @@ var render = function () {
                               ? _c(
                                   "span",
                                   [
-                                    _c(
-                                      "a",
-                                      {
-                                        directives: [
+                                    props.row.status == "pending"
+                                      ? _c(
+                                          "a",
                                           {
-                                            name: "b-tooltip",
-                                            rawName: "v-b-tooltip.hover",
-                                            modifiers: { hover: true },
+                                            directives: [
+                                              {
+                                                name: "b-tooltip",
+                                                rawName: "v-b-tooltip.hover",
+                                                modifiers: { hover: true },
+                                              },
+                                            ],
+                                            attrs: { title: "Edit" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.Edit_Order(props.row)
+                                              },
+                                            },
                                           },
-                                        ],
-                                        attrs: { title: "Edit" },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.Edit_Order(props.row)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass:
-                                            "i-Edit text-25 text-success",
-                                        }),
-                                      ]
-                                    ),
+                                          [
+                                            _c("i", {
+                                              staticClass:
+                                                "i-Edit text-25 text-success",
+                                            }),
+                                          ]
+                                        )
+                                      : _vm._e(),
                                     _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        directives: [
+                                    props.row.status == "pending"
+                                      ? _c(
+                                          "a",
                                           {
-                                            name: "b-tooltip",
-                                            rawName: "v-b-tooltip.hover",
-                                            modifiers: { hover: true },
+                                            directives: [
+                                              {
+                                                name: "b-tooltip",
+                                                rawName: "v-b-tooltip.hover",
+                                                modifiers: { hover: true },
+                                              },
+                                            ],
+                                            attrs: { title: "Delete" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.Delete_Order(
+                                                  props.row.id
+                                                )
+                                              },
+                                            },
                                           },
-                                        ],
-                                        attrs: { title: "Delete" },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.Delete_Order(
-                                              props.row.id
-                                            )
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass:
-                                            "i-Close-Window text-25 text-danger",
-                                        }),
-                                      ]
-                                    ),
+                                          [
+                                            _c("i", {
+                                              staticClass:
+                                                "i-Close-Window text-25 text-danger",
+                                            }),
+                                          ]
+                                        )
+                                      : _vm._e(),
                                     _vm._v(" "),
                                     _c(
                                       "router-link",
@@ -1248,7 +1266,7 @@ var render = function () {
                     ],
                     null,
                     false,
-                    240250203
+                    1194464187
                   ),
                 },
                 [
@@ -1386,6 +1404,7 @@ var render = function () {
                                             }
                                           }),
                                         },
+                                        on: { input: _vm.handleChange },
                                         model: {
                                           value: _vm.order.order_id,
                                           callback: function ($$v) {

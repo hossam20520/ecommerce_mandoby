@@ -39,7 +39,7 @@
                         v-model="sale.client_id"
                         :reduce="label => label.value"
                         :placeholder="$t('Choose_Customer')"
-                        :options="clients.map(clients => ({label: clients.email, value: clients.id}))"
+                        :options="clients.map(clients => ({label: clients.firstname, value: clients.id}))"
                       />
                       <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
@@ -441,8 +441,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import NProgress from "nprogress";
+import NProgress from 'nprogress';
+import {
+  mapActions,
+  mapGetters,
+} from 'vuex';
 
 export default {
   metaInfo: {

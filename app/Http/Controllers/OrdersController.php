@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Sale;
-
+use App\Models\User;
 use App\utils\helpers;
 use Carbon\Carbon;
 use DB;
@@ -51,7 +51,7 @@ class OrdersController extends Controller
           $item['Ref'] = $da->order->Ref;
           $item['status'] = $da->status;
           $item['paid_cash'] = $da->paid_cash;
-          $item['received_time_warehouse'] = $da->received_time_warehouse;
+          $item['received_time_warehouse'] = strval($da->received_time_warehouse) ;
           $item['start_time'] = $da->start_time;
           $item['end_time'] = $da->end_time;
           $item['image'] = $da->image;
@@ -60,10 +60,14 @@ class OrdersController extends Controller
           $data[] = $item;
        }
  
-       $sales = Sale::where('deleted_at', '=', null)->where('statut' ,  'pending' )->whereNotIn('id', $orders_ids)->get();
-        return response()->json([
+       $sales = Sale::where('deleted_at', '=', null)->where('statut' ,  'pending' )->whereNotIn('id', $orders_ids)->whereDoesntHave('orders')->get();
+       $user = User::where('id' ,$request->id  )->first();
+       
+       
+       return response()->json([
             'orders' =>  $data ,
             'sales'=>  $sales ,
+            'user'=>  $user,
             'totalRows' => $totalRows,
         ]);
 

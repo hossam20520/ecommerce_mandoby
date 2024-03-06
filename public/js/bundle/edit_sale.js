@@ -9,9 +9,9 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
-/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nprogress */ "./node_modules/nprogress/nprogress.js");
+/* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -521,7 +521,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["currentUser"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["currentUser"])),
   methods: {
     handleFocus: function handleFocus() {
       this.focused = true;
@@ -690,11 +690,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this4 = this;
 
       // Start the progress bar.
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
       axios.get("Products/Warehouse/" + id + "?stock=" + 1).then(function (response) {
         _this4.products = response.data;
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
       })["catch"](function (error) {});
     },
     //----------------------------------------- Add Product to order list -------------------------\\
@@ -857,8 +857,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.verifiedForm()) {
         this.SubmitProcessing = true; // Start the progress bar.
 
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.start();
-        nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.set(0.1);
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
         var id = this.$route.params.id;
         axios.put("sales/".concat(id), {
           date: this.sale.date,
@@ -875,14 +875,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }).then(function (response) {
           _this5.makeToast("success", _this5.$t("Update.TitleSale"), _this5.$t("Success"));
 
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
           _this5.SubmitProcessing = false;
 
           _this5.$router.push({
             name: "index_sales"
           });
         })["catch"](function (error) {
-          nprogress__WEBPACK_IMPORTED_MODULE_1___default.a.done();
+          nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
 
           _this5.makeToast("danger", _this5.$t("InvalidData"), _this5.$t("Failed"));
 
@@ -1147,7 +1147,7 @@ var render = function () {
                                                             function (clients) {
                                                               return {
                                                                 label:
-                                                                  clients.email,
+                                                                  clients.firstname,
                                                                 value:
                                                                   clients.id,
                                                               }
@@ -1187,7 +1187,7 @@ var render = function () {
                                           ],
                                           null,
                                           false,
-                                          2423635178
+                                          2567936379
                                         ),
                                       }),
                                     ],

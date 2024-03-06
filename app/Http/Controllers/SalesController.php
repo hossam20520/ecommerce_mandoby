@@ -114,7 +114,7 @@ class SalesController extends BaseController
             $item['shipping'] = $Sale['shipping'];
             $item['warehouse_name'] = $Sale['warehouse']['name'];
             $item['client_id'] = $Sale['client']['id'];
-            $item['client_name'] = $Sale['client']['email'];
+            $item['client_name'] = $Sale['client']['firstname'];
             $item['client_email'] = $Sale['client']['email'];
             $item['client_tele'] = $Sale['client']['phone'];
             $item['client_code'] = $Sale['client']['code'];
@@ -1239,7 +1239,7 @@ class SalesController extends BaseController
   
           $warehouses = Warehouse::where('deleted_at', '=', null)->get(['id', 'name']);
           //   $clients = Client::where('deleted_at', '=', null)->get(['id', 'name']);
-          $clients = User::where('deleted_at', '=', null)->get(['id', 'email']);
+          $clients = User::where('deleted_at', '=', null)->get(['id', 'email' , 'firstname']);
           return response()->json([
               'details' => $details,
               'sale' => $sale,

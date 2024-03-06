@@ -2,7 +2,8 @@
 <template>
   <div class="main-content">
     <breadcumb :page="$t('Order')" :folder="$t('Settings')"/>
-
+    <h3>{{ user.firstname  }}  {{ user.lastname  }}</h3>
+    <h3>Email: {{ user.email  }}</h3>
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
     <b-card class="wrapper" v-if="!isLoading">
       <vue-good-table
@@ -43,28 +44,27 @@
 
         <template slot="table-row" slot-scope="props">
           <span v-if="props.column.field == 'actions'">
-            <a @click="Edit_Order(props.row)" title="Edit" v-b-tooltip.hover>
+
+
+
+            <a  v-if="props.row.status == 'pending'" @click="Edit_Order(props.row)" title="Edit" v-b-tooltip.hover>
               <i class="i-Edit text-25 text-success"></i>
             </a>
-            <a title="Delete" v-b-tooltip.hover @click="Delete_Order(props.row.id)">
+
+            <a   v-if="props.row.status == 'pending'"  title="Delete" v-b-tooltip.hover @click="Delete_Order(props.row.id)">
               <i class="i-Close-Window text-25 text-danger"></i>
             </a>
 
 
             
-            <router-link
-            
-              v-b-tooltip.hover
+            <router-link 
+             v-b-tooltip.hover
               title="View"
-              :to="'/app/sales/detail/'+props.row.order_id"
-              >
+              :to="'/app/sales/detail/'+props.row.order_id">
               <i class="i-Eye text-25 text-info"></i>
             </router-link>
-
-            <!-- :to="{ name:'orders', params: { id: props.row.id} }" -->
           </span>
-    
-
+     
           <span v-else-if="props.column.field == 'image'">
             <a :href="'/storage/images/orders/'+ props.row.image"  >  <b-img
               thumbnail
@@ -91,7 +91,7 @@
 
 
             <!-- Category -->
-            <b-col md="12" class="mb-2">
+               <b-col md="12" class="mb-2">
                   <validation-provider name="order" :rules="{ required: true}">
                     <b-form-group slot-scope="{ valid, errors }" :label="$t('Orders')">
                       <v-select
@@ -100,8 +100,12 @@
                         :reduce="label => label.value"
                         :placeholder="$t('choose_order')"
                         v-model="order.order_id"
+                        v-on:input="handleChange"
                         :options="sales.map(sales => ({label: sales.Ref + ' ' +  '( '+sales.GrandTotal + ' ) EGP'  , value: sales.id}))"
-                      />
+                     
+                      
+                     
+                        />
                       <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
@@ -147,6 +151,7 @@ export default {
       totalRows: "",
       search: "",
       sales:[],
+      user:{},
       data: new FormData(),
       editmode: false,
       orders: [],
@@ -344,6 +349,9 @@ export default {
       this.$bvModal.show("New_order");
     },
 
+    handleChange( e){
+      // this.Get_Orders(this.serverParams.page);
+    },
     //---------------------------------------- Get All orders-----------------\
     Get_Orders(page) {
       let id = this.$route.params.id;
@@ -369,6 +377,7 @@ export default {
           this.orders = response.data.orders;
           this.sales = response.data.sales;
           this.totalRows = response.data.totalRows;
+          this.user = response.data.user;
 
           // Complete the animation of theprogress bar.
           NProgress.done();

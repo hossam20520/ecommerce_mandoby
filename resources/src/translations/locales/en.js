@@ -10,7 +10,7 @@ export default {
     status:'Status',
     Grand_total:'Grand Total',
     paid_cash:'Paid cash',
-    received_time_warehouse:'The Time the product is received from the store',
+    received_time_warehouse:'Accept Data',
     Receipt:'Receipt',
     Pos_Settings:'Pos Settings (Receipt)',
     Note_to_customer:'Note to customer',
@@ -504,7 +504,7 @@ export default {
     OrdersManager: 'Orders Management',
     ListQuotations: 'Quotation List',
     ListPurchases: 'Purchase List',
-    ListSales: 'Sale List',
+    ListSales: 'Orders List',
     ListReturns: 'Return List',
     PeopleManager: 'People Management',
 

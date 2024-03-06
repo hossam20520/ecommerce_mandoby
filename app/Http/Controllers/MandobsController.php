@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Mandob;
 use App\Models\Sale;
 use App\Models\User;
+use App\Models\Order;
 use App\utils\helpers;
 use Carbon\Carbon;
 use DB;
@@ -39,8 +40,7 @@ class MandobsController extends Controller
         ->where('deleted_at', '=', null)
         ->whereHas('role', function ($query) {
             $query->where('name', 'Mandob');
-        })
-        ->where(function ($query) use ($request) {
+        })->where(function ($query) use ($request) {
             return $query->when($request->filled('search'), function ($query) use ($request) {
                 return $query->where('email', 'LIKE', "%{$request->search}%")
                     ->orWhere('phone', 'LIKE', "%{$request->search}%");
@@ -64,8 +64,8 @@ class MandobsController extends Controller
                  $item['lastname'] = $da->lastname;
                  $item['email'] = $da->email;
                  $item['phone'] = $da->phone;
-                 $item['total_orders'] = 0;
-                 $item['completed_orders'] = 0;
+                 $item['total_orders'] = $this->TotalOrders($da->id);
+                 $item['completed_orders'] =  $this->TotalCompletedOrders($da->id);
                  $dataa[] = $item;
             }
             // where('statut')
@@ -77,6 +77,26 @@ class MandobsController extends Controller
         ]);
 
     }
+
+
+    public function TotalOrders($user_id){
+          
+
+        $total_orders = Order::where('deleted_at' , '=' , null)->where('user_id' , $user_id)->count();
+        return  $total_orders;
+
+    }
+
+
+    
+    public function TotalCompletedOrders($user_id){
+          
+
+        $total_orders = Order::where('deleted_at' , '=' , null)->where('user_id' , $user_id)->where('status' , 'completed' )->count();
+        return  $total_orders;
+
+    }
+
 
     //---------------- STORE NEW Mandob -------------\
 
