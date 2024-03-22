@@ -69,8 +69,8 @@ Route::get('/v1/device/get/area', 'device\surveyController@getarea');
 
 Route::post('/v1/device/add/client', 'device\surveyController@Addclient');
 
- 
-
+Route::get("/maps/get_data_view/data", "MapsController@getData_section");
+Route::get("/maps/get_data_view_type/data", "MapsController@getData_section_type");
 Route::group([
     'prefix' => 'password',
 ], function () {
@@ -86,6 +86,11 @@ Route::get('/v1/device/home/noauth', 'device\HomeController@HomePage');
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
+
+
+  
+   Route::post("/v1/device/map/client/add", "device\mandob\OrdersController@addOneClient");
+    
 
 
     Route::post("/v1/device/mandob/clients/add", "device\mandob\OrdersController@addClients");

@@ -16,6 +16,37 @@ use Illuminate\Support\Facades\Http;
 class MapsController extends Controller
 {
 
+
+    public function getData_section(Request $request){
+
+ 
+        $section = $request->section_name;
+        $Shiakha_Name  =  Map::whereNull('deleted_at')->where('Section' , $section)->whereNotNull('Shiakha_Name')->pluck('Shiakha_Name')->unique()->values()->toArray();
+  
+        return response()->json([
+            'Shiakha_Name' => $Shiakha_Name,
+         
+        ]);
+    }
+
+    
+
+
+    public function getData_section_type(Request $request){
+
+ 
+        $section = $request->section; 
+        $Shiakha_Name = $request->Filter_Shiakha_Name;
+        $Outlet_Type  =  Map::whereNull('deleted_at')->where('Shiakha_Name' , $Shiakha_Name)->where('Section' ,   $section )->whereNotNull('Outlet_Type')->pluck('Outlet_Type')->unique()->values()->toArray();
+  
+        return response()->json([
+            'Outlet_Type' => $Outlet_Type,
+         
+        ]);
+    }
+
+
+    
     //------------ GET ALL Maps -----------\
 
     public function index(Request $request)
@@ -36,8 +67,8 @@ class MapsController extends Controller
         // Filter_Zone_Name:"",
         // Filter_street:"",
         // Filter_Sections: "",
-        $columns = array(0 => 'Shiakha_Name', 1 => 'Zone_Name', 2 => 'Street', 3 => 'Section');
-        $param = array(0 => '=', 1 => '=', 2 => '=', 3 => '=');
+        $columns = array(0 => 'Shiakha_Name', 1 => 'Outlet_Type', 2 => 'Section' );
+        $param = array(0 => '=', 1 => '=', 2 => '=' );
         $data = array();
 
         $daat = Map::where('deleted_at', '=', null);
@@ -71,9 +102,10 @@ class MapsController extends Controller
  
        $itemMap = array();
        foreach ($maps as $i => $da) {
+
            $lat = $da['Point_X_Geo'];
            $lng = $da['Point_Y_Geo'];
-
+             
            $item_map = [
                "position" =>  [
                    "lat"=>  floatval($lng) ,

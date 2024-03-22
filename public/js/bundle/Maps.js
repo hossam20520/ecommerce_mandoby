@@ -15,12 +15,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
+var _methods;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -504,9 +525,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       Filter_Zone_Name: "",
       Filter_street: "",
       Filter_Sections: "",
+      type_t: "",
       Sections: [],
       Zone_Name: [],
       Shiakha_Name: [],
+      types: [],
       isLoading: true,
       center: {
         lat: 30.059813,
@@ -542,13 +565,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       user_id: 0,
       totalRows: "",
       search: "",
-      radius: 10000,
+      radius: 100,
       circle: {
         center: {
           lat: 30.059813,
           lng: 31.329825
         },
-        radius: 10000,
+        radius: 100,
         options: {
           strokeColor: 'red',
           strokeOpacity: 1.0,
@@ -601,8 +624,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("Zone_Name"),
-        field: "Zone_Name",
+        label: this.$t("Outlet_Type"),
+        field: "Outlet_Type",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -611,8 +634,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("Street"),
-        field: "Street",
+        label: this.$t("google_map"),
+        field: "google_map",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("assinged"),
+        field: "assinged",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -634,7 +662,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {// Fetch restaurant places using the Google Places API
     //  this.fetchPlaces();
   },
-  methods: {
+  methods: (_methods = {
     getMarkerIcon: function getMarkerIcon() {
       // Customize the marker icon here
       return {
@@ -791,8 +819,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var selectedRows = _ref3.selectedRows;
       this.selectedIds = [];
+      this.shops_marker = [];
       selectedRows.forEach(function (row, index) {
+        // console.log(row.Point_Y_Geo);
+        // console.log(row.Point_X_Geo);
         _this2.selectedIds.push(row.id);
+
+        _this2.shops_marker.push({
+          position: {
+            lat: parseFloat(row.Point_Y_Geo),
+            lng: parseFloat(row.Point_X_Geo)
+          },
+          // Specify the latitude and longitude of the new marker
+          showIcon: true // You can set this to true if you want the icon to be shown
+
+        });
       });
     },
     //---- Event on Search
@@ -920,6 +961,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.Filter_Zone_Name = "";
       this.Filter_street = "";
       this.Filter_Shiakha_Name = "";
+      this.type_t = "";
       this.Get_Maps(this.serverParams.page);
     },
     Get_Maps: function Get_Maps(page) {
@@ -928,17 +970,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // Start the progress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("maps/view/data?page=" + page + "&Section=" + this.Filter_Sections + "&Zone_Name=" + this.Filter_Zone_Name + "&Street=" + this.Filter_street + "&Shiakha_Name=" + this.Filter_Shiakha_Name + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
+      axios.get("maps/view/data?page=" + page + "&Section=" + this.Filter_Sections + "&Outlet_Type=" + this.type_t + "&Zone_Name=" + this.Filter_Zone_Name + "&Street=" + this.Filter_street + "&Shiakha_Name=" + this.Filter_Shiakha_Name + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
         _this5.maps = response.data.maps; // this.totalRows = response.data.totalRows;
         // this.shops_marker = response.data.map_items;
         // this.mandobs = response.data.mandobs;
         // Complete the animation of theprogress bar.
+        //  this.shops_marker = response.data.itemMap;
 
-        _this5.shops_marker = response.data.itemMap;
         _this5.mandobs = response.data.mandobs;
-        _this5.Zone_Name = response.data.Zone_Name;
-        _this5.Shiakha_Name = response.data.Shiakha_Name;
-        console.log(response.data.itemMap);
+        _this5.Zone_Name = response.data.Zone_Name; // this.Shiakha_Name = response.data.Shiakha_Name;
+        // console.log(response.data.itemMap);
+
         _this5.Sections = response.data.Sections;
         _this5.Street = response.data.Street;
         _this5.totalRows = response.data.totalRows;
@@ -952,158 +994,186 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, 500);
       });
     },
-    //---------------------------------------- Create new map-----------------\
-    Create_Map: function Create_Map() {
+    handleChange_shiakha: function handleChange_shiakha(e) {
       var _this6 = this;
 
-      var self = this;
-      self.SubmitProcessing = true;
-      self.data.append("ar_name", self.map.ar_name);
-      self.data.append("en_name", self.map.en_name);
-      self.data.append("image", self.map.image);
-      axios.post("maps", self.data).then(function (response) {
-        self.SubmitProcessing = false;
-        Fire.$emit("Event_Map");
-
-        _this6.makeToast("success", _this6.$t("Create.TitleMap"), _this6.$t("Success"));
-      })["catch"](function (error) {
-        self.SubmitProcessing = false;
-
-        _this6.makeToast("danger", _this6.$t("InvalidData"), _this6.$t("Failed"));
-      });
-    },
-    //---------------------------------------- Update Map-----------------\
-    Update_Map: function Update_Map() {
-      var _this7 = this;
-
-      var self = this;
-      self.SubmitProcessing = true;
-      self.data.append("en_name", self.map.en_name);
-      self.data.append("ar_name", self.map.ar_name);
-      self.data.append("image", self.map.image);
-      self.data.append("_method", "put");
-      axios.post("maps/" + self.map.id, self.data).then(function (response) {
-        self.SubmitProcessing = false;
-        Fire.$emit("Event_Map");
-
-        _this7.makeToast("success", _this7.$t("Update.TitleMap"), _this7.$t("Success"));
-      })["catch"](function (error) {
-        self.SubmitProcessing = false;
-
-        _this7.makeToast("danger", _this7.$t("InvalidData"), _this7.$t("Failed"));
-      });
-    },
-    //---------------------------------------- Reset Form -----------------\
-    reset_Form: function reset_Form() {
-      this.map = {
-        id: "",
-        ar_name: "",
-        en_name: "",
-        image: ""
-      };
-      this.data = new FormData();
-    },
-    //---------------------------------------- Delete Map -----------------\
-    Delete_Map: function Delete_Map(id) {
-      var _this8 = this;
-
-      this.$swal({
-        title: this.$t("Delete.Title"),
-        text: this.$t("Delete.Text"),
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        cancelButtonText: this.$t("Delete.cancelButtonText"),
-        confirmButtonText: this.$t("Delete.confirmButtonText")
-      }).then(function (result) {
-        if (result.value) {
-          axios["delete"]("maps/" + id).then(function () {
-            _this8.$swal(_this8.$t("Delete.Deleted"), _this8.$t("Delete.TitleMap"), "success");
-
-            Fire.$emit("Delete_Map");
-          })["catch"](function () {
-            _this8.$swal(_this8.$t("Delete.Failed"), _this8.$t("Delete.Therewassomethingwronge"), "warning");
-          });
-        }
-      });
-    },
-    //---- Delete maps by selection
-    save_select: function save_select() {
-      var _this9 = this;
-
-      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
-      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.post("maps/save/by_selection", {
-        selectedIds: this.selectedIds,
-        user_id: this.user_id,
-        from: this.from_date,
-        to: this.to_date
-      }).then(function () {
-        _this9.$swal(_this9.$t("Success"), _this9.$t("Success Assign"), "success");
-
-        _this9.$bvModal.hide("Driver");
-
-        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done(); // Fire.$emit("Delete_Map");
-      })["catch"](function () {
+      axios.get("maps/get_data_view_type/data?section=" + this.Filter_Sections + "&Filter_Shiakha_Name=" + e).then(function (response) {
+        _this6.types = response.data.Outlet_Type;
+        console.log(response.data.Outlet_Type);
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
+        _this6.isLoading = false;
+      })["catch"](function (response) {
         // Complete the animation of theprogress bar.
-        setTimeout(function () {
-          return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
-        }, 500);
-
-        _this9.$swal(_this9.$t("Delete.Failed"), _this9.$t("Delete.Therewassomethingwronge"), "warning");
-      });
-    },
-    delete_by_selected: function delete_by_selected() {
-      var _this10 = this;
-
-      this.$swal({
-        title: this.$t("Delete.Title"),
-        text: this.$t("Delete.Text"),
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        cancelButtonText: this.$t("Delete.cancelButtonText"),
-        confirmButtonText: this.$t("Delete.confirmButtonText")
-      }).then(function (result) {
-        if (result.value) {
-          // Start the progress bar.
-          nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
-          nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-          axios.post("maps/delete/by_selection", {
-            selectedIds: _this10.selectedIds
-          }).then(function () {
-            _this10.$swal(_this10.$t("Delete.Deleted"), _this10.$t("Delete.TitleMap"), "success");
-
-            Fire.$emit("Delete_Map");
-          })["catch"](function () {
-            // Complete the animation of theprogress bar.
-            setTimeout(function () {
-              return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
-            }, 500);
-
-            _this10.$swal(_this10.$t("Delete.Failed"), _this10.$t("Delete.Therewassomethingwronge"), "warning");
-          });
-        }
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
       });
     }
-  },
+  }, _defineProperty(_methods, "handleChange", function handleChange(e) {
+    var _this7 = this;
+
+    axios.get("maps/get_data_view/data?section_name=" + e).then(function (response) {
+      _this7.Shiakha_Name = response.data.Shiakha_Name; // this.maps = response.data.maps;
+      // this.totalRows = response.data.totalRows;
+      // this.shops_marker = response.data.map_items;
+      // this.mandobs = response.data.mandobs;
+      // Complete the animation of theprogress bar.
+      //  this.shops_marker = response.data.itemMap;
+      //  this.mandobs = response.data.mandobs;
+      //  this.Zone_Name = response.data.Zone_Name;
+      // this.Shiakha_Name = response.data.Shiakha_Name;
+      // console.log(response.data.itemMap);
+      // this.Sections = response.data.Sections;
+      // this.Street = response.data.Street;
+      // this.totalRows = response.data.totalRows;
+
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
+      _this7.isLoading = false;
+    })["catch"](function (response) {
+      // Complete the animation of theprogress bar.
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done(); // setTimeout(() => {
+      //   this.isLoading = false;
+      // }, 500);
+    });
+  }), _defineProperty(_methods, "Create_Map", function Create_Map() {
+    var _this8 = this;
+
+    var self = this;
+    self.SubmitProcessing = true;
+    self.data.append("ar_name", self.map.ar_name);
+    self.data.append("en_name", self.map.en_name);
+    self.data.append("image", self.map.image);
+    axios.post("maps", self.data).then(function (response) {
+      self.SubmitProcessing = false;
+      Fire.$emit("Event_Map");
+
+      _this8.makeToast("success", _this8.$t("Create.TitleMap"), _this8.$t("Success"));
+    })["catch"](function (error) {
+      self.SubmitProcessing = false;
+
+      _this8.makeToast("danger", _this8.$t("InvalidData"), _this8.$t("Failed"));
+    });
+  }), _defineProperty(_methods, "Update_Map", function Update_Map() {
+    var _this9 = this;
+
+    var self = this;
+    self.SubmitProcessing = true;
+    self.data.append("en_name", self.map.en_name);
+    self.data.append("ar_name", self.map.ar_name);
+    self.data.append("image", self.map.image);
+    self.data.append("_method", "put");
+    axios.post("maps/" + self.map.id, self.data).then(function (response) {
+      self.SubmitProcessing = false;
+      Fire.$emit("Event_Map");
+
+      _this9.makeToast("success", _this9.$t("Update.TitleMap"), _this9.$t("Success"));
+    })["catch"](function (error) {
+      self.SubmitProcessing = false;
+
+      _this9.makeToast("danger", _this9.$t("InvalidData"), _this9.$t("Failed"));
+    });
+  }), _defineProperty(_methods, "reset_Form", function reset_Form() {
+    this.map = {
+      id: "",
+      ar_name: "",
+      en_name: "",
+      image: ""
+    };
+    this.data = new FormData();
+  }), _defineProperty(_methods, "Delete_Map", function Delete_Map(id) {
+    var _this10 = this;
+
+    this.$swal({
+      title: this.$t("Delete.Title"),
+      text: this.$t("Delete.Text"),
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: this.$t("Delete.cancelButtonText"),
+      confirmButtonText: this.$t("Delete.confirmButtonText")
+    }).then(function (result) {
+      if (result.value) {
+        axios["delete"]("maps/" + id).then(function () {
+          _this10.$swal(_this10.$t("Delete.Deleted"), _this10.$t("Delete.TitleMap"), "success");
+
+          Fire.$emit("Delete_Map");
+        })["catch"](function () {
+          _this10.$swal(_this10.$t("Delete.Failed"), _this10.$t("Delete.Therewassomethingwronge"), "warning");
+        });
+      }
+    });
+  }), _defineProperty(_methods, "save_select", function save_select() {
+    var _this11 = this;
+
+    nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+    nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
+    axios.post("maps/save/by_selection", {
+      selectedIds: this.selectedIds,
+      user_id: this.user_id,
+      from: this.from_date,
+      to: this.to_date
+    }).then(function () {
+      _this11.$swal(_this11.$t("Success"), _this11.$t("Success Assign"), "success");
+
+      _this11.$bvModal.hide("Driver");
+
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done(); // Fire.$emit("Delete_Map");
+    })["catch"](function () {
+      // Complete the animation of theprogress bar.
+      setTimeout(function () {
+        return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
+      }, 500);
+
+      _this11.$swal(_this11.$t("Delete.Failed"), _this11.$t("Delete.Therewassomethingwronge"), "warning");
+    });
+  }), _defineProperty(_methods, "delete_by_selected", function delete_by_selected() {
+    var _this12 = this;
+
+    this.$swal({
+      title: this.$t("Delete.Title"),
+      text: this.$t("Delete.Text"),
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: this.$t("Delete.cancelButtonText"),
+      confirmButtonText: this.$t("Delete.confirmButtonText")
+    }).then(function (result) {
+      if (result.value) {
+        // Start the progress bar.
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
+        axios.post("maps/delete/by_selection", {
+          selectedIds: _this12.selectedIds
+        }).then(function () {
+          _this12.$swal(_this12.$t("Delete.Deleted"), _this12.$t("Delete.TitleMap"), "success");
+
+          Fire.$emit("Delete_Map");
+        })["catch"](function () {
+          // Complete the animation of theprogress bar.
+          setTimeout(function () {
+            return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
+          }, 500);
+
+          _this12.$swal(_this12.$t("Delete.Failed"), _this12.$t("Delete.Therewassomethingwronge"), "warning");
+        });
+      }
+    });
+  }), _methods),
   //end Methods
   created: function created() {
-    var _this11 = this;
+    var _this13 = this;
 
     this.Get_Maps(1);
     Fire.$on("Event_Map", function () {
       setTimeout(function () {
-        _this11.Get_Maps(_this11.serverParams.page);
+        _this13.Get_Maps(_this13.serverParams.page);
 
-        _this11.$bvModal.hide("New_map");
+        _this13.$bvModal.hide("New_map");
       }, 500);
     });
     Fire.$on("Delete_Map", function () {
       setTimeout(function () {
-        _this11.Get_Maps(_this11.serverParams.page);
+        _this13.Get_Maps(_this13.serverParams.page);
       }, 500);
     });
   }
@@ -1158,7 +1228,7 @@ var render = function () {
               key: index,
               attrs: {
                 position: m.position,
-                clickable: true,
+                clickable: false,
                 draggable: true,
                 icon: m.showIcon ? _vm.getMarkerIcon() : null,
               },
@@ -1215,97 +1285,8 @@ var render = function () {
             [
               _c(
                 "b-col",
-                { attrs: { md: "8" } },
-                [
-                  _c(
-                    "b-card",
-                    [
-                      _c(
-                        "b-row",
-                        [
-                          _c(
-                            "b-col",
-                            { staticClass: "mb-2", attrs: { md: "6" } },
-                            [
-                              _c("validation-provider", {
-                                attrs: {
-                                  name: "radius",
-                                  rules: {
-                                    required: true,
-                                    regex: /^\d*\.?\d*$/,
-                                  },
-                                },
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "default",
-                                    fn: function (validationContext) {
-                                      return [
-                                        _c(
-                                          "b-form-group",
-                                          {
-                                            attrs: {
-                                              label: _vm.$t("Distance(KM)"),
-                                            },
-                                          },
-                                          [
-                                            _c("b-form-input", {
-                                              attrs: {
-                                                state:
-                                                  _vm.getValidationState(
-                                                    validationContext
-                                                  ),
-                                                "aria-describedby":
-                                                  "ProductPrice-feedback",
-                                                label: "radius",
-                                                placeholder:
-                                                  _vm.$t("Enter_radius"),
-                                                disabled: "",
-                                              },
-                                              on: {
-                                                input: _vm.handleRadiusChange,
-                                              },
-                                              model: {
-                                                value: _vm.radius,
-                                                callback: function ($$v) {
-                                                  _vm.radius = $$v
-                                                },
-                                                expression: "radius",
-                                              },
-                                            }),
-                                            _vm._v(" "),
-                                            _c(
-                                              "b-form-invalid-feedback",
-                                              {
-                                                attrs: {
-                                                  id: "ProductPrice-feedback",
-                                                },
-                                              },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    validationContext.errors[0]
-                                                  )
-                                                ),
-                                              ]
-                                            ),
-                                          ],
-                                          1
-                                        ),
-                                      ]
-                                    },
-                                  },
-                                ]),
-                              }),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                    ],
-                    1
-                  ),
-                ],
+                { attrs: { md: "12" } },
+                [_c("b-card", [_c("b-row")], 1)],
                 1
               ),
             ],
@@ -1316,7 +1297,7 @@ var render = function () {
       ),
       _vm._v(" "),
       _c("breadcumb", {
-        attrs: { page: _vm.$t("Map"), folder: _vm.$t("Settings") },
+        attrs: { page: _vm.$t("Leads"), folder: _vm.$t("Settings") },
       }),
       _vm._v(" "),
       _vm.isLoading
@@ -1464,7 +1445,20 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v(_vm._s(_vm.$t("assign_to_mandob")))]
+                        [_vm._v(_vm._s(_vm.$t("Assign to Sales Rep")))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-sm",
+                          on: {
+                            click: function ($event) {
+                              return _vm.openModel()
+                            },
+                          },
+                        },
+                        [_vm._v(_vm._s(_vm.$t("Show On Map")))]
                       ),
                     ]
                   ),
@@ -1546,6 +1540,7 @@ var render = function () {
                                         }
                                       }),
                                     },
+                                    on: { input: _vm.handleChange },
                                     model: {
                                       value: _vm.Filter_Sections,
                                       callback: function ($$v) {
@@ -1586,6 +1581,7 @@ var render = function () {
                                         }
                                       }),
                                     },
+                                    on: { input: _vm.handleChange_shiakha },
                                     model: {
                                       value: _vm.Filter_Shiakha_Name,
                                       callback: function ($$v) {
@@ -1607,64 +1603,24 @@ var render = function () {
                             [
                               _c(
                                 "b-form-group",
-                                { attrs: { label: _vm.$t("Zone_Name") } },
+                                { attrs: { label: _vm.$t("type") } },
                                 [
                                   _c("v-select", {
                                     attrs: {
                                       reduce: function (label) {
                                         return label.value
                                       },
-                                      placeholder: _vm.$t("Choose_Zone_Name"),
-                                      options: _vm.Zone_Name.map(function (
-                                        Zone_Name
-                                      ) {
-                                        return {
-                                          label: Zone_Name,
-                                          value: Zone_Name,
-                                        }
+                                      placeholder: _vm.$t("Choose_type"),
+                                      options: _vm.types.map(function (types) {
+                                        return { label: types, value: types }
                                       }),
                                     },
                                     model: {
-                                      value: _vm.Filter_Zone_Name,
+                                      value: _vm.type_t,
                                       callback: function ($$v) {
-                                        _vm.Filter_Zone_Name = $$v
+                                        _vm.type_t = $$v
                                       },
-                                      expression: "Filter_Zone_Name",
-                                    },
-                                  }),
-                                ],
-                                1
-                              ),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-col",
-                            { attrs: { md: "12" } },
-                            [
-                              _c(
-                                "b-form-group",
-                                { attrs: { label: _vm.$t("Street") } },
-                                [
-                                  _c("v-select", {
-                                    attrs: {
-                                      reduce: function (label) {
-                                        return label.value
-                                      },
-                                      placeholder: _vm.$t("Choose_Street"),
-                                      options: _vm.Street.map(function (
-                                        Street
-                                      ) {
-                                        return { label: Street, value: Street }
-                                      }),
-                                    },
-                                    model: {
-                                      value: _vm.Filter_street,
-                                      callback: function ($$v) {
-                                        _vm.Filter_street = $$v
-                                      },
-                                      expression: "Filter_street",
+                                      expression: "type_t",
                                     },
                                   }),
                                 ],

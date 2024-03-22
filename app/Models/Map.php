@@ -14,7 +14,7 @@ class Map extends Model
          'Section', 'Shiakha_Name' ,
           'Zone_Name' , 'Area_Type' ,
            'Outlet_Type' , 'Street' ,
-            'Mobile' , 'Contact' , 'user_id'
+            'Mobile' , 'Contact' , 'user_id' ,'google_map' , 'assigned'
     ];
  
     protected $casts = [

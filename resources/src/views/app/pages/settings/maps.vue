@@ -2,7 +2,7 @@
 <template>
   <div class="main-content">
 
-
+ 
 
     <GmapMap
     :center="{lat:30.059813, lng:31.329825}"
@@ -28,7 +28,7 @@
           :key="index"
           v-for="(m, index) in markers"
           :position="m.position"
-          :clickable="true"
+          :clickable="false"
           :draggable="true"
           @dragend="onCircleDragEnd"
           :icon="m.showIcon ? getMarkerIcon() : null"
@@ -61,7 +61,7 @@
 
 <b-form @submit.prevent="GetDataMap" enctype="multipart/form-data">
         <b-row>
-          <b-col md="8">
+          <b-col md="12">
             <b-card>
               <b-row>
    
@@ -95,7 +95,7 @@
 
 
 
-          
+<!--           
               <b-col md="6" class="mb-2">
                   <validation-provider
                     name="radius"
@@ -118,7 +118,7 @@
                       >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
-                </b-col>
+                </b-col> -->
  
                 <!-- <button class="btn btn-success btn-sm" @click="GetDataMap()"> {{ $t('ShowInMap') }}</button> -->
 
@@ -151,7 +151,7 @@
   </GMapMap> -->
 
 
-    <breadcumb :page="$t('Map')" :folder="$t('Settings')"/>
+    <breadcumb :page="$t('Leads')" :folder="$t('Settings')"/>
 
  
 
@@ -186,12 +186,14 @@
         nextLabel: 'next',
         prevLabel: 'prev',
       }"
-        styleClass="table-hover tableOne vgt-table"
-      >
+      styleClass="table-hover tableOne vgt-table">
         <div slot="selected-row-actions">
           <!-- <button class="btn btn-success btn-sm" @click="delete_by_selected()"> {{ $t('Save') }}</button> -->
 
-          <button class="btn btn-success btn-sm" @click="openModel()">{{$t('assign_to_mandob')}}</button>
+          <button class="btn btn-success btn-sm" @click="openModel()">{{$t('Assign to Sales Rep')}}</button>
+
+          <button class="btn btn-success btn-sm" @click="openModel()">{{$t('Show On Map')}}</button>
+
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
 
@@ -243,6 +245,7 @@
                   :reduce="label => label.value"
                   :placeholder="$t('Choose_Section')"
                   v-model="Filter_Sections"
+                  v-on:input="handleChange"
                   :options="Sections.map(Sections => ({label: Sections , value: Sections }))"
                 />
               </b-form-group>
@@ -255,13 +258,27 @@
                   :reduce="label => label.value"
                   :placeholder="$t('Choose_Shiakha_Name')"
                   v-model="Filter_Shiakha_Name"
+                  v-on:input="handleChange_shiakha"
                   :options="Shiakha_Name.map(Shiakha_Name => ({label: Shiakha_Name , value: Shiakha_Name }))"
                 />
               </b-form-group>
             </b-col>
 
 
+            
+            <b-col md="12">
+              <b-form-group :label="$t('type')">
+                <v-select
+                  :reduce="label => label.value"
+                  :placeholder="$t('Choose_type')"
+                  v-model="type_t"
+                  :options="types.map(types => ({label: types , value: types }))"
+                />
+              </b-form-group>
+            </b-col>
 
+
+<!-- 
             <b-col md="12">
               <b-form-group :label="$t('Zone_Name')">
                 <v-select
@@ -271,11 +288,11 @@
                   :options="Zone_Name.map(Zone_Name => ({label: Zone_Name , value: Zone_Name }))"
                 />
               </b-form-group>
-            </b-col>
+            </b-col> -->
 
 
 
-            <b-col md="12">
+            <!-- <b-col md="12">
               <b-form-group :label="$t('Street')">
                 <v-select
                   :reduce="label => label.value"
@@ -284,7 +301,7 @@
                   :options="Street.map(Street => ({label: Street , value: Street }))"
                 />
               </b-form-group>
-            </b-col>
+            </b-col> -->
             
 
             <!-- Brand  -->
@@ -486,10 +503,11 @@ export default {
       Filter_Zone_Name:"",
       Filter_street:"",
       Filter_Sections: "",
-
+      type_t:"",
       Sections:[],
       Zone_Name:[],
       Shiakha_Name:[],
+      types:[],
       isLoading: true,
 
       center: {lat: 30.059813, lng: 31.329825},
@@ -527,10 +545,11 @@ export default {
 
       totalRows: "",
       search: "",
-      radius:10000,
+      radius:100,
       circle: {
       center: {  lat: 30.059813, lng: 31.329825 ,  },
-      radius: 10000,
+      radius: 100,
+     
       options: {
         strokeColor: 'red',
         strokeOpacity:1.0,
@@ -592,8 +611,8 @@ export default {
         },
 
         {
-          label: this.$t("Zone_Name"),
-          field: "Zone_Name",
+          label: this.$t("Outlet_Type"),
+          field: "Outlet_Type",
           tdClass: "text-left",
           thClass: "text-left"
         },
@@ -608,13 +627,19 @@ export default {
 
 
  
-
         {
-          label: this.$t("Street"),
-          field: "Street",
+          label: this.$t("google_map"),
+          field: "google_map",
           tdClass: "text-left",
           thClass: "text-left"
         },
+        {
+          label: this.$t("assinged"),
+          field: "assinged",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+ 
         {
           label: this.$t("Mobile"),
           field: "Mobile",
@@ -825,8 +850,16 @@ export default {
     //---- Event Select Rows
     selectionChanged({ selectedRows }) {
       this.selectedIds = [];
+      this.shops_marker = [];
       selectedRows.forEach((row, index) => {
+        // console.log(row.Point_Y_Geo);
+        // console.log(row.Point_X_Geo);
         this.selectedIds.push(row.id);
+
+    this.shops_marker.push({
+    position: { lat: parseFloat(row.Point_Y_Geo) , lng: parseFloat(row.Point_X_Geo)   }, // Specify the latitude and longitude of the new marker
+    showIcon: true, // You can set this to true if you want the icon to be shown
+             });
       });
     },
 
@@ -946,7 +979,7 @@ export default {
       this.Filter_Zone_Name = "";
       this.Filter_street = "";
       this.Filter_Shiakha_Name = "";
- 
+      this.type_t = "";
       this.Get_Maps(this.serverParams.page);
     },
     Get_Maps(page) {
@@ -961,6 +994,8 @@ export default {
             page +
             "&Section=" +
             this.Filter_Sections +
+            "&Outlet_Type=" +
+            this.type_t +
             "&Zone_Name=" +
             this.Filter_Zone_Name +
             "&Street=" +
@@ -982,11 +1017,11 @@ export default {
           // this.shops_marker = response.data.map_items;
           // this.mandobs = response.data.mandobs;
           // Complete the animation of theprogress bar.
-           this.shops_marker = response.data.itemMap;
+          //  this.shops_marker = response.data.itemMap;
            this.mandobs = response.data.mandobs;
            this.Zone_Name = response.data.Zone_Name;
-          this.Shiakha_Name = response.data.Shiakha_Name;
-          console.log(response.data.itemMap);
+          // this.Shiakha_Name = response.data.Shiakha_Name;
+          // console.log(response.data.itemMap);
           this.Sections = response.data.Sections;
           this.Street = response.data.Street;
           this.totalRows = response.data.totalRows;
@@ -1002,6 +1037,65 @@ export default {
         });
     },
 
+    handleChange_shiakha(e){
+      axios.get(
+          "maps/get_data_view_type/data?section=" +
+            this.Filter_Sections 
+            +
+            "&Filter_Shiakha_Name=" +
+            e 
+        )
+        .then(response => {
+
+
+          this.types  = response.data.Outlet_Type;
+          console.log(response.data.Outlet_Type)
+          NProgress.done();
+          this.isLoading = false;
+        })
+        .catch(response => {
+          // Complete the animation of theprogress bar.
+          NProgress.done();
+ 
+        });
+    },
+    handleChange(e){
+      
+
+      axios.get(
+          "maps/get_data_view/data?section_name=" +
+            e 
+        )
+        .then(response => {
+
+
+          this.Shiakha_Name  = response.data.Shiakha_Name;
+          // this.maps = response.data.maps;
+          // this.totalRows = response.data.totalRows;
+          // this.shops_marker = response.data.map_items;
+          // this.mandobs = response.data.mandobs;
+          // Complete the animation of theprogress bar.
+          //  this.shops_marker = response.data.itemMap;
+          //  this.mandobs = response.data.mandobs;
+          //  this.Zone_Name = response.data.Zone_Name;
+          // this.Shiakha_Name = response.data.Shiakha_Name;
+          // console.log(response.data.itemMap);
+          // this.Sections = response.data.Sections;
+          // this.Street = response.data.Street;
+          // this.totalRows = response.data.totalRows;
+          NProgress.done();
+          this.isLoading = false;
+        })
+        .catch(response => {
+          // Complete the animation of theprogress bar.
+          NProgress.done();
+          // setTimeout(() => {
+          //   this.isLoading = false;
+          // }, 500);
+        });
+
+
+    },
 
     //---------------------------------------- Create new map-----------------\
     Create_Map() {
@@ -1107,7 +1201,7 @@ export default {
     save_select(){
 
    
-         NProgress.start();
+          NProgress.start();
           NProgress.set(0.1);
           axios.post("maps/save/by_selection", {
               selectedIds: this.selectedIds ,

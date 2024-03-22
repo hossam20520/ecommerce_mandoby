@@ -33,6 +33,9 @@ class Maps extends Migration
             $table->text('Street')->nullable();
             $table->text('Mobile')->nullable();
             $table->text('Contact')->nullable();
+
+            $table->text('google_map')->nullable()->default("no");
+            $table->text('assigned')->nullable()->default("no");
         
 			$table->timestamps(6);
 			$table->softDeletes();

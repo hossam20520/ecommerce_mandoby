@@ -23,6 +23,63 @@ class OrdersController extends Controller
 {
 
 
+  public function addOneClient(Request $request){
+    $user =   Auth::user();
+    
+    if (empty($request['lat']) && $request['lat'] !== null) {
+        return response()->json(['message' => 'لا توجد احداثيات'], 200);
+
+    }
+
+
+    if (empty($request['Section']) && $request['Section'] !== null) {
+        return response()->json(['message' => 'القسم لايمكن ان يكون فارغ'], 200);
+
+    }
+
+
+    $mda =  Map::where('lng' , $item['lng'])->wherer('lat' , $item['lat'])->where('google_map' , 'yes')->first();
+   
+
+
+    if(!$mda){
+
+        $mda = Map::create([
+            'Outlet_Name' =>$request['name'],
+            'Point_X_Geo' => $request['lng'],
+            'Point_Y_Geo' => $request['lat'],
+            'Gov_Name' =>    $request['Gov_Name'],
+            'Section' =>     $request['Section'],
+            'Shiakha_Name' => $request['Shiakha_Name'],
+            'Zone_Name' =>    $request['Zone_Name'],
+            'Outlet_Type' =>  $request['Outlet_Type'],
+            'Mobile' =>       $request['Mobile'],
+            'google_map' =>    "yes",
+            'assigned' =>    "no",
+            'user_id' => $user->id,
+            ]);
+    }
+   
+
+
+        $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user->id)->where('location_id' , $mda->id)->first();
+
+        if(!$tas){
+            $tasks = new Task;
+            $tasks->location_id =  $mda->id;
+            $tasks->user_id = $user->id;
+            $tasks->from = "0";
+            $tasks->to = "0";
+            $tasks->status = "pending";
+            $tasks->save();
+        }
+
+
+        return response()->json(['message' => 'Data saved successfully'], 200);
+
+
+  }
+
 
     
     public function addClients(Request $request ){
