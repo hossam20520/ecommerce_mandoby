@@ -32,10 +32,7 @@ class OrdersController extends Controller
     }
 
 
-    if (empty($request['Section']) && $request['Section'] !== null) {
-        return response()->json(['message' => 'القسم لايمكن ان يكون فارغ'], 200);
-
-    }
+  
 
 
     if (empty($request['Section']) && $request['Section'] !== null) {
