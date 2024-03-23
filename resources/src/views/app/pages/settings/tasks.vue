@@ -185,6 +185,21 @@ export default {
   computed: {
     columns() {
       return [
+          {
+          label: this.$t("Outlet_Name"),
+          field: "shop.Section",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+        {
+          label: this.$t("Outlet_Type"),
+          field: "shop.Outlet_Type",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+
         {
           label: this.$t("Section"),
           field: "shop.Section",
@@ -197,21 +212,14 @@ export default {
           tdClass: "text-left",
           thClass: "text-left"
         },
-        {
-          label: this.$t("Zone_Name"),
-          field: "shop.Zone_Name",
+    
+  
+       {
+          label: this.$t("location"),
+          field: "shop.Shiakha_Name",
           tdClass: "text-left",
           thClass: "text-left"
         },
-
-
-        {
-          label: this.$t("Outlet_Type"),
-          field: "shop.Outlet_Type",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
-
 
         
         {

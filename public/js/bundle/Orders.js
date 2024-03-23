@@ -734,6 +734,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     columns: function columns() {
       return [{
+        label: this.$t("Outlet_Name"),
+        field: "shop.Section",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("Outlet_Type"),
+        field: "shop.Outlet_Type",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("Section"),
         field: "shop.Section",
         tdClass: "text-left",
@@ -744,13 +754,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("Zone_Name"),
-        field: "shop.Zone_Name",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("Outlet_Type"),
-        field: "shop.Outlet_Type",
+        label: this.$t("location"),
+        field: "shop.Shiakha_Name",
         tdClass: "text-left",
         thClass: "text-left"
       }, {

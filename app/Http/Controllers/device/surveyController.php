@@ -22,7 +22,19 @@ class surveyController extends Controller
  
  
  
- 
+    public function getDropDown(Request $request){
+
+
+
+        $mapsva  =  Map::whereNull('deleted_at')->whereNotNull('Section')->pluck('Section')->unique()->values()->toArray();
+         
+        $Shiakha_Name  =  Map::whereNull('deleted_at')->whereNotNull('Shiakha_Name')->pluck('Shiakha_Name')->unique()->values()->toArray();
+                   
+        $Zone_Name  =  Map::whereNull('deleted_at')->whereNotNull('Zone_Name')->pluck('Zone_Name')->unique()->values()->toArray();
+        $outlitType  =  Map::whereNull('deleted_at')->whereNotNull('Outlet_Type')->pluck('Outlet_Type')->unique()->values()->toArray();
+         
+        return response()->json(['section' => $mapsva , 'Shiakha_Name'=>$Shiakha_Name  , 'Outlet_Type'=> $outlitType   ]);
+    }
  
  
  

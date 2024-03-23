@@ -2893,7 +2893,7 @@ var render = function () {
                         _c("i", { staticClass: "nav-icon i-Bookmark" }),
                         _vm._v(" "),
                         _c("span", { staticClass: "item-name" }, [
-                          _vm._v(_vm._s(_vm.$t("Map"))),
+                          _vm._v(_vm._s(_vm.$t("Leads"))),
                         ]),
                       ]
                     ),

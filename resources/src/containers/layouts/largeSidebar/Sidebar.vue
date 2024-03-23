@@ -716,7 +716,7 @@
             class="nav-item" >
             <router-link tag="a" class to="/app/settings/Maps">
               <i class="nav-icon i-Bookmark"></i>
-              <span class="item-name">{{   $t('Map') }}</span>
+              <span class="item-name">{{   $t('Leads') }}</span>
             </router-link>
           </li>
 
