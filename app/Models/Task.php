@@ -11,7 +11,7 @@ class Task extends Model
     protected $table = 'tasks';
 
     protected $fillable = [
-        'user_id', 'location_id', 'from', 'to', 'status',  
+        'user_id', 'location_id', 'from', 'to', 'status',  'current_lat' , 'current_lng'
     ];
 
     public function Shop()

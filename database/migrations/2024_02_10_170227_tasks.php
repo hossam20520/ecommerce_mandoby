@@ -22,6 +22,9 @@ class Tasks extends Migration
             $table->text('to')->nullable();
             $table->string('status', 100);
  
+            $table->text('current_lat')->nullable();
+            $table->text('current_lng')->nullable();
+         
 			$table->timestamps(6);
 			$table->softDeletes();
         });
