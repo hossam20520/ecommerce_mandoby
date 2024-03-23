@@ -42,8 +42,9 @@ class CreateProductsTable extends Migration {
 			$table->integer('mini_qty')->nullable()->default(1);
 			$table->integer('max_qty')->nullable()->default(3);
 
+			$table->integer('external_id')->nullable();
 	 
-
+			
 
 			$table->timestamps(6);
 			$table->softDeletes();

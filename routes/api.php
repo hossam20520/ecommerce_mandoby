@@ -84,12 +84,19 @@ Route::get("/v1/device/play", "device\PlayController@play");
 Route::get('/v1/device/home/noauth', 'device\HomeController@HomePage');
 
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
+    Route::post("/v1/dashboard/sync", "device\DashboardController@updateMasterData");
+
 
     Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
 
 
   
    Route::post("/v1/device/map/client/add", "device\mandob\OrdersController@addOneClient");
+
+
+
+  
+   
     
 
 
