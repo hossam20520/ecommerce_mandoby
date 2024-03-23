@@ -44,7 +44,7 @@ class OrdersController extends Controller
     }
 
 
-    $mda =  Map::where('lng' , $request['lng'])->wherer('lat' , $request['lat'])->where('google_map' , 'yes')->first();
+    $mda =  Map::where('Point_X_Geo' , $request['lng'])->wherer('Point_Y_Geo' , $request['lat'])->where('google_map' , 'yes')->first();
    
 
 
