@@ -164,8 +164,11 @@ public function getCategoryID($id){
                     }
 
                     product_warehouse::insert($product_warehouse);
-                    $this->UpdateQuantity($Product->id);
+                   
                 }
+
+
+                $this->UpdateQuantity($Product->id);
 
                 
             } else{
