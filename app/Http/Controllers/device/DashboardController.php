@@ -102,8 +102,19 @@ public function getCategoryID($id){
             ->where('product_id', $product_id)
             ->first();
 
-            $product_warehouse->qte += 500;
-            $product_warehouse->save();
+
+
+            if ($product_warehouse) {
+                $product_warehouse->qte += 500;
+                $product_warehouse->save();
+            } else {
+                 $wa = new product_warehouse;
+                 $wa->warehouse_id = $settings->warehouse_id;
+                 $wa->product_id = $product_id;
+                 $wa->qte  = 500;
+                 $wa->save();
+            }
+
       
            }
 
