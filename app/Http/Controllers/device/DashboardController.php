@@ -168,7 +168,7 @@ public function getCategoryID($id){
                 }
 
 
-                $this->UpdateQuantity($Product->id);
+                // $this->UpdateQuantity($Product->id);
 
                 
             } else{
