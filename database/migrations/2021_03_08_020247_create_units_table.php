@@ -22,6 +22,8 @@ class CreateUnitsTable extends Migration {
 			$table->integer('base_unit')->nullable()->index('base_unit');
 			$table->char('operator', 192)->nullable()->default('*');
 			$table->float('operator_value', 10, 0)->nullable()->default(1);
+			$table->string('external_id', 192)->nullable();
+			
 			$table->timestamps(6);
 			$table->softDeletes();
 		});

@@ -155,6 +155,8 @@ class surveyController extends Controller
 
      Task::whereId($request['task_id'])->update([
             'status' => "done",
+             'current_lat' => $request['lat'],
+             'current_lng' => $request['lng']
         ]);
 
 
