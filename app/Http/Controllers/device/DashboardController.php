@@ -149,7 +149,7 @@ public function getCategoryID($id){
 
                 $Product->image =  'no-image.png';
                 $Product->save();
-                $this->UpdateQuantity($Product->id);
+               
               
                 $warehouses = Warehouse::where('deleted_at', null)->pluck('id')->toArray();
                 if ($warehouses) {
@@ -164,6 +164,7 @@ public function getCategoryID($id){
                     }
 
                     product_warehouse::insert($product_warehouse);
+                    $this->UpdateQuantity($Product->id);
                 }
 
                 
