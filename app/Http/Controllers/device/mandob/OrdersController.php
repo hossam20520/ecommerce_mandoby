@@ -224,6 +224,7 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
         foreach ($sale->details as $da) {
             $itemm['product'] = app('App\Http\Controllers\device\ProductsController')->ProductDetail($da->product->id);
             $itemm['detail'] = $da;
+            $item['notes'] =  $sale->notes;
             $data[] = $itemm;
          
         }

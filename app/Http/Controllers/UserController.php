@@ -703,7 +703,7 @@ class UserController extends BaseController
  
                             $emaiil = $value['phone']."@horecasmart.com";
 
-                            $user = User::where('email' , $emaiil )->first();
+                             $user = User::where('email' , $emaiil )->first();
 
                             if($user){
                                  continue;

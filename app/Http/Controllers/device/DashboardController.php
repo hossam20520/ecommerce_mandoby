@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\product_warehouse;
 use App\Models\Warehouse;
 use App\Models\Unit;
+use App\Models\User;
 use App\Models\Setting;
 
 
@@ -29,6 +30,8 @@ class DashboardController extends Controller
             $this->UpdateProduct($data);
         }else if($request->type == "unites"){
             $this->UpdateUnite($data);
+        }else if($request->type == "customers"){
+            $this->UpdateCustomer($data);
         }
   
 
@@ -59,7 +62,38 @@ public function getCategoryID($id){
                    }
 
            
-           
+                   
+
+
+                   public function UpdateCustomer($customers){
+
+                    foreach ($customers as $customer) {
+            
+                       $user_o = User::where('deleted_at' , '=' , null)->where('code' ,$customer['id'] )->first();
+                       if(!$user_o){
+                        $user_n  = new User;
+                        // $unite_n->name = $customer['name'];
+                        // $unite_n->ShortName = $unite['name'];
+                        // $unite_n->external_id = $unite['id'];
+                        // $user_n->save();
+                       }else{
+                        $unite_n = Unit::where('deleted_at' , '=' , null)->where('external_id', $unite['id'])
+                        ->first();
+            
+                        $unite_n->name = $User['name'];
+                        $unite_n->ShortName = $unite['name'];
+                        $unite_n->external_id = $unite['id'];
+                        $unite_n->save();
+                       }
+            
+            
+                        }
+            
+            
+            
+                       }
+
+
 
      public function UpdateUnite($unites){
 

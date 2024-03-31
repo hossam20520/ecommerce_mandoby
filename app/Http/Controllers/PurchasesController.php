@@ -199,6 +199,7 @@ class PurchasesController extends BaseController
                         }
 
                     } else {
+                        
                         $product_warehouse = product_warehouse::where('deleted_at', '=', null)
                             ->where('warehouse_id', $order->warehouse_id)
                             ->where('product_id', $value['product_id'])
