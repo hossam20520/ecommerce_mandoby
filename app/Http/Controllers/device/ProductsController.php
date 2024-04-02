@@ -329,8 +329,7 @@ class ProductsController extends Controller
         ->where('deleted_at', '=', null)
         ->whereHas('product', function ($query) use ($type ) {
               $query->where('status', $type);
-        })->distinct();
-      //  ->where('qte', '>', 0) // Filter for quantity > 0
+        })->where('qte', '>', 0); // Filter for quantity > 0
     $totalRows = $product_warehouse_data->count();
     
     $products = $product_warehouse_data
