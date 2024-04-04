@@ -18,7 +18,7 @@ services:
       
 
       - .:/var/www/html
-      -  ./config_php:/usr/local/etc/php/php.ini
+      # -  ./config_php:/usr/local/etc/php/php.ini
 
 
     depends_on:
