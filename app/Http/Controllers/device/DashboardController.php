@@ -85,7 +85,7 @@ public function getCategoryID($id){
                         $User->area_name     =  "";
                         $User->area_id       =    1;
                         $User->location_lat  =    "0.000";
-                        $User->address     =    $customer['street'];  
+                        $User->address     =    isset($customer['street']) ? $customer['street'] : "Street";   
                         $User->location_long     =   "01.00011";
                         $User->password  = Hash::make("Accc122$$$33###4hjjd@123");
                         $User->avatar    = "no_avatar.png";
@@ -105,7 +105,7 @@ public function getCategoryID($id){
                         $user_o->phone         = "0".$customer['phone'];
                         $user_o->code          =  $customer['id'];
                         $user_o->location_lat  =       "0.000";
-                        $user_o->address     =    $customer['street'];  
+                        $user_o->address     =    isset($customer['street']) ? $customer['street'] : "Street";   
                         $user_o->location_long     =   "0.0000";
                         $user_o->role_id   =   "2";
                         $user_o->save();
