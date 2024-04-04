@@ -9,9 +9,10 @@ use App\Models\Product;
 use App\Models\product_warehouse;
 use App\Models\Warehouse;
 use App\Models\Unit;
+use App\Models\role_user;
 use App\Models\User;
 use App\Models\Setting;
-
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -69,21 +70,46 @@ public function getCategoryID($id){
 
                     foreach ($customers as $customer) {
             
-                       $user_o = User::where('deleted_at' , '=' , null)->where('code' ,$customer['id'] )->first();
+                       $user_o = User::where('deleted_at' , '=' , null)->where('phone' ,$customer['phone'] )->first();
+                      
+                       $emaiil = $customer['phone']."@horecasmart.com";
                        if(!$user_o){
-                        $user_n  = new User;
-                        // $unite_n->name = $customer['name'];
-                        // $unite_n->ShortName = $unite['name'];
-                        // $unite_n->external_id = $unite['id'];
-                        // $user_n->save();
-                       }else{
-                        $unite_n = Unit::where('deleted_at' , '=' , null)->where('external_id', $unite['id'])
-                        ->first();
+                        // $user_n  = new User;
+                        $User = new User();
+                        $User->firstname = $customer['ar_name']; 
+                        $User->lastname  = $customer['ar_name'];
+                        $User->username  = $customer['phone'];
+                        $User->email         = $emaiil;
+                        $User->phone         = "0".$customer['phone'];
+                        $User->code          =  $customer['id'];
+                        $User->area_name     =  "";
+                        $User->area_id       =    1;
+                        $User->location_lat  =    "0.000";
+                        $User->address     =    $customer['street'];  
+                        $User->location_long     =   "01.00011";
+                        $User->password  = Hash::make("Accc122$$$33###4hjjd@123");
+                        $User->avatar    = "no_avatar.png";
+                        $User->role_id   =   "2";
+                        $User->save();
             
-                        $unite_n->name = $User['name'];
-                        $unite_n->ShortName = $unite['name'];
-                        $unite_n->external_id = $unite['id'];
-                        $unite_n->save();
+                        $role_user = new role_user;
+                        $role_user->user_id = $User->id;
+                        $role_user->role_id =  2;
+                        $role_user->save();
+                       }else{
+                      
+                        $user_o->firstname = $customer['ar_name']; 
+                        $user_o->lastname  = $customer['en_name'];
+                        $user_o->username  = $customer['phone'];
+                        $user_o->email         = $emaiil;
+                        $user_o->phone         = "0".$customer['phone'];
+                        $user_o->code          =  $customer['id'];
+                        $user_o->location_lat  =       "0.000";
+                        $user_o->address     =    $customer['street'];  
+                        $user_o->location_long     =   "0.0000";
+                        $user_o->role_id   =   "2";
+                        $user_o->save();
+ 
                        }
             
             

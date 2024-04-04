@@ -35,6 +35,7 @@ class CreateUsersTable extends Migration {
 			$table->string('code')->nullable();
 			$table->boolean('statut')->default(1);
 			
+			$table->string('area_id')->nullable();
 			$table->timestamps(6);
 			$table->softDeletes();
 		});
