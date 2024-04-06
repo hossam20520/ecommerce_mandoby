@@ -131,7 +131,7 @@
 
             <!-- -Ai Image -->
             <b-col md="12">
-              <validation-provider name="Image" ref="Image" rules="mimes:image/* ">
+              <validation-provider name="Image" ref="Image" rules="mimes:image">
                 <b-form-group slot-scope="{validate, valid, errors }" :label="$t('AiImage')">
                   <input
                     :state="errors[0] ? false : (valid ? true : null)"
@@ -211,7 +211,7 @@ export default {
           thClass: "text-left"
         },
         {
-          label: this.$t("AiDescription"),
+          label: this.$t("ar_name"),
           field: "ar_name",
           tdClass: "text-left",
           thClass: "text-left"

@@ -227,7 +227,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("AiDescription"),
+        label: this.$t("ar_name"),
         field: "ar_name",
         tdClass: "text-left",
         thClass: "text-left"
@@ -983,7 +983,7 @@ var render = function () {
                         [
                           _c("validation-provider", {
                             ref: "Image",
-                            attrs: { name: "Image", rules: "mimes:image/* " },
+                            attrs: { name: "Image", rules: "mimes:image" },
                             scopedSlots: _vm._u([
                               {
                                 key: "default",
