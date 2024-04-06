@@ -55,6 +55,5 @@ services:
       # MEMORY_LIMIT:400M
       # MAX_EXECUTION_TIME
  
- 
 volumes:
   db_data:

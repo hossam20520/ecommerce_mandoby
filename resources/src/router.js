@@ -645,6 +645,13 @@ const routes = [
                         },
 
 
+                          // ais
+                          {
+                            name: "ais",
+                            path: "Ais",
+                            component: () =>
+                                import(/* webpackChunkName: "Ais" */"./views/app/pages/settings/ais")
+                        },
                         
                           // promos
                     {

@@ -36,6 +36,8 @@ Route::post('/v1/device/survey', 'device\surveyController@surveyData');
 
 
 
+
+
 // Route::post("device/auth/login/", "device\AuthController@login");
 
 Route::post("/v1/device/auth/login/", "device\AuthController@login");
@@ -170,6 +172,13 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
   Route::post("/v1/device/mandob/bill/image", "device\mandob\OrdersController@addImage");
 
 
+
+
+      //------------------------------- Ais--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('ais', 'AisController');
+    Route::post('ais/delete/by_selection', 'AisController@delete_by_selection');
+    
 
       //------------------------------- Orders--------------------------\
     //------------------------------------------------------------------\
