@@ -759,7 +759,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("status"),
+        label: this.$t("status_achiv"),
         field: "status",
         tdClass: "text-left",
         thClass: "text-left"
@@ -1560,31 +1560,33 @@ var render = function () {
                               ? _c(
                                   "span",
                                   [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        directives: [
+                                    props.row.status != "pending"
+                                      ? _c(
+                                          "router-link",
                                           {
-                                            name: "b-tooltip",
-                                            rawName: "v-b-tooltip.hover",
-                                            modifiers: { hover: true },
+                                            directives: [
+                                              {
+                                                name: "b-tooltip",
+                                                rawName: "v-b-tooltip.hover",
+                                                modifiers: { hover: true },
+                                              },
+                                            ],
+                                            attrs: {
+                                              title: "View",
+                                              to: {
+                                                name: "detail_task",
+                                                params: { id: props.row.id },
+                                              },
+                                            },
                                           },
-                                        ],
-                                        attrs: {
-                                          title: "View",
-                                          to: {
-                                            name: "detail_task",
-                                            params: { id: props.row.id },
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass:
-                                            "i-Eye text-25 text-info",
-                                        }),
-                                      ]
-                                    ),
+                                          [
+                                            _c("i", {
+                                              staticClass:
+                                                "i-Eye text-25 text-info",
+                                            }),
+                                          ]
+                                        )
+                                      : _vm._e(),
                                     _vm._v(" "),
                                     _c(
                                       "a",
@@ -1637,7 +1639,7 @@ var render = function () {
                     ],
                     null,
                     false,
-                    3308320004
+                    3956279176
                   ),
                 },
                 [

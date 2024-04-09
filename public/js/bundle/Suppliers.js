@@ -3089,7 +3089,7 @@ var render = function () {
     { staticClass: "main-content" },
     [
       _c("breadcumb", {
-        attrs: { page: _vm.$t("Mandobs"), folder: _vm.$t("Mandobs") },
+        attrs: { page: _vm.$t("sales_users"), folder: _vm.$t("sales_users") },
       }),
       _vm._v(" "),
       _vm.isLoading
@@ -4123,11 +4123,11 @@ var render = function () {
                                           ],
                                         },
                                         model: {
-                                          value: _vm.user.type,
+                                          value: _vm.user.role_id,
                                           callback: function ($$v) {
-                                            _vm.$set(_vm.user, "type", $$v)
+                                            _vm.$set(_vm.user, "role_id", $$v)
                                           },
-                                          expression: "user.type",
+                                          expression: "user.role_id",
                                         },
                                       }),
                                       _vm._v(" "),

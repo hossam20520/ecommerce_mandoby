@@ -1,7 +1,7 @@
 
 <template>
   <div class="main-content">
-    <breadcumb :page="$t('Mandob')" :folder="$t('Settings')"/>
+    <breadcumb :page="$t('achivments')" :folder="$t('Settings')"/>
 
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
     <b-card class="wrapper" v-if="!isLoading">
@@ -92,8 +92,7 @@
                         :placeholder="$t('orders')"
                         v-model="mandob.orders"
                         multiple
-                        :options="orders.map(orders => ({label: orders.ref, value: orders.id}))"
-                      />
+                        :options="orders.map(orders => ({label: orders.ref, value: orders.id}))" />
                       <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
@@ -194,8 +193,27 @@ export default {
           thClass: "text-left"
         },
 
- 
+         {
+          label: this.$t("allsurv"),
+          field: "all",
+          tdClass: "text-left",
+          thClass: "text-left"
+         },
 
+
+         
+         {
+          label: this.$t("done_num"),
+          field: "done_num",
+          tdClass: "text-left",
+          thClass: "text-left"
+         },
+         {
+          label: this.$t("pending_num"),
+          field: "pending_num",
+          tdClass: "text-left",
+          thClass: "text-left"
+         },
   
         {
           label: this.$t("Action"),
@@ -326,7 +344,7 @@ export default {
       NProgress.set(0.1);
       axios
         .get(
-          "mandobs?page=" +
+          "sales_rep/achivements?page=" +
             page +
             "&SortField=" +
             this.serverParams.sort.field +
@@ -338,8 +356,12 @@ export default {
             this.limit
         )
         .then(response => {
-          this.mandobs = response.data.mandobs;
-          this.mandob = response.data.orders;
+          this.mandobs = response.data.users;
+          // this.mandob = response.data.orders;
+
+         // this.users = response.data.users;
+        //  this.roles = response.data.roles;
+
           this.totalRows = response.data.totalRows;
 
           // Complete the animation of theprogress bar.

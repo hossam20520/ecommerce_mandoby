@@ -2525,7 +2525,9 @@ var render = function () {
                       [
                         _c(
                           "router-link",
-                          { attrs: { tag: "a", to: "/app/People/sales_rep" } },
+                          {
+                            attrs: { tag: "a", to: "/app/People/user_mandobs" },
+                          },
                           [
                             _c("i", {
                               staticClass: "nav-icon i-Administrator",
@@ -2533,6 +2535,30 @@ var render = function () {
                             _vm._v(" "),
                             _c("span", { staticClass: "item-name" }, [
                               _vm._v(_vm._s(_vm.$t("Mandobs"))),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.currentUserPermissions &&
+                _vm.currentUserPermissions.includes("users_view")
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { tag: "a", to: "/app/People/sales_rep" } },
+                          [
+                            _c("i", {
+                              staticClass: "nav-icon i-Administrator",
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "item-name" }, [
+                              _vm._v(_vm._s(_vm.$t("Sales_users"))),
                             ]),
                           ]
                         ),

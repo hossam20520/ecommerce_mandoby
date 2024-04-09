@@ -149,7 +149,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -203,6 +202,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         label: this.$t("phone"),
         field: "phone",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("allsurv"),
+        field: "all",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("done_num"),
+        field: "done_num",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("pending_num"),
+        field: "pending_num",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -354,9 +368,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // Start the progress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("mandobs?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
-        _this4.mandobs = response.data.mandobs;
-        _this4.mandob = response.data.orders;
+      axios.get("sales_rep/achivements?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
+        _this4.mandobs = response.data.users; // this.mandob = response.data.orders;
+        // this.users = response.data.users;
+        //  this.roles = response.data.roles;
+
         _this4.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
@@ -523,7 +539,7 @@ var render = function () {
     { staticClass: "main-content" },
     [
       _c("breadcumb", {
-        attrs: { page: _vm.$t("Mandob"), folder: _vm.$t("Settings") },
+        attrs: { page: _vm.$t("achivments"), folder: _vm.$t("Settings") },
       }),
       _vm._v(" "),
       _vm.isLoading

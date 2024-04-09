@@ -510,7 +510,15 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::resource('users', 'UserController');
 
     Route::get('sales_rep/user', 'UserController@getSalesRep');
+
+
+    Route::get('sales_rep/achivements', 'UserController@GetAchivments');
+
+
     Route::post('storerep/user', 'UserController@storeRep');
+
+    Route::get('mandob_user/user', 'UserController@getMandobRep');
+ 
 
     Route::post('rep/delete/by_selection', 'UserController@delete_by_selection');
     Route::delete('rep/delete/mandob/{id}', 'UserController@delete_mandob');

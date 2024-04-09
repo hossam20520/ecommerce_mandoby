@@ -471,12 +471,12 @@ const routes = [
 
 
                         //   // Users
-                        //   {
-                        //     name: "user",
-                        //     path: "Users",
-                        //     component: () =>
-                        //         import(/* webpackChunkName: "Users" */"./views/app/pages/people/mandob")
-                        // }
+                          {
+                            name: "user_mandobs",
+                            path: "user_mandobs",
+                            component: () =>
+                                import(/* webpackChunkName: "Users" */"./views/app/pages/people/mandobs_users")
+                        }
 
 
                 ]

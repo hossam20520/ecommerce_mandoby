@@ -8,6 +8,8 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Models\role_user;
 use App\Models\Area;
+use App\Models\Task;
+
 use App\Models\product_warehouse;
 use App\utils\helpers;
 use Illuminate\Support\Facades\Validator;
@@ -78,6 +80,139 @@ class UserController extends BaseController
             'totalRows' => $totalRows,
         ]);
     }
+    
+
+
+    public function getMandobRep(request $request)
+    {
+
+        $this->authorizeForUser($request->user('api'), 'view', User::class);
+        // How many items do you want to display.
+        $perPage = $request->limit;
+        $pageStart = \Request::get('page', 1);
+        // Start displaying items from this number;
+        $offSet = ($pageStart * $perPage) - $perPage;
+        $order = $request->SortField;
+        $dir = $request->SortType;
+        $helpers = new helpers();
+        // Filter fields With Params to retrieve
+        $columns = array(0 => 'username', 1 => 'statut', 2 => 'phone', 3 => 'email');
+        $param = array(0 => 'like', 1 => '=', 2 => 'like', 3 => 'like');
+        $data = array();
+
+        $Role = Auth::user()->roles()->first();
+        $ShowRecord = Role::findOrFail($Role->id)->inRole('record_view');
+
+        $users = User::whereIn('role_id' ,  [3])->where('deleted_at' , '=' , null)->where(function ($query) use ($ShowRecord) {
+            if (!$ShowRecord) {
+                return $query->where('id', '=', Auth::user()->id);
+            }
+        });
+
+        //Multiple Filter
+        $Filtred = $helpers->filter($users, $columns, $param, $request)
+        // Search With Multiple Param
+            ->where(function ($query) use ($request) {
+                return $query->when($request->filled('search'), function ($query) use ($request) {
+                    return $query->where('username', 'LIKE', "%{$request->search}%")
+                        ->orWhere('firstname', 'LIKE', "%{$request->search}%")
+                        ->orWhere('lastname', 'LIKE', "%{$request->search}%")
+                        ->orWhere('email', 'LIKE', "%{$request->search}%")
+                        ->orWhere('phone', 'LIKE', "%{$request->search}%");
+                });
+            });
+        $totalRows = $Filtred->count();
+        $users = $Filtred->offset($offSet)
+            ->limit($perPage)
+            ->orderBy($order, $dir)
+            ->get();
+
+        $roles = Role::where('deleted_at', null)->get(['id', 'name']);
+
+        return response()->json([
+            'users' => $users,
+            'roles' => $roles,
+            'totalRows' => $totalRows,
+        ]);
+    }
+
+
+    
+
+
+    public function GetAchivments(request $request)
+    {
+
+        $this->authorizeForUser($request->user('api'), 'view', User::class);
+        // How many items do you want to display.
+        $perPage = $request->limit;
+        $pageStart = \Request::get('page', 1);
+        // Start displaying items from this number;
+        $offSet = ($pageStart * $perPage) - $perPage;
+        $order = $request->SortField;
+        $dir = $request->SortType;
+        $helpers = new helpers();
+        // Filter fields With Params to retrieve
+        $columns = array(0 => 'username', 1 => 'statut', 2 => 'phone', 3 => 'email');
+        $param = array(0 => 'like', 1 => '=', 2 => 'like', 3 => 'like');
+        $data = array();
+
+        $Role = Auth::user()->roles()->first();
+        $ShowRecord = Role::findOrFail($Role->id)->inRole('record_view');
+
+        $users = User::whereIn('role_id' ,  [ 4 ])->where('deleted_at' , '=' , null)->where(function ($query) use ($ShowRecord) {
+            if (!$ShowRecord) {
+                return $query->where('id', '=', Auth::user()->id);
+            }
+        });
+
+        //Multiple Filter
+        $Filtred = $helpers->filter($users, $columns, $param, $request)
+        // Search With Multiple Param
+            ->where(function ($query) use ($request) {
+                return $query->when($request->filled('search'), function ($query) use ($request) {
+                    return $query->where('username', 'LIKE', "%{$request->search}%")
+                        ->orWhere('firstname', 'LIKE', "%{$request->search}%")
+                        ->orWhere('lastname', 'LIKE', "%{$request->search}%")
+                        ->orWhere('email', 'LIKE', "%{$request->search}%")
+                        ->orWhere('phone', 'LIKE', "%{$request->search}%");
+                });
+            });
+        $totalRows = $Filtred->count();
+        $users = $Filtred->offset($offSet)
+            ->limit($perPage)
+            ->orderBy($order, $dir)
+            ->get();
+
+        $roles = Role::where('deleted_at', null)->get(['id', 'name']);
+
+  
+           $data = array();
+        foreach ($users as   $sales) {
+
+                       
+            $item['done_num']   = Task::where('deleted_at' , '=' , null)->where('user_id' , $sales->id)->where('status' , 'done')->count();
+            $item['pending_num']   = Task::where('deleted_at' , '=' , null)->where('user_id' , $sales->id)->where('status' , 'pending')->count();
+            $item['all']   = Task::where('deleted_at' , '=' , null)->where('user_id' , $sales->id)->count();
+           
+      
+      
+            $item['id'] = $sales->id;
+            $item['firstname'] = $sales->firstname;
+            $item['lastname'] = $sales->lastname;
+            $item['email'] = $sales->email;
+            $item['phone'] = $sales->phone;
+            $data[] = $item;
+           
+        }
+
+
+        return response()->json([
+            'users' =>   $data ,
+            'roles' => $roles,
+            'totalRows' => $totalRows,
+        ]);
+    }
 
 
     public function getSalesRep(request $request)
@@ -100,7 +235,7 @@ class UserController extends BaseController
         $Role = Auth::user()->roles()->first();
         $ShowRecord = Role::findOrFail($Role->id)->inRole('record_view');
 
-        $users = User::whereIn('role_id' ,  [3,4])->where('deleted_at' , '=' , null)->where(function ($query) use ($ShowRecord) {
+        $users = User::whereIn('role_id' ,  [4 ])->where('deleted_at' , '=' , null)->where(function ($query) use ($ShowRecord) {
             if (!$ShowRecord) {
                 return $query->where('id', '=', Auth::user()->id);
             }
@@ -217,12 +352,12 @@ class UserController extends BaseController
  
             $User->password  = Hash::make($request['password']);
             $User->avatar    = $filename;
-            $User->role_id   =  $request['type'];
+            $User->role_id   =  $request['role_id'];
             $User->save();
 
             $role_user = new role_user;
             $role_user->user_id = $User->id;
-            $role_user->role_id = $request['type'];
+            $role_user->role_id = $request['role_id'];
             $role_user->save();
     
         }, 10);
@@ -429,7 +564,7 @@ class UserController extends BaseController
                 'password' => $pass,
                 'avatar' => $filename,
                 'statut' => $request['statut'],
-                'role_id' => $request['type'],
+                'role_id' => $request['role_id'],
                 'area_name' =>  "",
                 'location_lat' => "",
                 'address' => "",
@@ -438,7 +573,7 @@ class UserController extends BaseController
 
             role_user::where('user_id' , $id)->update([
                 'user_id' => $id,
-                'role_id' =>  $request['type'],
+                'role_id' =>  $request['role_id'],
             ]);
 
         }, 10);

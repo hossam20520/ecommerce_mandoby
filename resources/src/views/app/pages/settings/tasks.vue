@@ -44,7 +44,7 @@
            
 
 
-            <router-link
+            <router-link v-if="props.row.status != 'pending'"
               
               v-b-tooltip.hover
               title="View"
@@ -223,7 +223,7 @@ export default {
 
         
         {
-          label: this.$t("status"),
+          label: this.$t("status_achiv"),
           field: "status",
           tdClass: "text-left",
           thClass: "text-left"

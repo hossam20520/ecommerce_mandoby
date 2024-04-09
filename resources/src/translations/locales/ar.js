@@ -2,6 +2,10 @@
 
 
 export default {
+    status_achiv:'حالة الزيارة',
+    pending_num:'لم تتم الزيارة',
+    done_num:'تمت الزيارة',
+    allsurv:'عدد العملاء',
     Mandobs:'المناديب',
     payment_type:'نوع الدفع',
     bill_image:'صورة الفاتورة',

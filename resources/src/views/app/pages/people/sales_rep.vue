@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <breadcumb :page="$t('Mandobs')" :folder="$t('Mandobs')"/>
+    <breadcumb :page="$t('sales_users')" :folder="$t('sales_users')"/>
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
     <div v-else>
       <vue-good-table
@@ -321,14 +321,14 @@
 
 
             
-                            <!-- Barcode Symbology  -->
+            
            <b-col md="6" class="mb-2">
                   <validation-provider name="type" :rules="{ required: true}">
                     <b-form-group slot-scope="{ valid, errors }" :label="$t('type')">
                       <v-select
                         :class="{'is-invalid': !!errors.length}"
                         :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="user.type"
+                        v-model="user.role_id"
                         :reduce="label => label.value"
                         :placeholder="$t('choose')"
                         :options="

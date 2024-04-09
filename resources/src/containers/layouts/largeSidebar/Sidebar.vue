@@ -550,21 +550,21 @@
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('Customers_view')"
           >
-            <router-link tag="a" class to="/app/People/sales_rep">
+            <router-link tag="a" class to="/app/People/user_mandobs">
               <i class="nav-icon i-Administrator"></i>
               <span class="item-name">{{$t('Mandobs')}}</span>
             </router-link>
           </li>
 
-          <!-- <li
+          <li
             class="nav-item"
             v-if="currentUserPermissions && currentUserPermissions.includes('users_view')"
           >
-            <router-link tag="a" class to="/app/People/Users">
+            <router-link tag="a" class to="/app/People/sales_rep">
               <i class="nav-icon i-Administrator"></i>
-              <span class="item-name">{{$t('Manobs')}}</span>
+              <span class="item-name">{{$t('Sales_users')}}</span>
             </router-link>
-          </li> -->
+          </li>
 
 
 
