@@ -95,12 +95,12 @@ class helpers
         $item['en_unit'] = $product['product']['unit']->ShortName;
         $item['price'] = $product['product']->price;
         $item['ar_description'] =$product['product']->ar_description;
-        $item['en_description'] =$product['product']->en_description;
+        $item['en_description'] = $product['product']->en_description;
         $item['discount'] = $product['product']->discount;
         $item['photo']= $product['product']->photo;
         $item['isInWishlist'] =    $is_widh;
-
-
+        $item['category_id'] =    $product['product']->category_id;
+        
         $item['status'] = $product['product']->status;
  
       
