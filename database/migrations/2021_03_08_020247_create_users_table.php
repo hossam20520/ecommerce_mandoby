@@ -35,6 +35,7 @@ class CreateUsersTable extends Migration {
 			$table->string('code')->nullable();
 			$table->boolean('statut')->default(1);
 			
+			$table->string('from_odoo')->nullable()->default("no");
 			$table->string('area_id')->nullable();
 			$table->timestamps(6);
 			$table->softDeletes();

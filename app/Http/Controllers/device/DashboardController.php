@@ -76,20 +76,21 @@ public function getCategoryID($id){
                        if(!$user_o){
                         // $user_n  = new User;
                         $User = new User();
-                        $User->firstname = $customer['ar_name']; 
-                        $User->lastname  = $customer['ar_name'];
+                        $User->firstname = ($customer['ar_name'] !== null) ? $customer['ar_name'] :  $customer['name']; 
+                        $User->lastname  =($customer['en_name'] !== null) ? $customer['en_name'] :  $customer['name']; 
                         $User->username  = $customer['phone'];
                         $User->email         = $emaiil;
                         $User->phone         = "0".$customer['phone'];
                         $User->code          =  $customer['id'];
                         $User->area_name     =  "";
                         $User->area_id       =    1;
-                        $User->location_lat  =    "0.000";
-                        $User->address     =    isset($customer['street']) ? $customer['street'] : "Street";   
-                        $User->location_long     =   "01.00011";
+                        $User->location_lat  =    $customer['partner_latitude'];
+                        $User->address       =    isset($customer['street']) ? $customer['street'] : "Street";   
+                        $User->location_long  =   $customer['partner_longitude'];
                         $User->password  = Hash::make("Accc122$$$33###4hjjd@123");
                         $User->avatar    = "no_avatar.png";
                         $User->role_id   =   "2";
+                        $User->from_odoo = "yes";
                         $User->save();
             
                         $role_user = new role_user;
@@ -97,18 +98,19 @@ public function getCategoryID($id){
                         $role_user->role_id =  2;
                         $role_user->save();
                        }else{
-                      
-                        $user_o->firstname = $customer['ar_name']; 
-                        $user_o->lastname  = $customer['en_name'];
-                        $user_o->username  = $customer['phone'];
-                        $user_o->email         = $emaiil;
-                        $user_o->phone         = "0".$customer['phone'];
-                        $user_o->code          =  $customer['id'];
-                        $user_o->location_lat  =       "0.000";
-                        $user_o->address     =    isset($customer['street']) ? $customer['street'] : "Street";   
-                        $user_o->location_long     =   "0.0000";
-                        $user_o->role_id   =   "2";
-                        $user_o->save();
+                        $user_o->update([
+                            // Update the fields as needed
+                            'firstname' => ($customer['ar_name'] !== null) ? $customer['ar_name'] :  $customer['name'],
+                            'lastname' =>  ($customer['en_name'] !== null) ? $customer['en_name'] :  $customer['name'] ,
+                            'email' =>  $emaiil,
+                          
+                            'phone' => "0".$customer['phone'],
+                            'location_lat' => $customer['partner_latitude'],
+                            'location_long' => $customer['partner_longitude'],
+                            'address' => isset($customer['street']) ? $customer['street'] : "Empty",
+                            // Add more fields as needed
+                        ]);
+             
  
                        }
             
