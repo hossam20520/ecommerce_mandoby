@@ -1057,19 +1057,7 @@ class ProductsController extends BaseController
 
                     //-- Create New Product
                     foreach ($data as $key => $value) {
-                        $category = Category::firstOrCreate(['name' => $value['category']]);
-                        $category_id = $category->id;
-
-                        $unit = Unit::where(['ShortName' => $value['unit']])
-                            ->orWhere(['name' => $value['unit']])->first();
-                        $unit_id = $unit->id;
-
-                        if ($value['brand'] != 'N/A' && $value['brand'] != '') {
-                            $brand = Brand::firstOrCreate(['name' => $value['brand']]);
-                            $brand_id = $brand->id;
-                        } else {
-                            $brand_id = null;
-                        }
+               
 
                         //  $producta = Product::where('code' , $value['code'])->first();
                         // if(aa){
@@ -1086,7 +1074,19 @@ class ProductsController extends BaseController
                            
 
                         }else{
-                            
+                            $category = Category::firstOrCreate(['name' => $value['category']]);
+                            $category_id = $category->id;
+    
+                            $unit = Unit::where(['ShortName' => $value['unit']])
+                                ->orWhere(['name' => $value['unit']])->first();
+                            $unit_id = $unit->id;
+    
+                            if ($value['brand'] != 'N/A' && $value['brand'] != '') {
+                                $brand = Brand::firstOrCreate(['name' => $value['brand']]);
+                                $brand_id = $brand->id;
+                            } else {
+                                $brand_id = null;
+                            } 
                      
                         $Product = new Product;
                         $Product->name = $value['en_name'] == '' ? null : $value['en_name'];
