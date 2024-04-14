@@ -39,7 +39,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root@8441144vva25
-      MYSQL_DATABASE: ecommerce_prod
+      MYSQL_DATABASE: ecommerce_prod_loc
     volumes:
       - ./db_data:/var/lib/mysql
 
