@@ -1068,7 +1068,7 @@ class ProductsController extends BaseController
 
                              
                             Product::whereNull('deleted_at')->where('code' , $value['code']  )
-                            ->update(['en_name' =>  $value['en_name'] ]);
+                            ->update(['name' =>  $value['en_name'] ]);
 
 
                            
