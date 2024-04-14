@@ -1075,9 +1075,22 @@ class ProductsController extends BaseController
                         // if(aa){
                         //     $this->updateData($code , $value);
                         // }
+
+                        if($value['update'] == "yes"){
+
+                             
+                            Product::whereNull('deleted_at')->where('code' , $value['code']  )
+                            ->update(['en_name' =>  $value['en_name'] ]);
+
+
+                           
+
+                        }else{
+                            
+                     
                         $Product = new Product;
-                        $Product->name = $value['name'] == '' ? null : $value['name'];
-                        $Product->ar_name = $value['ar_name'] == '' ? null : $value['ar_name'];
+                        $Product->name = $value['en_name'] == '' ? null : $value['en_name'];
+                        $Product->ar_name = $value['name'] == '' ? null : $value['name'];
                         $Product->code = $value['code'] == '' ? '11111111' : $value['code'];
                         $Product->Type_barcode = 'CODE128';
                         $Product->price = $value['price'];
@@ -1112,6 +1125,9 @@ class ProductsController extends BaseController
                     if ($warehouses) {
                         product_warehouse::insert($product_warehouse);
                     }
+
+                }
+
 
 
                 }

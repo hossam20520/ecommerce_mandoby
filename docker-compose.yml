@@ -7,20 +7,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8082:8000"
-      # - "443:443"
+       # - "443:443"
     volumes:
-        
       # - ./eduz-app.com.crt:/etc/ssl/certs/eduz-app.com.crt
       # - ./eduz-app.com.key:/etc/ssl/private/eduz-app.com.key
       # - ./000-default.conf:/etc/apache2/sites-available/000-default.conf
       # - ./default-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
-    
-      
-
+ 
       - .:/var/www/html
       -  ./config_php/php.ini:/usr/local/etc/php/php.ini:ro
-
-
+ 
     depends_on:
       - db
     environment:
