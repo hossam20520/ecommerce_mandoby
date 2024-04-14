@@ -93,7 +93,7 @@ class helpers
         $item['en_category'] = $product['product']['category']->en_name;
         $item['ar_unit'] = $product['product']['unit']->name;
         $item['en_unit'] = $product['product']['unit']->ShortName;
-        $item['price'] = round($product['product']->price, 1);
+        $item['price'] = round( floatval( $product['product']->price ) , 1);
         $item['ar_description'] =$product['product']->ar_description;
         $item['en_description'] = $product['product']->en_description;
         $item['discount'] = $product['product']->discount;
@@ -151,14 +151,14 @@ class helpers
             //Exclusive
             if ($product['product']->tax_method == '1') {
                 $tax_price = $price * $product['product']->TaxNet / 100;
-                $item['Net_price'] = $price + $tax_price;
+                $item['Net_price'] = round( floatval( $price + $tax_price) , 1);
                 // Inxclusive
             } else {
-                $item['Net_price'] = $price;
+                $item['Net_price'] =  round(floatval( $price) , 1);
             }
 
         } else {
-            $item['Net_price'] = $price;
+            $item['Net_price'] = round( floatval( $price ) , 1);
         }
         
          return $item;
