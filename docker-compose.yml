@@ -26,7 +26,7 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 3306
-      DB_DATABASE: ecommerce_prod
+      DB_DATABASE: ecommerce_prod_loc
       DB_USERNAME: root
       DB_PASSWORD: root@8441144vva25
       PHP_UPLOAD_MAX_FILESIZE: 40M  # Set the upload_max_filesize
