@@ -93,7 +93,7 @@ class helpers
         $item['en_category'] = $product['product']['category']->en_name;
         $item['ar_unit'] = $product['product']['unit']->name;
         $item['en_unit'] = $product['product']['unit']->ShortName;
-        $item['price'] = $product['product']->price;
+        $item['price'] = round($product['product']->price, 1);
         $item['ar_description'] =$product['product']->ar_description;
         $item['en_description'] = $product['product']->en_description;
         $item['discount'] = $product['product']->discount;
