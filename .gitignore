@@ -1,5 +1,5 @@
 # /public/hot
-
+/db_data
 # /public/js/bundle
 # /public/images/vendor
 # /public/js/main.js
@@ -8,7 +8,7 @@
 /public/storage
 /public/images
 # /storage/*.key
-# /storage/framework/sessions
+/storage/framework/sessions
 /vendor
 vendor.zip
 .env

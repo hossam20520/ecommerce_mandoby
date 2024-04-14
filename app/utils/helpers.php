@@ -160,7 +160,7 @@ class helpers
         } else {
             $item['Net_price'] = round( floatval( $price ) , 1);
         }
-        $item['Net_pricesss'] = round( floatval( $price ) , 1);
+  
          return $item;
 
     }
