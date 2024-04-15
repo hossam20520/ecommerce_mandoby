@@ -88,8 +88,8 @@ Route::get('/v1/device/home/noauth', 'device\HomeController@HomePage');
 
 Route::get("/v1/device/info/master", "device\surveyController@getDropDown");
 
-
-
+Route::get("/v1/device/brands", "device\ProductsController@getBrands");
+Route::get("/v1/device/products/brands/noauth", "device\ProductsController@GetProductsByBrand");
 
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::post("/v1/dashboard/sync", "device\DashboardController@updateMasterData");

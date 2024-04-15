@@ -18,6 +18,34 @@ use App\Models\Setting;
 
 class ProductsController extends Controller
 {
+
+
+
+
+    public function getBrands(request $request){
+
+        $brands =  Brand::where('deleted_at' , '=' , null)->get();
+        $data =   array();
+        foreach ( $brands as  $brand) {
+           $item['web_brand_image']=   env('URL', 'http://192.168.1.5:8000') ."/images/brands/". $brand->image;
+           $item['en_name']=    $brand->name;
+           $item['ar_name']=    $brand->description;
+           
+           $data[] = $item;
+      
+        }
+
+
+         
+        return response()->json([
+            'brands'=> $data  , 
+           
+        ]);
+
+    }
+
+
+
     
     public function Products(request $request)
     {
@@ -247,6 +275,7 @@ class ProductsController extends Controller
         $item['ar_name'] =  $brand->name;
         $item['en_name'] =   $brand->description;
         $item['image'] =  "/images/brands/".$brand->image;
+        $item['web_image_brand'] =   env('URL', 'http://192.168.1.6:8000') . "/images/brands/".$brand->image;
         $dataBrand[] = $item;
 
 
