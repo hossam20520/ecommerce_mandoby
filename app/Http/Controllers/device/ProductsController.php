@@ -27,6 +27,7 @@ class ProductsController extends Controller
         $brands =  Brand::where('deleted_at' , '=' , null)->get();
         $data =   array();
         foreach ( $brands as  $brand) {
+            $item['id']=    $brand->id;
            $item['web_brand_image']=   env('URL', 'http://192.168.1.5:8000') ."/images/brands/". $brand->image;
            $item['en_name']=    $brand->name;
            $item['ar_name']=    $brand->description;
