@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Ai;
 
 use App\Http\Controllers\device\ProductsController;
 
