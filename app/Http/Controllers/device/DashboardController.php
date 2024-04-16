@@ -98,6 +98,8 @@ public function getCategoryID($id){
                         $role_user->role_id =  2;
                         $role_user->save();
                        }else{
+
+
                         $user_o->update([
                             // Update the fields as needed
                             'firstname' => ($customer['ar_name'] !== null) ? $customer['ar_name'] :  $customer['name'],
@@ -110,8 +112,8 @@ public function getCategoryID($id){
                             'address' => isset($customer['street']) ? $customer['street'] : "Empty",
                             // Add more fields as needed
                         ]);
-             
- 
+
+                        
                        }
             
             

@@ -20,6 +20,23 @@ class HomeController extends Controller
        $this->productController = new ProductsController();
     }
       
+
+    public function GetCategoryAi(Request $request){
+
+          
+       
+     $ai = Ai::where('deleted_at', '=', null)->get();
+
+
+       return response()->json([
+         
+                'ai'=>  $ai ,
+        
+ 
+           ]);
+
+    }
+
     public function HomePage(Request $request){
 
           
