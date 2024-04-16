@@ -26,7 +26,18 @@ class HomeController extends Controller
 
           
        
-     $ai = Ai::where('deleted_at', '=', null)->get();
+     $ais = Ai::where('deleted_at', '=', null)->get();
+
+    $data  = array();
+      foreach ($ais as  $ai) {
+        $item['id'] = $ai->id;
+        $item['ar_name'] = $ai->ar_name;
+        $item['en_name'] = $ai->en_name;
+        $item['image'] =   env('URL', 'http://192.168.1.5:8000') ."/images/ais/".  $ai->image;
+        $data[] = $item;
+        # code...
+      }
+
 
 
        return response()->json([
