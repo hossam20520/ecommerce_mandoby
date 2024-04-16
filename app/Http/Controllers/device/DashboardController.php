@@ -254,31 +254,31 @@ public function getCategoryID($id){
                 //-- Update Product
  
                 // Store Variants Product
-                $Product->name = $product['name'];
-                $Product->ar_name = $product['name'];
-                $Product->code = $product['code'];
-                $Product->Type_barcode =  "CODE128";
-                $Product->price = $product['price'];
-                $Product->external_id = $product['id'];
-                $Product->category_id =  $this->getCategoryID($product['categ_id']);
-                $Product->brand_id =  1;
-                $Product->TaxNet = 0;
-                $Product->tax_method =  "1";
-                $Product->note = "" ;
-                $Product->cost =  0;
-                $Product->unit_id = $this->getUniteID($product['unite_id']);     //unite_id
-                $Product->unit_sale_id = $this->getUniteID($product['unite_id']);  
-                $Product->unit_purchase_id = $this->getUniteID($product['unite_id']);  
-                $Product->stock_alert = 5;
-                $Product->is_variant = 0;
-                $Product->mini_qty = 1;
-                $Product->max_qty = 100;
+                // $Product->name = $product['name'];
+                // $Product->ar_name = $product['name'];
+                // $Product->code = $product['code'];
+                // $Product->Type_barcode =  "CODE128";
+                // $Product->price = $product['price'];
+                // $Product->external_id = $product['id'];
+                // $Product->category_id =  $this->getCategoryID($product['categ_id']);
+                // $Product->brand_id =  1;
+                // $Product->TaxNet = 0;
+                // $Product->tax_method =  "1";
+                // $Product->note = "" ;
+                // $Product->cost =  0;
+                // $Product->unit_id = $this->getUniteID($product['unite_id']);     //unite_id
+                // $Product->unit_sale_id = $this->getUniteID($product['unite_id']);  
+                // $Product->unit_purchase_id = $this->getUniteID($product['unite_id']);  
+                // $Product->stock_alert = 5;
+                // $Product->is_variant = 0;
+                // $Product->mini_qty = 1;
+                // $Product->max_qty = 100;
  
-                $Product->status =  "NORMAL_PRODUCT";
-                $Product->discount =  "0";
+                // $Product->status =  "NORMAL_PRODUCT";
+                // $Product->discount =  "0";
  
-                $Product->save();
-                $this->UpdateQuantity($Product->id);
+                // $Product->save();
+                // $this->UpdateQuantity($Product->id);
 
             }
 
