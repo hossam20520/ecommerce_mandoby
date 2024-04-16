@@ -42,7 +42,7 @@ class HomeController extends Controller
 
        return response()->json([
          
-                'ai'=>  $ai ,
+                'ai'=>   $data  ,
         
  
            ]);
