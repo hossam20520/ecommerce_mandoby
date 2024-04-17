@@ -5,19 +5,24 @@ namespace App\Http\Controllers\device;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Models\Ai;
+
 class ChatAiController extends Controller
 {
     
 
     public function sendChat(Request $request){
 
+   
+         $ai =  Ai::where('deleted_at' , '=' , null)->where('id' ,  $request->id)->first();
+ 
 
 
         return response()->json([
          
             'message'=>  $request->message  ,
     
-            'replay'=>  $this->sendDataToApi( "Aaa" , "dddd" )  ,
+            'replay'=>  $this->sendDataToApi( $request->message , $ai->role )  ,
        ]);
 
 
@@ -33,11 +38,11 @@ class ChatAiController extends Controller
             "messages" => [
                 [
                     "role" => "user",
-                    "content" => "طريقة عمل البيتزا بالجبنة"
+                    "content" => $role_one
                 ],
                 [
                     "role" => "user",
-                    "content" => "المكونات فقط"
+                    "content" => $role_tow
                 ]
             ],
             "temperature" => 1,
