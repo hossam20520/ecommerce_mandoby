@@ -111,10 +111,11 @@
 
 
 
+
          <b-col md="12">
               <validation-provider
                     name="en_Name"
-                    :rules="{required:true , min:3 , max:200}"
+                    :rules="{required:true , min:3 , max:50000}"
                     v-slot="validationContext">
                     <b-form-group :label="$t('role')">
                   <textarea

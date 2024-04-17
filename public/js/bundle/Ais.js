@@ -180,6 +180,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -914,7 +915,7 @@ var render = function () {
                           _c("validation-provider", {
                             attrs: {
                               name: "en_Name",
-                              rules: { required: true, min: 3, max: 200 },
+                              rules: { required: true, min: 3, max: 50000 },
                             },
                             scopedSlots: _vm._u([
                               {
