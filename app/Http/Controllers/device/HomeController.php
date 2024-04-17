@@ -35,7 +35,7 @@ class HomeController extends Controller
         $item['en_name'] = $ai->en_name;
         $item['image'] =   env('URL', 'http://192.168.1.5:8000') ."/images/ais/".  $ai->image;
         $data[] = $item;
-        # code...
+        
       }
 
 

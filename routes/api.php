@@ -99,9 +99,9 @@ Route::get("/v1/device/ai/category/noauth", "device\HomeController@GetCategoryAi
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::post("/v1/dashboard/sync", "device\DashboardController@updateMasterData");
 
+    Route::post("/v1/device/chat/ai/message", "device\ChatAiController@sendChat");
+
     
-
-
     Route::get("/v1/device/products/category", "device\ProductsController@GetProductsByCategory");
 
 
