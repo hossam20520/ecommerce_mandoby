@@ -53,7 +53,7 @@ class ChatAiController extends Controller
         $apiUrl = 'https://api.openai.com/v1/chat/completions';
 
         // Bearer token
-        $bearerToken = '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';
+        $bearerToken =  env('OPEN_AI_TOKEN' , 'OPEN_AI_TOKEN');
 
         // Create a Guzzle client instance
         $client = new Client();
