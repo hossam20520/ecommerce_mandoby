@@ -55,7 +55,7 @@ class ProductsController extends BaseController
                         ->orWhere(function ($query) use ($request) {
                             return $query->whereHas('category', function ($q) use ($request) {
                                 $q->where('name', 'LIKE', "%{$request->search}%");
-                            });
+                            })->orWhere('products.ar_name', 'LIKE', "%{$request->search}%");
                         })
                         ->orWhere(function ($query) use ($request) {
                             return $query->whereHas('brand', function ($q) use ($request) {
