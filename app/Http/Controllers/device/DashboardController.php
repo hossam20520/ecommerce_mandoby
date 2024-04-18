@@ -253,6 +253,13 @@ public function getCategoryID($id){
                     ->where('deleted_at', '=', null)
                     ->first();
 
+
+                    Product::where('code', $product['code'])
+                    ->where('deleted_at', '=', null)->update([
+                        'price' => $product['price']
+                    ]);
+
+                    
                 //-- Update Product
  
                 // Store Variants Product
