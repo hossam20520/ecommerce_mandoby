@@ -213,7 +213,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
 
             // $productexist =   app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
             
-            $productexist =   app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line ,  20 , $sale->Ref );
+            // $productexist =   app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line ,  20 , $sale->Ref );
 
 
             Cart::where('order_id' , '=' , null)->where('user_id' , $user->id)->update([
