@@ -49,27 +49,27 @@ class IntegrationController extends Controller
     ]);
 
 
-    if ($responseData && isset($responseData['count']) && $responseData['count'] > 0) {
+    // if ($responseData && isset($responseData['count']) && $responseData['count'] > 0) {
             
-        return "Success";
+    //     return "Success";
 
 
-    } else {
-            if ($responseData && isset($responseData['type'])) {
-            // Type is found
-            // $type = $responseData['type'];
-            // $message = $responseData['message'];
-            // echo "Type: $type, Message: $message";
+    // } else {
+    //         if ($responseData && isset($responseData['type'])) {
+    //         // Type is found
+    //         // $type = $responseData['type'];
+    //         // $message = $responseData['message'];
+    //         // echo "Type: $type, Message: $message";
 
 
-             } else {
-            // Type not found
-                // echo "Type not found";
-        }
+    //          } else {
+    //         // Type not found
+    //             // echo "Type not found";
+    //     }
 
 
 
-    }
+    // }
 
 
 
