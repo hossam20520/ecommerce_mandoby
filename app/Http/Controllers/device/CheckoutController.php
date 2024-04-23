@@ -162,11 +162,12 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
           
             // $cartItem->in_stock = $this->ProducctInStock($cartItem->product->id);
      
+           $customer = User::where('id' ,  Auth::user()->id )->first();
 
-
-
+            $order_line = array(); 
             foreach ($data['cartItems'] as $key => $value) {
                 $unit = Unit::where('id', $value['product']->unit_sale_id)->first();
+                
                 $orderDetails[] = [
                     'date' => Carbon::now(),
                     'sale_id' => $order->id,
@@ -180,24 +181,8 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
                     'tax_method' => 1,
                     'discount' => $value->discount,
                     'discount_method' => 2,
-                ];
-
-                if (false) {
-                    $product_warehouse = product_warehouse::where('warehouse_id', $order->warehouse_id)
-                        ->where('product_id', $value['product']->id)
-                        ->where('product_variant_id', $value['product_variant_id'])
-                        ->first();
-
-                    if ($unit && $product_warehouse) {
-                        if ($unit->operator == '/') {
-                            $product_warehouse->qte -= $value->qty / $unit->operator_value;
-                        } else {
-                            $product_warehouse->qte -=  $value->qty * $unit->operator_value;
-                        }
-                        $product_warehouse->save();
-                    }
-                } else {
-
+                   ];
+ 
                     $product_warehouse = product_warehouse::where('warehouse_id', $order->warehouse_id)
                         ->where('product_id', $value['product']->id)
                         ->first();
@@ -210,12 +195,25 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
                         $product_warehouse->save();
                     }
 
+ 
+                    $product_item =  [
+                        'product_id' => 28 ,  //$value['product']->code,
+                        'qty' => $value->qty,
+                        'application_price' => $value['product']->price
+                       ];
 
-                }
+                    array_push( $order_line, $product_item);
+                    
             }
 
             SaleDetail::insert($orderDetails);
             $sale = Sale::findOrFail($order->id);
+    
+
+            // $productexist =   app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
+            
+            $productexist =   app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line ,  20 , $sale->Ref );
+
 
             Cart::where('order_id' , '=' , null)->where('user_id' , $user->id)->update([
                 'order_id' => $order->id
@@ -223,6 +221,10 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
 
 
 
+            
+           
+          
+          
             return  ApiResponse::SuccessResponseStatus('PAID'  , "ff"  , "rrrr");
             // return $order->id;
 
