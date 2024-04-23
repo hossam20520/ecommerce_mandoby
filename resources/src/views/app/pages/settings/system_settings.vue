@@ -185,7 +185,7 @@
                     <validation-provider
                       name="odoo_url"
                      
-                     
+
                       v-slot="validationContext"
                     >
                       <b-form-group :label="$t('odoo_url')">
@@ -770,6 +770,10 @@ export default {
         currency_id: "",
         email: "",
         logo: "",
+        db_name:"",
+        token_api:"",
+        token_ai:"",
+        odoo_url:"",
         CompanyName: "",
         CompanyPhone: "",
         CompanyAdress: "",
@@ -938,6 +942,13 @@ export default {
       self.data.append("footer", self.setting.footer);
       self.data.append("developed_by", self.setting.developed_by);
       self.data.append("default_language", self.setting.default_language);
+
+
+      self.data.append("db_name", self.setting.db_name);
+      self.data.append("token_api", self.setting.token_api);
+      self.data.append("token_ai", self.setting.token_ai);
+      self.data.append("odoo_url", self.setting.odoo_url);
+      
       self.data.append("_method", "put");
 
       axios
