@@ -19,6 +19,7 @@ use App\Models\Role;
 use App\Models\Sale;
 use App\Models\Unit;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\SaleDetail;
 use App\Models\Warehouse;
 use App\utils\helpers;
