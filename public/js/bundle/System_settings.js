@@ -751,6 +751,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1894,6 +1918,96 @@ var render = function () {
                                               null,
                                               false,
                                               2234004316
+                                            ),
+                                          }),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-col",
+                                        {
+                                          attrs: { lg: "4", md: "4", sm: "12" },
+                                        },
+                                        [
+                                          _c("validation-provider", {
+                                            attrs: { name: "odoo_url" },
+                                            scopedSlots: _vm._u(
+                                              [
+                                                {
+                                                  key: "default",
+                                                  fn: function (
+                                                    validationContext
+                                                  ) {
+                                                    return [
+                                                      _c(
+                                                        "b-form-group",
+                                                        {
+                                                          attrs: {
+                                                            label:
+                                                              _vm.$t(
+                                                                "odoo_url"
+                                                              ),
+                                                          },
+                                                        },
+                                                        [
+                                                          _c("b-form-input", {
+                                                            attrs: {
+                                                              state:
+                                                                _vm.getValidationState(
+                                                                  validationContext
+                                                                ),
+                                                              "aria-describedby":
+                                                                "Company-feedback",
+                                                              label: "odoo_url",
+                                                              placeholder:
+                                                                _vm.$t(
+                                                                  "odoo_url"
+                                                                ),
+                                                            },
+                                                            model: {
+                                                              value:
+                                                                _vm.setting
+                                                                  .odoo_url,
+                                                              callback:
+                                                                function ($$v) {
+                                                                  _vm.$set(
+                                                                    _vm.setting,
+                                                                    "odoo_url",
+                                                                    $$v
+                                                                  )
+                                                                },
+                                                              expression:
+                                                                "setting.odoo_url",
+                                                            },
+                                                          }),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "b-form-invalid-feedback",
+                                                            {
+                                                              attrs: {
+                                                                id: "Company-feedback",
+                                                              },
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  validationContext
+                                                                    .errors[0]
+                                                                )
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ],
+                                                        1
+                                                      ),
+                                                    ]
+                                                  },
+                                                },
+                                              ],
+                                              null,
+                                              false,
+                                              753950876
                                             ),
                                           }),
                                         ],

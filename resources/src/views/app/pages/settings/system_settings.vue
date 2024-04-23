@@ -180,6 +180,30 @@
                   </b-col>
 
 
+                     <!-- DB name  -->
+                  <b-col lg="4" md="4" sm="12">
+                    <validation-provider
+                      name="odoo_url"
+                     
+                     
+                      v-slot="validationContext"
+                    >
+                      <b-form-group :label="$t('odoo_url')">
+                        <b-form-input
+                          :state="getValidationState(validationContext)"
+                          aria-describedby="Company-feedback"
+                          label="odoo_url"
+                          :placeholder="$t('odoo_url')"
+                          v-model="setting.odoo_url"
+                        ></b-form-input>
+                        <b-form-invalid-feedback
+                          id="Company-feedback"
+                        >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                      </b-form-group>
+                    </validation-provider>
+                  </b-col>
+
+
                   <!-- developed by -->
                   <b-col lg="4" md="4" sm="12">
                     <validation-provider
