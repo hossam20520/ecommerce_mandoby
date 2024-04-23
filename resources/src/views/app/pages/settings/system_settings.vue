@@ -108,6 +108,78 @@
                     </validation-provider>
                   </b-col>
 
+
+
+                  <!-- Company Name  -->
+                  <b-col lg="4" md="4" sm="12">
+                    <validation-provider
+                      name="Api Token"
+                     
+                      v-slot="validationContext"
+                    >
+                      <b-form-group :label="$t('API_TOKEN')">
+                        <b-form-input
+                          :state="getValidationState(validationContext)"
+                          aria-describedby="Company-feedback"
+                          label="API_TOKEN"
+                          :placeholder="$t('API_TOKEN')"
+                          v-model="setting.token_api"
+                        ></b-form-input>
+                        <b-form-invalid-feedback
+                          id="Company-feedback"
+                        >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                      </b-form-group>
+                    </validation-provider>
+                  </b-col>
+
+
+                  <!-- AI Token  -->
+                  <b-col lg="4" md="4" sm="12">
+                    <validation-provider
+                      name="AI Token"
+                     
+                      v-slot="validationContext"
+                    >
+                      <b-form-group :label="$t('AI_TOKEN')">
+                        <b-form-input
+                          :state="getValidationState(validationContext)"
+                          aria-describedby="Company-feedback"
+                          label="AI_TOKEN"
+                          :placeholder="$t('AI_TOKEN')"
+                          v-model="setting.token_ai"
+                        ></b-form-input>
+                        <b-form-invalid-feedback
+                          id="Company-feedback"
+                        >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                      </b-form-group>
+                    </validation-provider>
+                  </b-col>
+                  
+
+
+                           <!-- DB name  -->
+                  <b-col lg="4" md="4" sm="12">
+                    <validation-provider
+                      name="DB_NAME"
+                     
+                      v-slot="validationContext"
+                    >
+                      <b-form-group :label="$t('DB_NAME')">
+                        <b-form-input
+                          :state="getValidationState(validationContext)"
+                          aria-describedby="Company-feedback"
+                          label="DB_NAME"
+                          :placeholder="$t('DB_NAME')"
+                          v-model="setting.db_name"
+                        ></b-form-input>
+                        <b-form-invalid-feedback
+                          id="Company-feedback"
+                        >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                      </b-form-group>
+                    </validation-provider>
+                  </b-col>
+
+
                   <!-- developed by -->
                   <b-col lg="4" md="4" sm="12">
                     <validation-provider

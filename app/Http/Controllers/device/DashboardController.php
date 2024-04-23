@@ -216,7 +216,6 @@ public function getCategoryID($id){
                 $Product->is_variant = 0;
                 $Product->mini_qty = 1;
                 $Product->max_qty = 100;
- 
                 $Product->status =  "NORMAL_PRODUCT";
                 $Product->discount =  "0";
       
@@ -259,7 +258,7 @@ public function getCategoryID($id){
                         'price' => $product['price']
                     ]);
 
-                    
+
                 //-- Update Product
  
                 // Store Variants Product

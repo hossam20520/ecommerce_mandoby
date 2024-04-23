@@ -67,9 +67,28 @@ class SettingsController extends Controller
         } else {
             $default_language = 'en';
         }
+
+
+
+        
+        if ($request['token_api'] != 'null') {
+            $token_api = $request['token_api'];
+        } else {
+            $token_api = null;
+        }
+
+
+
+
+
         Setting::whereId($id)->update([
             'currency_id' => $currency,
             'client_id' => $client,
+
+            'token_api' => $token_api,
+            'token_ai' => $token_ai,
+            'db_name' => $db_name,
+
             'warehouse_id' => $warehouse,
             'email' => $request['email'],
             'default_language' =>  $default_language,
@@ -268,6 +287,11 @@ class SettingsController extends Controller
             $item['CompanyName'] = $settings->CompanyName;
             $item['CompanyPhone'] = $settings->CompanyPhone;
             $item['CompanyAdress'] = $settings->CompanyAdress;
+
+            $item['token_api'] = $settings->token_api;
+            $item['token_ai'] = $settings->token_ai;
+            $item['db_name'] = $settings->db_name;
+    
             $item['logo'] = $settings->logo;
             $item['footer'] = $settings->footer;
             $item['developed_by'] = $settings->developed_by;

@@ -23,6 +23,11 @@ class CreateSettingsTable extends Migration {
 			$table->string('CompanyPhone');
 			$table->string('CompanyAdress');
 			$table->string('logo', 191)->nullable();
+			$table->text('token_api')->nullable();
+			$table->text('token_ai')->nullable();
+			$table->text('db_name')->nullable();
+
+			
 			$table->timestamps(6);
 			$table->softDeletes();
 		});

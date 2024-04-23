@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
 
+ 
+
     protected $fillable = [
         'currency_id', 'email', 'CompanyName', 'CompanyPhone', 'CompanyAdress',
          'logo','footer','developed_by','client_id','warehouse_id','default_language',
+         'token_api',
+         'token_ai',
+         'db_name',
     ];
 
     protected $casts = [
