@@ -15,6 +15,7 @@ class Setting extends Model
          'token_api',
          'token_ai',
          'db_name',
+         'odoo_url',
     ];
 
     protected $casts = [

@@ -26,8 +26,9 @@ class CreateSettingsTable extends Migration {
 			$table->text('token_api')->nullable();
 			$table->text('token_ai')->nullable();
 			$table->text('db_name')->nullable();
-
+			$table->text('odoo_url')->nullable();
 			
+
 			$table->timestamps(6);
 			$table->softDeletes();
 		});

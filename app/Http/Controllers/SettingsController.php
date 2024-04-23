@@ -79,7 +79,11 @@ class SettingsController extends Controller
 
 
 
-
+        if ($request['odoo_url'] != 'null') {
+            $odoo_url = $request['odoo_url'];
+        } else {
+            $odoo_url = null;
+        }
 
         Setting::whereId($id)->update([
             'currency_id' => $currency,
@@ -89,6 +93,9 @@ class SettingsController extends Controller
             'token_ai' => $token_ai,
             'db_name' => $db_name,
 
+            'odoo_url' => $odoo_url,
+
+        
             'warehouse_id' => $warehouse,
             'email' => $request['email'],
             'default_language' =>  $default_language,
@@ -291,6 +298,9 @@ class SettingsController extends Controller
             $item['token_api'] = $settings->token_api;
             $item['token_ai'] = $settings->token_ai;
             $item['db_name'] = $settings->db_name;
+
+            $item['odoo_url'] = $settings->odoo_url;
+            
     
             $item['logo'] = $settings->logo;
             $item['footer'] = $settings->footer;
