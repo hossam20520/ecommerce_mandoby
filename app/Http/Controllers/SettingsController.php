@@ -93,6 +93,12 @@ class SettingsController extends Controller
         }
 
 
+        if ($request['db_name'] != 'null') {
+            $db_name = $request['db_name'];
+        } else {
+            $db_name = null;
+        }
+        
         Setting::whereId($id)->update([
             'currency_id' => $currency,
             'client_id' => $client,
