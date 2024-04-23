@@ -79,11 +79,19 @@ class SettingsController extends Controller
 
 
 
+        if ($request['token_ai'] != 'null') {
+            $token_ai = $request['token_ai'];
+        } else {
+            $token_ai = null;
+        }
+
+
         if ($request['odoo_url'] != 'null') {
             $odoo_url = $request['odoo_url'];
         } else {
             $odoo_url = null;
         }
+
 
         Setting::whereId($id)->update([
             'currency_id' => $currency,
