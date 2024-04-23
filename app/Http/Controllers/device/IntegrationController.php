@@ -18,7 +18,7 @@ class IntegrationController extends Controller
 
     $setting = Setting::where('deleted_at' , '=' , null)->first();
 
-    $response = $client->post('http://104.248.31.157:7078/api/sales?order_reference='.$sale_ref.'&customer_id='.$customer_id, [
+    $response = $client->post($setting->odoo_url.'/api/sales?order_reference='.$sale_ref.'&customer_id='.$customer_id, [
         'headers' => [
             'db' => $setting->db_name ,
             'Content-Type' => 'application/json',
