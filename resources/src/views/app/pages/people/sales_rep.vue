@@ -735,7 +735,7 @@ export default {
       self.data.append("email", self.user.email);
       self.data.append("password", self.user.password);
       self.data.append("phone", self.user.phone);
-      self.data.append("type", self.user.type);
+      self.data.append("role_id", self.user.role_id);
       // self.data.append("role", self.user.role_id);
       // self.data.append("area_name", self.user.area_name);
       // self.data.append("location_lat", self.user.location_lat);
@@ -779,7 +779,8 @@ export default {
       self.data.append("role", self.user.role_id);
       self.data.append("statut", self.user.statut);
       self.data.append("avatar", self.user.avatar);
-      self.data.append("type", self.user.type);
+      self.data.append("role_id", self.user.role_id);
+      
       // self.data.append("area_name", self.user.area_name);
       // self.data.append("location_lat", self.user.location_lat);
       // self.data.append("address", self.user.address);
