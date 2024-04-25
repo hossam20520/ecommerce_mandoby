@@ -1964,8 +1964,8 @@ var render = function () {
                 size: "lg",
                 id: "Driver",
                 title: _vm.EditPaiementMode
-                  ? _vm.$t("Driver")
-                  : _vm.$t("Driver"),
+                  ? _vm.$t("Sales Rep")
+                  : _vm.$t("Sales Rep"),
               },
             },
             [
@@ -2000,7 +2000,7 @@ var render = function () {
                                   var errors = ref.errors
                                   return _c(
                                     "b-form-group",
-                                    { attrs: { label: _vm.$t("Mandobs") } },
+                                    { attrs: { label: _vm.$t("Sales Rep") } },
                                     [
                                       _c("v-select", {
                                         class: {
@@ -2015,7 +2015,7 @@ var render = function () {
                                           reduce: function (label) {
                                             return label.value
                                           },
-                                          placeholder: _vm.$t("Mandobs"),
+                                          placeholder: _vm.$t("Sales Rep"),
                                           options: _vm.mandobs.map(function (
                                             mandobs
                                           ) {

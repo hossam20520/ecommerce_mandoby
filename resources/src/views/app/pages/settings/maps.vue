@@ -424,7 +424,7 @@
         hide-footer
         size="lg"
         id="Driver"
-        :title="EditPaiementMode?$t('Driver'):$t('Driver')"
+        :title="EditPaiementMode?$t('Sales Rep'):$t('Sales Rep')"
       >
      
         <b-form @submit.prevent="save_select">
@@ -435,12 +435,12 @@
                   <!-- Category -->
                   <b-col md="12" class="mb-2">
                   <validation-provider name="category" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Mandobs')">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('Sales Rep')">
                       <v-select
                         :class="{'is-invalid': !!errors.length}"
                         :state="errors[0] ? false : (valid ? true : null)"
                         :reduce="label => label.value"
-                        :placeholder="$t('Mandobs')"
+                        :placeholder="$t('Sales Rep')"
                         v-model="user_id"
                         :options="mandobs.map(mandobs => ({label: mandobs.email, value: mandobs.id}))"
                       />

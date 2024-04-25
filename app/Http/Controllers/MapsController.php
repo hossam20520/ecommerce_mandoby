@@ -97,7 +97,7 @@ class MapsController extends Controller
        $Street  =  Map::whereNull('deleted_at')->whereNotNull('Street')->pluck('Street')->unique()->values()->toArray();
          
        
-       $mandobs = User::where('deleted_at', '=', null)->where('role_id' , 3)->get(['id', 'email']);
+       $mandobs = User::where('deleted_at', '=', null)->where('role_id' , 4)->get(['id', 'email']);
 
  
        $itemMap = array();
