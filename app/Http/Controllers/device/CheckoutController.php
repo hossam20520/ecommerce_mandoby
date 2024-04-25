@@ -198,7 +198,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
 
  
                     $product_item =  [
-                        'product_id' => 28 ,  //$value['product']->code,
+                        'product_id' =>   $value['product']->code,
                         'qty' => $value->qty,
                         'application_price' => $value['product']->price
                        ];
@@ -211,9 +211,9 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
             $sale = Sale::findOrFail($order->id);
     
 
-            // $productexist =   app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
+             app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
             
-             app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line ,  20 , $sale->Ref );
+            //  app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line ,  20 , $sale->Ref );
 
 
             Cart::where('order_id' , '=' , null)->where('user_id' , $user->id)->update([
