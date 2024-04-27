@@ -21,8 +21,8 @@ class TasksController extends Controller
             $item['task_id']  = strval($itm->id);
             $item['location_id']  = $itm->Shop->id;
             $item['place_name']  = $itm->Shop->Outlet_Name;
-            $item['lng']  = ($itm->Shop->Point_X_Geo === null) ? "0.000000" : $itm->Shop->Point_X_Geo;  
-            $item['lat']  = ($itm->Shop->Point_Y_Geo === null) ? "0.000000" : $itm->Shop->Point_Y_Geo;  
+            $item['lng']  = ($itm->Shop->Point_X_Geo === "null") ? "0.000000" : $itm->Shop->Point_X_Geo;  
+            $item['lat']  = ($itm->Shop->Point_Y_Geo === "null") ? "0.000000" : $itm->Shop->Point_Y_Geo;  
             $item['status'] = $itm->status;
             $dataa[] = $item;
          }
