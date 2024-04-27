@@ -237,8 +237,22 @@ class AuthController extends Controller
 
     }
 
-
+    
  
+    public function versionSurvey(Request $request , $version){
+           
+        $versaionfromDB = '1.2';
+        $urlDB = 'https://google.com';
+        if($versaionfromDB == $version){
+            return response()->json(['version' => $version ,  'needupdate'=> false , 'message'=> "hello" , 'url' => 'url' ], 200);
+        }else{
+            return response()->json(['version' => $versaionfromDB ,  'needupdate'=> true , 'message'=> "hello" , 'url' =>  $urlDB  ], 200);
+        }
+     
+       
+    }
+
+
 
     public function version(Request $request , $version){
  

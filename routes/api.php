@@ -47,7 +47,7 @@ Route::post("/v1/device/auth/register/", "device\AuthController@register");
 Route::get("/v1/device/version/{version}", "device\AuthController@version");
 
 
-
+Route::get("/v1/device/version/survey/{version}", "device\AuthController@versionSurvey");
 
 
 // device/products/category?SortField=id&SortType=desc&search=&limit=6&page=1&category_id=1
