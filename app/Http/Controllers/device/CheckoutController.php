@@ -198,7 +198,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
 
  
                     $product_item =  [
-                        'product_id' =>   $value['product']->code,
+                        'product_id' =>   $value['product']->external_id,
                         'qty' => $value->qty,
                         'application_price' => $value['product']->price
                        ];
