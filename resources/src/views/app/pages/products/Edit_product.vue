@@ -3,6 +3,8 @@
     <breadcumb :page="'Update Product'" :folder="$t('Products')"/>
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
 
+
+
     <validation-observer ref="Edit_Product" v-if="!isLoading">
       <b-form @submit.prevent="Submit_Product" enctype="multipart/form-data">
         <b-row>
@@ -14,7 +16,7 @@
                   <b-col md="6" class="mb-2">
                     <validation-provider
                       name="name"
-                      :rules="{required:true , min:3 , max:55}"
+                      :rules="{required:true , min:3 , max:500}"
                       v-slot="validationContext"
                     >
                       <b-form-group :label="$t('Name_product')">
@@ -37,7 +39,7 @@
                   <b-col md="6" class="mb-2">
                   <validation-provider
                     name="Name"
-                    :rules="{required:true , min:3 , max:55}"
+                    :rules="{required:true , min:3 , max:500}"
                     v-slot="validationContext"
                   >
                     <b-form-group :label="$t('ar_Name_product')">
