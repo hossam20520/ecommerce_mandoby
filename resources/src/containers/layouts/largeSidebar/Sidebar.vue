@@ -622,6 +622,19 @@
           </li>
 
 
+
+         <li
+            class="nav-item"
+            v-if="currentUserPermissions && currentUserPermissions.includes('category')"
+          >
+            <router-link tag="a" class to="/app/settings/Attendances">
+              <i class="nav-icon i-Duplicate-Layer"></i>
+              <span class="item-name">{{$t('Attendance')}}</span>
+            </router-link>
+       </li>
+
+ 
+
   
           <li
             class="nav-item"

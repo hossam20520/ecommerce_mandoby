@@ -586,6 +586,13 @@ const routes = [
                                         },
 
 
+                                        // attendances
+                                        {
+                                            name: "attendances",
+                                            path: "Attendances",
+                                            component: () =>
+                                                import(/* webpackChunkName: "Attendances" */"./views/app/pages/settings/attendances")
+                                        },
 
                                         {
                                             name: "tasks",

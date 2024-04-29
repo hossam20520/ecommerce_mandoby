@@ -34,7 +34,7 @@ Route::get('maps/view/data/testa', 'MapsController@getRestaurants');
 
 Route::post('/v1/device/survey', 'device\surveyController@surveyData');
 
-
+Route::post('/v1/device/checkin', 'device\AuthController@checkin');
 
 
 
@@ -97,6 +97,16 @@ Route::get("/v1/device/ai/category/noauth", "device\HomeController@GetCategoryAi
 
 
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
+
+    
+
+
+    Route::get("/v1/device/attendance/checkin/{type}", "device\AuthController@check_status");
+
+
+   
+
+
     Route::post("/v1/dashboard/sync", "device\DashboardController@updateMasterData");
 
     Route::post("/v1/device/chat/ai/message", "device\ChatAiController@sendChat");
@@ -214,6 +224,12 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::post('tasks/delete/by_selection', 'TasksController@delete_by_selection');
 
 
+
+        //------------------------------- Attendances--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('attendances', 'AttendancesController');
+    Route::post('attendances/delete/by_selection', 'AttendancesController@delete_by_selection');
+    
 
     //------------------------------- Notifications--------------------------\
     //------------------------------------------------------------------\

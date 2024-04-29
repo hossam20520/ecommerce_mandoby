@@ -237,6 +237,46 @@ class AuthController extends Controller
 
     }
 
+
+    public function checkin(Request $request  ){
+        $user = Auth::user(); 
+        $type = $request->type;
+ 
+
+        return response()->json([
+           
+            'status'=>   "pending",
+ 
+        ] , 200); 
+
+
+    //    $attendance =  Attendance::where('deleted_at' , '=' , null)->get();
+
+
+
+    }
+
+
+
+
+    public function check_status(Request $request ){
+       
+        $user = Auth::user(); 
+        $type = $request->type;
+        // delvery
+        return response()->json([
+           
+            'status'=>   "pending",
+ 
+        ] , 200); 
+
+
+    //    $attendance =  Attendance::where('deleted_at' , '=' , null)->get();
+
+
+
+    }
+
     
  
     public function versionSurvey(Request $request , $version){

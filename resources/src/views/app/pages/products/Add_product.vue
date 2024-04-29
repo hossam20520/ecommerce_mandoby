@@ -165,8 +165,9 @@
                   <validation-provider
                     name="Product Price"
                     :rules="{ required: true , regex: /^\d*\.?\d*$/}"
-                    v-slot="validationContext"
-                  >
+                    v-slot="validationContext">
+
+                    
                     <b-form-group :label="$t('ProductPrice')">
                       <b-form-input
                         :state="getValidationState(validationContext)"
