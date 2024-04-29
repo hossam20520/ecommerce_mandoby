@@ -5,6 +5,9 @@ namespace App\Http\Controllers\device;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+
+use App\Models\Attendance;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\utils\helpers;
@@ -241,11 +244,19 @@ class AuthController extends Controller
     public function checkin(Request $request  ){
         $user = Auth::user(); 
         $type = $request->type;
- 
+        $status = $request->status;
 
+
+        // Attendance::where('deleted_at' , '=' , null)->update([
+        //     'status' => $status
+            
+        //     ]
+        // );
+
+ 
         return response()->json([
            
-            'status'=>   "pending",
+            'status'=>   $status,
  
         ] , 200); 
 

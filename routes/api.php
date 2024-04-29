@@ -34,7 +34,7 @@ Route::get('maps/view/data/testa', 'MapsController@getRestaurants');
 
 Route::post('/v1/device/survey', 'device\surveyController@surveyData');
 
-Route::post('/v1/device/checkin', 'device\AuthController@checkin');
+
 
 
 
@@ -103,7 +103,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::get("/v1/device/attendance/checkin/{type}", "device\AuthController@check_status");
 
-
+    Route::post('/v1/device/checkin', 'device\AuthController@checkin');
    
 
 
