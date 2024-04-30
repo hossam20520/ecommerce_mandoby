@@ -337,7 +337,7 @@ class AuthController extends Controller
 
             return response()->json([
            
-                'status'=>    "LOGEDOUT" ,
+                'status'=>    "LOGEDIN" ,
      
             ] , 200); 
         }
