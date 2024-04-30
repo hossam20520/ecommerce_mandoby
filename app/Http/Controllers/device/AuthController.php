@@ -318,7 +318,7 @@ class AuthController extends Controller
        ->where('user_id' ,   $user->id )
        ->where('type' , $type  )
        ->where('date' , $currentDate)
-       ->where('status' , "loggedin")
+      
        ->first();
         // delvery
         
@@ -326,7 +326,7 @@ class AuthController extends Controller
 
             return response()->json([
            
-                'status'=>   "loggedin",
+                'status'=>   $attendance->status ,
      
             ] , 200); 
 
@@ -336,7 +336,7 @@ class AuthController extends Controller
 
             return response()->json([
            
-                'status'=>   "pending",
+                'status'=>    "LOGEDOUT" ,
      
             ] , 200); 
         }
