@@ -15,7 +15,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use File;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-
+ 
 
 class AuthController extends Controller
 {
@@ -246,13 +246,50 @@ class AuthController extends Controller
         $type = $request->type;
         $status = $request->status;
 
+        $location_lat = $request->lat;
+        $location_lng = $request->lng;
+        // loggedout , pending  , loggedin
+        $currentDate = Carbon::now()->format('d-n-Y');
 
-        // Attendance::where('deleted_at' , '=' , null)->update([
-        //     'status' => $status
-            
-        //     ]
-        // );
+        $attendance =  Attendance::where('deleted_at' , '=' , null)
+       ->where('user_id' ,   $user->id )
+       ->where('type' , $type  )
+       ->where('date' , $currentDate)
+       ->where('status' , $status)
+       ->first();
 
+       if($attendance){
+
+
+        return response()->json([
+           
+            'status'=>  $status ,
+ 
+        ] , 200); 
+
+ 
+
+       }else{
+
+        $currentDateTimee = Carbon::now();
+        $formattedTime = $currentDateTimee->format('h:i A');
+        $currentDate = Carbon::now()->format('d-n-Y');
+
+
+
+        $att = new Attendance;
+        $att->user_id = $user->id;
+        $att->type = $type;
+        $att->location_lat  = $location_lat;
+        $att->location_lng  =  $location_lng;
+        $att->time  =  $formattedTime;
+        $att->date  =  $currentDate;
+        $att->status  =  $status ;
+        $att->save();
+
+       }
+          
+ 
  
         return response()->json([
            
@@ -260,10 +297,7 @@ class AuthController extends Controller
  
         ] , 200); 
 
-
-    //    $attendance =  Attendance::where('deleted_at' , '=' , null)->get();
-
-
+ 
 
     }
 
@@ -274,12 +308,44 @@ class AuthController extends Controller
        
         $user = Auth::user(); 
         $type = $request->type;
-        // delvery
-        return response()->json([
-           
-            'status'=>   "pending",
+        $status = $request->status;
+
  
-        ] , 200); 
+        // loggedout , pending  , loggedin
+        $currentDate = Carbon::now()->format('d-n-Y');
+
+       $attendance =  Attendance::where('deleted_at' , '=' , null)
+       ->where('user_id' ,   $user->id )
+       ->where('type' , $type  )
+       ->where('date' , $currentDate)
+       ->where('status' , "loggedin")
+       ->first();
+        // delvery
+        
+        if($attendance){
+
+            return response()->json([
+           
+                'status'=>   "loggedin",
+     
+            ] , 200); 
+
+
+
+        }else{
+
+            return response()->json([
+           
+                'status'=>   "pending",
+     
+            ] , 200); 
+        }
+
+
+        // $attendance =  Attendance::where('deleted_at' , '=' , null)->get();
+
+
+
 
 
     //    $attendance =  Attendance::where('deleted_at' , '=' , null)->get();
