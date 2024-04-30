@@ -318,48 +318,84 @@ class AuthController extends Controller
        ->where('user_id' ,   $user->id )
        ->where('type' , $type  )
        ->where('date' , $currentDate)
-     
+       ->where('status' , "LOGEDIN")
        ->first();
-        // delvery
-        
-        if($attendance){
-             
-            $attendance_2 =  Attendance::where('deleted_at' , '=' , null)
-            ->where('user_id' ,   $user->id )
-            ->where('type' , $type  )
-            ->where('date' , $currentDate)
-            ->where('status' , "LOGEDOUT")
-            ->first();
 
-            if($attendance_2){
 
-                return response()->json([
+       if($attendance ){
+        $attendance_loggedout =  Attendance::where('deleted_at' , '=' , null)
+        ->where('user_id' ,   $user->id )
+        ->where('type' , $type  )
+        ->where('date' , $currentDate)
+        ->where('status' , "LOGEDOUT")
+        ->first();
+
+        if($attendance_loggedout){
+           return response()->json([
            
-                    'status'=>   $attendance->status ,
+                    'status'=>    "LOGEDOUT" ,
          
                 ] , 200); 
-
-            }else{
-                return response()->json([
+        }else{
+            return response()->json([
            
-                    'status'=>    "LOGEDIN" ,
+                'status'=>    "LOGEDIN" ,
+     
+            ] , 200); 
+        }
+
+
+       }else{
+        return response()->json([
+           
+            'status'=>    "LOGEDOUT" ,
+ 
+        ] , 200); 
+       }
+
+
+
+
+        // delvery
+        
+        // if($attendance){
+             
+        //     $attendance_2 =  Attendance::where('deleted_at' , '=' , null)
+        //     ->where('user_id' ,   $user->id )
+        //     ->where('type' , $type  )
+        //     ->where('date' , $currentDate)
+        //     ->where('status' , "LOGEDOUT")
+        //     ->first();
+
+            // if($attendance_2){
+
+            //     return response()->json([
+           
+            //         'status'=>   $attendance->status ,
          
-                ] , 200);  
-            }
+            //     ] , 200); 
+
+            // }else{
+            //     return response()->json([
+           
+            //         'status'=>    "LOGEDIN" ,
+         
+            //     ] , 200);  
+            // }
             //   ->where('status' , "LOGEDOUT")
    
 
 
 
 
-        }else{
+        // }else{
 
-            return response()->json([
+        //     return response()->json([
            
-                'status'=>    "LOGEDOUT" ,
+        //         'status'=>    "LOGEDOUT" ,
      
-            ] , 200); 
-        }
+        //     ] , 200); 
+        // }
 
 
         // $attendance =  Attendance::where('deleted_at' , '=' , null)->get();
