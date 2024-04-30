@@ -318,12 +318,13 @@ class AuthController extends Controller
        ->where('user_id' ,   $user->id )
        ->where('type' , $type  )
        ->where('date' , $currentDate)
-      
+       ->where('status' , "LOGEDOUT")
        ->first();
         // delvery
         
         if($attendance){
-
+             
+            
             return response()->json([
            
                 'status'=>   $attendance->status ,
