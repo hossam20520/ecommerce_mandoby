@@ -318,18 +318,37 @@ class AuthController extends Controller
        ->where('user_id' ,   $user->id )
        ->where('type' , $type  )
        ->where('date' , $currentDate)
-       ->where('status' , "LOGEDOUT")
+     
        ->first();
         // delvery
         
         if($attendance){
              
-            
-            return response()->json([
+            $attendance_2 =  Attendance::where('deleted_at' , '=' , null)
+            ->where('user_id' ,   $user->id )
+            ->where('type' , $type  )
+            ->where('date' , $currentDate)
+            ->where('status' , "LOGEDOUT")
+            ->first();
+
+            if($attendance_2){
+
+                return response()->json([
            
-                'status'=>   $attendance->status ,
-     
-            ] , 200); 
+                    'status'=>   $attendance->status ,
+         
+                ] , 200); 
+
+            }else{
+                return response()->json([
+           
+                    'status'=>    "LOGEDIN" ,
+         
+                ] , 200);  
+            }
+            //   ->where('status' , "LOGEDOUT")
+   
+
 
 
 
@@ -337,7 +356,7 @@ class AuthController extends Controller
 
             return response()->json([
            
-                'status'=>    "LOGEDIN" ,
+                'status'=>    "LOGEDOUT" ,
      
             ] , 200); 
         }
