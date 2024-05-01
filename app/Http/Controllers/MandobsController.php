@@ -39,7 +39,7 @@ class MandobsController extends Controller
         $mandobs = User::with('role')
         ->where('deleted_at', '=', null)
         ->whereHas('role', function ($query) {
-            $query->where('name', 'Mandob');
+            $query->where('name', 'Driver');
         })->where(function ($query) use ($request) {
             return $query->when($request->filled('search'), function ($query) use ($request) {
                 return $query->where('email', 'LIKE', "%{$request->search}%")
