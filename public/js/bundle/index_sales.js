@@ -802,6 +802,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tdClass: "text-left",
         thClass: "text-left"
       }, {
+        label: this.$t("odoo_ref"),
+        field: "odoo_ref",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("Customer"),
         field: "client_name",
         tdClass: "text-left",
