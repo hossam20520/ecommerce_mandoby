@@ -1390,6 +1390,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             GrandTotal: this.GrandTotal,
             details: this.details,
             payment: this.payment,
+            odoo_refrence: this.sale.odoo_refrence,
             amount: parseFloat(this.payment.amount).toFixed(2),
             received_amount: parseFloat(this.payment.received_amount).toFixed(2),
             change: parseFloat(this.payment.received_amount - this.payment.amount).toFixed(2)
