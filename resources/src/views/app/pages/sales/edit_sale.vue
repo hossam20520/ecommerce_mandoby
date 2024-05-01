@@ -9,6 +9,29 @@
           <b-col lg="12" md="12" sm="12">
             <b-card>
               <b-row>
+
+
+              
+                <b-col lg="3" md="3" sm="12" class="mb-3">
+                  <validation-provider
+                    name="odoo_refrence"
+                    :rules="{required:false , min:2 , max:55}"
+                    v-slot="validationContext"
+                  >
+                    <b-form-group :label="$t('odoo_refrence')">
+                      <b-form-input
+                        :state="getValidationState(validationContext)"
+                        aria-describedby="Name-feedback"
+                        label="odoo_refrence"
+                        :placeholder="$t('odoo_refrence')"
+                        v-model="sale.odoo_refrence"
+                      ></b-form-input>
+                      <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+                
                  <!-- date  -->
                 <b-col lg="4" md="4" sm="12" class="mb-3">
                   <validation-provider
@@ -470,6 +493,7 @@ export default {
         date: "",
         statut: "",
         notes: "",
+        odoo_refrence:"",
         client_id: "",
         warehouse_id: "",
         tax_rate: 0,
@@ -940,7 +964,8 @@ export default {
             TaxNet: this.sale.TaxNet,
             discount: this.sale.discount,
             shipping: this.sale.shipping,
-            details: this.details
+            details: this.details,
+            odoo_refrence:this.odoo_refrence
           })
           .then(response => {
             this.makeToast(

@@ -460,6 +460,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -485,6 +508,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         date: "",
         statut: "",
         notes: "",
+        odoo_refrence: "",
         client_id: "",
         warehouse_id: "",
         tax_rate: 0,
@@ -871,7 +895,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           TaxNet: this.sale.TaxNet,
           discount: this.sale.discount,
           shipping: this.sale.shipping,
-          details: this.details
+          details: this.details,
+          odoo_refrence: this.odoo_refrence
         }).then(function (response) {
           _this5.makeToast("success", _this5.$t("Update.TitleSale"), _this5.$t("Success"));
 
@@ -1011,6 +1036,104 @@ var render = function () {
                               _c(
                                 "b-row",
                                 [
+                                  _c(
+                                    "b-col",
+                                    {
+                                      staticClass: "mb-3",
+                                      attrs: { lg: "3", md: "3", sm: "12" },
+                                    },
+                                    [
+                                      _c("validation-provider", {
+                                        attrs: {
+                                          name: "odoo_refrence",
+                                          rules: {
+                                            required: false,
+                                            min: 2,
+                                            max: 55,
+                                          },
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function (validationContext) {
+                                                return [
+                                                  _c(
+                                                    "b-form-group",
+                                                    {
+                                                      attrs: {
+                                                        label:
+                                                          _vm.$t(
+                                                            "odoo_refrence"
+                                                          ),
+                                                      },
+                                                    },
+                                                    [
+                                                      _c("b-form-input", {
+                                                        attrs: {
+                                                          state:
+                                                            _vm.getValidationState(
+                                                              validationContext
+                                                            ),
+                                                          "aria-describedby":
+                                                            "Name-feedback",
+                                                          label:
+                                                            "odoo_refrence",
+                                                          placeholder:
+                                                            _vm.$t(
+                                                              "odoo_refrence"
+                                                            ),
+                                                        },
+                                                        model: {
+                                                          value:
+                                                            _vm.sale
+                                                              .odoo_refrence,
+                                                          callback: function (
+                                                            $$v
+                                                          ) {
+                                                            _vm.$set(
+                                                              _vm.sale,
+                                                              "odoo_refrence",
+                                                              $$v
+                                                            )
+                                                          },
+                                                          expression:
+                                                            "sale.odoo_refrence",
+                                                        },
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "b-form-invalid-feedback",
+                                                        {
+                                                          attrs: {
+                                                            id: "Name-feedback",
+                                                          },
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              validationContext
+                                                                .errors[0]
+                                                            )
+                                                          ),
+                                                        ]
+                                                      ),
+                                                    ],
+                                                    1
+                                                  ),
+                                                ]
+                                              },
+                                            },
+                                          ],
+                                          null,
+                                          false,
+                                          2230426769
+                                        ),
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
                                   _c(
                                     "b-col",
                                     {

@@ -166,6 +166,7 @@ class SalesController extends BaseController
             $order->GrandTotal = $request->GrandTotal;
             $order->warehouse_id = $request->warehouse_id;
             $order->odoo_refrence = $request->odoo_refrence;
+            $order->odoo_ref  = $request->odoo_refrence;
             $order->tax_rate = $request->tax_rate;
             $order->TaxNet = $request->TaxNet;
             $order->discount = $request->discount;
@@ -481,6 +482,9 @@ class SalesController extends BaseController
                     $orderDetails['product_id'] = $prod_detail['product_id'];
                     $orderDetails['product_variant_id'] = $prod_detail['product_variant_id'];
                     $orderDetails['total'] = $prod_detail['subtotal'];
+
+
+                    
                     
                     if (!in_array($prod_detail['id'], $old_products_id)) {
                         $orderDetails['date'] = Carbon::now();
@@ -513,6 +517,9 @@ class SalesController extends BaseController
                 'shipping' => $request['shipping'],
                 'GrandTotal' => $request['GrandTotal'],
                 'payment_statut' => $payment_statut,
+                'odoo_refrence' => $request['odoo_refrence'],
+                'odoo_ref' => $request['odoo_refrence'],
+ 
             ]);
 
         }, 10);
@@ -1143,6 +1150,9 @@ class SalesController extends BaseController
           $sale['shipping'] = $Sale_data->shipping;
           $sale['statut'] = $Sale_data->statut;
           $sale['notes'] = $Sale_data->notes;
+
+          $sale['odoo_refrence'] = $Sale_data->odoo_ref;
+         
   
           $detail_id = 0;
           foreach ($Sale_data['details'] as $detail) {
