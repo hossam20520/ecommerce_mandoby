@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 use App\Models\Attendance;
+use App\Models\role_user;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -242,13 +243,16 @@ class AuthController extends Controller
         $User->location_lat    = $request['location_lat'];
         $User->location_long    = $request['location_long'];
         $User->address    = $request['address'];
-        $User->role_id    =  3;
+        $User->role_id    =  2;
         $User->save();
         
     
         $accessToken = $User->createToken('AuthToken')->accessToken;
-
-      app('App\Http\Controllers\device\NotificationsController')->AddFcm($User ,  $request['fcm']);
+        $role_user = new role_user;
+        $role_user->user_id = $User->id;
+        $role_user->role_id =  2;
+        $role_user->save();
+        app('App\Http\Controllers\device\NotificationsController')->AddFcm($User ,  $request['fcm']);
         
         return response()->json([
            
