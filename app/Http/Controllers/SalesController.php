@@ -108,6 +108,7 @@ class SalesController extends BaseController
 
             $item['id'] = $Sale['id'];
             $item['date'] = $Sale['date'];
+            $item['odoo_ref'] = $Sale['odoo_ref'];
             $item['Ref'] = $Sale['Ref'];
             $item['statut'] = $Sale['statut'];
             $item['discount'] = $Sale['discount'];
