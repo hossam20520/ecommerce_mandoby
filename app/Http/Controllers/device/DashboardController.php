@@ -100,7 +100,7 @@ public function getCategoryID($id){
                        }else{
 
 
-                       User::where('deleted_at' , '=' , null)->where('code' ,$customer['id'] )>update([
+                       User::where('deleted_at' , '=' , null)->where('code' ,$customer['id'] )->update([
                             // Update the fields as needed
 
 
