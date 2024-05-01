@@ -165,7 +165,7 @@ class SalesController extends BaseController
             $order->client_id = $request->client_id;
             $order->GrandTotal = $request->GrandTotal;
             $order->warehouse_id = $request->warehouse_id;
-            $order->odoo_refrence = $request->odoo_refrence;
+            // $order->odoo_refrence = $request->odoo_refrence;
             $order->odoo_ref  = $request->odoo_refrence;
             $order->tax_rate = $request->tax_rate;
             $order->TaxNet = $request->TaxNet;
