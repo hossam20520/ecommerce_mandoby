@@ -23,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-
+Route::get('iot/test_api', 'device\AuthController@testiot');
 // Route::get('maps/view/data', 'MapsController@GetData');
 
 Route::get('maps/view/data', 'MapsController@index');

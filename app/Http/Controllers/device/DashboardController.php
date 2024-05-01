@@ -70,7 +70,7 @@ public function getCategoryID($id){
 
                     foreach ($customers as $customer) {
             
-                       $user_o = User::where('deleted_at' , '=' , null)->where('phone' ,$customer['phone'] )->first();
+                       $user_o = User::where('deleted_at' , '=' , null)->where('code' ,$customer['id'] )->first();
                       
                        $emaiil = $customer['phone']."@horecasmart.com";
                        if(!$user_o){
@@ -100,11 +100,18 @@ public function getCategoryID($id){
                        }else{
 
 
-                        $user_o->update([
+                       User::where('deleted_at' , '=' , null)->where('code' ,$customer['id'] )>update([
                             // Update the fields as needed
-                            'firstname' => ($customer['ar_name'] !== null) ? $customer['ar_name'] :  $customer['name'],
-                            'lastname' =>  ($customer['en_name'] !== null) ? $customer['en_name'] :  $customer['name'] ,
-                            'email' =>  $emaiil,
+
+
+
+                            // 'firstname' => ($customer['ar_name'] !== null) ? $customer['ar_name'] :  $customer['name'],
+                            // 'lastname' =>  ($customer['en_name'] !== null) ? $customer['en_name'] :  $customer['name'] ,
+                           
+                           'firstname' =>  $customer['name'],
+                           'lastname' =>   $customer['name'] ,
+                           
+                            // 'email' =>  $emaiil,
                           
                             'phone' => "0".$customer['phone'],
                             'location_lat' => $customer['partner_latitude'],

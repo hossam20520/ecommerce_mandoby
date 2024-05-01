@@ -20,6 +20,28 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     
+
+    
+    public function testiot(Request $request){
+
+         
+
+        
+        $pins = [
+            "pin_zero" => false,
+            "pin_one" => false,
+            "pint_tow" => true,
+            "pin_three" => true,
+        ];
+
+
+           
+          
+        return response()->json(['status' => "success" ,  'pins'=> $pins    ], 200);
+    }
+
+
+
     public function resetPassword(Request $request){
 
         $phone = $request->phone;
