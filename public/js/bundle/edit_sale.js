@@ -896,7 +896,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           discount: this.sale.discount,
           shipping: this.sale.shipping,
           details: this.details,
-          odoo_refrence: this.odoo_refrence
+          odoo_refrence: this.sale.odoo_refrence
         }).then(function (response) {
           _this5.makeToast("success", _this5.$t("Update.TitleSale"), _this5.$t("Success"));
 

@@ -31,7 +31,7 @@
                   </validation-provider>
                 </b-col>
 
-                
+
                  <!-- date  -->
                 <b-col lg="4" md="4" sm="12" class="mb-3">
                   <validation-provider
@@ -965,7 +965,7 @@ export default {
             discount: this.sale.discount,
             shipping: this.sale.shipping,
             details: this.details,
-            odoo_refrence:this.odoo_refrence
+            odoo_refrence:this.sale.odoo_refrence
           })
           .then(response => {
             this.makeToast(
