@@ -55,6 +55,7 @@ class OrdersController extends Controller
           $item['start_time'] = $da->start_time;
           $item['end_time'] = $da->end_time;
           $item['image'] = $da->image;
+          $item['odoo_ref'] = $da->odoo_ref;
           $item['payment_type'] = $da->payment_type;
           
           $data[] = $item;

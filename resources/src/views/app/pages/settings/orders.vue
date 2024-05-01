@@ -101,7 +101,7 @@
                         :placeholder="$t('choose_order')"
                         v-model="order.order_id"
                         v-on:input="handleChange"
-                        :options="sales.map(sales => ({label: sales.Ref + ' ' +  '( '+sales.GrandTotal + ' ) EGP'  , value: sales.id}))"
+                        :options="sales.map(sales => ({label: sales.Ref + ' : Odoo_ref: ' +  sales.odoo_ref +  ' ( '+sales.GrandTotal + ' ) EGP'  , value: sales.id}))"
                      
                       
                      

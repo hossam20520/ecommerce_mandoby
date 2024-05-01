@@ -1401,8 +1401,9 @@ var render = function () {
                                             return {
                                               label:
                                                 sales.Ref +
-                                                " " +
-                                                "( " +
+                                                " : Odoo_ref: " +
+                                                sales.odoo_ref +
+                                                " ( " +
                                                 sales.GrandTotal +
                                                 " ) EGP",
                                               value: sales.id,
