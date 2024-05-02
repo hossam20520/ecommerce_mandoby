@@ -1,6 +1,68 @@
 
 <template>
   <div class="main-content">
+
+
+
+    <GmapMap
+    :center="{lat:30.059813, lng:31.329825}"
+    :zoom="7"
+    map-type-id="terrain"
+    style="width: 100%; height: 500px"
+>
+ 
+         <GmapMarker
+          :key="index"
+            v-for="(m, index) in shops_marker"
+          :position="m.position"
+          :clickable="false"
+          :draggable="false"
+          :icon="m.showIcon ? getMarkerIcon() : null"
+          
+        
+  />
+
+  
+  <GmapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          :clickable="false"
+          :draggable="true"
+        
+          :icon="m.showIcon ? getMarkerIcon() : null"
+         
+          @click="center=m.position"
+  />
+
+
+  <GmapCircle
+    :visible="true" 
+    :center="circle.center"
+    :radius="circle.radius"
+    :editable="true"
+
+    @center_changed="onCircleCenterChanged"
+    @radius_changed="onCircleRadiusChanged"
+     @drag="onCircleDrag"
+    :options="{
+      strokeColor: circle.strokeColor,
+      strokeOpacity: circle.strokeOpacity,
+      strokeWeight: circle.strokeWeight,
+      fillColor: circle.fillColor,
+      fillOpacity: circle.fillOpacity
+    }"
+  />
+</GmapMap>
+
+
+
+
+
+
+
+
+
     <breadcumb :page="$t('Attendance')" :folder="$t('Settings')"/>
 
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
@@ -32,33 +94,50 @@
         styleClass="table-hover tableOne vgt-table"
       >
         <div slot="selected-row-actions">
-          <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button>
+          <!-- <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button> -->
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
-          <b-button @click="New_Attendance()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
-            <i class="i-Add"></i>
-             {{ $t('Add') }}
+ 
+           <b-button variant="outline-info m-1" size="sm" v-b-toggle.sidebar-right>
+            <i class="i-Filter-2"></i>
+            {{ $t("Filter") }}
           </b-button>
+
         </div>
 
         <template slot="table-row" slot-scope="props">
           <span v-if="props.column.field == 'actions'">
-            <a @click="Edit_Attendance(props.row)" title="Edit" v-b-tooltip.hover>
+            <!-- <a @click="Edit_Attendance(props.row)" title="Edit" v-b-tooltip.hover>
               <i class="i-Edit text-25 text-success"></i>
             </a>
             <a title="Delete" v-b-tooltip.hover @click="Delete_Attendance(props.row.id)">
               <i class="i-Close-Window text-25 text-danger"></i>
-            </a>
+            </a> -->
           </span>
-          <span v-else-if="props.column.field == 'image'">
-            <b-img
+          <span v-else-if="props.column.field == 'status'">
+            
+            
+            <b-img v-if="props.row.status == 'LOGEDIN'"
               thumbnail
-              height="50"
-              width="50"
+              height="20"
+              width="20"
               fluid
-              :src="'/images/attendances/' + props.row.image"
+              
+               src="/green.png"
+               
               alt="image"
             ></b-img>
+       <b-img v-else  
+              thumbnail
+              height="20"
+              width="20"
+              fluid
+              
+               src="/read_image.png"
+               
+              alt="image"
+            ></b-img>
+ <!-- src="/read_image.png" -->
           </span>
         </template>
       </vue-good-table>
@@ -136,6 +215,107 @@
         </b-form>
       </b-modal>
     </validation-observer>
+
+
+
+      <b-sidebar id="sidebar-right" :title="$t('Filter')" bg-variant="white" right shadow>
+        <div class="px-3 py-2">
+          <b-row>
+    
+    
+
+            <!-- Category  -->
+            <b-col md="12">
+              <b-form-group :label="$t('User')">
+                <v-select
+                  :reduce="label => label.value"
+                  :placeholder="$t('Choose_User')"
+                  v-model="Filter_Sections"
+                  v-on:input="handleChange"
+                  :options="users.map(users => ({label: users.email , value: users.id }))"
+                />
+              </b-form-group>
+            </b-col>
+ 
+ 
+
+
+           <!-- date  -->
+          <b-col md="12">
+            <b-form-group :label="$t('date')">
+              <b-form-input type="date" v-model="Filter_date"></b-form-input>
+            </b-form-group>
+          </b-col>
+
+
+                <!-- Tax Method -->
+               <b-col md="12">
+         
+                    <b-form-group   :label="$t('Status')">
+                      <v-select
+                  
+                   
+                        v-model="Filter_status"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Choose_Status')"
+                        :options="
+                           [
+                            {label: 'LOGEDIN', value: 'LOGEDIN'},
+                            {label: 'LOGEDOUT', value: 'LOGEDOUT'}
+                           ]"
+                      ></v-select>
+                  
+                    </b-form-group>
+           
+                </b-col>
+
+
+
+             <!-- Tax Method -->
+               <b-col md="12">
+         
+                    <b-form-group   :label="$t('Application_type')">
+                      <v-select
+                        v-model="Filter_application"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Application_type')"
+                        :options="
+                           [
+                            {label: 'SURVEY', value: 'SURVEY'},
+                            {label: 'DELIVERY', value: 'DELIVERY'}
+                           ]"
+                      ></v-select>
+                  
+                    </b-form-group>
+           
+                </b-col>
+
+
+
+            <b-col md="6" sm="12">
+              <b-button
+                @click="GetData(serverParams.page)"
+                variant="primary m-1"
+                size="sm"
+                block
+              >
+                <i class="i-Filter-2"></i>
+                {{ $t("Filter") }}
+              </b-button>
+            </b-col>
+
+            <b-col md="6" sm="12">
+              <b-button @click="Reset_Filter()" variant="danger m-1" size="sm" block>
+                <i class="i-Power-2"></i>
+                {{ $t("Reset") }}
+              </b-button>
+            </b-col>
+          </b-row>
+        </div>
+      </b-sidebar>
+
+
+
   </div>
 </template>
 
@@ -149,7 +329,28 @@ export default {
   data() {
     return {
       isLoading: true,
+         Filter_Sections: "",
+         Filter_date:"",
+         Filter_status:"",
+         Filter_application:"",
+
+
+
+     radius:100,
+      circle: {
+      center: {  lat: 30.059813, lng: 31.329825 ,  },
+      radius: 100,
+     
+      options: {
+        strokeColor: 'red',
+        strokeOpacity:1.0,
+        strokeWeight: 2,
+        fillColor: 'red',
+        fillOpacity: 0.35,
+      },
+    },
       SubmitProcessing:false,
+      user_id:"",
       serverParams: {
         columnFilters: {},
         sort: {
@@ -177,24 +378,58 @@ export default {
   computed: {
     columns() {
       return [
+ 
+ 
         {
-          label: this.$t("AttendanceImage"),
-          field: "image",
+          label: this.$t("email"),
+          field: "user.email",
           tdClass: "text-left",
           thClass: "text-left"
         },
+ 
         {
-          label: this.$t("AttendanceName"),
-          field: "en_name",
+          label: this.$t("phone"),
+          field: "user.phone",
           tdClass: "text-left",
           thClass: "text-left"
         },
+
         {
-          label: this.$t("AttendanceDescription"),
-          field: "ar_name",
+          label: this.$t("type"),
+          field: "type",
           tdClass: "text-left",
           thClass: "text-left"
         },
+
+
+      {
+          label: this.$t("status"),
+          field: "status",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+       {
+          label: this.$t("date"),
+          field: "date",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+          {
+          label: this.$t("time"),
+          field: "time",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+      //  {
+      //     label: this.$t("date"),
+      //     field: "date",
+      //     tdClass: "text-left",
+      //     thClass: "text-left"
+      //   },
+
+
         {
           label: this.$t("Action"),
           field: "actions",
@@ -208,6 +443,101 @@ export default {
   },
 
   methods: {
+
+    Reset_Filter() {
+      this.search = "";
+      this.Filter_date = "";
+      this.Filter_status = "";
+      this.Filter_application = "";
+      // this.Filter_Sections = "";
+      // this.Filter_Zone_Name = "";
+      // this.Filter_street = "";
+      // this.Filter_Shiakha_Name = "";
+      this.user_id = "";
+      this.Get_Attendances(this.serverParams.page);
+    },
+ 
+    GetData(){
+     this.Get_Attendances(1);
+    },
+   
+    onCircleDragEnd(event){
+      // this.fetchPlaces();
+    },
+ handleChange(selectedValue){
+       this.user_id = selectedValue;
+      // this.fetchPlaces();
+
+ },
+    handleRadiusChange() {
+    // Add your logic here to handle the onchange event
+    // circle.radius
+
+    this.circle.radius = this.radius;
+
+    // this.fetchPlaces();
+    // console.log('Radius changed:', this.radius);
+  },
+
+
+
+
+  onMarkerDrag(index, event) {
+      const draggedMarker = this.markers[index];
+      draggedMarker.position = {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+      };
+
+      // Update the circle's center when the marker is dragged
+      this.circle.center = draggedMarker.position;
+    },
+
+    onCircleCenterChanged(event) {
+ 
+      // Update the marker's position when the circle's center is changed
+      const newCenter = {
+        lat: event.lat(),
+        lng: event.lng(),
+      };
+       this.markers[0].position = newCenter;
+
+
+      //  this.fetchPlaces();
+      // this.markers.forEach((marker) => {
+      //   marker.position = newCenter;
+      // });
+
+      // Update the circle's center
+      // this.circle.center = newCenter;
+    },
+
+
+    onCircleRadiusChanged(event) {
+      // Update the circle's radius when it is changed
+      // alert(55)
+      // console.log(event)
+
+      this.circle.radius = event;
+      this.radius = event;
+      // this.fetchPlaces();
+    },
+
+    onCircleDrag(event) {
+      // Update the marker's position when the circle is dragged
+      const newCenter = {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+      };
+      this.markers.forEach((marker) => {
+        marker.position = newCenter;
+      });
+
+      // Update the circle's center
+      this.circle.center = newCenter;
+      // this.fetchPlaces();
+    },
+
     //---- update Params Table
     updateParams(newProps) {
       this.serverParams = Object.assign({}, this.serverParams, newProps);
@@ -333,10 +663,22 @@ export default {
             "&search=" +
             this.search +
             "&limit=" +
-            this.limit
+            this.limit +
+           "&user_id=" +
+            this.user_id+
+             "&date=" +
+            this.formattedDate() +
+              
+             "&status=" +
+             this.Filter_status+
+             "&type=" + 
+             this.Filter_application 
+            
         )
         .then(response => {
+          console.log(this.formattedDate());
           this.attendances = response.data.attendances;
+          this.users = response.data.users;
           this.totalRows = response.data.totalRows;
 
           // Complete the animation of theprogress bar.
@@ -351,6 +693,25 @@ export default {
           }, 500);
         });
     },
+
+
+     formattedDate() {
+
+      if(this.Filter_date == ""){
+        return "";
+      }else{
+       const d = new Date(this.Filter_date);
+      const day = d.getDate() < 10 ? '0' + d.getDate() : d.getDate();
+      const month = d.getMonth() + 1; // Month is zero-based, so we add 1
+      const year = d.getFullYear();
+      return `${day}-${month}-${year}`;
+      }
+ 
+    },
+
+
+
+    
 
     //---------------------------------------- Create new attendance-----------------\
     Create_Attendance() {

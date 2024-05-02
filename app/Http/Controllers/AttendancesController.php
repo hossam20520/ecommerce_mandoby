@@ -2,8 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
-use App\utils\helpers;
+use App\Models\User;
 use Carbon\Carbon;
+use App\utils\helpers;
+ 
 use DB;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -25,19 +27,39 @@ class AttendancesController extends Controller
         $dir = $request->SortType;
         $helpers = new helpers();
 
-        $attendances = Attendance::where('deleted_at', '=', null)->where(function ($query) use ($request) {
+       $user_id = $request->user_id;
+
+
+       $columns = array(0 => 'user_id', 1 => 'date', 2 => 'time' , 3 => 'status' , 4 => 'type'    );
+       $param = array(0 => '=', 1 => '=', 2 => '=' , 3 => '=' , 4 => '=' );
+
+        $daat = Attendance::with('user')->where('deleted_at', '=', null);
+        // $date = Carbon::createFromFormat('Y-m-d', '2024-05-01')->format('j-n-Y');
+
+
+        $attendances =  $helpers->filter($daat, $columns, $param, $request)->where('deleted_at', '=', null)->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
-                    return $query->where('ar_name', 'LIKE', "%{$request->search}%")
-                        ->orWhere('en_name', 'LIKE', "%{$request->search}%");
+                    return $query->where('user_id', 'LIKE', "%{$request->search}%") 
+                    ->orWhere('date', 'LIKE', "%{$request->search}%")
+                    ->orWhere('time', 'LIKE', "%{$request->search}%") 
+                    ->orWhere('status', 'LIKE', "%{$request->search}%") 
+                    ->orWhere('type', 'LIKE', "%{$request->search}%");
                 });
             });
+
+
+
         $totalRows = $attendances->count();
         $attendances = $attendances->offset($offSet)
             ->limit($perPage)
             ->orderBy($order, $dir)
             ->get();
 
+         
+        $users = User::where('deleted_at' , '=' , null)->whereIn('role_id', [3, 4 , 5])->get();
         return response()->json([
+           
+            'users'=> $users,
             'attendances' => $attendances,
             'totalRows' => $totalRows,
         ]);

@@ -160,6 +160,186 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -168,7 +348,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       isLoading: true,
+      Filter_Sections: "",
+      Filter_date: "",
+      Filter_status: "",
+      Filter_application: "",
+      radius: 100,
+      circle: {
+        center: {
+          lat: 30.059813,
+          lng: 31.329825
+        },
+        radius: 100,
+        options: {
+          strokeColor: 'red',
+          strokeOpacity: 1.0,
+          strokeWeight: 2,
+          fillColor: 'red',
+          fillOpacity: 0.35
+        }
+      },
       SubmitProcessing: false,
+      user_id: "",
       serverParams: {
         columnFilters: {},
         sort: {
@@ -196,21 +396,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     columns: function columns() {
       return [{
-        label: this.$t("AttendanceImage"),
-        field: "image",
+        label: this.$t("email"),
+        field: "user.email",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("AttendanceName"),
-        field: "en_name",
+        label: this.$t("phone"),
+        field: "user.phone",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("AttendanceDescription"),
-        field: "ar_name",
+        label: this.$t("type"),
+        field: "type",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
+        label: this.$t("status"),
+        field: "status",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("date"),
+        field: "date",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("time"),
+        field: "time",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, //  {
+      //     label: this.$t("date"),
+      //     field: "date",
+      //     tdClass: "text-left",
+      //     thClass: "text-left"
+      //   },
+      {
         label: this.$t("Action"),
         field: "actions",
         html: true,
@@ -221,6 +442,73 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    Reset_Filter: function Reset_Filter() {
+      this.search = "";
+      this.Filter_date = "";
+      this.Filter_status = "";
+      this.Filter_application = ""; // this.Filter_Sections = "";
+      // this.Filter_Zone_Name = "";
+      // this.Filter_street = "";
+      // this.Filter_Shiakha_Name = "";
+
+      this.user_id = "";
+      this.Get_Attendances(this.serverParams.page);
+    },
+    GetData: function GetData() {
+      this.Get_Attendances(1);
+    },
+    onCircleDragEnd: function onCircleDragEnd(event) {// this.fetchPlaces();
+    },
+    handleChange: function handleChange(selectedValue) {
+      this.user_id = selectedValue; // this.fetchPlaces();
+    },
+    handleRadiusChange: function handleRadiusChange() {
+      // Add your logic here to handle the onchange event
+      // circle.radius
+      this.circle.radius = this.radius; // this.fetchPlaces();
+      // console.log('Radius changed:', this.radius);
+    },
+    onMarkerDrag: function onMarkerDrag(index, event) {
+      var draggedMarker = this.markers[index];
+      draggedMarker.position = {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng()
+      }; // Update the circle's center when the marker is dragged
+
+      this.circle.center = draggedMarker.position;
+    },
+    onCircleCenterChanged: function onCircleCenterChanged(event) {
+      // Update the marker's position when the circle's center is changed
+      var newCenter = {
+        lat: event.lat(),
+        lng: event.lng()
+      };
+      this.markers[0].position = newCenter; //  this.fetchPlaces();
+      // this.markers.forEach((marker) => {
+      //   marker.position = newCenter;
+      // });
+      // Update the circle's center
+      // this.circle.center = newCenter;
+    },
+    onCircleRadiusChanged: function onCircleRadiusChanged(event) {
+      // Update the circle's radius when it is changed
+      // alert(55)
+      // console.log(event)
+      this.circle.radius = event;
+      this.radius = event; // this.fetchPlaces();
+    },
+    onCircleDrag: function onCircleDrag(event) {
+      // Update the marker's position when the circle is dragged
+      var newCenter = {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng()
+      };
+      this.markers.forEach(function (marker) {
+        marker.position = newCenter;
+      }); // Update the circle's center
+
+      this.circle.center = newCenter; // this.fetchPlaces();
+    },
     //---- update Params Table
     updateParams: function updateParams(newProps) {
       this.serverParams = Object.assign({}, this.serverParams, newProps);
@@ -359,8 +647,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // Start the progress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("attendances?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
+      axios.get("attendances?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit + "&user_id=" + this.user_id + "&date=" + this.formattedDate() + "&status=" + this.Filter_status + "&type=" + this.Filter_application).then(function (response) {
+        console.log(_this4.formattedDate());
         _this4.attendances = response.data.attendances;
+        _this4.users = response.data.users;
         _this4.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
@@ -372,6 +662,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this4.isLoading = false;
         }, 500);
       });
+    },
+    formattedDate: function formattedDate() {
+      if (this.Filter_date == "") {
+        return "";
+      } else {
+        var d = new Date(this.Filter_date);
+        var day = d.getDate() < 10 ? '0' + d.getDate() : d.getDate();
+        var month = d.getMonth() + 1; // Month is zero-based, so we add 1
+
+        var year = d.getFullYear();
+        return "".concat(day, "-").concat(month, "-").concat(year);
+      }
     },
     //---------------------------------------- Create new attendance-----------------\
     Create_Attendance: function Create_Attendance() {
@@ -526,6 +828,70 @@ var render = function () {
     "div",
     { staticClass: "main-content" },
     [
+      _c(
+        "GmapMap",
+        {
+          staticStyle: { width: "100%", height: "500px" },
+          attrs: {
+            center: { lat: 30.059813, lng: 31.329825 },
+            zoom: 7,
+            "map-type-id": "terrain",
+          },
+        },
+        [
+          _vm._l(_vm.shops_marker, function (m, index) {
+            return _c("GmapMarker", {
+              key: index,
+              attrs: {
+                position: m.position,
+                clickable: false,
+                draggable: false,
+                icon: m.showIcon ? _vm.getMarkerIcon() : null,
+              },
+            })
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.markers, function (m, index) {
+            return _c("GmapMarker", {
+              key: index,
+              attrs: {
+                position: m.position,
+                clickable: false,
+                draggable: true,
+                icon: m.showIcon ? _vm.getMarkerIcon() : null,
+              },
+              on: {
+                click: function ($event) {
+                  _vm.center = m.position
+                },
+              },
+            })
+          }),
+          _vm._v(" "),
+          _c("GmapCircle", {
+            attrs: {
+              visible: true,
+              center: _vm.circle.center,
+              radius: _vm.circle.radius,
+              editable: true,
+              options: {
+                strokeColor: _vm.circle.strokeColor,
+                strokeOpacity: _vm.circle.strokeOpacity,
+                strokeWeight: _vm.circle.strokeWeight,
+                fillColor: _vm.circle.fillColor,
+                fillOpacity: _vm.circle.fillOpacity,
+              },
+            },
+            on: {
+              center_changed: _vm.onCircleCenterChanged,
+              radius_changed: _vm.onCircleRadiusChanged,
+              drag: _vm.onCircleDrag,
+            },
+          }),
+        ],
+        2
+      ),
+      _vm._v(" "),
       _c("breadcumb", {
         attrs: { page: _vm.$t("Attendance"), folder: _vm.$t("Settings") },
       }),
@@ -579,75 +945,32 @@ var render = function () {
                         fn: function (props) {
                           return [
                             props.column.field == "actions"
-                              ? _c("span", [
-                                  _c(
-                                    "a",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true },
-                                        },
-                                      ],
-                                      attrs: { title: "Edit" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.Edit_Attendance(props.row)
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "i-Edit text-25 text-success",
-                                      }),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true },
-                                        },
-                                      ],
-                                      attrs: { title: "Delete" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.Delete_Attendance(
-                                            props.row.id
-                                          )
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "i-Close-Window text-25 text-danger",
-                                      }),
-                                    ]
-                                  ),
-                                ])
-                              : props.column.field == "image"
+                              ? _c("span")
+                              : props.column.field == "status"
                               ? _c(
                                   "span",
                                   [
-                                    _c("b-img", {
-                                      attrs: {
-                                        thumbnail: "",
-                                        height: "50",
-                                        width: "50",
-                                        fluid: "",
-                                        src:
-                                          "/images/attendances/" +
-                                          props.row.image,
-                                        alt: "image",
-                                      },
-                                    }),
+                                    props.row.status == "LOGEDIN"
+                                      ? _c("b-img", {
+                                          attrs: {
+                                            thumbnail: "",
+                                            height: "20",
+                                            width: "20",
+                                            fluid: "",
+                                            src: "/green.png",
+                                            alt: "image",
+                                          },
+                                        })
+                                      : _c("b-img", {
+                                          attrs: {
+                                            thumbnail: "",
+                                            height: "20",
+                                            width: "20",
+                                            fluid: "",
+                                            src: "/read_image.png",
+                                            alt: "image",
+                                          },
+                                        }),
                                   ],
                                   1
                                 )
@@ -658,31 +981,14 @@ var render = function () {
                     ],
                     null,
                     false,
-                    1616826285
+                    696187932
                   ),
                 },
                 [
-                  _c(
-                    "div",
-                    {
-                      attrs: { slot: "selected-row-actions" },
-                      slot: "selected-row-actions",
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function ($event) {
-                              return _vm.delete_by_selected()
-                            },
-                          },
-                        },
-                        [_vm._v(" " + _vm._s(_vm.$t("Del")))]
-                      ),
-                    ]
-                  ),
+                  _c("div", {
+                    attrs: { slot: "selected-row-actions" },
+                    slot: "selected-row-actions",
+                  }),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -695,20 +1001,21 @@ var render = function () {
                       _c(
                         "b-button",
                         {
-                          staticClass: "btn-rounded",
-                          attrs: { variant: "btn btn-primary btn-icon m-1" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.New_Attendance()
+                          directives: [
+                            {
+                              name: "b-toggle",
+                              rawName: "v-b-toggle.sidebar-right",
+                              modifiers: { "sidebar-right": true },
                             },
-                          },
+                          ],
+                          attrs: { variant: "outline-info m-1", size: "sm" },
                         },
                         [
-                          _c("i", { staticClass: "i-Add" }),
+                          _c("i", { staticClass: "i-Filter-2" }),
                           _vm._v(
-                            "\n           " +
-                              _vm._s(_vm.$t("Add")) +
-                              "\n        "
+                            "\n            " +
+                              _vm._s(_vm.$t("Filter")) +
+                              "\n          "
                           ),
                         ]
                       ),
@@ -978,6 +1285,222 @@ var render = function () {
           ),
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-sidebar",
+        {
+          attrs: {
+            id: "sidebar-right",
+            title: _vm.$t("Filter"),
+            "bg-variant": "white",
+            right: "",
+            shadow: "",
+          },
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "px-3 py-2" },
+            [
+              _c(
+                "b-row",
+                [
+                  _c(
+                    "b-col",
+                    { attrs: { md: "12" } },
+                    [
+                      _c(
+                        "b-form-group",
+                        { attrs: { label: _vm.$t("User") } },
+                        [
+                          _c("v-select", {
+                            attrs: {
+                              reduce: function (label) {
+                                return label.value
+                              },
+                              placeholder: _vm.$t("Choose_User"),
+                              options: _vm.users.map(function (users) {
+                                return { label: users.email, value: users.id }
+                              }),
+                            },
+                            on: { input: _vm.handleChange },
+                            model: {
+                              value: _vm.Filter_Sections,
+                              callback: function ($$v) {
+                                _vm.Filter_Sections = $$v
+                              },
+                              expression: "Filter_Sections",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { md: "12" } },
+                    [
+                      _c(
+                        "b-form-group",
+                        { attrs: { label: _vm.$t("date") } },
+                        [
+                          _c("b-form-input", {
+                            attrs: { type: "date" },
+                            model: {
+                              value: _vm.Filter_date,
+                              callback: function ($$v) {
+                                _vm.Filter_date = $$v
+                              },
+                              expression: "Filter_date",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { md: "12" } },
+                    [
+                      _c(
+                        "b-form-group",
+                        { attrs: { label: _vm.$t("Status") } },
+                        [
+                          _c("v-select", {
+                            attrs: {
+                              reduce: function (label) {
+                                return label.value
+                              },
+                              placeholder: _vm.$t("Choose_Status"),
+                              options: [
+                                { label: "LOGEDIN", value: "LOGEDIN" },
+                                { label: "LOGEDOUT", value: "LOGEDOUT" },
+                              ],
+                            },
+                            model: {
+                              value: _vm.Filter_status,
+                              callback: function ($$v) {
+                                _vm.Filter_status = $$v
+                              },
+                              expression: "Filter_status",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { md: "12" } },
+                    [
+                      _c(
+                        "b-form-group",
+                        { attrs: { label: _vm.$t("Application_type") } },
+                        [
+                          _c("v-select", {
+                            attrs: {
+                              reduce: function (label) {
+                                return label.value
+                              },
+                              placeholder: _vm.$t("Application_type"),
+                              options: [
+                                { label: "SURVEY", value: "SURVEY" },
+                                { label: "DELIVERY", value: "DELIVERY" },
+                              ],
+                            },
+                            model: {
+                              value: _vm.Filter_application,
+                              callback: function ($$v) {
+                                _vm.Filter_application = $$v
+                              },
+                              expression: "Filter_application",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { md: "6", sm: "12" } },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            variant: "primary m-1",
+                            size: "sm",
+                            block: "",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.GetData(_vm.serverParams.page)
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Filter-2" }),
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.$t("Filter")) +
+                              "\n              "
+                          ),
+                        ]
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { md: "6", sm: "12" } },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            variant: "danger m-1",
+                            size: "sm",
+                            block: "",
+                          },
+                          on: {
+                            click: function ($event) {
+                              return _vm.Reset_Filter()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Power-2" }),
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.$t("Reset")) +
+                              "\n              "
+                          ),
+                        ]
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ]
       ),
     ],
     1

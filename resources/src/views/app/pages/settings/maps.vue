@@ -277,44 +277,7 @@
               </b-form-group>
             </b-col>
 
-
-<!-- 
-            <b-col md="12">
-              <b-form-group :label="$t('Zone_Name')">
-                <v-select
-                  :reduce="label => label.value"
-                  :placeholder="$t('Choose_Zone_Name')"
-                  v-model="Filter_Zone_Name"
-                  :options="Zone_Name.map(Zone_Name => ({label: Zone_Name , value: Zone_Name }))"
-                />
-              </b-form-group>
-            </b-col> -->
-
-
-
-            <!-- <b-col md="12">
-              <b-form-group :label="$t('Street')">
-                <v-select
-                  :reduce="label => label.value"
-                  :placeholder="$t('Choose_Street')"
-                  v-model="Filter_street"
-                  :options="Street.map(Street => ({label: Street , value: Street }))"
-                />
-              </b-form-group>
-            </b-col> -->
-            
-
-            <!-- Brand  -->
-            <!-- <b-col md="12">
-              <b-form-group :label="$t('Brand')">
-                <v-select
-                  :reduce="label => label.value"
-                  :placeholder="$t('Choose_Brand')"
-                  v-model="Filter_brand"
-                  :options="brands.map(brands => ({label: brands.name, value: brands.id}))"
-                />
-              </b-form-group>
-            </b-col> -->
+ 
 
             <b-col md="6" sm="12">
               <b-button
@@ -1060,8 +1023,7 @@ export default {
         });
     },
     handleChange(e){
-      
-
+ 
       axios.get(
           "maps/get_data_view/data?section_name=" +
             e 
