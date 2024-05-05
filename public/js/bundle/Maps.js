@@ -476,6 +476,67 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -484,6 +545,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      import_leads: "",
       Filter_Shiakha_Name: "",
       Filter_Zone_Name: "",
       Filter_street: "",
@@ -493,6 +555,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       Zone_Name: [],
       Shiakha_Name: [],
       types: [],
+      ImportProcessing: false,
       isLoading: true,
       center: {
         lat: 30.059813,
@@ -652,6 +715,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.circle.radius = this.radius; // this.fetchPlaces();
       // console.log('Radius changed:', this.radius);
     },
+    //----------------------------------------Submit  import products-----------------\\
+    Submit_import: function Submit_import() {
+      var _this = this;
+
+      // Start the progress bar.
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
+      var self = this;
+      self.ImportProcessing = true;
+      self.data.append("leads", self.import_leads);
+      axios.post("leads/import/csv", self.data).then(function (response) {
+        self.ImportProcessing = false;
+
+        if (response.data.status === true) {
+          _this.makeToast("success", _this.$t("Successfully_Imported"), _this.$t("Success"));
+
+          Fire.$emit("Event_import");
+        } else if (response.data.status === false) {
+          _this.makeToast("danger", _this.$t("field_must_be_in_csv_format"), _this.$t("Failed"));
+        } // Complete the animation of theprogress bar.
+
+
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
+      })["catch"](function (error) {
+        self.ImportProcessing = false; // Complete the animation of theprogress bar.
+
+        nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
+
+        _this.makeToast("danger", _this.$t("Please_follow_the_import_instructions"), _this.$t("Failed"));
+      });
+    },
     onMarkerDrag: function onMarkerDrag(index, event) {
       var draggedMarker = this.markers[index];
       draggedMarker.position = {
@@ -703,6 +797,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // const radius = 10000; // Set the radius for the search in meters
       this.Get_Maps(1);
     },
+    //----------------------------------- Show import products -------------------------------\\
+    Show_import_products: function Show_import_products() {
+      this.$bvModal.show("importProducts");
+    },
     addCircleAroundMarker: function addCircleAroundMarker(markerPosition) {
       var circleOptions = {
         strokeColor: '#FF0000',
@@ -717,7 +815,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.circle = circleOptions;
     },
     addMarkerToCurrentPosition: function addMarkerToCurrentPosition() {
-      var _this = this;
+      var _this2 = this;
 
       navigator.geolocation.getCurrentPosition(function (position) {
         var currentPos = {
@@ -725,15 +823,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           lng: position.coords.longitude
         };
 
-        _this.markers.push({
+        _this2.markers.push({
           position: currentPos,
           clickable: true,
           draggable: true
         });
 
-        _this.addCircleAroundMarker(currentPos);
+        _this2.addCircleAroundMarker(currentPos);
 
-        _this.center = currentPos;
+        _this2.center = currentPos;
       }, function (error) {
         console.error('Error getting current position:', error);
       });
@@ -778,7 +876,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //---- Event Select Rows
     selectionChanged: function selectionChanged(_ref3) {
-      var _this2 = this;
+      var _this3 = this;
 
       var selectedRows = _ref3.selectedRows;
       this.selectedIds = [];
@@ -786,9 +884,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selectedRows.forEach(function (row, index) {
         // console.log(row.Point_Y_Geo);
         // console.log(row.Point_X_Geo);
-        _this2.selectedIds.push(row.id);
+        _this3.selectedIds.push(row.id);
 
-        _this2.shops_marker.push({
+        _this3.shops_marker.push({
           position: {
             lat: parseFloat(row.Point_Y_Geo),
             lng: parseFloat(row.Point_X_Geo)
@@ -814,16 +912,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //------------- Submit Validation Create & Edit Map
     Submit_Map: function Submit_Map() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$refs.Create_map.validate().then(function (success) {
         if (!success) {
-          _this3.makeToast("danger", _this3.$t("Please_fill_the_form_correctly"), _this3.$t("Failed"));
+          _this4.makeToast("danger", _this4.$t("Please_fill_the_form_correctly"), _this4.$t("Failed"));
         } else {
-          if (!_this3.editmode) {
-            _this3.Create_Map();
+          if (!_this4.editmode) {
+            _this4.Create_Map();
           } else {
-            _this3.Update_Map();
+            _this4.Update_Map();
           }
         }
       });
@@ -838,26 +936,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //------------------------------ Event Upload Image -------------------------------\
     onFileSelected: function onFileSelected(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _yield$_this4$$refs$I, valid;
+        var _yield$_this5$$refs$I, valid;
 
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this4.$refs.Image.validate(e);
+                return _this5.$refs.Image.validate(e);
 
               case 2:
-                _yield$_this4$$refs$I = _context.sent;
-                valid = _yield$_this4$$refs$I.valid;
+                _yield$_this5$$refs$I = _context.sent;
+                valid = _yield$_this5$$refs$I.valid;
 
                 if (valid) {
-                  _this4.map.image = e.target.files[0];
+                  _this5.map.image = e.target.files[0];
                 } else {
-                  _this4.map.image = "";
+                  _this5.map.image = "";
                 }
 
               case 5:
@@ -867,6 +965,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    onFileSelected_map: function onFileSelected_map(e) {
+      this.import_leads = "";
+      var file = e.target.files[0];
+      var errorFilesize;
+
+      if (file["size"] < 35048576) {
+        // 1 mega = 1,048,576 Bytes
+        errorFilesize = false;
+      } else {
+        this.makeToast("danger", this.$t("file_size_must_be_less_than_1_mega"), this.$t("Failed"));
+      }
+
+      if (errorFilesize === false) {
+        this.import_leads = file;
+      }
     },
     //------------------------------ Modal (create Map) -------------------------------\
     New_Map: function New_Map() {
@@ -928,53 +1042,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.Get_Maps(this.serverParams.page);
     },
     Get_Maps: function Get_Maps(page) {
-      var _this5 = this;
+      var _this6 = this;
 
       // Start the progress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
       axios.get("maps/view/data?page=" + page + "&Section=" + this.Filter_Sections + "&Outlet_Type=" + this.type_t + "&Zone_Name=" + this.Filter_Zone_Name + "&Street=" + this.Filter_street + "&Shiakha_Name=" + this.Filter_Shiakha_Name + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
-        _this5.maps = response.data.maps; // this.totalRows = response.data.totalRows;
+        _this6.maps = response.data.maps; // this.totalRows = response.data.totalRows;
         // this.shops_marker = response.data.map_items;
         // this.mandobs = response.data.mandobs;
         // Complete the animation of theprogress bar.
         //  this.shops_marker = response.data.itemMap;
 
-        _this5.mandobs = response.data.mandobs;
-        _this5.Zone_Name = response.data.Zone_Name; // this.Shiakha_Name = response.data.Shiakha_Name;
+        _this6.mandobs = response.data.mandobs;
+        _this6.Zone_Name = response.data.Zone_Name; // this.Shiakha_Name = response.data.Shiakha_Name;
         // console.log(response.data.itemMap);
 
-        _this5.Sections = response.data.Sections;
-        _this5.Street = response.data.Street;
-        _this5.totalRows = response.data.totalRows;
+        _this6.Sections = response.data.Sections;
+        _this6.Street = response.data.Street;
+        _this6.totalRows = response.data.totalRows;
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
-        _this5.isLoading = false;
+        _this6.isLoading = false;
       })["catch"](function (response) {
         // Complete the animation of theprogress bar.
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
         setTimeout(function () {
-          _this5.isLoading = false;
+          _this6.isLoading = false;
         }, 500);
       });
     },
     handleChange_shiakha: function handleChange_shiakha(e) {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get("maps/get_data_view_type/data?section=" + this.Filter_Sections + "&Filter_Shiakha_Name=" + e).then(function (response) {
-        _this6.types = response.data.Outlet_Type;
+        _this7.types = response.data.Outlet_Type;
         console.log(response.data.Outlet_Type);
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
-        _this6.isLoading = false;
+        _this7.isLoading = false;
       })["catch"](function (response) {
         // Complete the animation of theprogress bar.
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
       });
     }
   }, _defineProperty(_methods, "handleChange", function handleChange(e) {
-    var _this7 = this;
+    var _this8 = this;
 
     axios.get("maps/get_data_view/data?section_name=" + e).then(function (response) {
-      _this7.Shiakha_Name = response.data.Shiakha_Name; // this.maps = response.data.maps;
+      _this8.Shiakha_Name = response.data.Shiakha_Name; // this.maps = response.data.maps;
       // this.totalRows = response.data.totalRows;
       // this.shops_marker = response.data.map_items;
       // this.mandobs = response.data.mandobs;
@@ -989,7 +1103,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // this.totalRows = response.data.totalRows;
 
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
-      _this7.isLoading = false;
+      _this8.isLoading = false;
     })["catch"](function (response) {
       // Complete the animation of theprogress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done(); // setTimeout(() => {
@@ -997,7 +1111,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // }, 500);
     });
   }), _defineProperty(_methods, "Create_Map", function Create_Map() {
-    var _this8 = this;
+    var _this9 = this;
 
     var self = this;
     self.SubmitProcessing = true;
@@ -1008,14 +1122,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       self.SubmitProcessing = false;
       Fire.$emit("Event_Map");
 
-      _this8.makeToast("success", _this8.$t("Create.TitleMap"), _this8.$t("Success"));
+      _this9.makeToast("success", _this9.$t("Create.TitleMap"), _this9.$t("Success"));
     })["catch"](function (error) {
       self.SubmitProcessing = false;
 
-      _this8.makeToast("danger", _this8.$t("InvalidData"), _this8.$t("Failed"));
+      _this9.makeToast("danger", _this9.$t("InvalidData"), _this9.$t("Failed"));
     });
   }), _defineProperty(_methods, "Update_Map", function Update_Map() {
-    var _this9 = this;
+    var _this10 = this;
 
     var self = this;
     self.SubmitProcessing = true;
@@ -1027,11 +1141,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       self.SubmitProcessing = false;
       Fire.$emit("Event_Map");
 
-      _this9.makeToast("success", _this9.$t("Update.TitleMap"), _this9.$t("Success"));
+      _this10.makeToast("success", _this10.$t("Update.TitleMap"), _this10.$t("Success"));
     })["catch"](function (error) {
       self.SubmitProcessing = false;
 
-      _this9.makeToast("danger", _this9.$t("InvalidData"), _this9.$t("Failed"));
+      _this10.makeToast("danger", _this10.$t("InvalidData"), _this10.$t("Failed"));
     });
   }), _defineProperty(_methods, "reset_Form", function reset_Form() {
     this.map = {
@@ -1042,7 +1156,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
     this.data = new FormData();
   }), _defineProperty(_methods, "Delete_Map", function Delete_Map(id) {
-    var _this10 = this;
+    var _this11 = this;
 
     this.$swal({
       title: this.$t("Delete.Title"),
@@ -1056,16 +1170,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }).then(function (result) {
       if (result.value) {
         axios["delete"]("maps/" + id).then(function () {
-          _this10.$swal(_this10.$t("Delete.Deleted"), _this10.$t("Delete.TitleMap"), "success");
+          _this11.$swal(_this11.$t("Delete.Deleted"), _this11.$t("Delete.TitleMap"), "success");
 
           Fire.$emit("Delete_Map");
         })["catch"](function () {
-          _this10.$swal(_this10.$t("Delete.Failed"), _this10.$t("Delete.Therewassomethingwronge"), "warning");
+          _this11.$swal(_this11.$t("Delete.Failed"), _this11.$t("Delete.Therewassomethingwronge"), "warning");
         });
       }
     });
   }), _defineProperty(_methods, "save_select", function save_select() {
-    var _this11 = this;
+    var _this12 = this;
 
     nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
     nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
@@ -1075,9 +1189,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       from: this.from_date,
       to: this.to_date
     }).then(function () {
-      _this11.$swal(_this11.$t("Success"), _this11.$t("Success Assign"), "success");
+      _this12.$swal(_this12.$t("Success"), _this12.$t("Success Assign"), "success");
 
-      _this11.$bvModal.hide("Driver");
+      _this12.$bvModal.hide("Driver");
 
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done(); // Fire.$emit("Delete_Map");
     })["catch"](function () {
@@ -1086,10 +1200,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
       }, 500);
 
-      _this11.$swal(_this11.$t("Delete.Failed"), _this11.$t("Delete.Therewassomethingwronge"), "warning");
+      _this12.$swal(_this12.$t("Delete.Failed"), _this12.$t("Delete.Therewassomethingwronge"), "warning");
     });
   }), _defineProperty(_methods, "delete_by_selected", function delete_by_selected() {
-    var _this12 = this;
+    var _this13 = this;
 
     this.$swal({
       title: this.$t("Delete.Title"),
@@ -1106,9 +1220,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
         axios.post("maps/delete/by_selection", {
-          selectedIds: _this12.selectedIds
+          selectedIds: _this13.selectedIds
         }).then(function () {
-          _this12.$swal(_this12.$t("Delete.Deleted"), _this12.$t("Delete.TitleMap"), "success");
+          _this13.$swal(_this13.$t("Delete.Deleted"), _this13.$t("Delete.TitleMap"), "success");
 
           Fire.$emit("Delete_Map");
         })["catch"](function () {
@@ -1117,26 +1231,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
           }, 500);
 
-          _this12.$swal(_this12.$t("Delete.Failed"), _this12.$t("Delete.Therewassomethingwronge"), "warning");
+          _this13.$swal(_this13.$t("Delete.Failed"), _this13.$t("Delete.Therewassomethingwronge"), "warning");
         });
       }
     });
   }), _methods),
   //end Methods
   created: function created() {
-    var _this13 = this;
+    var _this14 = this;
 
     this.Get_Maps(1);
     Fire.$on("Event_Map", function () {
       setTimeout(function () {
-        _this13.Get_Maps(_this13.serverParams.page);
+        _this14.Get_Maps(_this14.serverParams.page);
 
-        _this13.$bvModal.hide("New_map");
+        _this14.$bvModal.hide("New_map");
       }, 500);
     });
     Fire.$on("Delete_Map", function () {
       setTimeout(function () {
-        _this13.Get_Maps(_this13.serverParams.page);
+        _this14.Get_Maps(_this14.serverParams.page);
       }, 500);
     });
   }
@@ -1455,6 +1569,29 @@ var render = function () {
                           ),
                         ]
                       ),
+                      _vm._v(" "),
+                      _vm.currentUserPermissions &&
+                      _vm.currentUserPermissions.includes("product_import")
+                        ? _c(
+                            "b-button",
+                            {
+                              attrs: { size: "sm", variant: "info m-1" },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.Show_import_products()
+                                },
+                              },
+                            },
+                            [
+                              _c("i", { staticClass: "i-Download" }),
+                              _vm._v(
+                                "\n            " +
+                                  _vm._s(_vm.$t("import_products")) +
+                                  "\n          "
+                              ),
+                            ]
+                          )
+                        : _vm._e(),
                     ],
                     1
                   ),
@@ -2093,11 +2230,135 @@ var render = function () {
         ],
         1
       ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "ok-only": "",
+            "ok-title": "Cancel",
+            size: "md",
+            id: "importProducts",
+            title: _vm.$t("import_products"),
+          },
+        },
+        [
+          _c(
+            "b-form",
+            {
+              attrs: { enctype: "multipart/form-data" },
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.Submit_import($event)
+                },
+              },
+            },
+            [
+              _c(
+                "b-row",
+                [
+                  _c(
+                    "b-col",
+                    { staticClass: "mb-3", attrs: { md: "12", sm: "12" } },
+                    [
+                      _c(
+                        "b-form-group",
+                        [
+                          _c("input", {
+                            attrs: { type: "file", label: "Choose File" },
+                            on: { change: _vm.onFileSelected_map },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "b-form-invalid-feedback",
+                            {
+                              staticClass: "d-block",
+                              attrs: { id: "File-feedback" },
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.$t("field_must_be_in_csv_format"))
+                              ),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { md: "6", sm: "12" } },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            type: "submit",
+                            variant: "primary",
+                            disabled: _vm.ImportProcessing,
+                            size: "sm",
+                            block: "",
+                          },
+                        },
+                        [_vm._v(_vm._s(_vm.$t("submit")))]
+                      ),
+                      _vm._v(" "),
+                      _vm.ImportProcessing ? _vm._m(2) : _vm._e(),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-col",
+                    { attrs: { md: "6", sm: "12" } },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            href: "/import/exemples",
+                            variant: "info",
+                            size: "sm",
+                            block: "",
+                          },
+                        },
+                        [_vm._v(_vm._s(_vm.$t("Download_exemple")))]
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("b-col", { attrs: { md: "12", sm: "12" } }, [
+                    _c("table", {
+                      staticClass: "table table-bordered table-sm mt-4",
+                    }),
+                  ]),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
     ],
     1
   )
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "typo__p" }, [
+      _c("div", { staticClass: "spinner sm spinner-primary mt-3" }),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

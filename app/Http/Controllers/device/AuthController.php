@@ -29,10 +29,12 @@ class AuthController extends Controller
 
         
         $pins = [
-            "pin_zero" => true,
-            "pin_one" => true,
-            "pint_tow" => false,
-            "pin_three" => false,
+            "IO0_PIN" => true,
+            "IO2_PIN" => true,
+            "TX_PIN" => true, //low eneg
+            "RX_PIN" => true,
+            
+      
         ];
 
 

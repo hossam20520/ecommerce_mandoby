@@ -432,6 +432,13 @@ class MapsController extends Controller
 
     // save_by_selection
 
+
+
+
+
+
+
+
     public function save_by_selection(Request $request)
     {
 
@@ -480,6 +487,110 @@ class MapsController extends Controller
         return response()->json(['success' => true]);
 
     }
+
+
+
+
+    // import Products
+    public function import_leads(Request $request)
+    {
+        try {
+            \DB::transaction(function () use ($request) {
+                $file_upload = $request->file('leads');
+                $ext = pathinfo($file_upload->getClientOriginalName(), PATHINFO_EXTENSION);
+                if ($ext != 'csv') {
+                    return response()->json([
+                        'msg' => 'must be in csv format',
+                        'status' => false,
+                    ]);
+                } else {
+                    $data = array();
+                    $rowcount = 0;
+                    if (($handle = fopen($file_upload, "r")) !== false) {
+
+                        $max_line_length = defined('MAX_LINE_LENGTH') ? MAX_LINE_LENGTH : 10000;
+                        $header = fgetcsv($handle, $max_line_length);
+                        $header_colcount = count($header);
+                        while (($row = fgetcsv($handle, $max_line_length)) !== false) {
+                            $row_colcount = count($row);
+                            if ($row_colcount == $header_colcount) {
+                                $entry = array_combine($header, $row);
+                                $data[] = $entry;
+                            } else {
+                                return null;
+                            }
+                            $rowcount++;
+                        }
+                        fclose($handle);
+                    } else {
+                        return null;
+                    }
+
+
+                   
+
+                    //-- Create New Product
+                    foreach ($data as $key => $value) {
+               
+ 
+
+                    
+                     
+                     
+                      
+                         
+                   
+
+
+                          $lead = new Map;
+                          $lead->Outlet_Name =  $value['Outlet_Name'];
+                          $lead->Point_X_Geo =  $value['lng'];
+                          $lead->Point_Y_Geo =  $value['lat'];
+                          $lead->Gov_Name =  $value['Gov_Name'];
+                          $lead->Section =  $value['Section'];
+                          $lead->Shiakha_Name =  $value['Shiakha_Name'];
+                          $lead->Zone_Name =  $value['Zone_Name'];
+                          $lead->Area_Type =  $value['Area_Type'];
+                          $lead->Street =  $value['Street'];
+                          $lead->Mobile =  $value['Mobile'];
+                          $lead->Contact =  $value['Contact'];
+                          $lead->google_map =  "no";
+                         
+                          $lead->save();
+
+                        // Map::whereNull('deleted_at')->where('code' , $value['code']  )
+                        // ->update(['name' =>  $value['en_name'] ]);
+                       
+ 
+
+                }
+
+
+
+                }
+            }, 10);
+            return response()->json([
+                'status' => true,
+            ], 200);
+
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => false,
+                'msg' => 'error',
+                'errors' => $e->errors(),
+            ]);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 
 }
 

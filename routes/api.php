@@ -385,6 +385,10 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     //------------------------------------------------------------------\
     Route::resource('maps', 'MapsController');
     Route::post('maps/delete/by_selection', 'MapsController@delete_by_selection');
+
+
+
+    Route::post('leads/import/csv', 'MapsController@import_leads');
    
     Route::get('Tasks/Detail/{id}', 'TasksController@getDetail');
    

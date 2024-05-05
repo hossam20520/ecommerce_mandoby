@@ -201,6 +201,19 @@
             <i class="i-Filter-2"></i>
             {{ $t("Filter") }}
           </b-button>
+
+
+          <b-button
+            @click="Show_import_products()"
+            size="sm"
+            variant="info m-1"
+            v-if="currentUserPermissions && currentUserPermissions.includes('product_import')"
+          >
+            <i class="i-Download"></i>
+            {{ $t("import_products") }}
+          </b-button>
+
+
           <!-- <b-button @click="New_Map()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
             <i class="i-Add"></i>
              {{ $t('Add') }}
@@ -446,6 +459,54 @@
 
 
  
+
+
+
+       <!-- Modal Show Import Products -->
+      <b-modal
+        ok-only
+        ok-title="Cancel"
+        size="md"
+        id="importProducts"
+        :title="$t('import_products')"
+      >
+        <b-form @submit.prevent="Submit_import" enctype="multipart/form-data">
+          <b-row>
+            <!-- File -->
+            <b-col md="12" sm="12" class="mb-3">
+              <b-form-group>
+                <input type="file" @change="onFileSelected_map" label="Choose File">
+                <b-form-invalid-feedback
+                  id="File-feedback"
+                  class="d-block"
+                >{{$t('field_must_be_in_csv_format')}}</b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
+
+             <b-col md="6" sm="12">
+            <b-button type="submit" variant="primary" :disabled="ImportProcessing" size="sm" block>{{ $t("submit") }}</b-button>
+              <div v-once class="typo__p" v-if="ImportProcessing">
+                <div class="spinner sm spinner-primary mt-3"></div>
+              </div>
+          </b-col>
+
+            <b-col md="6" sm="12">
+              <b-button
+                :href="'/import/exemples'"
+                variant="info"
+                size="sm"
+                block
+              >{{ $t("Download_exemple") }}</b-button>
+            </b-col>
+
+            <b-col md="12" sm="12">
+              <table class="table table-bordered table-sm mt-4">
+      
+              </table>
+            </b-col>
+          </b-row>
+        </b-form>
+      </b-modal>
   </div>
 </template>
 
@@ -461,7 +522,7 @@ export default {
     return {
 
 
-    
+      import_leads:"",
       Filter_Shiakha_Name: "",
       Filter_Zone_Name:"",
       Filter_street:"",
@@ -471,6 +532,7 @@ export default {
       Zone_Name:[],
       Shiakha_Name:[],
       types:[],
+       ImportProcessing:false,
       isLoading: true,
 
       center: {lat: 30.059813, lng: 31.329825},
@@ -663,6 +725,50 @@ export default {
     // console.log('Radius changed:', this.radius);
   },
 
+
+
+    //----------------------------------------Submit  import products-----------------\\
+    Submit_import() {
+      // Start the progress bar.
+      NProgress.start();
+      NProgress.set(0.1);
+      var self = this;
+      self.ImportProcessing = true;
+      self.data.append("leads", self.import_leads);
+      axios
+        .post("leads/import/csv", self.data)
+        .then(response => {
+          self.ImportProcessing = false;
+          if (response.data.status === true) {
+            this.makeToast(
+              "success",
+              this.$t("Successfully_Imported"),
+              this.$t("Success")
+            );
+            Fire.$emit("Event_import");
+          } else if (response.data.status === false) {
+            this.makeToast(
+              "danger",
+              this.$t("field_must_be_in_csv_format"),
+              this.$t("Failed")
+            );
+          }
+          // Complete the animation of theprogress bar.
+          NProgress.done();
+        })
+        .catch(error => {
+          self.ImportProcessing = false;
+          // Complete the animation of theprogress bar.
+          NProgress.done();
+          this.makeToast(
+            "danger",
+            this.$t("Please_follow_the_import_instructions"),
+            this.$t("Failed")
+          );
+        });
+    },
+
+
     onMarkerDrag(index, event) {
       const draggedMarker = this.markers[index];
       draggedMarker.position = {
@@ -734,7 +840,10 @@ export default {
  
     },
 
-
+    //----------------------------------- Show import products -------------------------------\\
+    Show_import_products() {
+      this.$bvModal.show("importProducts");
+    },
     addCircleAroundMarker(markerPosition) {
     const circleOptions = {
       strokeColor: '#FF0000',
@@ -877,6 +986,32 @@ export default {
         this.map.image = "";
       }
     },
+
+
+
+   onFileSelected_map(e) {
+      this.import_leads = "";
+      let file = e.target.files[0];
+      let errorFilesize;
+
+      if (file["size"] < 35048576) {
+        // 1 mega = 1,048,576 Bytes
+        errorFilesize = false;
+      } else {
+
+       this.makeToast(
+          "danger",
+          this.$t("file_size_must_be_less_than_1_mega"),
+          this.$t("Failed")
+        );
+
+      }
+
+      if (errorFilesize === false) {
+        this.import_leads = file;
+      }
+    },
+
 
     //------------------------------ Modal (create Map) -------------------------------\
     New_Map() {

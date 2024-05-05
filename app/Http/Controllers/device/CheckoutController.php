@@ -210,8 +210,8 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
             SaleDetail::insert($orderDetails);
             $sale = Sale::findOrFail($order->id);
     
-
-             app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
+ 
+            app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
             
             //  app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line ,  20 , $sale->Ref );
 
