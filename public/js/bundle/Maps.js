@@ -1570,28 +1570,25 @@ var render = function () {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm.currentUserPermissions &&
-                      _vm.currentUserPermissions.includes("product_import")
-                        ? _c(
-                            "b-button",
-                            {
-                              attrs: { size: "sm", variant: "info m-1" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.Show_import_products()
-                                },
-                              },
+                      _c(
+                        "b-button",
+                        {
+                          attrs: { size: "sm", variant: "info m-1" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.Show_import_products()
                             },
-                            [
-                              _c("i", { staticClass: "i-Download" }),
-                              _vm._v(
-                                "\n            " +
-                                  _vm._s(_vm.$t("import_products")) +
-                                  "\n          "
-                              ),
-                            ]
-                          )
-                        : _vm._e(),
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Download" }),
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(_vm.$t("import_leads")) +
+                              "\n          "
+                          ),
+                        ]
+                      ),
                     ],
                     1
                   ),
@@ -2239,7 +2236,7 @@ var render = function () {
             "ok-title": "Cancel",
             size: "md",
             id: "importProducts",
-            title: _vm.$t("import_products"),
+            title: _vm.$t("import_leads"),
           },
         },
         [

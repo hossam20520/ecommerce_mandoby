@@ -207,10 +207,10 @@
             @click="Show_import_products()"
             size="sm"
             variant="info m-1"
-            v-if="currentUserPermissions && currentUserPermissions.includes('product_import')"
+            
           >
             <i class="i-Download"></i>
-            {{ $t("import_products") }}
+            {{ $t("import_leads") }}
           </b-button>
 
 
@@ -468,7 +468,7 @@
         ok-title="Cancel"
         size="md"
         id="importProducts"
-        :title="$t('import_products')"
+        :title="$t('import_leads')"
       >
         <b-form @submit.prevent="Submit_import" enctype="multipart/form-data">
           <b-row>

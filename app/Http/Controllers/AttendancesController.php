@@ -57,8 +57,26 @@ class AttendancesController extends Controller
 
          
         $users = User::where('deleted_at' , '=' , null)->whereIn('role_id', [3, 4 , 5])->get();
+       
+       
+       
+        // public function getLoginLogoutRecords()
+        // {
+            // $records = DB::table('attendances')
+            //     ->select('user_id', 'date' , 'time',
+            //              DB::raw("MIN(CASE WHEN type = 'LOGEDIN' THEN time END) as login_time"),
+            //              DB::raw("MAX(CASE WHEN type = 'LOGEDOUT' THEN time END) as logout_time"))
+            //     ->groupBy('user_id', 'date')
+            //     ->get();
+
+
+    
+        //     return $records;
+        // }
+       
+       
         return response()->json([
-           
+         
             'users'=> $users,
             'attendances' => $attendances,
             'totalRows' => $totalRows,
@@ -67,6 +85,15 @@ class AttendancesController extends Controller
     }
 
     //---------------- STORE NEW Attendance -------------\
+
+
+public function getAttend($attendances){
+ 
+
+
+}
+
+
 
     public function store(Request $request)
     {

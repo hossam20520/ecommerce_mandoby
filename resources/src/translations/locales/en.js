@@ -2,7 +2,7 @@
 
 export default {
     Mandobs:'MSales Rep',
-    Mandob:'Sales Rep',
+    Mandob:'Drivers',
     payment_type:'Payment Type',
     bill_image:'Bill Image',
     end_time:'Leaving Time',

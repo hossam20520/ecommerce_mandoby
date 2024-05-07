@@ -292,6 +292,13 @@
 
 
 
+
+
+
+
+
+
+
             <b-col md="6" sm="12">
               <b-button
                 @click="GetData(serverParams.page)"
@@ -311,11 +318,65 @@
               </b-button>
             </b-col>
           </b-row>
+
+
+          <row> 
+       <button @click="print_product()" class="btn btn-outline-primary">
+          <i class="i-Billing"></i>
+          {{$t('print')}}
+        </button>
+           </row>
         </div>
       </b-sidebar>
 
 
+ <!-- style="display:none;" -->
+      <b-row id="print_product" >
+          <b-col md="12" class="mb-5">
+          <center>    <h2>   تقارير الحضور والانصراف </h2>  </center>
+ 
+          </b-col>
 
+
+          
+<table style="width:100%; border:1px solid; border-collapse: collapse;">
+  <thead>
+    <tr>
+    
+ 
+    <th>   الابلكيشن </th>
+    <th>   وقت الانصراف  </th>
+    <th>  تاريخ الانصراف </th>
+    <th> وقت الحضور  </th>
+    <th>تاريخ الحضور</th>
+    <th>رقم الهاتف</th>
+    <th>الاسم</th>
+
+    </tr>
+  </thead>
+  <tbody>
+ 
+ 
+
+<!-- attendances -->
+
+    <tr v-for="(attendance, index) in attendances" :key="index">
+        <td style="text-align: right;border: 1px solid #dddddd;">   {{ attendance.type }}  </td>
+        <td style="text-align: right;border: 1px solid #dddddd;">   {{ attendance.date }}  </td>
+        <td style="text-align: right;border: 1px solid #dddddd;"> {{ attendance.time }} </td>
+        <td style="text-align: right;border: 1px solid #dddddd;"> {{ attendance.time }} </td>
+        <td style="text-align: right;border: 1px solid #dddddd;"> {{ attendance.date }}  </td>
+        <td style="text-align: right;border: 1px solid #dddddd;"> {{ attendance.user.phone }} </td>
+        <td style="text-align: right;border: 1px solid #dddddd;"> {{ attendance.user.firstname }} </td>
+    </tr>
+
+
+
+  </tbody>
+</table>
+
+          </b-row> 
+ 
   </div>
 </template>
 
@@ -443,6 +504,59 @@ export default {
   },
 
   methods: {
+
+
+test_try(){
+  const data = this.attendances;
+
+// Object to store combined data
+const combinedData = {};
+
+// Loop through the data
+data.forEach(entry => {
+  const key = entry.phone; // Use phone number as the key
+  if (!combinedData[key]) {
+    // If the key doesn't exist in the combined data object, create it
+    combinedData[key] = {
+      name: entry.name,
+      phone: entry.phone,
+      loggedIn: { date: "", time: "" },
+      loggedOut: { date: "", time: "" }
+    };
+  }
+
+  // Check the status and assign the date and time accordingly
+  if (entry.status === "LOGEDIN") {
+    combinedData[key].loggedIn.date = entry.date;
+    combinedData[key].loggedIn.time = entry.time;
+  } else if (entry.status === "LOGEDOUT") {
+    combinedData[key].loggedOut.date = entry.date;
+    combinedData[key].loggedOut.time = entry.time;
+  }
+});
+
+// Convert the combined data object into an array of objects
+const combinedArray = Object.values(combinedData);
+
+// Print the result
+// console.log(combinedArray);
+ return combinedArray;
+
+},
+
+
+  print_product() {
+      var divContents = document.getElementById("print_product").innerHTML;
+      var a = window.open("", "", "height=500, width=500");
+      a.document.write(
+        '<link rel="stylesheet" href="/assets_setup/css/bootstrap.css"><html>'
+      );
+      a.document.write("<body >");
+      a.document.write(divContents);
+      a.document.write("</body></html>");
+      a.document.close();
+      a.print();
+    },
 
     Reset_Filter() {
       this.search = "";
@@ -681,6 +795,8 @@ export default {
           this.users = response.data.users;
           this.totalRows = response.data.totalRows;
 
+          // console.log(response.data.attend);
+          this.test_try();
           // Complete the animation of theprogress bar.
           NProgress.done();
           this.isLoading = false;
@@ -872,3 +988,13 @@ export default {
   }
 };
 </script>
+
+
+<style>
+@media print {
+  #print_product {
+    display: flex;
+    justify-content: center;
+  }
+}
+</style>
