@@ -268,7 +268,7 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
           
         ]);
 
-        Sale::where('id' , $order_id)->update(  [ 'statut'=> 'shipping'  , 'odoo_ref' => $code, ] );
+        Sale::where('id' , $order_id)->update(  [ 'statut'=> 'shipping'  , 'odoo_refrence' => $code, ] );
 
         return response()->json([
             'success' => true,
