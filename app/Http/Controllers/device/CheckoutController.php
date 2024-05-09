@@ -224,7 +224,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
  
             // app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
             
-             app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($ordlineaa ,  1639 , $sale->Ref );
+             app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($ordlineaa , $customer->code , $sale->Ref );
 
 
             Cart::where('order_id' , '=' , null)->where('user_id' , $user->id)->update([
