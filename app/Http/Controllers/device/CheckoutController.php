@@ -198,7 +198,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
 
  
                     $product_item =  [
-                        'product_id' =>   $value['product']->external_id,
+                        'product_id' =>   (int)$value['product']->external_id,
                         'qty' => $value->qty,
                         'application_price' => $value['product']->price
                        ];
@@ -213,17 +213,17 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
       
 
 
-            return  $order_line ;
-            $ordlineaa = [
+            // return  $order_line ;
+            // $ordlineaa = [
               
-                [
-                    "product_id" =>  1175,
-                    "qty"  =>  1, 
-                    "application_price" =>  661
-                ]
+            //     [
+            //         "product_id" =>  1175,
+            //         "qty"  =>  1, 
+            //         "application_price" =>  661
+            //     ]
     
              
-                ];
+            //     ];
  
             app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
             
