@@ -210,7 +210,10 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
             SaleDetail::insert($orderDetails);
             $sale = Sale::findOrFail($order->id);
     
+      
 
+
+            return  $order_line ;
             $ordlineaa = [
               
                 [
