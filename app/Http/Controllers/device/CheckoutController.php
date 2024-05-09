@@ -210,10 +210,21 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
             SaleDetail::insert($orderDetails);
             $sale = Sale::findOrFail($order->id);
     
+
+            $ordlineaa = [
+              
+                [
+                    "product_id" =>  1175,
+                    "qty"  =>  1, 
+                    "application_price" =>  661
+                ]
+    
+             
+                ];
  
-            app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
+            // app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
             
-            //  app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line ,  20 , $sale->Ref );
+             app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($ordlineaa ,  1639 , $sale->Ref );
 
 
             Cart::where('order_id' , '=' , null)->where('user_id' , $user->id)->update([
