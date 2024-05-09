@@ -213,12 +213,16 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
 
             $ordlineaa = [
               
-                $order_line
+                [
+                    "product_id" =>  1175,
+                    "qty"  =>  1, 
+                    "application_price" =>  661
+                ]
     
              
                 ];
  
-            app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($ordlineaa , $customer->code , $sale->Ref );
+            app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
             
             //  app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($ordlineaa , $customer->code , $sale->Ref );
 
