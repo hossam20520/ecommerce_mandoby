@@ -163,7 +163,7 @@ public function getCategoryID($id){
 
 
 
-           public function UpdateQuantity($product_id){
+           public function UpdateQuantity($product_id , $qty ){
            
 
             $settings = Setting::where('deleted_at', '=', null)->first();
@@ -173,16 +173,16 @@ public function getCategoryID($id){
             ->where('product_id', $product_id)
             ->first();
 
-
+            // qty_available
 
             if ($product_warehouse) {
-                $product_warehouse->qte += 500;
+                $product_warehouse->qte  = $qty;
                 $product_warehouse->save();
             } else {
                  $wa = new product_warehouse;
                  $wa->warehouse_id = $settings->warehouse_id;
                  $wa->product_id = $product_id;
-                 $wa->qte  = 500;
+                 $wa->qte  = $qty;
                  $wa->save();
             }
 
@@ -248,8 +248,9 @@ public function getCategoryID($id){
                    
                 }
 
-
-                $this->UpdateQuantity($Product->id);
+                
+                
+                $this->UpdateQuantity($Product->id ,  $product['qty_available']);
 
                 
             } else{

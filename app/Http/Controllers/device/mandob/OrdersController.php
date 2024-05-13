@@ -261,9 +261,18 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
                 'id' => 0
             ]);
         }
+
+
+        $time = Carbon::now();
+
+        // Format the time
+        $formattedTime = $time->format('g:i A');
+
         Order::where('order_id' ,  $order_id )->where('user_id' ,  $user->id)->update([
             'status'=> "accepted",
             'received_time_warehouse' =>  Carbon::now(),
+            'RWT' =>  $formattedTime,
+            
             'odoo_ref' => $code,
           
         ]);
@@ -357,6 +366,8 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
             } else if ($due === $sale->GrandTotal) {
                 $payment_statut = 'unpaid';
             }
+
+
             $order->update([
                'paid_cash'=> $total_paid,
                "payment_type" => $pyamentType,
