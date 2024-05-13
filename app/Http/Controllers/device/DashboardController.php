@@ -253,10 +253,14 @@ public function getCategoryID($id){
                 $this->UpdateQuantity($Product->id ,  $product['qty_available']);
 
                 
+
+
+
+                
             } else{
 
  
-                
+
                 $Product = Product::where('code', $product['code'])
                     ->where('deleted_at', '=', null)
                     ->first();
