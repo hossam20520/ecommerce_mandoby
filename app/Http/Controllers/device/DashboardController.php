@@ -256,6 +256,7 @@ public function getCategoryID($id){
             } else{
 
  
+                
                 $Product = Product::where('code', $product['code'])
                     ->where('deleted_at', '=', null)
                     ->first();
