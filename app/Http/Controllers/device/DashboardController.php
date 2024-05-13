@@ -256,7 +256,7 @@ public function getCategoryID($id){
 
 
 
-                
+
             } else{
 
  
@@ -271,6 +271,11 @@ public function getCategoryID($id){
                         'price' => $product['price']
                     ]);
 
+
+
+
+
+              $this->UpdateQuantity($Product->id ,  $product['qty_available']);
 
                 //-- Update Product
  
