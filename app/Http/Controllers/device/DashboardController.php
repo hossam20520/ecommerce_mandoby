@@ -270,6 +270,7 @@ public function getCategoryID($id){
                     ->where('deleted_at', '=', null)->update([
                         'price' => $product['price'],
                         'ar_name' => $product['name'],
+                        'test_field' => $product['name'],
                     ]);
 
 
