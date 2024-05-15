@@ -268,7 +268,8 @@ public function getCategoryID($id){
 
                     Product::where('code', $product['code'])
                     ->where('deleted_at', '=', null)->update([
-                        'price' => $product['price']
+                        'price' => $product['price'],
+                        'ar_name' => $product['name'],
                     ]);
 
 
