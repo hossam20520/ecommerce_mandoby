@@ -49,6 +49,11 @@ class OrdersController extends Controller
           $item['Ref'] = $da->order->Ref;
           $item['GrandTotal'] = $da->order->GrandTotal;
           $item['Ref'] = $da->order->Ref;
+          $item['mandob_ref'] = $da->order->odoo_refrence;
+          $item['odoo_ref'] = $da->order->odoo_ref;
+          $item['RWT'] = $da->order->RWT;
+
+          
           $item['status'] = $da->status;
           $item['paid_cash'] = $da->paid_cash;
           $item['received_time_warehouse'] = strval($da->received_time_warehouse) ;

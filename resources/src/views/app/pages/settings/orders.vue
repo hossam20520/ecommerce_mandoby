@@ -1,11 +1,16 @@
 
 <template>
-  <div class="main-content">
+  <div class="main-content" >
     <breadcumb :page="$t('Order')" :folder="$t('Settings')"/>
+
+  <button @click="print()" class="btn btn-warning btn-icon ripple btn-sm">
+            <i class="i-Billing"></i>
+            {{$t('print')}}
+          </button>
     <h3>{{ user.firstname  }}  {{ user.lastname  }}</h3>
     <h3>Email: {{ user.email  }}</h3>
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
-    <b-card class="wrapper" v-if="!isLoading">
+    <b-card class="wrapper" id="print_Invoice" v-if="!isLoading">
       <vue-good-table
         mode="remote"
         :columns="columns"
@@ -172,6 +177,20 @@ export default {
           tdClass: "text-left",
           thClass: "text-left"
         },
+
+         {
+          label: this.$t("odoo_ref"),
+          field: "odoo_ref",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+         {
+          label: this.$t("mandob_ref"),
+          field: "mandob_ref",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
         {
           label: this.$t("Grand_total"),
           field: "GrandTotal",
@@ -186,6 +205,14 @@ export default {
         },
 
         {
+          label: this.$t("RWT"),
+          field: "RWT",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+
+             {
           label: this.$t("received_time_warehouse"),
           field: "received_time_warehouse",
           tdClass: "text-left",
@@ -240,6 +267,21 @@ export default {
   },
 
   methods: {
+
+        print() {
+      var divContents = document.getElementById("print_Invoice").innerHTML;
+      var a = window.open("", "", "height=500, width=500");
+      a.document.write(
+        '<link rel="stylesheet" href="/assets_setup/css/bootstrap.css"><html>'
+      );
+      a.document.write("<body >");
+      a.document.write(divContents);
+      a.document.write("</body></html>");
+      a.document.close();
+      a.print();
+    },
+
+
     //---- update Params Table
     updateParams(newProps) {
       this.serverParams = Object.assign({}, this.serverParams, newProps);

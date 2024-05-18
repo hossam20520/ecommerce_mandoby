@@ -199,6 +199,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -629,6 +650,48 @@ var render = function () {
                             },
                             [
                               _c("h5", { staticClass: "font-weight-bold" }, [
+                                _vm._v(_vm._s(_vm.$t("OrderInfo"))),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._v(
+                                  _vm._s(_vm.$t("Note")) +
+                                    " : " +
+                                    _vm._s(_vm.sale.notes)
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._v(" " + _vm._s(_vm.$t("Image")) + " :  "),
+                                _c(
+                                  "a",
+                                  { attrs: { href: _vm.sale.image } },
+                                  [
+                                    _c("b-img", {
+                                      attrs: {
+                                        thumbnail: "",
+                                        height: "50",
+                                        width: "50",
+                                        fluid: "",
+                                        src: _vm.sale.image,
+                                        alt: "image",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-col",
+                            {
+                              staticClass: "mb-4",
+                              attrs: { lg: "4", md: "4", sm: "12" },
+                            },
+                            [
+                              _c("h5", { staticClass: "font-weight-bold" }, [
                                 _vm._v(_vm._s(_vm.$t("Invoice_Info"))),
                               ]),
                               _vm._v(" "),
@@ -637,6 +700,22 @@ var render = function () {
                                   _vm._s(_vm.$t("Reference")) +
                                     " : " +
                                     _vm._s(_vm.sale.Ref)
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._v(
+                                  _vm._s(_vm.$t("mandob_ref")) +
+                                    " : " +
+                                    _vm._s(_vm.sale.mandob_ref)
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._v(
+                                  _vm._s(_vm.$t("odoo_ref")) +
+                                    " : " +
+                                    _vm._s(_vm.sale.odoo_ref)
                                 ),
                               ]),
                               _vm._v(" "),

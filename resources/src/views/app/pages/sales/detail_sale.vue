@@ -56,16 +56,37 @@
               <div>{{sale.client_adr}}</div>
               
             </b-col>
-            <!-- <b-col lg="4" md="4" sm="12" class="mb-4">
-              <h5 class="font-weight-bold">{{$t('Company_Info')}}</h5>
-              <div>{{company.CompanyName}}</div>
-              <div>{{company.email}}</div>
-              <div>{{company.CompanyPhone}}</div>
-              <div>{{company.CompanyAdress}}</div>
-            </b-col> -->
+
+
+ 
+
+            <b-col lg="4" md="4" sm="12" class="mb-4">
+              <h5 class="font-weight-bold">{{$t('OrderInfo')}}</h5>
+              <div>{{$t('Note')}} : {{sale.notes}}</div>
+              <div> {{$t('Image')}} :  <a :href="  sale.image"  >  <b-img
+              thumbnail
+              height="50"
+              width="50"
+              fluid :src="sale.image" alt="image"
+            ></b-img>  </a>  </div>
+              <!-- <div>{{company.CompanyPhone}}</div>
+              <div>{{company.CompanyAdress}}</div> -->
+            </b-col>
+
+
+
+
+
+
+
+
+
             <b-col lg="4" md="4" sm="12" class="mb-4">
               <h5 class="font-weight-bold">{{$t('Invoice_Info')}}</h5>
               <div>{{$t('Reference')}} : {{sale.Ref}}</div>
+               <div>{{$t('mandob_ref')}} : {{sale.mandob_ref}}</div>
+               <div>{{$t('odoo_ref')}} : {{sale.odoo_ref}}</div>
+               
               <div>
                 {{$t('PaymentStatus')}} :
                 <span

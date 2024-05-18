@@ -148,6 +148,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -190,6 +195,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
+        label: this.$t("odoo_ref"),
+        field: "odoo_ref",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("mandob_ref"),
+        field: "mandob_ref",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("Grand_total"),
         field: "GrandTotal",
         tdClass: "text-left",
@@ -197,6 +212,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         label: this.$t("paid_cash"),
         field: "paid_cash",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("RWT"),
+        field: "RWT",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -240,6 +260,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    print: function print() {
+      var divContents = document.getElementById("print_Invoice").innerHTML;
+      var a = window.open("", "", "height=500, width=500");
+      a.document.write('<link rel="stylesheet" href="/assets_setup/css/bootstrap.css"><html>');
+      a.document.write("<body >");
+      a.document.write(divContents);
+      a.document.write("</body></html>");
+      a.document.close();
+      a.print();
+    },
     //---- update Params Table
     updateParams: function updateParams(newProps) {
       this.serverParams = Object.assign({}, this.serverParams, newProps);
@@ -1095,6 +1125,22 @@ var render = function () {
         attrs: { page: _vm.$t("Order"), folder: _vm.$t("Settings") },
       }),
       _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning btn-icon ripple btn-sm",
+          on: {
+            click: function ($event) {
+              return _vm.print()
+            },
+          },
+        },
+        [
+          _c("i", { staticClass: "i-Billing" }),
+          _vm._v("\n          " + _vm._s(_vm.$t("print")) + "\n        "),
+        ]
+      ),
+      _vm._v(" "),
       _c("h3", [
         _vm._v(_vm._s(_vm.user.firstname) + "  " + _vm._s(_vm.user.lastname)),
       ]),
@@ -1110,7 +1156,7 @@ var render = function () {
       !_vm.isLoading
         ? _c(
             "b-card",
-            { staticClass: "wrapper" },
+            { staticClass: "wrapper", attrs: { id: "print_Invoice" } },
             [
               _c(
                 "vue-good-table",

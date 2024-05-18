@@ -7,7 +7,7 @@ use App\Mail\SaleMail;
 use App\Models\Client;
 use App\Models\Unit;
 use App\Models\Order;
-
+ 
 use App\Models\PaymentSale;
 use App\Models\Product;
 use App\Models\ProductVariant;
@@ -755,8 +755,22 @@ class SalesController extends BaseController
         return Excel::download(new SalesExport, 'List_Sales.xlsx');
     }
 
+
+
+    public function getImageUrl( $order_id ){
+       
+       $order =  Order::where('deleted_at' , '=' , null)->where('order_id' , $order_id)->first();
+         if($order){
+            return $order->image;
+         }else{
+            return "";
+         }
+       return $order->image;
+    }
+
     //---------------- Get Details Sale-----------------\\
 
+    
     public function show(Request $request, $id)
     {
 
@@ -793,7 +807,12 @@ class SalesController extends BaseController
         $sale_details['statut'] = $sale_data->statut;
         $sale_details['warehouse'] = $sale_data['warehouse']->name;
         $sale_details['discount'] = $sale_data->discount;
+        $sale_details['notes'] = $sale_data->notes;
+        $sale_details['mandob_ref'] = $sale_data->odoo_refrence;
+        $sale_details['odoo_ref'] = $sale_data->odoo_ref;
+        $sale_details['image'] =   '/images/orders/'  .  $this->getImageUrl( $sale_data->id );
 
+        
 
         // $sale_details['promo'] =  $sale_data->GrandTotal ;
 

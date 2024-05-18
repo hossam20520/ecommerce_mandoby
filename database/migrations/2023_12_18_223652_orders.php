@@ -33,6 +33,9 @@ class Orders extends Migration
             $table->string('odoo_ref', 192)->nullable();
             $table->text('reason')->nullable();
             
+            $table->text('RWT')->nullable();
+
+            
 			$table->timestamps(6);
 			$table->softDeletes();
         });

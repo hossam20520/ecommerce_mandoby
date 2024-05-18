@@ -1,7 +1,8 @@
 //Language Anglais
 
 export default {
-    Mandobs:'MSales Rep',
+    RWT:'Accept Time',
+    Mandobs:'Drivers',
     Mandob:'Drivers',
     payment_type:'Payment Type',
     bill_image:'Bill Image',

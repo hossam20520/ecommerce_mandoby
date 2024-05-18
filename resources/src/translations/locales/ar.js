@@ -2,6 +2,7 @@
 
 
 export default {
+    RWT:'وقت الاستلام',
     status_achiv:'حالة الزيارة',
     pending_num:'لم تتم الزيارة',
     done_num:'تمت الزيارة',
