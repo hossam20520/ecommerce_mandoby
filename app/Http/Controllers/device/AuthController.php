@@ -16,7 +16,9 @@ use Intervention\Image\ImageManagerStatic as Image;
 use File;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
- 
+use GuzzleHttp\Client;
+use App\Models\Setting;
+
 
 class AuthController extends Controller
 {
@@ -195,6 +197,74 @@ class AuthController extends Controller
     }
 
 
+
+    public function SaveCustomerToOdoo($phone , $firstname , $lastname , $address , $lat , $lng  , $id  )
+    {
+
+        $setting = Setting::where('deleted_at' , '=' , null)->first();
+        $client = new Client();
+        $url = $setting->odoo_url.'/api/partner';
+        
+        $params = [
+            'query' => [
+                'phone' => $phone ,
+                'first_name' => $firstname,
+                'last_name' => $lastname ,
+                'business_name' => $firstname.' '.$lastname ,
+                'areas_id' => '',
+                'address' => $address ,
+                'email' => $phone.'@horeca.com',
+                'partner_longitude' =>$lat,
+                'partner_latitude' => $lng
+            ],
+            'headers' => [
+                'db' => $setting->db_name ,
+                'Content-Type' => 'application/json',
+                'access_token' => $setting->token_api,
+                // 'Cookie' => 'session_id=1e66bbeb32454abe43d30e9e2f4dd8aa202b920a',
+            ],
+        ];
+
+        try {
+            $response = $client->request('GET', $url, $params);
+            $body = $response->getBody();
+            $content = json_decode($body->getContents(), true);
+
+            if (isset($content['count']) && $content['count'] > 0 && isset($content['data'][0])) {
+                $id = $content['data'][0]['id'];
+                $ref = $content['data'][0]['ref'];
+
+
+
+               
+
+              User::where('id', $id)->update([
+                "code" => $ref,
+              ]);
+                // return response()->json([
+                //     'success' => true,
+                //     'id' => $id,
+                //     'ref' => $ref,
+                //     'message' => $content['data'][0]['message']
+                // ]);
+
+
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No data found'
+                ], 404);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+
     public function register(Request $request){
 
  
@@ -254,8 +324,12 @@ class AuthController extends Controller
         $role_user->user_id = $User->id;
         $role_user->role_id =  2;
         $role_user->save();
-        app('App\Http\Controllers\device\NotificationsController')->AddFcm($User ,  $request['fcm']);
         
+        app('App\Http\Controllers\device\NotificationsController')->AddFcm($User ,  $request['fcm'] , "TOKEN"  );
+        
+
+        $this->SaveCustomerToOdoo($request['phone']  ,$request['firstname'] , $request['lastname'] , $request['address'] , $request['location_lat'] , $request['location_long']  , $User->id  );
+
         return response()->json([
            
             'user'=>  $User,
