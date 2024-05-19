@@ -331,7 +331,7 @@ class AuthController extends Controller
         app('App\Http\Controllers\device\NotificationsController')->AddFcm($User ,  $request['fcm'] , "TOKEN"  );
         
 
-       return $this->SaveCustomerToOdoo($request['phone']  ,$request['firstname'] , $request['lastname'] , $request['address'] , $request['location_lat'] , $request['location_long']  , $User->id  );
+        $this->SaveCustomerToOdoo($request['phone']  ,$request['firstname'] , $request['lastname'] , $request['address'] , $request['location_lat'] , $request['location_long']  , $User->id  );
 
         return response()->json([
            
