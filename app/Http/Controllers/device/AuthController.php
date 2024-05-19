@@ -238,9 +238,9 @@ class AuthController extends Controller
 
                
 
-              User::where('id', $id)->update([
-                "code" => $ref,
-              ]);
+            //   User::where('id', $id)->update([
+            //     "code" => $ref,
+            //   ]);
                 return response()->json([
                     'success' => true,
                     'id' => $id,
@@ -287,6 +287,7 @@ class AuthController extends Controller
     
         }
 
+       return $this->SaveCustomerToOdoo($request['phone']  ,$request['firstname'] , $request['lastname'] , $request['address'] , $request['location_lat'] , $request['location_long']  ,55  );
 
      
          $username = explode("@" , $request['email']);
