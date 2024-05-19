@@ -231,22 +231,24 @@ class AuthController extends Controller
             $content = json_decode($body->getContents(), true);
 
             if (isset($content['count']) && $content['count'] > 0 && isset($content['data'][0])) {
-                $id = $content['data'][0]['id'];
+                $odoo_id = $content['data'][0]['id'];
                 $ref = $content['data'][0]['ref'];
 
 
 
                
 
-            //   User::where('id', $id)->update([
-            //     "code" => $ref,
-            //   ]);
-                return response()->json([
-                    'success' => true,
-                    'id' => $id,
-                    'ref' => $ref,
-                    'message' => $content['data'][0]['message']
-                ]);
+              User::where('id', $id)->update([
+                "code" => $odoo_id ,
+              ]);
+
+              
+                // return response()->json([
+                //     'success' => true,
+                //     'id' => $id,
+                //     'ref' => $ref,
+                //     'message' => $content['data'][0]['message']
+                // ]);
                
               
             } else {
