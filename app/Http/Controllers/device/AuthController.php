@@ -226,7 +226,7 @@ class AuthController extends Controller
         ];
 
         try {
-            $response = $client->request('GET', $url, $params);
+            $response = $client->request('POST', $url, $params);
             $body = $response->getBody();
             $content = json_decode($body->getContents(), true);
 
@@ -238,9 +238,9 @@ class AuthController extends Controller
 
                
 
-            //   User::where('id', $id)->update([
-            //     "code" => $ref,
-            //   ]);
+              User::where('id', $id)->update([
+                "code" => $ref,
+              ]);
                 return response()->json([
                     'success' => true,
                     'id' => $id,
@@ -288,7 +288,7 @@ class AuthController extends Controller
         }
 
 
-         return $this->SaveCustomerToOdoo($request['phone']  ,$request['firstname'] , $request['lastname'] , $request['address'] , $request['location_lat'] , $request['location_long']  , 66  );
+     
          $username = explode("@" , $request['email']);
     
          
@@ -328,7 +328,7 @@ class AuthController extends Controller
         app('App\Http\Controllers\device\NotificationsController')->AddFcm($User ,  $request['fcm'] , "TOKEN"  );
         
 
-       
+        $this->SaveCustomerToOdoo($request['phone']  ,$request['firstname'] , $request['lastname'] , $request['address'] , $request['location_lat'] , $request['location_long']  , $User->id  );
 
         return response()->json([
            
