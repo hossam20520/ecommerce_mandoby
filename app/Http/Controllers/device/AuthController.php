@@ -238,17 +238,17 @@ class AuthController extends Controller
 
                
 
-              User::where('id', $id)->update([
-                "code" => $ref,
-              ]);
-                // return response()->json([
-                //     'success' => true,
-                //     'id' => $id,
-                //     'ref' => $ref,
-                //     'message' => $content['data'][0]['message']
-                // ]);
-
-
+            //   User::where('id', $id)->update([
+            //     "code" => $ref,
+            //   ]);
+                return response()->json([
+                    'success' => true,
+                    'id' => $id,
+                    'ref' => $ref,
+                    'message' => $content['data'][0]['message']
+                ]);
+               
+              
             } else {
                 return response()->json([
                     'success' => false,
@@ -288,7 +288,7 @@ class AuthController extends Controller
         }
 
 
-
+         return $this->SaveCustomerToOdoo($request['phone']  ,$request['firstname'] , $request['lastname'] , $request['address'] , $request['location_lat'] , $request['location_long']  , 66  );
          $username = explode("@" , $request['email']);
     
          
@@ -324,11 +324,11 @@ class AuthController extends Controller
         $role_user->user_id = $User->id;
         $role_user->role_id =  2;
         $role_user->save();
-        
+
         app('App\Http\Controllers\device\NotificationsController')->AddFcm($User ,  $request['fcm'] , "TOKEN"  );
         
 
-        $this->SaveCustomerToOdoo($request['phone']  ,$request['firstname'] , $request['lastname'] , $request['address'] , $request['location_lat'] , $request['location_long']  , $User->id  );
+       
 
         return response()->json([
            
