@@ -127,15 +127,20 @@ class IntegrationController extends Controller
       }
       SaleDetail::insert($orderDetails);
 
-      return response()->json([
-        'message_ar' =>  "تم انشاء الاوردر",
-        'message_en' =>  "Order has been created",
-        'order_refrence' => $order->Ref, 
-        'status' => true
-          ] , 200);
+    
 
   }, 10);
+
   
+  return response()->json([
+    'message_ar' =>  "تم انشاء الاوردر",
+    'message_en' =>  "Order has been created",
+    'order_refrence' => $order->Ref, 
+    'status' => true
+      ] , 200);
+
+
+
   }
   
   public function SendProductsLines($products , $customer_id , $sale_ref){
