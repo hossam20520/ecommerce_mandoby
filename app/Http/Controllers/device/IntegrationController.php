@@ -42,7 +42,7 @@ class IntegrationController extends Controller
   public function CreateSale(Request $request){
 
 
-    \DB::transaction(function () use ($request) {
+   
 
       $currentDate = Carbon::now()->format('Y-m-d');
       $user_id = $request->user_id;
@@ -64,6 +64,26 @@ class IntegrationController extends Controller
        
             ] , 404);
       }
+
+
+
+      $data = $request['details'];
+      foreach ($data as $key => $value) {
+
+        $product  = Product::where('code' , $value['product_refrence'])->first();
+
+           
+        if(!$product){
+          return response()->json([
+            'message_ar' =>  "المنتج غير موجود من فضلك قم بالمزامنة",
+            'message_en' =>  "Product not Found, please do Sync",
+            'status' => false
+         
+              ] , 404);
+        }
+
+      }
+
 
       $settings = Setting::where('deleted_at', '=', null)->first();
       $helpers = new helpers();
@@ -91,7 +111,7 @@ class IntegrationController extends Controller
 
  
 
-      $data = $request['details'];
+       
       foreach ($data as $key => $value) {
 
         $product  = Product::where('code' , $value['product_refrence'])->first();
@@ -129,13 +149,13 @@ class IntegrationController extends Controller
 
     
 
-  }, 10);
+ 
 
-
+  
   return response()->json([
     'message_ar' =>  "تم انشاء الاوردر",
     'message_en' =>  "Order has been created",
-    
+    'order_refrence' => $order->Ref, 
     'status' => true
       ] , 200);
 
