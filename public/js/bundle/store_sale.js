@@ -1363,6 +1363,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Create_Sale: function Create_Sale() {
       var _this9 = this;
 
+      //  alert(4444)
+      // console.log(this.details);
+      // return true;
       if (this.verifiedForm()) {
         // Start the progress bar.
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();

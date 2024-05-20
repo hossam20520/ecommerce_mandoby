@@ -600,6 +600,13 @@ const routes = [
                                             component: () =>
                                                 import(/* webpackChunkName: "Orders" */"./views/app/pages/settings/tasks")
                                         },
+                                                             // sreports
+                    {
+                        name: "sreports",
+                        path: "Sreports",
+                        component: () =>
+                            import(/* webpackChunkName: "Sreports" */"./views/app/pages/settings/sreports")
+                    },
 
 
                                         

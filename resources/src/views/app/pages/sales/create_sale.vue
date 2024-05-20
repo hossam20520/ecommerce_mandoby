@@ -1261,6 +1261,12 @@ export default {
     },
     //--------------------------------- Create Sale -------------------------\\
     Create_Sale() {
+
+
+      //  alert(4444)
+      // console.log(this.details);
+
+      // return true;
       if (this.verifiedForm()) {
         // Start the progress bar.
         NProgress.start();

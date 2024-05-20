@@ -99,6 +99,10 @@ Route::get("/v1/device/ai/category/noauth", "device\HomeController@GetCategoryAi
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     
+    Route::post("/v1/odoo/order/create", "device\IntegrationController@CreateSale");
+
+
+
 
 
     Route::get("/v1/device/attendance/checkin/{type}", "device\AuthController@check_status");
@@ -420,6 +424,10 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
 
 
+    //------------------------------- Sreports--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('sreports', 'SreportsController');
+    Route::post('sreports/delete/by_selection', 'SreportsController@delete_by_selection');
 
 
     //------------------------------- Payments  Purchases --------------------------\\
