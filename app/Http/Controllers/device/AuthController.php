@@ -32,7 +32,7 @@ class AuthController extends Controller
         // Make the GET request
         $response = $client->request('GET', 'https://parseapi.back4app.com/classes/Carmodels_Car_Model_List', [
             'query' => [
-                'limit' => 8000,
+                'limit' => 11000,
             ],
             'headers' => [
                 'X-Parse-Application-Id' => 'VvJxzMb9qmUSb8LpJYBvQZJIudoHbLXbl0UAqoTf',
