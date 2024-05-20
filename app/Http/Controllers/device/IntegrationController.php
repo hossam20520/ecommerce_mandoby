@@ -9,6 +9,7 @@ use App\Models\Setting;
 use App\Models\Order;
 use App\Models\Sale;
 use App\Models\User;
+use App\Models\Product;
 use DB;
 use App\utils\helpers;
 use Carbon\Carbon;
