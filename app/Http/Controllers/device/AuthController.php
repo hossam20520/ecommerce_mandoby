@@ -18,12 +18,49 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use App\Models\Setting;
-
+ 
+ 
+use App\Models\CarModel;
 
 class AuthController extends Controller
 {
     
+    public function getCarModels()
+    {
+        $client = new Client();
 
+        // Make the GET request
+        $response = $client->request('GET', 'https://parseapi.back4app.com/classes/Carmodels_Car_Model_List', [
+            'query' => [
+                'limit' => 3,
+            ],
+            'headers' => [
+                'X-Parse-Application-Id' => 'VvJxzMb9qmUSb8LpJYBvQZJIudoHbLXbl0UAqoTf',
+                'X-Parse-REST-API-Key' => '3QJDZJOkzm2mu0BBPyJncrgUg1zJekNoRAPsGpgT',
+            ],
+        ]);
+
+        // Decode the JSON response
+        $data = json_decode($response->getBody(), true);
+
+        // Loop through the results and save each car model to the database
+        foreach ($data['results'] as $car) {
+            CarModel::updateOrCreate(
+                ['objectId' => $car['objectId']],
+                [
+                    'Year' => $car['Year'],
+                    'Make' => $car['Make'],
+                    'Model' => $car['Model'],
+                    'Category' => $car['Category'],
+                    'createdAt' => $car['createdAt'],
+                    'updatedAt' => $car['updatedAt']
+                ]
+            );
+        }
+
+        // Return the saved data as a JSON response
+        return response()->json(CarModel::all(), 200, [], JSON_PRETTY_PRINT);
+    }
     
     public function testiot(Request $request){
 

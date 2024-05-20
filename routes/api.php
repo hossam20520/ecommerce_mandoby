@@ -22,6 +22,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get("device/cars", "device\AuthController@getCarModels");
+
+
 
 Route::get('iot/test_api', 'device\AuthController@testiot');
 // Route::get('maps/view/data', 'MapsController@GetData');
