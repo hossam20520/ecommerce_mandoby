@@ -10,6 +10,8 @@ use App\Models\Order;
 use App\Models\Sale;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\SaleDetail;
+
 use DB;
 use App\utils\helpers;
 use Carbon\Carbon;
