@@ -131,11 +131,11 @@ class IntegrationController extends Controller
 
   }, 10);
 
-  
+
   return response()->json([
     'message_ar' =>  "تم انشاء الاوردر",
     'message_en' =>  "Order has been created",
-    'order_refrence' => $order->Ref, 
+    
     'status' => true
       ] , 200);
 
