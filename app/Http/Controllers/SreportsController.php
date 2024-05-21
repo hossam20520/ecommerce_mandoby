@@ -15,7 +15,7 @@ class SreportsController extends Controller
 
     public function index(Request $request)
     {
-        $this->authorizeForUser($request->user('api'), 'view', Sreport::class);
+        // $this->authorizeForUser($request->user('api'), 'view', Sreport::class);
         // How many items do you want to display.
         $perPage = $request->limit;
         $pageStart = \Request::get('page', 1);
@@ -48,7 +48,7 @@ class SreportsController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorizeForUser($request->user('api'), 'create', Sreport::class);
+        // $this->authorizeForUser($request->user('api'), 'create', Sreport::class);
 
         request()->validate([
             'ar_name' => 'required',
@@ -94,7 +94,7 @@ class SreportsController extends Controller
      public function update(Request $request, $id)
      {
  
-         $this->authorizeForUser($request->user('api'), 'update', Sreport::class);
+        //  $this->authorizeForUser($request->user('api'), 'update', Sreport::class);
  
          request()->validate([
              'ar_name' => 'required',
@@ -148,7 +148,7 @@ class SreportsController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $this->authorizeForUser($request->user('api'), 'delete', Sreport::class);
+        // $this->authorizeForUser($request->user('api'), 'delete', Sreport::class);
 
         Sreport::whereId($id)->update([
             'deleted_at' => Carbon::now(),
@@ -161,7 +161,7 @@ class SreportsController extends Controller
     public function delete_by_selection(Request $request)
     {
 
-        $this->authorizeForUser($request->user('api'), 'delete', Sreport::class);
+        // $this->authorizeForUser($request->user('api'), 'delete', Sreport::class);
 
         $selectedIds = $request->selectedIds;
         foreach ($selectedIds as $sreport_id) {

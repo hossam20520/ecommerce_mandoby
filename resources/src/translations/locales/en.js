@@ -1,6 +1,9 @@
 //Language Anglais
 
 export default {
+    done_num:'visited numbers',
+    pending_num:'pending visit',
+    allsurv:'all',
     RWT:'Accept Time',
     Mandobs:'Drivers',
     Mandob:'Drivers',

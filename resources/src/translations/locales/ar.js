@@ -2,6 +2,9 @@
 
 
 export default {
+    done_num:'عدد الزيارات',
+    pending_num:'عدد الزيارات الغير مكتملة',
+    allsurv:'الكل',
     RWT:'وقت الاستلام',
     status_achiv:'حالة الزيارة',
     pending_num:'لم تتم الزيارة',
