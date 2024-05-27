@@ -54,6 +54,15 @@ class IntegrationController extends Controller
      
     
       $product_id = $request->product_refrence;
+
+      $application_order_reference = $request->application_order_reference;
+
+      $odoo_ref = Sale::where('Ref' , $application_order_reference )->where('deleted_at' , '=' , null)->first();
+   
+
+      if($odoo_ref){
+        return true;
+      }
       
       $userC =  User::where('code' , $user_id)->first();
       if(!$userC){
