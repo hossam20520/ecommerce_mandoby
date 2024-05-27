@@ -125,12 +125,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
   
    Route::post("/v1/device/map/client/add", "device\mandob\OrdersController@addOneClient");
 
-
-
-  
-   
     
-
 
     Route::post("/v1/device/mandob/clients/add", "device\mandob\OrdersController@addClients");
     

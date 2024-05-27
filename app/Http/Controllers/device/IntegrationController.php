@@ -47,7 +47,7 @@ class IntegrationController extends Controller
       $currentDate = Carbon::now()->format('Y-m-d');
       $user_id = $request->user_id;
       $GrandTotal = $request->total;
-      $odoo_refrence = $request->odoo_refrence;
+      $odoo_refrence = $request->odoo_reference;
       $discount = $request->discount;
       $notes =  $request->notes;
       $date = $currentDate;
