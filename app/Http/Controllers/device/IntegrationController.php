@@ -61,6 +61,10 @@ class IntegrationController extends Controller
    
 
       if($odoo_ref){
+
+        Sale::where('Ref' , $odoo_ref)->update([
+          'statut'=> 'pending'
+        ]);
         return true;
       }
       
