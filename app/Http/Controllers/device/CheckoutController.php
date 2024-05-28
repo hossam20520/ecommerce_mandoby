@@ -166,10 +166,12 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
            $customer = User::where('id' ,  Auth::user()->id )->first();
 
             $order_line = array(); 
+            $total_discount = 0;
             foreach ($data['cartItems'] as $key => $value) {
                 $unit = Unit::where('id', $value['product']->unit_sale_id)->first();
                 
                 $orderDetails[] = [
+
                     'date' => Carbon::now(),
                     'sale_id' => $order->id,
                     'sale_unit_id' => $value['product']->unit_sale_id,
@@ -182,8 +184,10 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
                     'tax_method' => 1,
                     'discount' => $value->discount,
                     'discount_method' => 2,
+                    
                    ];
  
+                   $total_discount += (int)$value->discount;
                     $product_warehouse = product_warehouse::where('warehouse_id', $order->warehouse_id)
                         ->where('product_id', $value['product']->id)
                         ->first();
@@ -225,7 +229,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
              
             //     ];
  
-            app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref );
+            app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref , $total_discount);
             
             //  app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($ordlineaa , $customer->code , $sale->Ref );
 

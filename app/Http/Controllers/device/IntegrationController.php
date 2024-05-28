@@ -176,13 +176,13 @@ class IntegrationController extends Controller
 
   }
   
-  public function SendProductsLines($products , $customer_id , $sale_ref){
+  public function SendProductsLines($products , $customer_id , $sale_ref , $dicount ){
 
     $client = new Client();
 
     $setting = Setting::where('deleted_at' , '=' , null)->first();
 
-    $responseData = $client->post($setting->odoo_url.'/api/sales?order_reference='.$sale_ref.'&customer_id='.$customer_id, [
+    $responseData = $client->post($setting->odoo_url.'/api/sales?discount='.$dicount.'&order_reference='.$sale_ref.'&customer_id='.$customer_id, [
         'headers' => [
             'db' => $setting->db_name ,
             'Content-Type' => 'application/json',
