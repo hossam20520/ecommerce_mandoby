@@ -229,7 +229,7 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
              
             //     ];
  
-            app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref , $total_discount);
+            app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($order_line , $customer->code , $sale->Ref , $order->discount );
             
             //  app('App\Http\Controllers\device\IntegrationController')->SendProductsLines($ordlineaa , $customer->code , $sale->Ref );
 

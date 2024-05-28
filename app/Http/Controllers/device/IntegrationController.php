@@ -176,7 +176,7 @@ class IntegrationController extends Controller
 
   }
   
-  public function SendProductsLines($products , $customer_id , $sale_ref , $dicount ){
+  public function SendProductsLines($products , $customer_id , $sale_ref ,   $dicount   ){
 
     $client = new Client();
 
