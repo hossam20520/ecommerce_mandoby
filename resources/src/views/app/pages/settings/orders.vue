@@ -41,7 +41,7 @@
           <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button>
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
-          <b-button   v-if="currentUserPermissions.includes('Sales_add')"    @click="New_Order()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
+          <b-button    @click="New_Order()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
             <i class="i-Add"></i>
              {{ $t('Add') }}
           </b-button>
