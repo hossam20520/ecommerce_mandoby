@@ -30,9 +30,9 @@
         :styleClass="showDropdown?'tableOne table-hover vgt-table full-height':'tableOne table-hover vgt-table non-height'"
       >
         <div slot="selected-row-actions">
-          <button class="btn btn-danger btn-sm" @click="delete_by_selected()">{{$t('Del')}}</button>
+          <button class="btn btn-danger btn-sm" v-if="currentUserPermissions.includes('Sales_delete')"   @click="delete_by_selected()">{{$t('Del')}}</button>
 
-          <button class="btn btn-success btn-sm" @click="openModel()">{{$t('assign_to_mandob')}}</button>
+          <button class="btn btn-success btn-sm" v-if="currentUserPermissions.includes('Sales_add')"  @click="openModel()">{{$t('assign_to_mandob')}}</button>
 
         </div>
 
@@ -317,7 +317,7 @@
                         <i class="i-Speach-Bubble"></i>
                       </span>
                       <span
-                        v-if="currentUserPermissions.includes('Sales_delete')"
+                        v-if="currentUserPermissions.includes('payment_sales_delete')"
                         title="Delete"
                         class="btn btn-icon btn-danger btn-sm"
                         @click="Remove_Payment(payment.id)"

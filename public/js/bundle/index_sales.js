@@ -2271,31 +2271,35 @@ var render = function () {
                       slot: "selected-row-actions",
                     },
                     [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function ($event) {
-                              return _vm.delete_by_selected()
+                      _vm.currentUserPermissions.includes("Sales_delete")
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger btn-sm",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.delete_by_selected()
+                                },
+                              },
                             },
-                          },
-                        },
-                        [_vm._v(_vm._s(_vm.$t("Del")))]
-                      ),
+                            [_vm._v(_vm._s(_vm.$t("Del")))]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success btn-sm",
-                          on: {
-                            click: function ($event) {
-                              return _vm.openModel()
+                      _vm.currentUserPermissions.includes("Sales_add")
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.openModel()
+                                },
+                              },
                             },
-                          },
-                        },
-                        [_vm._v(_vm._s(_vm.$t("assign_to_mandob")))]
-                      ),
+                            [_vm._v(_vm._s(_vm.$t("assign_to_mandob")))]
+                          )
+                        : _vm._e(),
                     ]
                   ),
                   _vm._v(" "),
@@ -2859,7 +2863,7 @@ var render = function () {
                                       ),
                                       _vm._v(" "),
                                       _vm.currentUserPermissions.includes(
-                                        "Sales_delete"
+                                        "payment_sales_delete"
                                       )
                                         ? _c(
                                             "span",
