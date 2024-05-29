@@ -1336,18 +1336,20 @@ var render = function () {
                       slot: "selected-row-actions",
                     },
                     [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function ($event) {
-                              return _vm.delete_by_selected()
+                      _vm.currentUserPermissions.includes("Sales_delete")
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger btn-sm",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.delete_by_selected()
+                                },
+                              },
                             },
-                          },
-                        },
-                        [_vm._v(" " + _vm._s(_vm.$t("Del")))]
-                      ),
+                            [_vm._v(" " + _vm._s(_vm.$t("Del")))]
+                          )
+                        : _vm._e(),
                     ]
                   ),
                   _vm._v(" "),

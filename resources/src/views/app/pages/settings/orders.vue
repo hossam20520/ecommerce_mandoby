@@ -38,7 +38,7 @@
         styleClass="table-hover tableOne vgt-table"
       >
         <div slot="selected-row-actions">
-          <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button>
+          <button class="btn btn-danger btn-sm"   v-if="currentUserPermissions.includes('Sales_delete')" @click="delete_by_selected()"> {{ $t('Del') }}</button>
         </div>
         <div slot="table-actions" class="mt-2 mb-3">
           <b-button  v-if="currentUserPermissions.includes('Sales_add')"   @click="New_Order()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
