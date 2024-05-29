@@ -317,7 +317,7 @@
                         <i class="i-Speach-Bubble"></i>
                       </span>
                       <span
-                        v-if="currentUserPermissions.includes('payment_sales_delete')"
+                        v-if="currentUserPermissions.includes('Sales_delete')"
                         title="Delete"
                         class="btn btn-icon btn-danger btn-sm"
                         @click="Remove_Payment(payment.id)"

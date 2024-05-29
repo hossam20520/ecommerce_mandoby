@@ -2859,7 +2859,7 @@ var render = function () {
                                       ),
                                       _vm._v(" "),
                                       _vm.currentUserPermissions.includes(
-                                        "payment_sales_delete"
+                                        "Sales_delete"
                                       )
                                         ? _c(
                                             "span",
