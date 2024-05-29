@@ -1351,26 +1351,30 @@ var render = function () {
                       slot: "table-actions",
                     },
                     [
-                      _c(
-                        "b-button",
-                        {
-                          staticClass: "btn-rounded",
-                          attrs: { variant: "btn btn-primary btn-icon m-1" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.New_Order()
+                      _vm.currentUserPermissions.includes("Sales_add")
+                        ? _c(
+                            "b-button",
+                            {
+                              staticClass: "btn-rounded",
+                              attrs: {
+                                variant: "btn btn-primary btn-icon m-1",
+                              },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.New_Order()
+                                },
+                              },
                             },
-                          },
-                        },
-                        [
-                          _c("i", { staticClass: "i-Add" }),
-                          _vm._v(
-                            "\n           " +
-                              _vm._s(_vm.$t("Add")) +
-                              "\n        "
-                          ),
-                        ]
-                      ),
+                            [
+                              _c("i", { staticClass: "i-Add" }),
+                              _vm._v(
+                                "\n           " +
+                                  _vm._s(_vm.$t("Add")) +
+                                  "\n        "
+                              ),
+                            ]
+                          )
+                        : _vm._e(),
                     ],
                     1
                   ),
