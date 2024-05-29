@@ -95,14 +95,14 @@
                 </b-dropdown-item>
 
                 <b-dropdown-item
-                  v-if="currentUserPermissions.includes('payment_sales_view')"
+                  v-if="currentUserPermissions.includes('Sales_view')"
                   @click="Show_Payments(props.row.id , props.row)">
                   <i class="nav-icon i-Money-Bag font-weight-bold mr-2"></i>
                   {{$t('ShowPayment')}}
                 </b-dropdown-item>
 
                 <b-dropdown-item
-                  v-if="currentUserPermissions.includes('payment_sales_add')"
+                  v-if="currentUserPermissions.includes('Sales_add')"
                   @click="New_Payment(props.row)"
                 >
                   <i class="nav-icon i-Add font-weight-bold mr-2"></i>

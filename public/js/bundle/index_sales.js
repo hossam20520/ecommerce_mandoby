@@ -2026,7 +2026,7 @@ var render = function () {
                                           : _vm._e(),
                                         _vm._v(" "),
                                         _vm.currentUserPermissions.includes(
-                                          "payment_sales_view"
+                                          "Sales_view"
                                         )
                                           ? _c(
                                               "b-dropdown-item",
@@ -2057,7 +2057,7 @@ var render = function () {
                                           : _vm._e(),
                                         _vm._v(" "),
                                         _vm.currentUserPermissions.includes(
-                                          "payment_sales_add"
+                                          "Sales_add"
                                         )
                                           ? _c(
                                               "b-dropdown-item",

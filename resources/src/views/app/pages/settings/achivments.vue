@@ -337,6 +337,7 @@ export default {
       this.$bvModal.show("New_mandob");
     },
 
+
     //---------------------------------------- Get All mandobs-----------------\
     Get_Mandobs(page) {
       // Start the progress bar.
