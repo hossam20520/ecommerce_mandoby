@@ -1,9 +1,15 @@
 <template>
-  <div class="main-content">
+  <div class="main-content" >
+
+
+
+
+  
     <breadcumb :page="$t('CustomerManagement')" :folder="$t('Users')"/>
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
     <div v-else>
-      <vue-good-table
+      <vue-good-table 
+       id="print_Invoice"
         mode="remote"
         :columns="columns"
         :totalRows="totalRows"
@@ -46,7 +52,10 @@
           </b-button>
 
 
-
+          <button @click="print()" class="btn btn-warning btn-icon ripple btn-sm">
+            <i class="i-Billing"></i>
+            {{$t('print')}}
+          </button>
 
         </div>
 
@@ -113,6 +122,9 @@
               <b-form-input label="Email" :placeholder="$t('SearchByEmail')" v-model="Filter_Email"></b-form-input>
             </b-form-group>
           </b-col>
+
+
+
 
           <!-- Status  -->
           <b-col md="12">
@@ -512,6 +524,15 @@ export default {
           tdClass: "text-left",
           thClass: "text-left"
         },
+
+       {
+          label: this.$t("sales_count"),
+          field: "sales_count",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+
         {
           label: this.$t("Email"),
           field: "email",
@@ -546,6 +567,20 @@ export default {
   },
 
   methods: {
+
+            print() {
+      var divContents = document.getElementById("print_Invoice").innerHTML;
+      var a = window.open("", "", "height=500, width=500");
+      a.document.write(
+        '<link rel="stylesheet" href="/assets_setup/css/bootstrap.css"><html>'
+      );
+      a.document.write("<body >");
+      a.document.write(divContents);
+      a.document.write("</body></html>");
+      a.document.close();
+      a.print();
+    },
+    
     //------------- Submit Validation Create & Edit User
     Submit_User() {
       this.$refs.Create_User.validate().then(success => {

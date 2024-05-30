@@ -779,6 +779,18 @@
 
 
 
+         <!-- <li
+            class="nav-item"
+          
+          >
+            <router-link tag="a" class to="/app/settings/Reportsales">
+              <i class="nav-icon i-Bookmark"></i>
+              <span class="item-name">{{   $t('Reportsale') }}</span>
+            </router-link>
+          </li> -->
+
+
+
           
           <li
             class="nav-item"

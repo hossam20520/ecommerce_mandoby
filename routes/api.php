@@ -99,6 +99,9 @@ Route::get("/v1/device/ai/category/noauth", "device\HomeController@GetCategoryAi
 
 
 
+
+
+
 Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     
@@ -295,6 +298,14 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get('Get_Clients_Without_Paginate', 'ClientController@Get_Clients_Without_Paginate');
     Route::post('clients/delete/by_selection', 'ClientController@delete_by_selection');
 
+
+
+    
+    //------------------------------- Reportsales--------------------------\
+    //------------------------------------------------------------------\
+    Route::resource('Reportsales', 'ReportsalesController');
+    Route::post('Reportsales/delete/by_selection', 'ReportsalesController@delete_by_selection');
+    
 
     //------------------------------- Providers --------------------------\\
     //--------------------------------------------------------------------\\

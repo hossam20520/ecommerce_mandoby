@@ -453,6 +453,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -529,6 +541,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tdClass: "text-left",
         thClass: "text-left"
       }, {
+        label: this.$t("sales_count"),
+        field: "sales_count",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("Email"),
         field: "email",
         tdClass: "text-left",
@@ -556,6 +573,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   methods: {
+    print: function print() {
+      var divContents = document.getElementById("print_Invoice").innerHTML;
+      var a = window.open("", "", "height=500, width=500");
+      a.document.write('<link rel="stylesheet" href="/assets_setup/css/bootstrap.css"><html>');
+      a.document.write("<body >");
+      a.document.write(divContents);
+      a.document.write("</body></html>");
+      a.document.close();
+      a.print();
+    },
     //------------- Submit Validation Create & Edit User
     Submit_User: function Submit_User() {
       var _this = this;
@@ -996,6 +1023,7 @@ var render = function () {
                 "vue-good-table",
                 {
                   attrs: {
+                    id: "print_Invoice",
                     mode: "remote",
                     columns: _vm.columns,
                     totalRows: _vm.totalRows,
@@ -1245,6 +1273,26 @@ var render = function () {
                             ]
                           )
                         : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning btn-icon ripple btn-sm",
+                          on: {
+                            click: function ($event) {
+                              return _vm.print()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-Billing" }),
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.$t("print")) +
+                              "\n        "
+                          ),
+                        ]
+                      ),
                     ],
                     1
                   ),

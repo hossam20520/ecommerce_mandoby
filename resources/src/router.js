@@ -608,7 +608,13 @@ const routes = [
                             import(/* webpackChunkName: "Sreports" */"./views/app/pages/settings/sreports")
                     },
 
-
+              // Reportsales
+              {
+                name: "Reportsales",
+                path: "Reportsales",
+                component: () =>
+                    import(/* webpackChunkName: "Reportsales" */"./views/app/pages/settings/Reportsales")
+            },
                                         
                           // maps
                     {
