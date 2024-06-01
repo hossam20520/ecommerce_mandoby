@@ -91,6 +91,11 @@ if ($installed === false) {
 } else {
 
     
+    Route::get("account-delete",  function(){
+
+        return view('delete');
+    });
+    
     Route::get('/info' ,    function () {
         $gdInfo = gd_info();
 
