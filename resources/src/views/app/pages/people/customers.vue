@@ -568,7 +568,7 @@ export default {
 
   methods: {
 
-            print() {
+     print() {
       var divContents = document.getElementById("print_Invoice").innerHTML;
       var a = window.open("", "", "height=500, width=500");
       a.document.write(

@@ -51,7 +51,7 @@ Route::get("/v1/device/version/{version}", "device\AuthController@version");
 
 
 Route::get("/v1/device/version/survey/{version}", "device\AuthController@versionSurvey");
-
+Route::get("/v1/device/version/horeca/{version}", "device\AuthController@versionHoreca");
 
 // device/products/category?SortField=id&SortType=desc&search=&limit=6&page=1&category_id=1
 
