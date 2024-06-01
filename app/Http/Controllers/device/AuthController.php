@@ -555,7 +555,7 @@ class AuthController extends Controller
     
     public function versionHoreca(Request $request , $version){
            
-        $versaionfromDB = '3.1';
+        $versaionfromDB = '2.0';
         $urlDB = 'https://drive.google.com/drive/folders/1rp2eWbM-3XQnn4UABk0-V6VwR3f0TlFp?usp=sharing';
         if($versaionfromDB == $version){
             return response()->json(['version' => $version ,  'needupdate'=> false , 'message'=> "hello" , 'url' => 'url' ], 200);
@@ -566,7 +566,7 @@ class AuthController extends Controller
        
     }
 
-    
+
     public function versionSurvey(Request $request , $version){
            
         $versaionfromDB = '3.1';
