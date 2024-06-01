@@ -58,9 +58,9 @@
   <h1>Delete Account</h1>
   <p>Please send a message to our support team at and tell us that you want Delete account
   
-  <a href="mailto:jadtech2@gmail.com" class="email-link">jadtech2@gmail.com</a>.</p>
+  <a href="mailto:Info@horecasmart.com " class="email-link">Info@horecasmart.com </a>.</p>
   
-<center>  <span>We will permanently delete your account within 90 days.</span> </center>
+<center>  <span>We will permanently delete your account within 30 days.</span> </center>
 </div>
 
 </body>
