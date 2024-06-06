@@ -326,6 +326,15 @@ class AuthController extends Controller
     
         }
 
+         $email =  $request['email'];
+
+        if(   $request['email'] == "Empty"){
+            $emaill =  $request['phone'].'@horeca.com';
+         }else{
+            $emaill = $request['email'];
+         }
+
+
     //    return $this->SaveCustomerToOdoo($request['phone']  ,$request['firstname'] , $request['lastname'] , $request['address'] , $request['location_lat'] , $request['location_long']  ,55  );
 
      
@@ -341,7 +350,7 @@ class AuthController extends Controller
         $User->location_long = $request['location_long'];
         $User->address = $request['address'];
  
-        
+      
         $User->firstname = $request['firstname'];
         $User->lastname  = $request['lastname'];
         $User->username  = $username[0];
