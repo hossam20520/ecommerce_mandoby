@@ -211,6 +211,13 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
                     
             }
 
+
+             $address = $request['address'];
+             
+             User::where('id' , Auth::user()->id)->update([
+                'address' =>  $address
+             ]);
+
             SaleDetail::insert($orderDetails);
             $sale = Sale::findOrFail($order->id);
     
