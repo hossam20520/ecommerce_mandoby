@@ -404,6 +404,14 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
 
             $current_time = Carbon::now()->format('h:i A');
 
+
+            $time1Carbon = Carbon::createFromFormat('h:i A', $order->start_time);
+            $time2Carbon = Carbon::createFromFormat('h:i A',  $current_time);
+
+ 
+             $diffInMinutes = $time1Carbon->diffInMinutes($time2Carbon);
+
+
             $order->update([
                'paid_cash'=> $total_paid,
                "payment_type" => $pyamentType,
@@ -412,6 +420,7 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
                'location_lat'=>  $request['lat']  ,
                'location_long'=>  $request['lng'] ,
                'end_time'=> $current_time,
+               'delivery_time' => $diffInMinutes
                 
             ]);
 
