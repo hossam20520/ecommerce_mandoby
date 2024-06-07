@@ -9,7 +9,7 @@ use App\Models\Sale;
 use App\Models\Nclient;
 use App\Models\Map;
 use App\Models\Task;
-
+use App\Models\User;
 use App\utils\helpers;
 use Carbon\Carbon;
 use App\Models\PaymentSale;
@@ -285,6 +285,30 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
         ]);
     }
 
+
+
+    public function updateArriveTime(Request $request , $id){  
+
+        // $order =  Order::where('order_id' ,  $id )->where('user_id' , Auth::user()->id)->first();
+
+        $current_time = Carbon::now()->format('h:i A');
+
+        
+        $current_date = Carbon::now()->format('d-m-Y');
+        Order::where('order_id' ,  $id )->where('user_id' , Auth::user()->id)->update([
+            'start_time'=>  $current_time,
+            'CN_date'  => $current_date 
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'id' => 0 
+        ]);
+    }
+
+
+    
+
     public function getNumberOrder()
     {
         $last = DB::table('payment_sales')->latest('id')->first();
@@ -323,6 +347,15 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
            $pyamentType = "Bill";  
            $Reglement = "others";
         }
+
+
+            
+        // User::where('id' , Auth::user()->id)->update([
+        //     'location_lat'=>  $request['lat'] ,
+        //     'location_long'=>  $request['lng'] ,
+        //     'updated_location' =>  1,
+        // ]);
+        
         // Cash
        $order =  Order::where('order_id' ,  $request['sale_id'] )->where('user_id' , Auth::user()->id)->first();
   
@@ -368,13 +401,22 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
             }
 
 
+            $current_time = Carbon::now()->format('h:i A');
+
             $order->update([
                'paid_cash'=> $total_paid,
                "payment_type" => $pyamentType,
                'status' => "completed",
                'reason' => $reason,
-
+               'location_lat'=>  $request['lat']  ,
+               'location_long'=>  $request['lng'] ,
+               'end_time'=> $current_time,
+                
             ]);
+
+
+
+
             
             $sale->update([
                 'statut' => "completed",

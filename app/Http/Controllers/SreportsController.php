@@ -17,29 +17,30 @@ class SreportsController extends Controller
     {
         // $this->authorizeForUser($request->user('api'), 'view', Sreport::class);
         // How many items do you want to display.
-        $perPage = $request->limit;
-        $pageStart = \Request::get('page', 1);
-        // Start displaying items from this number;
-        $offSet = ($pageStart * $perPage) - $perPage;
-        $order = $request->SortField;
-        $dir = $request->SortType;
-        $helpers = new helpers();
+        $id = $request->id;
+        $from = $request->from;
+        $to = $request->to;
 
-        $sreports = Sreport::where('deleted_at', '=', null)->where(function ($query) use ($request) {
-                return $query->when($request->filled('search'), function ($query) use ($request) {
-                    return $query->where('ar_name', 'LIKE', "%{$request->search}%")
-                        ->orWhere('en_name', 'LIKE', "%{$request->search}%");
-                });
-            });
-        $totalRows = $sreports->count();
-        $sreports = $sreports->offset($offSet)
-            ->limit($perPage)
-            ->orderBy($order, $dir)
-            ->get();
 
+        $sreports =  array(
+            'attendace_date'=> "25-10-2024",
+            'attendace_time'=> "10:30 AM",
+            'l_attendace_date'=> "25-10-2024",
+            'l_attendace_time'=> "10:30 PM",
+            'accept_data_storage'=> "1-6-2024",
+            'accept_time_storage'=> "10 PM",
+            'arrive_date_client'=> "1-6-2024",
+            'arrive_time_client'=> "10 PM",
+            'leaving_date_client'=> "1-6-2024",
+            'leaving_time_client'=> "10 PM",
+            'total_orders'=> 10,
+            'total_cost'=> 500,
+            'total_collected'=> 400,
+        );
+         
         return response()->json([
             'sreports' => $sreports,
-            'totalRows' => $totalRows,
+           
         ]);
 
     }

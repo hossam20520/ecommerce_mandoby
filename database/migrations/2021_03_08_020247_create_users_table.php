@@ -34,6 +34,8 @@ class CreateUsersTable extends Migration {
 			$table->integer('role_id');
 			$table->string('code')->nullable();
 			$table->boolean('statut')->default(1);
+
+			$table->boolean('updated_location')->default(0);
 			
 			$table->string('from_odoo')->nullable()->default("no");
 			$table->string('area_id')->nullable();

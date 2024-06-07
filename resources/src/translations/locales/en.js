@@ -1,6 +1,17 @@
 //Language Anglais
 
 export default {
+    attendace_date:'تاريخ الحضور',
+    Attencdance_leaving_date:'تاريخ الانصراف',
+    accept_data_storage:'تاريخ الاستلام من المخزن',
+    arrive_date_client:'تاريخ الوصول عند العميل',
+    leaving_date_client:'تاريخ الانصراف من عند العميل',
+    total_orders:'اجمالي عدد الطلبات',
+    total_cost:'اجمالي تكلفة الطلبات',
+    total_collected:'اجمالي المحصل',
+ 
+
+    
     done_num:'visited numbers',
     pending_num:'pending visit',
     allsurv:'all',

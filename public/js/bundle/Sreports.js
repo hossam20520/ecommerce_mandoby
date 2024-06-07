@@ -160,6 +160,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -185,12 +196,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       editmode: false,
       sreports: [],
       limit: "10",
-      sreport: {
-        id: "",
-        ar_name: "",
-        en_name: "",
-        image: ""
-      }
+      from: "",
+      to: "",
+      sreport: {}
     };
   },
   computed: {
@@ -357,10 +365,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
 
       // Start the progress bar.
+      var id = this.$route.params.id;
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("sreports?page=" + page + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
-        _this4.sreports = response.data.sreports;
+      axios.get("sreports?id=" + id + "&from=" + this.from + "&to=" + this.to).then(function (response) {
+        _this4.sreport = response.data.sreports;
         _this4.totalRows = response.data.totalRows; // Complete the animation of theprogress bar.
 
         nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
@@ -542,179 +551,139 @@ var render = function () {
             { staticClass: "wrapper" },
             [
               _c(
-                "vue-good-table",
-                {
-                  attrs: {
-                    mode: "remote",
-                    columns: _vm.columns,
-                    totalRows: _vm.totalRows,
-                    rows: _vm.sreports,
-                    "search-options": {
-                      enabled: true,
-                      placeholder: _vm.$t("Search_this_table"),
-                    },
-                    "select-options": {
-                      enabled: true,
-                      clearSelectionText: "",
-                    },
-                    "pagination-options": {
-                      enabled: true,
-                      mode: "records",
-                      nextLabel: "next",
-                      prevLabel: "prev",
-                    },
-                    styleClass: "table-hover tableOne vgt-table",
-                  },
-                  on: {
-                    "on-page-change": _vm.onPageChange,
-                    "on-per-page-change": _vm.onPerPageChange,
-                    "on-sort-change": _vm.onSortChange,
-                    "on-search": _vm.onSearch,
-                    "on-selected-rows-change": _vm.selectionChanged,
-                  },
-                  scopedSlots: _vm._u(
-                    [
-                      {
-                        key: "table-row",
-                        fn: function (props) {
-                          return [
-                            props.column.field == "actions"
-                              ? _c("span", [
-                                  _c(
-                                    "a",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true },
-                                        },
-                                      ],
-                                      attrs: { title: "Edit" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.Edit_Sreport(props.row)
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "i-Edit text-25 text-success",
-                                      }),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true },
-                                        },
-                                      ],
-                                      attrs: { title: "Delete" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.Delete_Sreport(
-                                            props.row.id
-                                          )
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "i-Close-Window text-25 text-danger",
-                                      }),
-                                    ]
-                                  ),
-                                ])
-                              : props.column.field == "image"
-                              ? _c(
-                                  "span",
-                                  [
-                                    _c("b-img", {
-                                      attrs: {
-                                        thumbnail: "",
-                                        height: "50",
-                                        width: "50",
-                                        fluid: "",
-                                        src:
-                                          "/images/sreports/" + props.row.image,
-                                        alt: "image",
-                                      },
-                                    }),
-                                  ],
-                                  1
-                                )
-                              : _vm._e(),
-                          ]
-                        },
-                      },
-                    ],
-                    null,
-                    false,
-                    444269143
-                  ),
-                },
+                "b-card-body",
                 [
                   _c(
-                    "div",
-                    {
-                      attrs: { slot: "selected-row-actions" },
-                      slot: "selected-row-actions",
-                    },
+                    "b-row",
+                    { attrs: { id: "print_product" } },
                     [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-sm",
-                          on: {
-                            click: function ($event) {
-                              return _vm.delete_by_selected()
-                            },
+                      _c("b-col", { attrs: { md: "8" } }, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "table table-hover table-bordered table-md",
                           },
-                        },
-                        [_vm._v(" " + _vm._s(_vm.$t("Del")))]
-                      ),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "mt-2 mb-3",
-                      attrs: { slot: "table-actions" },
-                      slot: "table-actions",
-                    },
-                    [
-                      _c(
-                        "b-button",
-                        {
-                          staticClass: "btn-rounded",
-                          attrs: { variant: "btn btn-primary btn-icon m-1" },
-                          on: {
-                            click: function ($event) {
-                              return _vm.New_Sreport()
-                            },
-                          },
-                        },
-                        [
-                          _c("i", { staticClass: "i-Add" }),
-                          _vm._v(
-                            "\n           " +
-                              _vm._s(_vm.$t("Add")) +
-                              "\n        "
-                          ),
-                        ]
-                      ),
+                          [
+                            _c("tbody", [
+                              _c("tr", [
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.$t("attendace_date"))),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(_vm._s(_vm.sreport.attendace_date)),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(_vm._s(_vm.sreport.attendace_time)),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(_vm.$t("Attencdance_leaving_date"))
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(_vm._s(_vm.sreport.l_attendace_date)),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(_vm._s(_vm.sreport.l_attendace_time)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.$t("accept_data_storage"))),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    _vm._s(_vm.sreport.accept_data_storage)
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    _vm._s(_vm.sreport.accept_time_storage)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.$t("arrive_date_client"))),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    _vm._s(_vm.sreport.arrive_date_client)
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    _vm._s(_vm.sreport.arrive_time_client)
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.$t("leaving_date_client"))),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    _vm._s(_vm.sreport.leaving_date_client)
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(
+                                    _vm._s(_vm.sreport.leaving_time_client)
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.$t("total_orders"))),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(_vm._s(_vm.sreport.total_orders)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.$t("total_cost"))),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(_vm._s(_vm.sreport.total_cost)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.$t("total_collected"))),
+                                ]),
+                                _vm._v(" "),
+                                _c("th", [
+                                  _vm._v(_vm._s(_vm.sreport.total_collected)),
+                                ]),
+                              ]),
+                            ]),
+                          ]
+                        ),
+                      ]),
                     ],
                     1
                   ),
-                ]
+                ],
+                1
               ),
             ],
             1

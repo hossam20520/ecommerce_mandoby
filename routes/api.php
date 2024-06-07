@@ -107,9 +107,9 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     
     Route::post("/v1/odoo/order/create", "device\IntegrationController@CreateSale");
 
+    Route::post("device/update/reciving/{id}", "device\mandob\OrdersController@updateArriveTime");
 
-
-
+    
 
     Route::get("/v1/device/attendance/checkin/{type}", "device\AuthController@check_status");
 

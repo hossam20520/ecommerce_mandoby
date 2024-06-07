@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'firstname', 'area_name' , 'from_odoo' ,   'bussiness_type' ,  'location_lat' ,  'location_long' , 'address' , 'bussiness_name',
-         'lastname', 'username', 'email', 'password', 'phone', 'statut', 'avatar', 'role_id', 'code', 'area_id'
+         'lastname', 'username', 'email', 'password', 'phone', 'statut', 'avatar', 'role_id', 'code', 'area_id' , 'updated_location'
          
     ];
 

@@ -76,8 +76,8 @@ public function getCategoryID($id){
                        if(!$user_o){
                         // $user_n  = new User;
                         $User = new User();
-                        $User->firstname = ($customer['ar_name'] !== null) ? $customer['ar_name'] :  $customer['name']; 
-                        $User->lastname  =($customer['en_name'] !== null) ? $customer['en_name'] :  $customer['name']; 
+                        $User->firstname = ($customer['name'] !== null) ? $customer['name'] :  $customer['name']; 
+                        $User->lastname  =($customer['name'] !== null) ? $customer['name'] :  $customer['name']; 
                         $User->username  = $customer['phone'];
                         $User->email         = $emaiil;
                         $User->phone         = "0".$customer['phone'];
@@ -113,10 +113,10 @@ public function getCategoryID($id){
                            
                             // 'email' =>  $emaiil,
                           
-                            'phone' => "0".$customer['phone'],
-                            'location_lat' => $customer['partner_latitude'],
-                            'location_long' => $customer['partner_longitude'],
-                            'address' => isset($customer['street']) ? $customer['street'] : "Empty",
+                            // 'phone' => "0".$customer['phone'],
+                            // 'location_lat' => $customer['partner_latitude'],
+                            // 'location_long' => $customer['partner_longitude'],
+                            // 'address' => isset($customer['street']) ? $customer['street'] : "Empty",
                             // Add more fields as needed
                         ]);
 

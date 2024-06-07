@@ -603,7 +603,7 @@ const routes = [
                                                              // sreports
                     {
                         name: "sreports",
-                        path: "Sreports",
+                        path: "Sreports/:id",
                         component: () =>
                             import(/* webpackChunkName: "Sreports" */"./views/app/pages/settings/sreports")
                     },

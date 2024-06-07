@@ -35,6 +35,10 @@ class Orders extends Migration
             
             $table->text('RWT')->nullable();
 
+            $table->text('location_long')->nullable();
+            $table->text('location_lat')->nullable();
+
+     
             
 			$table->timestamps(6);
 			$table->softDeletes();

@@ -9,7 +9,15 @@ class Order extends Model
 {
     protected $table = 'orders';
     protected $fillable = [
-        'order_id' ,'odoo_ref', 'RWT',  'reason', 'paid_cash'  , 'total' , 'payment_type'  , 'image' , 'returned_items'    , 'start_time'  ,  'end_time'  , 'received_time_warehouse','delivery_time' , 'status' , 'user_id','user_id_action'
+        'order_id' ,'odoo_ref', 'RWT',  'reason',
+         'paid_cash'  , 'total' ,
+          'payment_type'  , 'image' , 
+          'returned_items'    , 'start_time'  ,
+            'end_time'  , 'received_time_warehouse',
+            'delivery_time' , 'status' , 'user_id',
+            'user_id_action',
+            'location_long',
+            'location_lat'
       ];
      
       public function order()

@@ -5,63 +5,74 @@
 
     <div v-if="isLoading" class="loading_page spinner spinner-primary mr-3"></div>
     <b-card class="wrapper" v-if="!isLoading">
-      <vue-good-table
-        mode="remote"
-        :columns="columns"
-        :totalRows="totalRows"
-        :rows="sreports"
-        @on-page-change="onPageChange"
-        @on-per-page-change="onPerPageChange"
-        @on-sort-change="onSortChange"
-        @on-search="onSearch"
-        :search-options="{
-        enabled: true,
-        placeholder: $t('Search_this_table'),  
-      }"
-        :select-options="{ 
-          enabled: true ,
-          clearSelectionText: '',
-        }"
-        @on-selected-rows-change="selectionChanged"
-        :pagination-options="{
-        enabled: true,
-        mode: 'records',
-        nextLabel: 'next',
-        prevLabel: 'prev',
-      }"
-        styleClass="table-hover tableOne vgt-table"
-      >
-        <div slot="selected-row-actions">
-          <button class="btn btn-danger btn-sm" @click="delete_by_selected()"> {{ $t('Del') }}</button>
-        </div>
-        <div slot="table-actions" class="mt-2 mb-3">
-          <b-button @click="New_Sreport()" class="btn-rounded" variant="btn btn-primary btn-icon m-1">
-            <i class="i-Add"></i>
-             {{ $t('Add') }}
-          </b-button>
-        </div>
 
-        <template slot="table-row" slot-scope="props">
-          <span v-if="props.column.field == 'actions'">
-            <a @click="Edit_Sreport(props.row)" title="Edit" v-b-tooltip.hover>
-              <i class="i-Edit text-25 text-success"></i>
-            </a>
-            <a title="Delete" v-b-tooltip.hover @click="Delete_Sreport(props.row.id)">
-              <i class="i-Close-Window text-25 text-danger"></i>
-            </a>
-          </span>
-          <span v-else-if="props.column.field == 'image'">
-            <b-img
-              thumbnail
-              height="50"
-              width="50"
-              fluid
-              :src="'/images/sreports/' + props.row.image"
-              alt="image"
-            ></b-img>
-          </span>
-        </template>
-      </vue-good-table>
+  <b-card-body>
+        <b-row id="print_product">
+       
+        <b-col md="8">
+            <table class="table table-hover table-bordered table-md">
+              <tbody>
+                 <tr>
+                  <td>{{$t('attendace_date')}}</td>
+                  <th>{{sreport.attendace_date}}</th>
+                  <th>{{sreport.attendace_time}}</th>
+
+                  <td>{{$t('Attencdance_leaving_date')}}</td>
+
+                  <th>{{sreport.l_attendace_date}}</th>
+                  <th>{{sreport.l_attendace_time}}</th>
+                 </tr>
+
+
+
+                   <tr>
+                       <td>{{$t('accept_data_storage')}}</td>
+                       <th>{{sreport.accept_data_storage}}</th>
+                       <th>{{sreport.accept_time_storage}}</th>
+                   </tr>
+
+
+
+                  <tr>
+                         <td>{{$t('arrive_date_client')}}</td>
+                          <th>{{sreport.arrive_date_client}}</th>
+                          <th>{{sreport.arrive_time_client}}</th>
+
+                          <td>{{$t('leaving_date_client')}}</td>
+                          <th>{{sreport.leaving_date_client}}</th>
+                          <th>{{sreport.leaving_time_client}}</th>
+
+                   </tr>
+
+
+
+
+                      <tr>
+                       <td>{{$t('total_orders')}}</td>
+                       <th>{{sreport.total_orders}}</th>
+                      </tr>
+
+
+                     <tr>
+                       <td>{{$t('total_cost')}}</td>
+                       <th>{{sreport.total_cost}}</th>
+                      </tr>
+
+                        <tr>
+                       <td>{{$t('total_collected')}}</td>
+                       <th>{{sreport.total_collected}}</th>
+                      </tr>
+
+                </tbody>
+                </table>
+                </b-col>
+
+          </b-row>
+
+          </b-card-body>
+
+
+
     </b-card>
 
     <validation-observer ref="Create_sreport">
@@ -166,11 +177,11 @@ export default {
       editmode: false,
       sreports: [],
       limit: "10",
+        from:"",
+        to:"",
       sreport: {
-        id: "",
-        ar_name: "",
-        en_name: "",
-        image: ""
+   
+ 
       }
     };
   },
@@ -320,23 +331,20 @@ export default {
     //---------------------------------------- Get All sreports-----------------\
     Get_Sreports(page) {
       // Start the progress bar.
+       let id = this.$route.params.id;
       NProgress.start();
       NProgress.set(0.1);
       axios
         .get(
-          "sreports?page=" +
-            page +
-            "&SortField=" +
-            this.serverParams.sort.field +
-            "&SortType=" +
-            this.serverParams.sort.type +
-            "&search=" +
-            this.search +
-            "&limit=" +
-            this.limit
+          "sreports?id=" +
+             id +
+            "&from=" +
+            this.from  +
+            "&to=" +
+            this.to  
         )
         .then(response => {
-          this.sreports = response.data.sreports;
+          this.sreport  = response.data.sreports;
           this.totalRows = response.data.totalRows;
 
           // Complete the animation of theprogress bar.
