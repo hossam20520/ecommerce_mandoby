@@ -294,6 +294,7 @@ return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 20
         $current_time = Carbon::now()->format('h:i A');
 
         
+        
         $current_date = Carbon::now()->format('d-m-Y');
         Order::where('order_id' ,  $id )->where('user_id' , Auth::user()->id)->update([
             'start_time'=>  $current_time,
