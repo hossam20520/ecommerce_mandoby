@@ -37,7 +37,7 @@ class Orders extends Migration
 
             $table->text('location_long')->nullable();
             $table->text('location_lat')->nullable();
-
+            $table->text('CN_date')->nullable();
      
             
 			$table->timestamps(6);

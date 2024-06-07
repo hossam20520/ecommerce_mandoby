@@ -17,7 +17,8 @@ class Order extends Model
             'delivery_time' , 'status' , 'user_id',
             'user_id_action',
             'location_long',
-            'location_lat'
+            'location_lat',
+            'CN_date',
       ];
      
       public function order()
