@@ -51,7 +51,7 @@ class OrdersController extends Controller
           $item['Ref'] = $da->order->Ref;
           $item['mandob_ref'] = $da->order->odoo_refrence;
           $item['odoo_ref'] = $da->order->odoo_ref;
-          $item['RWT'] = $da->order->RWT;
+          $item['RWT'] = $da->RWT;
 
           
           $item['status'] = $da->status;
