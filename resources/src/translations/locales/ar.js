@@ -2,6 +2,7 @@
 
 
 export default {
+    delevery_date:'وقت الانتظار',
     done_num:'عدد الزيارات',
     pending_num:'عدد الزيارات الغير مكتملة',
     allsurv:'الكل',

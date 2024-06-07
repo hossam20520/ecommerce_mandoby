@@ -182,12 +182,12 @@ export default {
           thClass: "text-left"
         },
 
-         {
-          label: this.$t("odoo_ref"),
-          field: "odoo_ref",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
+        //  {
+        //   label: this.$t("odoo_ref"),
+        //   field: "odoo_ref",
+        //   tdClass: "text-left",
+        //   thClass: "text-left"
+        // },
 
          {
           label: this.$t("mandob_ref"),
@@ -237,6 +237,14 @@ export default {
           thClass: "text-left"
         },
 
+
+       {
+          label: this.$t("delevery_date"),
+          field: "delevery_date",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
        {
           label: this.$t("bill_image"),
           field: "image",
@@ -265,7 +273,10 @@ export default {
           tdClass: "text-right",
           thClass: "text-right",
           sortable: false
-        }
+        },
+
+
+        
       ];
     }
   },

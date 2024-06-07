@@ -202,12 +202,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         field: "Ref",
         tdClass: "text-left",
         thClass: "text-left"
-      }, {
-        label: this.$t("odoo_ref"),
-        field: "odoo_ref",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
+      }, //  {
+      //   label: this.$t("odoo_ref"),
+      //   field: "odoo_ref",
+      //   tdClass: "text-left",
+      //   thClass: "text-left"
+      // },
+      {
         label: this.$t("mandob_ref"),
         field: "mandob_ref",
         tdClass: "text-left",
@@ -240,6 +241,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         label: this.$t("end_time"),
         field: "end_time",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("delevery_date"),
+        field: "delevery_date",
         tdClass: "text-left",
         thClass: "text-left"
       }, {

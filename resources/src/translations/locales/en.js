@@ -1,6 +1,7 @@
 //Language Anglais
 
 export default {
+    delevery_date:'Waiting Time',
     attendace_date:'تاريخ الحضور',
     Attencdance_leaving_date:'تاريخ الانصراف',
     accept_data_storage:'تاريخ الاستلام من المخزن',
