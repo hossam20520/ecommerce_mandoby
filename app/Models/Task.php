@@ -18,4 +18,11 @@ class Task extends Model
     {
         return $this->belongsTo('App\Models\Map'  , 'location_id');
     }
+
+
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User' , 'user_id');
+    }
 }

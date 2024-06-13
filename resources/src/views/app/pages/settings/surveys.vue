@@ -212,6 +212,13 @@ export default {
     thClass: "text-left"
     },
 
+       {
+    label: this.$t("المبيعات"),
+    field: "task.user.email",
+    tdClass: "text-left",
+    thClass: "text-left"
+    },
+
     {
     label: this.$t("اسم العميل"),
     field: "name",

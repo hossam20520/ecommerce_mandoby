@@ -43,4 +43,13 @@ class Survey extends Model
         'task_id',
         // Add more fields here...
     ];
+
+ 
+
+    public function task()
+    {
+        return $this->belongsTo('App\Models\Task' , 'task_id');
+    }
+
+
 }

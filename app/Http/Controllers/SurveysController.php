@@ -25,7 +25,7 @@ class SurveysController extends Controller
         $dir = $request->SortType;
         $helpers = new helpers();
 
-        $surveys = Survey::where('deleted_at', '=', null)->where(function ($query) use ($request) {
+        $surveys = Survey::with('task.user')->where('deleted_at', '=', null)->where(function ($query) use ($request) {
                 return $query->when($request->filled('search'), function ($query) use ($request) {
                     return $query->where('ar_name', 'LIKE', "%{$request->search}%")
                         ->orWhere('en_name', 'LIKE', "%{$request->search}%");
