@@ -106,13 +106,25 @@ class surveyController extends Controller
     }
 
     public function updateSUrvey(Request $request, $task_id , $location_lat , $location_lng ){
-
+      
+        $user =   Auth::user();
         
         Survey::where('task_id' , $task_id)->update([
             'location_lat'=> $location_lat,
             'location_lng'=> $location_lng
         ]);
 
+
+        $task =  Task::where('id' , $task_id)->first();
+
+         if($task){
+            Map::where('id' , $task->location_id )->update([
+                'user_id'=> $user->id,
+                'assigned' => 'yes'
+            ]);
+         }
+
+       
 
         Task::whereId($task_id)->update([
              'status' => "done",
