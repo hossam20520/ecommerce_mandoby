@@ -109,6 +109,12 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::get("device/update/reciving/{id}", "device\mandob\OrdersController@updateArriveTime");
 
+
+
+    Route::get("device/{task_id}/{location_lat}/{location_lng}", 'device\surveyController@updateSUrvey');
+
+    
+
     
 
     Route::get("/v1/device/attendance/checkin/{type}", "device\AuthController@check_status");
@@ -158,7 +164,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::post("device/profile/image", "device\AuthController@changeImage");
 
 
-    
+
     Route::post("device/survey/image", "device\AuthController@surveyImage");
 
    

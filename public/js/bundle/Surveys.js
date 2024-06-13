@@ -229,6 +229,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
+        label: this.$t("اسم المكان"),
+        field: "bussiness_name",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("المبيعات"),
         field: "task.user.email",
         tdClass: "text-left",
@@ -276,6 +281,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         label: this.$t("ملخص الزيارة"),
         field: "summryVisit",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("location_lat"),
+        field: "location_lat",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("location_lng"),
+        field: "location_lat",
         tdClass: "text-left",
         thClass: "text-left"
       }, {

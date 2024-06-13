@@ -21,7 +21,10 @@ class Survey extends Migration
 			$table->integer('id', true);
             $table->string('name')->nullable();
             $table->string('image')->nullable();
-
+            $table->string('location_lat')->nullable();
+            $table->string('location_lng')->nullable();
+            $table->string('bussiness_name')->nullable();
+            
             
             $table->string('nameselectaStatus')->nullable();
             $table->string('city')->nullable();

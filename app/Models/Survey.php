@@ -10,8 +10,11 @@ class Survey extends Model
     protected $table = 'surveys'; // Specify the table name
 
     protected $fillable = [
+        'bussiness_name',
         'name',
         'image',
+        'location_lat',
+        'location_lng',
         'nameselectaStatus',
         'city',
         'area',

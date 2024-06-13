@@ -105,10 +105,33 @@ class surveyController extends Controller
         return response()->json(['goves' => $govs]);
     }
 
+    public function updateSUrvey(Request $request, $task_id , $location_lat , $location_lng ){
+
+        
+        Survey::where('task_id' , $task_id)->update([
+            'location_lat'=> $location_lat,
+            'location_lng'=> $location_lng
+        ]);
+
+
+        Task::whereId($task_id)->update([
+             'status' => "done",
+             'current_lat' => $location_lat,
+             'current_lng' => $location_lng 
+        ]);
+
+
+        return response()->json(['success' => true]);
+    
+    
+    }
+
+
+
+
      public function surveyData(Request $request){
 
-
-
+ 
         \DB::transaction(function () use ($request) {
 
       
@@ -116,50 +139,47 @@ class surveyController extends Controller
 
 
             $Survey = new Survey;
+
+            $Survey->bussiness_name = $surveyData['bussiness_name'] ?? null;
+
+
             $Survey->name = $surveyData['name'] ?? null;
             $Survey->nameselectaStatus = $surveyData['nameselectaStatus'] ?? null;;
             $Survey->city = $surveyData['city'] ?? null;;
             $Survey->area = $surveyData['area'] ?? null;;
             // Continue assigning values for the other fields...
         
-            $Survey->DIDMeatResponsiblePerson = $surveyData['DIDMeatResponsiblePerson'] ?? null;;
+            // $Survey->DIDMeatResponsiblePerson = $surveyData['DIDMeatResponsiblePerson'] ?? null;;
             $Survey->NameResponsible = $surveyData['NameResponsible'] ?? null;;
             $Survey->Phone = $surveyData['Phone'] ?? null;
             $Survey->activityType = $surveyData['activityType'] ?? null;
             $Survey->address_Detail = $surveyData['address_Detail'] ?? null;
             $Survey->delevery_detail = $surveyData['delevery_detail'] ?? null;
-            $Survey->reasonVisit =  $surveyData['reason_call'] ?? null;
-            $Survey->usingApplication = $surveyData['usingApplication'] ?? null;
-            $Survey->milkused = $surveyData['milkused'] ?? null;
-            $Survey->kreemUsed = $surveyData['kreemUsed'] ?? null;
-            $Survey->spices = $surveyData['spices'] ?? null;
-            $Survey->cheeseUsed = $surveyData['cheeseUsed'] ?? null;
-            $Survey->SelectedBatter = $surveyData['SelectedBatter'] ?? null;
-            $Survey->oilUsed = $surveyData['oilUsed'] ?? null;
-            $Survey->teaused = $surveyData['teaused'] ?? null;
-            $Survey->seeeds = $surveyData['seeeds'] ?? null;
-            $Survey->sauce = $surveyData['sauce'] ?? null;
-            $Survey->sauceCompany = $surveyData['sauceCompany'] ?? null;
-            $Survey->watergasused = $surveyData['watergasused'] ?? null;
-            $Survey->pastaUsed = $surveyData['pastaUsed'] ?? null;
-            $Survey->bonUsed = $surveyData['bonUsed'] ?? null;
-            $Survey->branchNumber = $surveyData['branchNumber'] ?? null;
+            // $Survey->reasonVisit =  $surveyData['reason_call'] ?? null;
+            // $Survey->usingApplication = $surveyData['usingApplication'] ?? null;
+            // $Survey->milkused = $surveyData['milkused'] ?? null;
+            // $Survey->kreemUsed = $surveyData['kreemUsed'] ?? null;
+            // $Survey->spices = $surveyData['spices'] ?? null;
+            // $Survey->cheeseUsed = $surveyData['cheeseUsed'] ?? null;
+            // $Survey->SelectedBatter = $surveyData['SelectedBatter'] ?? null;
+            // $Survey->oilUsed = $surveyData['oilUsed'] ?? null;
+            // $Survey->teaused = $surveyData['teaused'] ?? null;
+            // $Survey->seeeds = $surveyData['seeeds'] ?? null;
+            // $Survey->sauce = $surveyData['sauce'] ?? null;
+            // $Survey->sauceCompany = $surveyData['sauceCompany'] ?? null;
+            // $Survey->watergasused = $surveyData['watergasused'] ?? null;
+            // $Survey->pastaUsed = $surveyData['pastaUsed'] ?? null;
+            // $Survey->bonUsed = $surveyData['bonUsed'] ?? null;
+            // $Survey->branchNumber = $surveyData['branchNumber'] ?? null;
             $Survey->summryVisit = $surveyData['summryVisit'] ?? null;
-            $Survey->productUsesClient = $surveyData['productUsesClient'] ?? null;
-            $Survey->activity = $surveyData['activity'] ?? null;
+            // $Survey->productUsesClient = $surveyData['productUsesClient'] ?? null;
+            // $Survey->activity = $surveyData['activity'] ?? null;
             $Survey->task_id = $request['task_id'] ?? null;
  
             $Survey->save();
 
 
-
-     Task::whereId($request['task_id'])->update([
-            'status' => "done",
-             'current_lat' => $request['lat'],
-             'current_lng' => $request['lng']
-        ]);
-
-
+ 
 
         }, 10);
 

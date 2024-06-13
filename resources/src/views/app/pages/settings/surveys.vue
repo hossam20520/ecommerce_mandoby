@@ -205,9 +205,17 @@ export default {
   computed: {
     columns() {
       return [
+ 
     {
     label: this.$t(" صورة المكان "),
     field: "image",
+    tdClass: "text-left",
+    thClass: "text-left"
+    },
+
+        {
+    label: this.$t("اسم المكان"),
+    field: "bussiness_name",
     tdClass: "text-left",
     thClass: "text-left"
     },
@@ -277,6 +285,19 @@ export default {
     thClass: "text-left"
   },
  
+  {
+    label: this.$t("location_lat"),
+    field: "location_lat",
+    tdClass: "text-left",
+    thClass: "text-left"
+  },
+
+   {
+    label: this.$t("location_lng"),
+    field: "location_lat",
+    tdClass: "text-left",
+    thClass: "text-left"
+  },
  
         {
           label: this.$t("Action"),
