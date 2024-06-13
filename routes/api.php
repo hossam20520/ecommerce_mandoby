@@ -111,7 +111,7 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
 
 
-    Route::get("device/{task_id}/{location_lat}/{location_lng}", 'device\surveyController@updateSUrvey');
+      Route::get("device/{task_id}/{location_lat}/{location_lng}", 'device\surveyController@updateSUrvey');
 
     
 
