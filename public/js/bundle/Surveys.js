@@ -293,14 +293,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         field: "location_lat",
         tdClass: "text-left",
         thClass: "text-left"
-      }, {
-        label: this.$t("Action"),
-        field: "actions",
-        html: true,
-        tdClass: "text-right",
-        thClass: "text-right",
-        sortable: false
-      }];
+      } // {
+      //   label: this.$t("Action"),
+      //   field: "actions",
+      //   html: true,
+      //   tdClass: "text-right",
+      //   thClass: "text-right",
+      //   sortable: false
+      // }
+      ];
     }
   },
   methods: {

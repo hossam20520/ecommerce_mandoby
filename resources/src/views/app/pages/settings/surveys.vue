@@ -299,14 +299,14 @@ export default {
     thClass: "text-left"
   },
  
-        {
-          label: this.$t("Action"),
-          field: "actions",
-          html: true,
-          tdClass: "text-right",
-          thClass: "text-right",
-          sortable: false
-        }
+        // {
+        //   label: this.$t("Action"),
+        //   field: "actions",
+        //   html: true,
+        //   tdClass: "text-right",
+        //   thClass: "text-right",
+        //   sortable: false
+        // }
       ];
     }
   },
