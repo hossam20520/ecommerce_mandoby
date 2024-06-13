@@ -187,6 +187,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       limit: "10",
       survey: {
         id: "",
+        image: "",
         name: "",
         nameselectaStatus: "",
         city: "",
@@ -222,13 +223,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     columns: function columns() {
       return [{
-        label: this.$t("اسم العميل"),
-        field: "name",
+        label: this.$t(" صورة المكان "),
+        field: "image",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("جديد / قديم"),
-        field: "nameselectaStatus",
+        label: this.$t("اسم العميل"),
+        field: "name",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -239,11 +240,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         label: this.$t("المنطقة"),
         field: "area",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("هل قابلت الشخص المسؤل"),
-        field: "DIDMeatResponsiblePerson",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -272,98 +268,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("سبب الزيارة"),
-        field: "reasonVisit",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("هل يستخدم ابلكيشن للطلب"),
-        field: "usingApplication",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("اللبن المستخدم"),
-        field: "milkused",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("الكريمة المستخدمة"),
-        field: "kreemUsed",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("التوابل المستخدمة"),
-        field: "spices",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("الجبن المستخدمة"),
-        field: "cheeseUsed",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("الذبدة المستخدمة"),
-        field: "SelectedBatter",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("الزيوت المستخدمة"),
-        field: "oilUsed",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("الشاى المستخدم"),
-        field: "teaused",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("ارز و بقوليات"),
-        field: "seeeds",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("الصوصات المستخدمة"),
-        field: "sauce",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("الشركة المنتجة للصوصات"),
-        field: "sauceCompany",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("المشروبات الغازية المستخدمة"),
-        field: "watergasused",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("المكرونة المستخدمة"),
-        field: "pastaUsed",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("البن المستخدم"),
-        field: "bonUsed",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("عدد فروع العميل ومكانهم"),
-        field: "branchNumber",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
         label: this.$t("ملخص الزيارة"),
         field: "summryVisit",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("منتجات اخرى يستخدمها العميل"),
-        field: "productUsesClient",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
-        label: this.$t("هل تم تفعيل العميل"),
-        field: "activity",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -747,7 +653,8 @@ var render = function () {
                                         width: "50",
                                         fluid: "",
                                         src:
-                                          "/images/surveys/" + props.row.image,
+                                          "/images/surveyimages/" +
+                                          props.row.image,
                                         alt: "image",
                                       },
                                     }),
@@ -761,7 +668,7 @@ var render = function () {
                     ],
                     null,
                     false,
-                    3461693510
+                    3536830465
                   ),
                 },
                 [
