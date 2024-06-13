@@ -18,8 +18,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use App\Models\Setting;
- 
- 
+use App\Models\Survey;
+
 use App\Models\CarModel;
 
 class AuthController extends Controller
@@ -121,7 +121,6 @@ class AuthController extends Controller
  
       
          $user =   Auth::user();
- 
          $image = $request->file('placeImage');
          $path = public_path() . '/images/surveyimages';
          $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
@@ -130,7 +129,15 @@ class AuthController extends Controller
       
          $image_resize->save(public_path('/images/surveyimages/' . $filename));
 
+          $id = $request->id;
 
+          
+
+           Survey::where( 'task_id' ,$id)->update([
+ 
+                'image' => $filename,
+
+                ]);
 
          return response()->json(['url' =>  "/images/surveyimages/".  $filename   ], 200);
 

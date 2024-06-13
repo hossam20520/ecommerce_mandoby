@@ -20,6 +20,9 @@ class Survey extends Migration
 			$table->engine = 'InnoDB';
 			$table->integer('id', true);
             $table->string('name')->nullable();
+            $table->string('image')->nullable();
+
+            
             $table->string('nameselectaStatus')->nullable();
             $table->string('city')->nullable();
             $table->string('area')->nullable();

@@ -11,6 +11,7 @@ class Survey extends Model
 
     protected $fillable = [
         'name',
+        'image',
         'nameselectaStatus',
         'city',
         'area',
