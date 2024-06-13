@@ -64,6 +64,7 @@
       </vue-good-table>
     </b-card>
 
+
     <validation-observer ref="Create_survey">
       <b-modal hide-footer size="md" id="New_survey" :title="editmode?$t('Edit'):$t('Add')">
         <b-form @submit.prevent="Submit_Survey" enctype="multipart/form-data">
