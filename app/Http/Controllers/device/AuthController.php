@@ -112,6 +112,50 @@ class AuthController extends Controller
 
     }
 
+
+    
+
+
+
+    public function surveyImage(Request $request){
+ 
+      
+         $user =   Auth::user();
+ 
+         $image = $request->file('placeImage');
+         $path = public_path() . '/images/surveyimages';
+         $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
+
+         $image_resize = Image::make($image->getRealPath());
+      
+         $image_resize->save(public_path('/images/surveyimages/' . $filename));
+
+
+
+         return response()->json(['url' =>  "/images/surveyimages/".  $filename   ], 200);
+
+
+        //  $filename
+
+        //  $userPhoto = $path . '/' . $currentAvatar;
+        //  if (file_exists($userPhoto)) {
+        //      if ($user->avatar != 'no_avatar.png') {
+        //          @unlink($userPhoto);
+        //      }
+        //  }
+
+        //  $filename = $filename;
+   
+
+        // return $filename;
+
+
+//  User::whereId($user->id)->update([
+
+//      'avatar' => $filename,
+   
+//  ]);
+}
     
     public function changeImage(Request $request){
  
@@ -594,7 +638,7 @@ class AuthController extends Controller
     public function version(Request $request , $version){
  
     
-        $versaionfromDB = '2.0';
+        $versaionfromDB = '14.0';
         $urlDB = 'https://drive.google.com/drive/folders/1okrvPkNZnHyWM_r9u7FLg3LfFifkmUp5?usp=drive_link';
         if($versaionfromDB == $version){
             return response()->json(['version' => $version ,  'needupdate'=> false , 'message'=> "hello" , 'url' => 'url' ], 200);

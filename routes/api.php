@@ -157,6 +157,9 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     Route::get("device/profile", "device\AuthController@profile");
     Route::post("device/profile/image", "device\AuthController@changeImage");
 
+    Route::post("device/survey/image", "device\AuthController@surveyImage");
+
+   
     Route::post("device/profile/edit", "device\AuthController@EditProfile");
 
 
