@@ -22,7 +22,7 @@ class SurveyExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvent
 
             foreach ($clients as $client) {
               
-                $item['image'] =  env('APP_URL', 'http://104.248.31.157:8082') +"/images/surveyimages/"+ $client->image;
+                $item['image'] =  env('APP_URL', 'http://104.248.31.157:8082') . "/images/surveyimages/" . $client->image;
                 $item['bussiness_name'] = $client->bussiness_name;
                 // $item['sales'] = $client->task->user->email;
                 $item['name'] = $client->name;
