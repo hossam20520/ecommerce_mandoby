@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SurveyExport;
 
 class SurveysController extends Controller
 {
@@ -43,6 +45,19 @@ class SurveysController extends Controller
         ]);
 
     }
+
+
+
+
+        //------------- Export USERS to EXCEL ---------\\
+
+        public function exportExcel(Request $request)
+        {
+            
+    
+            return Excel::download(new SurveyExport, 'survey.xlsx');
+        }
+
 
     //---------------- STORE NEW Survey -------------\
 

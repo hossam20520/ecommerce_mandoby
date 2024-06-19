@@ -636,8 +636,8 @@ class AuthController extends Controller
 
     public function versionSurvey(Request $request , $version){
            
-        $versaionfromDB = '3.1';
-        $urlDB = 'https://drive.google.com/drive/folders/1rp2eWbM-3XQnn4UABk0-V6VwR3f0TlFp?usp=sharing';
+        $versaionfromDB = '4';
+        $urlDB = 'https://drive.google.com/drive/folders/11vnuWO49K5B7WsbpGFrqdRXW9u4VcH9a?usp=sharing';
         if($versaionfromDB == $version){
             return response()->json(['version' => $version ,  'needupdate'=> false , 'message'=> "hello" , 'url' => 'url' ], 200);
         }else{

@@ -161,6 +161,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -305,6 +309,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    Users_Excel: function Users_Excel() {
+      // Start the progress bar.
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
+      nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
+      axios.get("survey/export/Excel", {
+        responseType: "blob",
+        // important
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(function (response) {
+        var url = window.URL.createObjectURL(new Blob([response.data]));
+        var link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "List_Users.xlsx");
+        document.body.appendChild(link);
+        link.click(); // Complete the animation of theprogress bar.
+
+        setTimeout(function () {
+          return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
+        }, 500);
+      })["catch"](function () {
+        // Complete the animation of theprogress bar.
+        setTimeout(function () {
+          return nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.done();
+        }, 500);
+      });
+    },
     //---- update Params Table
     updateParams: function updateParams(newProps) {
       this.serverParams = Object.assign({}, this.serverParams, newProps);
@@ -716,11 +748,32 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("div", {
-                    staticClass: "mt-2 mb-3",
-                    attrs: { slot: "table-actions" },
-                    slot: "table-actions",
-                  }),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "mt-2 mb-3",
+                      attrs: { slot: "table-actions" },
+                      slot: "table-actions",
+                    },
+                    [
+                      _c(
+                        "b-button",
+                        {
+                          attrs: { size: "sm", variant: "outline-danger m-1" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.Users_Excel()
+                            },
+                          },
+                        },
+                        [
+                          _c("i", { staticClass: "i-File-Excel" }),
+                          _vm._v(" EXCEL\n        "),
+                        ]
+                      ),
+                    ],
+                    1
+                  ),
                 ]
               ),
             ],

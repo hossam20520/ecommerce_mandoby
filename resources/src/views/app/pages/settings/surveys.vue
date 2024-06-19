@@ -39,6 +39,10 @@
             <i class="i-Add"></i>
              {{ $t('Add') }}
           </b-button> -->
+
+        <b-button @click="Users_Excel()" size="sm" variant="outline-danger m-1">
+            <i class="i-File-Excel"></i> EXCEL
+          </b-button>
         </div>
 
         <template slot="table-row" slot-scope="props">
@@ -312,6 +316,35 @@ export default {
   },
 
   methods: {
+
+
+      Users_Excel() {
+      // Start the progress bar.
+      NProgress.start();
+      NProgress.set(0.1);
+      axios
+        .get("survey/export/Excel", {
+          responseType: "blob", // important
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(response => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "List_Users.xlsx");
+          document.body.appendChild(link);
+          link.click();
+          // Complete the animation of theprogress bar.
+          setTimeout(() => NProgress.done(), 500);
+        })
+        .catch(() => {
+          // Complete the animation of theprogress bar.
+          setTimeout(() => NProgress.done(), 500);
+        });
+    },
+
     //---- update Params Table
     updateParams(newProps) {
       this.serverParams = Object.assign({}, this.serverParams, newProps);

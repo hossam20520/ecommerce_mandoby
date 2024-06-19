@@ -303,8 +303,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
 
     Route::resource('clients', 'ClientController');
     Route::get('clients/export/Excel', 'ClientController@exportExcel');
-
-
+ 
+   
 
     Route::get('Get_Clients_Without_Paginate', 'ClientController@Get_Clients_Without_Paginate');
     Route::post('clients/delete/by_selection', 'ClientController@delete_by_selection');
@@ -346,9 +346,8 @@ Route::middleware(['auth:api', 'Is_Active'])->group(function () {
     //------------------------------------------------------------------\
     Route::resource('surveys', 'SurveysController');
     Route::post('surveys/delete/by_selection', 'SurveysController@delete_by_selection');
-
-
-
+ 
+    Route::get('survey/export/Excel', 'SurveysController@exportExcel');
 
     Route::resource('Products', 'ProductsController');
     Route::get('Products/export/Excel', 'ProductsController@export_Excel');

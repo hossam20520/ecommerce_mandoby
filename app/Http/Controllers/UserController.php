@@ -593,6 +593,10 @@ class UserController extends BaseController
         return Excel::download(new UsersExport, 'Users.xlsx');
     }
 
+
+
+    
+
     //------------- UPDATE PROFILE ---------\\
 
     public function updateProfile(Request $request)
