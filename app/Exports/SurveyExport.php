@@ -24,7 +24,7 @@ class SurveyExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvent
               
                 $item['image'] =  $client->image;
                 $item['bussiness_name'] = $client->bussiness_name;
-                $item['sales'] = $client->task->user->email;
+                // $item['sales'] = $client->task->user->email;
                 $item['name'] = $client->name;
                 $item['city'] = $client->city;
                 $item['area'] = $client->area;
@@ -86,7 +86,7 @@ class SurveyExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvent
         return [
             'صورة المكان',
             'اسم المكان',
-            'المبيعات',
+            // 'المبيعات',
             'اسم العميل',
             'المدينة',
             'المنطقة',
