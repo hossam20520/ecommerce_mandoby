@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\utils\helpers;
+use App\Models\Setting;
+use App\Models\product_warehouse;
+
+
 class Cart extends Model
 {
     protected $table = 'carts';
@@ -32,9 +36,18 @@ class Cart extends Model
         $existingCartItem = $this->cartItems()->where('product_id', $product_id)->first();
 
         if ($existingCartItem) {
-            $product = Product::find($product_id);
-           $helpers = new helpers();
-            $prod = $helpers->singleProduct($product);
+          
+            $helpers = new helpers();
+            $settings = Setting::where('deleted_at', '=', null)->first();
+            $product_warehouse_data = product_warehouse::with('warehouse', 'product', 'productVariant')
+            ->where('warehouse_id', $settings->warehouse_id)
+            ->where('deleted_at', '=', null)
+            ->whereHas('product', function ($query) use ($product_id) {
+                $query->where('id', $product_id);
+            })->first();
+
+         
+            $prod = $helpers->singleProduct($product_warehouse_data);
         
             $finalQTY = $existingCartItem->qty + $qty;
 
