@@ -17,12 +17,31 @@ class SurveyExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvent
      */
     function array(): array
     {
-         $clients = Survey::where('deleted_at', '=', null)->orderBy('id', 'DESC')->get();
+         $clients = Survey::with('task')->where('deleted_at', '=', null)->orderBy('id', 'DESC')->get();
         if ($clients->isNotEmpty()) {
 
             foreach ($clients as $client) {
-
+              
+                $item['image'] =  $client->image;
                 $item['bussiness_name'] = $client->bussiness_name;
+                $item['sales'] = $client->task->user->email;
+                $item['name'] = $client->name;
+                $item['city'] = $client->city;
+                $item['area'] = $client->area;
+
+                $item['NameResponsible'] = $client->NameResponsible;
+
+                $item['Phone'] = $client->Phone;
+                $item['activityType'] = $client->activityType;
+                $item['address_Detail'] = $client->address_Detail;
+
+
+                $item['delevery_detail'] = $client->delevery_detail;
+                $item['summryVisit'] = $client->summryVisitb;
+
+
+                $item['location_lat'] = $client->location_lat;
+                $item['location_lng'] = $client->location_lng;
                 // $item['name'] = $client->name;
                 // $item['email'] = $client->email;
                 // $item['phone'] = $client->phone;
@@ -65,11 +84,20 @@ class SurveyExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvent
     public function headings(): array
     {
         return [
+            'صورة المكان',
             'اسم المكان',
-            'Name',
-            'Email',
-            'Phone',
-            'Adresse',
+            'المبيعات',
+            'اسم العميل',
+            'المدينة',
+            'المنطقة',
+            'اسم المسؤل',
+            'رقم التليفون',
+            'نوع النشاط',
+            'عنوان الادارة',
+            'عنوان التوصيل',
+            'ملخص الزيارة',
+            'خط العرض',
+            'خط الطول',
         ];
     }
 }
