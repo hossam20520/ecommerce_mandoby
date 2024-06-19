@@ -120,6 +120,7 @@ class surveyController extends Controller
          if($task){
             Map::where('id' , $task->location_id )->update([
                 'user_id'=> $user->id,
+                
                 'assigned' => 'yes'
             ]);
          }

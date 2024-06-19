@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\utils\helpers;
 class Cart extends Model
 {
     protected $table = 'carts';
@@ -27,15 +27,25 @@ class Cart extends Model
 
     public function addProductToCart($product_id, $qty, $price , $discount)
     {
+
         // Check if the product already exists in the cart
         $existingCartItem = $this->cartItems()->where('product_id', $product_id)->first();
 
         if ($existingCartItem) {
+            $product = Product::find($product_id);
+           $helpers = new helpers();
+            $prod = $helpers->singleProduct($product);
+        
+            $finalQTY = $existingCartItem->qty + $qty;
+
+            if(  (int)$prod['qte'] >  (int)$finalQTY){
+                $existingCartItem->qty += $qty;
+                $existingCartItem->discount  =  $discount;
+                $existingCartItem->subtotal = ($existingCartItem->qty *  ($price ) )   ;
+                $existingCartItem->save();
+            }
             // If the product exists, update the quantity and subtotal
-            $existingCartItem->qty += $qty;
-            $existingCartItem->discount  =  $discount;
-            $existingCartItem->subtotal = ($existingCartItem->qty *  ($price ) )   ;
-            $existingCartItem->save();
+          
 
 
         } else {
