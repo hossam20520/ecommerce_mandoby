@@ -665,8 +665,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("assigned"),
+        label: this.$t("visited"),
         field: "assigned",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("assigned"),
+        field: "assigned_s",
         tdClass: "text-left",
         thClass: "text-left"
       }, {

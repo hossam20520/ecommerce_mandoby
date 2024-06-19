@@ -44,6 +44,7 @@ class Survey extends Model
         'productUsesClient',
         'activity',
         'task_id',
+        'assigned_s'
         // Add more fields here...
     ];
 

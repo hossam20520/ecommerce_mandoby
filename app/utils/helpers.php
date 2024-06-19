@@ -168,6 +168,100 @@ class helpers
 
 
 
+    public function singleProductStandard($product){
+        $is_widh =  false;
+        $isCart =   false;
+        if (!Auth::check()) {
+            $is_widh =  false;
+            $isCart =   false;
+        }else{
+             $user =  Auth::user();
+             $is_widh =  $this->IsInWhishlist($product->id , $user->id);
+             $isCart =   $this->IsInCart($product->id , $user->id);
+        }
+ 
+        $item['id'] = $product->id;
+        $item['code'] = $product->code;
+        $item['en_name'] = $product->name;
+        $item['ar_name'] = $product['product']->ar_name;
+        $item['ar_category'] = $product['product']['category']->name;
+        $item['en_category'] = $product['product']['category']->en_name;
+        $item['ar_unit'] = $product['product']['unit']->name;
+        $item['en_unit'] = $product['product']['unit']->ShortName;
+        $item['price'] = round( floatval( $product['product']->price ) , 1);
+        $item['ar_description'] =$product['product']->ar_description;
+        $item['en_description'] = $product['product']->en_description;
+        $item['discount'] = $product['product']->discount;
+        $item['photo']= $product['product']->photo;
+        $item['isInWishlist'] =    $is_widh;
+        $item['category_id'] =    $product['product']->category_id;
+        
+        $item['status'] = $product['product']->status;
+ 
+      
+
+        $item['isInCart'] =  $isCart;
+
+        if ($product['product']->image != '') {
+            // $isFirstImage = true; 
+            foreach (explode(',', $product['product']->image) as $img) {
+                // $item['images'][] = "/public/images/products/".$img;
+                $item['gallery'][] =  "/images/products/". $img;
+            }
+        }
+        $firstimage = explode(',', $product['product']->image);
+        $item['image'] = "/images/products/".$firstimage[0];
+
+
+        if ($product['product']->image != '') {
+            // $isFirstImage = true; 
+            foreach (explode(',', $product['product']->image) as $img) {
+                // $item['images'][] = "/public/images/products/".$img;
+                $item['gallery_full'][] =  env('URL', 'http://192.168.1.5:8000')."/images/products/". $img;
+            }
+        }
+
+
+        $item['full_image_url'] = env('URL', 'http://192.168.1.5:8000')."/images/products/".$firstimage[0];
+
+        if ($product['product']['unitSale']->operator == '/') {
+            $item['qte_sale'] = $product['product']->qte * $product['product']['unitSale']->operator_value;
+            $price = $product['product']->price / $product['product']['unitSale']->operator_value;
+        } else {
+            $item['qte_sale'] = $product['product']->qte / $product['product']['unitSale']->operator_value;
+            $price = $product['product']->price * $product['product']['unitSale']->operator_value;
+        }
+
+        if ($product['product']['unitPurchase']->operator == '/') {
+            $item['qte_purchase'] = round($product['product']->qte * $product['product']['unitPurchase']->operator_value, 5);
+        } else {
+            $item['qte_purchase'] = round($product['product']->qte / $product['product']['unitPurchase']->operator_value, 5);
+        }
+
+         $item['qte'] = $product->qte;
+        //  $item['unitSale'] = $product_warehouse['product']['unitSale']->ShortName;
+        // $item['unitPurchase'] = $product_warehouse['product']['unitPurchase']->ShortName;
+
+        if ($product['product']->TaxNet !== 0.0) {
+            //Exclusive
+            if ($product['product']->tax_method == '1') {
+                $tax_price = $price * $product['product']->TaxNet / 100;
+                $item['Net_price'] = round( floatval( $price + $tax_price) , 1);
+                // Inxclusive
+            } else {
+                $item['Net_price'] =  round(floatval( $price) , 1);
+            }
+
+        } else {
+            $item['Net_price'] = round( floatval( $price ) , 1);
+        }
+  
+         return $item;
+
+    }
+
+
+
     //  Helper Multiple Filter
     public function filter($model, $columns, $param, $request)
     {

@@ -448,7 +448,9 @@ class MapsController extends Controller
         $to = $request->to;
         $selectedIds = $request->selectedIds;
         foreach ($selectedIds as $map_id) {
-    
+            Map::where('id', $map_id)->update([
+                'assigned_s'=> 'yes'
+            ]);
 
             $tas = Task::where('deleted_at' , '=' , null)->where('user_id' ,$user_id)->where('location_id' , $map_id)->first();
            if($tas){
