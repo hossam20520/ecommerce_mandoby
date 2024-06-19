@@ -67,8 +67,8 @@ class MapsController extends Controller
         // Filter_Zone_Name:"",
         // Filter_street:"",
         // Filter_Sections: "",
-        $columns = array(0 => 'Shiakha_Name', 1 => 'Outlet_Type', 2 => 'Section' );
-        $param = array(0 => '=', 1 => '=', 2 => '=' );
+        $columns = array(0 => 'Shiakha_Name', 1 => 'Outlet_Type', 2 => 'Section' , 3 => 'assigned_s'   ,  4 => 'assigned' );
+        $param = array(0 => '=', 1 => '=', 2 => '=' , 3 => '=' , 4 => '=' );
         $data = array();
 
         $daat = Map::where('deleted_at', '=', null);
@@ -78,6 +78,8 @@ class MapsController extends Controller
                     return $query->where('Shiakha_Name', 'LIKE', "%{$request->search}%")
                         ->orWhere('Zone_Name', 'LIKE', "%{$request->search}%")
                         ->orWhere('Street', 'LIKE', "%{$request->search}%") 
+                        ->orWhere('assigned_s', 'LIKE', "%{$request->search}%") 
+                        ->orWhere('assigned', 'LIKE', "%{$request->search}%") 
                         ->orWhere('Section', 'LIKE', "%{$request->search}%");
                 });
             });

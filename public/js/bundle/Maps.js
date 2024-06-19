@@ -537,6 +537,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -550,6 +593,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       Filter_Zone_Name: "",
       Filter_street: "",
       Filter_Sections: "",
+      assigned_filter: "",
+      assigned_s_filter: "",
       type_t: "",
       Sections: [],
       Zone_Name: [],
@@ -1044,6 +1089,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.Filter_street = "";
       this.Filter_Shiakha_Name = "";
       this.type_t = "";
+      this.assigned_filter = "";
+      this.assigned_s_filter = "";
       this.Get_Maps(this.serverParams.page);
     },
     Get_Maps: function Get_Maps(page) {
@@ -1052,7 +1099,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // Start the progress bar.
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.start();
       nprogress__WEBPACK_IMPORTED_MODULE_0___default.a.set(0.1);
-      axios.get("maps/view/data?page=" + page + "&Section=" + this.Filter_Sections + "&Outlet_Type=" + this.type_t + "&Zone_Name=" + this.Filter_Zone_Name + "&Street=" + this.Filter_street + "&Shiakha_Name=" + this.Filter_Shiakha_Name + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit).then(function (response) {
+      axios.get("maps/view/data?page=" + page + "&Section=" + this.Filter_Sections + "&Outlet_Type=" + this.type_t + "&Zone_Name=" + this.Filter_Zone_Name + "&Street=" + this.Filter_street + "&Shiakha_Name=" + this.Filter_Shiakha_Name + "&SortField=" + this.serverParams.sort.field + "&SortType=" + this.serverParams.sort.type + "&search=" + this.search + "&limit=" + this.limit + "&assigned=" + this.assigned_filter + "&assigned_s=" + this.assigned_s_filter).then(function (response) {
         _this6.maps = response.data.maps; // this.totalRows = response.data.totalRows;
         // this.shops_marker = response.data.map_items;
         // this.mandobs = response.data.mandobs;
@@ -1728,6 +1775,152 @@ var render = function () {
                                 ],
                                 1
                               ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-col",
+                            { attrs: { md: "12" } },
+                            [
+                              _c("validation-provider", {
+                                attrs: {
+                                  name: "visited",
+                                  rules: { required: true },
+                                },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "default",
+                                      fn: function (ref) {
+                                        var valid = ref.valid
+                                        var errors = ref.errors
+                                        return _c(
+                                          "b-form-group",
+                                          {
+                                            attrs: { label: _vm.$t("visited") },
+                                          },
+                                          [
+                                            _c("v-select", {
+                                              class: {
+                                                "is-invalid": !!errors.length,
+                                              },
+                                              attrs: {
+                                                state: errors[0]
+                                                  ? false
+                                                  : valid
+                                                  ? true
+                                                  : null,
+                                                reduce: function (label) {
+                                                  return label.value
+                                                },
+                                                placeholder:
+                                                  _vm.$t("Choose_visit"),
+                                                options: [
+                                                  {
+                                                    label: "Yes",
+                                                    value: "yes",
+                                                  },
+                                                  { label: "No", value: "no" },
+                                                ],
+                                              },
+                                              model: {
+                                                value: _vm.assigned_filter,
+                                                callback: function ($$v) {
+                                                  _vm.assigned_filter = $$v
+                                                },
+                                                expression: "assigned_filter",
+                                              },
+                                            }),
+                                            _vm._v(" "),
+                                            _c("b-form-invalid-feedback", [
+                                              _vm._v(_vm._s(errors[0])),
+                                            ]),
+                                          ],
+                                          1
+                                        )
+                                      },
+                                    },
+                                  ],
+                                  null,
+                                  false,
+                                  3411393961
+                                ),
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-col",
+                            { attrs: { md: "12" } },
+                            [
+                              _c("validation-provider", {
+                                attrs: {
+                                  name: "assigned",
+                                  rules: { required: true },
+                                },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "default",
+                                      fn: function (ref) {
+                                        var valid = ref.valid
+                                        var errors = ref.errors
+                                        return _c(
+                                          "b-form-group",
+                                          {
+                                            attrs: {
+                                              label: _vm.$t("assigned"),
+                                            },
+                                          },
+                                          [
+                                            _c("v-select", {
+                                              class: {
+                                                "is-invalid": !!errors.length,
+                                              },
+                                              attrs: {
+                                                state: errors[0]
+                                                  ? false
+                                                  : valid
+                                                  ? true
+                                                  : null,
+                                                reduce: function (label) {
+                                                  return label.value
+                                                },
+                                                placeholder:
+                                                  _vm.$t("Choose_is_assigned"),
+                                                options: [
+                                                  {
+                                                    label: "Yes",
+                                                    value: "yes",
+                                                  },
+                                                  { label: "No", value: "no" },
+                                                ],
+                                              },
+                                              model: {
+                                                value: _vm.assigned_s_filter,
+                                                callback: function ($$v) {
+                                                  _vm.assigned_s_filter = $$v
+                                                },
+                                                expression: "assigned_s_filter",
+                                              },
+                                            }),
+                                            _vm._v(" "),
+                                            _c("b-form-invalid-feedback", [
+                                              _vm._v(_vm._s(errors[0])),
+                                            ]),
+                                          ],
+                                          1
+                                        )
+                                      },
+                                    },
+                                  ],
+                                  null,
+                                  false,
+                                  2580087937
+                                ),
+                              }),
                             ],
                             1
                           ),

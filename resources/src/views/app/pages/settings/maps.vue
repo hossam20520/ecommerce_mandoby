@@ -292,6 +292,49 @@
 
  
 
+          <b-col md="12">
+                  <validation-provider name="visited" :rules="{ required: true}">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('visited')">
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        v-model="assigned_filter"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Choose_visit')"
+                        :options="
+                           [
+                            {label: 'Yes', value: 'yes'},
+                            {label: 'No', value: 'no'}
+                           ]"
+                      ></v-select>
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+
+
+          <b-col md="12">
+                  <validation-provider name="assigned" :rules="{ required: true}">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('assigned')">
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        v-model="assigned_s_filter"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Choose_is_assigned')"
+                        :options="
+                           [
+                            {label: 'Yes', value: 'yes'},
+                            {label: 'No', value: 'no'}
+                           ]"
+                      ></v-select>
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+
             <b-col md="6" sm="12">
               <b-button
                 @click="GetDataMap(serverParams.page)"
@@ -527,6 +570,8 @@ export default {
       Filter_Zone_Name:"",
       Filter_street:"",
       Filter_Sections: "",
+      assigned_filter:"",
+      assigned_s_filter:"",
       type_t:"",
       Sections:[],
       Zone_Name:[],
@@ -1085,6 +1130,9 @@ export default {
       this.Filter_street = "";
       this.Filter_Shiakha_Name = "";
       this.type_t = "";
+      this.assigned_filter = "";
+      this.assigned_s_filter = "";
+    
       this.Get_Maps(this.serverParams.page);
     },
     Get_Maps(page) {
@@ -1114,7 +1162,12 @@ export default {
             "&search=" +
             this.search +
             "&limit=" +
-            this.limit
+            this.limit+
+            "&assigned=" +
+            this.assigned_filter +
+              "&assigned_s=" +
+            this.assigned_s_filter
+ 
         )
         .then(response => {
           this.maps = response.data.maps;

@@ -125,9 +125,16 @@ class AuthController extends Controller
          $path = public_path() . '/images/surveyimages';
          $filename = rand(11111111, 99999999) . $image->getClientOriginalName();
 
-         $image_resize = Image::make($image->getRealPath());
+        //  $image_resize = Image::make($image->getRealPath());
       
-         $image_resize->save(public_path('/images/surveyimages/' . $filename));
+        //  $image_resize->save(public_path('/images/surveyimages/' . $filename));
+  
+      
+
+// Save the uploaded image directly
+               $image->move($path, $filename);
+
+
 
           $id = $request->id;
 
