@@ -17,7 +17,7 @@ class SurveyExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvent
      */
     function array(): array
     {
-         $clients = Survey::with('task')->where('deleted_at', '=', null)->orderBy('id', 'DESC')->get();
+         $clients = Survey::with('task.user')->where('deleted_at', '=', null)->orderBy('id', 'DESC')->get();
         if ($clients->isNotEmpty()) {
 
             foreach ($clients as $client) {
