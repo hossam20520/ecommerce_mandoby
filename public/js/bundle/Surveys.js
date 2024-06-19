@@ -697,24 +697,33 @@ var render = function () {
                             props.column.field == "actions"
                               ? _c("span")
                               : props.column.field == "image"
-                              ? _c(
-                                  "span",
-                                  [
-                                    _c("b-img", {
+                              ? _c("span", [
+                                  _c(
+                                    "a",
+                                    {
                                       attrs: {
-                                        thumbnail: "",
-                                        height: "50",
-                                        width: "50",
-                                        fluid: "",
-                                        src:
+                                        href:
                                           "/images/surveyimages/" +
                                           props.row.image,
-                                        alt: "image",
                                       },
-                                    }),
-                                  ],
-                                  1
-                                )
+                                    },
+                                    [
+                                      _c("b-img", {
+                                        attrs: {
+                                          thumbnail: "",
+                                          height: "50",
+                                          width: "50",
+                                          fluid: "",
+                                          src:
+                                            "/images/surveyimages/" +
+                                            props.row.image,
+                                          alt: "image",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ])
                               : _vm._e(),
                           ]
                         },
@@ -722,7 +731,7 @@ var render = function () {
                     ],
                     null,
                     false,
-                    3536830465
+                    2207835547
                   ),
                 },
                 [

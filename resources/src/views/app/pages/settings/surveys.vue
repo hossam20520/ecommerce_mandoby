@@ -55,14 +55,14 @@
             </a> -->
           </span>
           <span v-else-if="props.column.field == 'image'">
-            <b-img
+            <a :href="'/images/surveyimages/' + props.row.image"  >  <b-img
               thumbnail
               height="50"
               width="50"
               fluid
               :src="'/images/surveyimages/' + props.row.image"
               alt="image"
-            ></b-img>
+            ></b-img> </a>
           </span>
         </template>
       </vue-good-table>
