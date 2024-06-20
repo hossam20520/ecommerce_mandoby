@@ -138,19 +138,19 @@ public function getCategoryID($id){
 
            $unite_o = Unit::where('deleted_at' , '=' , null)->where('external_id' ,$unite['id'] )->first();
            if(!$unite_o){
-            $unite_n  = new Unit;
-            $unite_n->name = $unite['name'];
-            $unite_n->ShortName = $unite['name'];
-            $unite_n->external_id = $unite['id'];
-            $unite_n->save();
+            // $unite_n  = new Unit;
+            // $unite_n->name = $unite['name'];
+            // $unite_n->ShortName = $unite['name'];
+            // $unite_n->external_id = $unite['id'];
+            // $unite_n->save();
            }else{
             $unite_n = Unit::where('deleted_at' , '=' , null)->where('external_id', $unite['id'])
             ->first();
 
-            $unite_n->name = $unite['name'];
-            $unite_n->ShortName = $unite['name'];
-            $unite_n->external_id = $unite['id'];
-            $unite_n->save();
+            // $unite_n->name = $unite['name'];
+            // $unite_n->ShortName = $unite['name'];
+            // $unite_n->external_id = $unite['id'];
+            // $unite_n->save();
            }
 
 

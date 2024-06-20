@@ -27,6 +27,9 @@ Route::get("device/cars", "device\AuthController@getCarModels");
 
 
 Route::get('iot/test_api', 'device\AuthController@testiot');
+Route::post('iot/lamp_state', 'device\AuthController@reseveState');
+
+
 // Route::get('maps/view/data', 'MapsController@GetData');
 
 Route::get('maps/view/data', 'MapsController@index');

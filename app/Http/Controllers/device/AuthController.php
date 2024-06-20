@@ -5,7 +5,7 @@ namespace App\Http\Controllers\device;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Http;
 use App\Models\Attendance;
 use App\Models\role_user;
 
@@ -19,8 +19,11 @@ use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use App\Models\Setting;
 use App\Models\Survey;
-
+use Illuminate\Support\Facades\Log;
 use App\Models\CarModel;
+use App\Models\Statelamp;
+
+
 
 class AuthController extends Controller
 {
@@ -61,6 +64,54 @@ class AuthController extends Controller
         // Return the saved data as a JSON response
         return response()->json(CarModel::all(), 200, [], JSON_PRETTY_PRINT);
     }
+
+
+
+    public function sendCommand(Request $request)
+    {
+        $command = $request->input('command');
+
+        // Assuming your ESP8266 IP address and port
+        $espAddress = '192.168.1.100'; // Replace with your ESP8266 IP
+        $espPort = 80; // Replace with your ESP8266 port
+
+        try {
+            $response = Http::post("http://{$espAddress}:{$espPort}/control-pins", [
+                'command' => $command
+            ]);
+
+            return response()->json($response->json());
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to send command to ESP8266'], 500);
+        }
+    }
+
+
+    public function reseveState(Request $request){
+
+        // Log the incoming request
+        // Log::info('Received lamp state update request: ' . $request->getContent());
+
+        // Process the lamp state (assuming 'lamp' key exists in JSON payload)
+        // $payload = json_decode($request->getContent(), true);
+        // // $lampState = $payload['lamp'] ?? false;
+        // $lampState = $payload['lamp'];
+        // Perform actions based on $lampState (e.g., update database, trigger events)
+
+        $payload = $request->lamp;
+        // // Log the action performed
+        // $message = $lampState ? 'Lamp turned on' : 'Lamp turned off';
+        // Log::info($message);
+        // $st = new  Statelamp;
+
+        // $st->status = $payload;
+        // $st->save();
+        // // Return response
+        // $response = ['message' => 'Lamp state updated successfully'];
+        // Log::info('Response sent: ' . json_encode($response));
+        return response()->json(['error' => 'Failed to send command to ESP8266'], 200);
+        
+    }
     
     public function testiot(Request $request){
 
@@ -69,9 +120,9 @@ class AuthController extends Controller
         
         $pins = [
             "IO0_PIN" => true,
-            "IO2_PIN" => true,
-            "TX_PIN" => true, //low eneg
-            "RX_PIN" => true,
+            "IO2_PIN" => false,
+            "TX_PIN" => false, //low eneg
+            "RX_PIN" => false,
             
       
         ];
