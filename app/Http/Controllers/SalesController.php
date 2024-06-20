@@ -158,10 +158,10 @@ class SalesController extends BaseController
         \DB::transaction(function () use ($request) {
             $helpers = new helpers();
             $order = new Sale;
-
+               $orderRef = $this->getNumberOrder();
             $order->is_pos = 0;
             $order->date = $request->date;
-            $order->Ref = $this->getNumberOrder();
+            $order->Ref =  $orderRef;
             $order->client_id = $request->client_id;
             $order->GrandTotal = $request->GrandTotal;
             $order->warehouse_id = $request->warehouse_id;
@@ -216,6 +216,15 @@ class SalesController extends BaseController
                         }
 
                     } else {
+
+
+                        if($order->statut == "Pending"){
+                            $userr =  User::where('id' ,  $request->client_id )->first();
+
+                            app('App\Http\Controllers\device\NotificationsController')->sendNotification( $userr->email ,  "Order Status" , "Your order has been confirmed" );
+                        }
+
+
                         $product_warehouse = product_warehouse::where('deleted_at', '=', null)
                             ->where('warehouse_id', $order->warehouse_id)
                             ->where('product_id', $value['product_id'])
@@ -504,6 +513,15 @@ class SalesController extends BaseController
             } else if ($due == $request['GrandTotal']) {
                 $payment_statut = 'unpaid';
             }
+
+
+
+            if($request['statut']  == "Pending"){
+                $userr =  User::where('id' ,  $request['client_id'] )->first();
+
+                app('App\Http\Controllers\device\NotificationsController')->sendNotification( $userr->email ,  "Order Status" , "Your order has been confirmed" );
+            }
+
 
             $current_Sale->update([
                 'date' => $request['date'],
