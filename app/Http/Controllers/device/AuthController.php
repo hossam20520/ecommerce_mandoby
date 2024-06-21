@@ -22,11 +22,126 @@ use App\Models\Survey;
 use Illuminate\Support\Facades\Log;
 use App\Models\CarModel;
 use App\Models\Statelamp;
-
+use GuzzleHttp\Exception\RequestException;
 
 
 class AuthController extends Controller
 {
+
+
+
+
+
+
+function sendSms($apiUrl, $apiKey, $senderId, $recipient, $message)
+{
+    $client = new Client();
+
+    $payload = [
+        'recipient' => $recipient,
+        'api_token' => $apiKey,
+        'sender_id' => $senderId,
+        'message' => $message,
+        'type' => 'plain',
+    ];
+
+    try {
+        $response = $client->post($apiUrl, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $apiKey,
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => $payload,
+        ]);
+
+        $body = $response->getBody()->getContents();
+        $contentType = $response->getHeaderLine('Content-Type');
+
+        if (strpos($contentType, 'application/json') !== false) {
+            return json_decode($body, true);
+        } else {
+            echo "Unexpected response content: " . $body;
+            return null;
+        }
+    } catch (RequestException $e) {
+        if ($e->hasResponse()) {
+            echo "Request failed: " . $e->getResponse()->getBody()->getContents();
+        } else {
+            echo "Request failed: " . $e->getMessage();
+        }
+        return null;
+    }
+}
+
+
+
+
+    public function ResetPhone(Request $request , $phone){
+     
+        $confirmationCode = rand(10000, 99999);
+        $this->sendSms( env('SMS_URL', 'Laravel'), env('SMS_KEY', 'Laravel') ,  env('SMS_SENDERID', 'HorecaSmart')  , "2".$phone,  "CODE: ".$confirmationCode);
+        User::where('phone' , $phone)->update(
+            [
+                'confirmation_code'=> $confirmationCode
+            ]
+            );
+
+            return response()->json(  ['status'=>   'success'   ]  , 200);
+ 
+    }
+
+
+
+    public function confirmCode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required',
+            'confirmation_code' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'message' => $validator->errors(),
+            ], 422);
+        }
+
+        $user = User::where('phone', $request->phone)
+                    ->where('confirmation_code', $request->confirmation_code)
+                    ->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Invalid confirmation code or email.',
+            ], 400);
+        }
+
+        // Update user's status or any other field indicating confirmation
+        $user->confirmation_code = null; // Clear the confirmation code
+       // $user->is_confirmed = true; // Assuming you have this field in your users table
+        $user->save();
+
+  
+
+        $accessToken = $user->createToken('AuthToken')->accessToken;
+
+
+ 
+
+
+        return response()->json([
+           
+            'user'=>   $user,
+      
+            'token'=> $accessToken
+            
+        ] , 200); 
+
+
+   
+    }
+
     
     public function getCarModels()
     {
