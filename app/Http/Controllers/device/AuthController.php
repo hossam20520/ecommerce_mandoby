@@ -788,8 +788,8 @@ function sendSms($apiUrl, $apiKey, $senderId, $recipient, $message)
     
     public function versionHoreca(Request $request , $version){
            
-        $versaionfromDB = '3.0';
-        $urlDB = 'https://drive.google.com/drive/folders/14T4eziS4gRr2f-I0X9rHimT9unZffFFt?usp=sharing';
+        $versaionfromDB = env('VERSION_HORECA', '3.0' ) ;
+        $urlDB = env('URL_UPDATE_HORECA', 'https://drive.google.com/drive/folders/14T4eziS4gRr2f-I0X9rHimT9unZffFFt?usp=sharing')  ;
         if($versaionfromDB == $version){
             return response()->json(['version' => $version ,  'needupdate'=> false , 'message'=> "hello" , 'url' => 'url' ], 200);
         }else{
