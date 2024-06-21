@@ -63,6 +63,10 @@
             <b-col lg="4" md="4" sm="12" class="mb-4">
               <h5 class="font-weight-bold">{{$t('OrderInfo')}}</h5>
               <div>{{$t('Note')}} : {{sale.notes}}</div>
+
+              <div>{{$t('client_note')}} : {{sale.client_note}}</div>
+
+              
               <div> {{$t('Image')}} :  <a :href="  sale.image"  >  <b-img
               thumbnail
               height="50"

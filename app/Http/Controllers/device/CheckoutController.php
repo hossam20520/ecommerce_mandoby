@@ -154,6 +154,8 @@ return ApiResponse::OrderResponseStatus('APPLIED', 'Applied promo.');
             $order->GrandTotal =  floatval($data->total);
             $order->statut = 'ordered';
             $order->user_id = Auth::user()->id;
+            $order->client_note = $request['note'];
+
             $order->save();
 
            

@@ -36,6 +36,9 @@ class CreateSalesTable extends Migration {
 			$table->text('reason')->nullable();
 			$table->string('statut');
 			$table->text('notes')->nullable();
+			$table->text('client_note')->nullable();
+
+			
 			$table->timestamps(6);
 			$table->softDeletes();
 		});

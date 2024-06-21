@@ -119,6 +119,9 @@ class SalesController extends BaseController
             $item['client_email'] = $Sale['client']['email'];
             $item['client_tele'] = $Sale['client']['phone'];
             $item['client_code'] = $Sale['client']['code'];
+
+            $item['client_note'] = $Sale['client_note'];
+            
             $item['client_adr'] = $Sale['client']['address'];
             $item['GrandTotal'] = number_format($Sale['GrandTotal'], 2, '.', '');
             $item['paid_amount'] = number_format($Sale['paid_amount'], 2, '.', '');
