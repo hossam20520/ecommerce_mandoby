@@ -80,11 +80,11 @@ function sendSms($apiUrl, $apiKey, $senderId, $recipient, $message)
      
         $confirmationCode = rand(10000, 99999);
         $this->sendSms( env('SMS_URL', 'Laravel'), env('SMS_KEY', 'Laravel') ,  env('SMS_SENDERID', 'HorecaSmart')  , "2".$phone,  "CODE: ".$confirmationCode);
-        // User::where('phone' , $phone)->update(
-        //     [
-        //         'confirmation_code'=> $confirmationCode
-        //     ]
-        //     );
+        User::where('phone' , $phone)->update(
+            [
+                'confirmation_code'=> $confirmationCode
+            ]
+            );
 
             return response()->json(  ['status'=>   'success'   ]  , 200);
  
