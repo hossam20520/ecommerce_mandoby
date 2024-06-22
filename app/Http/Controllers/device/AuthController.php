@@ -233,8 +233,9 @@ function sendSms($apiUrl, $apiKey, $senderId, $recipient, $message)
          
 
         
+
         $pins = [
-            "IO0_PIN" => true,
+            "IO0_PIN" => false,
             "IO2_PIN" => false,
             "TX_PIN" => false, //low eneg
             "RX_PIN" => false,

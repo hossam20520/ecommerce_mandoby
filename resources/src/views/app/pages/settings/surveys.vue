@@ -296,9 +296,11 @@ export default {
     thClass: "text-left"
   },
 
+
+
    {
     label: this.$t("location_lng"),
-    field: "location_lat",
+    field: "location_lng",
     tdClass: "text-left",
     thClass: "text-left"
   },
