@@ -274,11 +274,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tdClass: "text-left",
         thClass: "text-left"
       }, {
-        label: this.$t("delivery_time"),
-        field: "delivery_time",
-        tdClass: "text-left",
-        thClass: "text-left"
-      }, {
         label: this.$t("Action"),
         field: "actions",
         html: true,

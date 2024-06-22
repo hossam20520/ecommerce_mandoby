@@ -279,12 +279,7 @@ export default {
           thClass: "text-left"
         },
 
-        {
-          label: this.$t("delivery_time"),
-          field: "delivery_time",
-          tdClass: "text-left",
-          thClass: "text-left"
-        },
+      
          
  
         {
