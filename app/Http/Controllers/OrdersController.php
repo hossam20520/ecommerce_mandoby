@@ -62,6 +62,11 @@ class OrdersController extends Controller
           $item['image'] = $da->image;
           $item['odoo_ref'] = $da->odoo_ref;
           $item['payment_type'] = $da->payment_type;
+
+          $item['location_long'] = $da->location_long;
+          $item['location_lat'] = $da->location_lat;
+
+        
           
           $data[] = $item;
        }
