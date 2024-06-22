@@ -265,6 +265,27 @@ export default {
           thClass: "text-left"
         },
         
+           {
+          label: this.$t("location_lng"),
+          field: "location_long",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+           {
+          label: this.$t("location_lat"),
+          field: "location_lat",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+        {
+          label: this.$t("delivery_time"),
+          field: "delivery_time",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+         
  
         {
           label: this.$t("Action"),
