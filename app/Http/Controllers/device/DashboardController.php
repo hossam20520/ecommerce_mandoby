@@ -202,7 +202,8 @@ public function getCategoryID($id){
             if(!$product_o){
 
                 $Product = new Product;
-
+                // $this->getCategoryID($product['categ_id'])
+              //   $this->getUniteID($product['unite_id'])
                 //-- Field Required
                 $Product->name = $product['name'];
                 $Product->ar_name = $product['name'];
@@ -210,15 +211,15 @@ public function getCategoryID($id){
                 $Product->Type_barcode =  "CODE128";
                 $Product->price = $product['price'];
                 $Product->external_id = $product['id'];
-                $Product->category_id =  $this->getCategoryID($product['categ_id']);
+                $Product->category_id =  1;
                 $Product->brand_id =  1;
                 $Product->TaxNet = 0;
                 $Product->tax_method =  "1";
                 $Product->note = "" ;
                 $Product->cost =  0;
-                $Product->unit_id = $this->getUniteID($product['unite_id']);     //unite_id
-                $Product->unit_sale_id = $this->getUniteID($product['unite_id']);  
-                $Product->unit_purchase_id = $this->getUniteID($product['unite_id']);  
+                $Product->unit_id = 1;     //unite_id
+                $Product->unit_sale_id = 1;  
+                $Product->unit_purchase_id = 1;  
                 $Product->stock_alert = 5;
                 $Product->is_variant = 0;
                 $Product->mini_qty = 1;
@@ -331,11 +332,11 @@ public function getCategoryID($id){
             $cat = Category::where('deleted_at' , '=' , null)->where('code' ,$category['id'] )->first();
             if(!$cat){
 
-                $category_ob = new Category;
-                $category_ob->name =  $category['name'];
-                $category_ob->code =  $category['id'];
-                // $category_ob->image =  $category;
-                $category_ob->save();
+                // $category_ob = new Category;
+                // $category_ob->name =  $category['name'];
+                // $category_ob->code =  $category['id'];
+                // // $category_ob->image =  $category;
+                // $category_ob->save();
             } 
     
   
