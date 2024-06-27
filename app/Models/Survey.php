@@ -56,4 +56,10 @@ class Survey extends Model
     }
 
 
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
+
+
 }
