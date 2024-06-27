@@ -233,6 +233,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tdClass: "text-left",
         thClass: "text-left"
       }, {
+        label: this.$t("تاريخ الزيارة"),
+        field: "created_at",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("اسم المكان"),
         field: "bussiness_name",
         tdClass: "text-left",
