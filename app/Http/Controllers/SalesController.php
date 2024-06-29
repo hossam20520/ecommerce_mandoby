@@ -106,8 +106,10 @@ class SalesController extends BaseController
 
         foreach ($Sales as $Sale) {
 
+
+
             $item['id'] = $Sale['id'];
-            $item['username'] = $Sale['driver']['username'];
+            $item['username'] = isset($Sale['driver']['username']) ? $Sale['driver']['username'] : 'No Drivers';
             $item['date'] = $Sale['date'];
             $item['odoo_ref'] = $Sale['odoo_ref'];
             $item['Ref'] = $Sale['Ref'];
