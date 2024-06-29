@@ -500,7 +500,7 @@
         id="Driver"
         :title="EditPaiementMode?$t('Driver'):$t('Driver')"
       >
-        <b-form @submit.prevent="Submit_Payment">
+        <b-form @submit.prevent="Submit_Mandob">
           <b-row>
  
             
@@ -763,6 +763,12 @@ export default {
     ...mapGetters(["currentUserPermissions", "currentUser"]),
     columns() {
       return [
+       {
+          label: this.$t("driver"),
+          field: "user.username",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
         {
           label: this.$t("date"),
           field: "date",
@@ -1671,6 +1677,12 @@ export default {
         }
       });
     },
+
+
+ 
+
+
+
     //---- Delete sales by selection
     delete_by_selected() {
       this.$swal({
@@ -1732,6 +1744,7 @@ export default {
         this.$bvModal.hide("Add_Payment");
       }, 500);
     });
+    
     Fire.$on("Delete_Facture_sale", () => {
       setTimeout(() => {
         this.Get_Payments(this.Sale_id);

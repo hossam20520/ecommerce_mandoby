@@ -12,7 +12,7 @@ class Sale extends Model
         'date', 'Ref',  'reason',   'is_pos', 'client_id', 'GrandTotal', 'qte_retturn', 'TaxNet', 'tax_rate', 'notes',
         'total_retturn', 'warehouse_id', 'user_id', 'statut', 'discount', 'shipping',
         'paid_amount', 'payment_statut', 'created_at', 'updated_at', 'deleted_at', 'odoo_refrence', 'odoo_ref',
-        'client_note'
+        'client_note' , 'driver_id'
     ];
 
     protected $casts = [
@@ -34,6 +34,13 @@ class Sale extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function driver()
+    {
+        return $this->belongsTo('App\Models\User' , 'driver_id');
+    }
+
+    
 
     public function details()
     {

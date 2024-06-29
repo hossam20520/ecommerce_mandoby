@@ -792,6 +792,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(["currentUserPermissions", "currentUser"])), {}, {
     columns: function columns() {
       return [{
+        label: this.$t("driver"),
+        field: "user.username",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
         label: this.$t("date"),
         field: "date",
         tdClass: "text-left",
@@ -3398,7 +3403,7 @@ var render = function () {
                   on: {
                     submit: function ($event) {
                       $event.preventDefault()
-                      return _vm.Submit_Payment($event)
+                      return _vm.Submit_Mandob($event)
                     },
                   },
                 },

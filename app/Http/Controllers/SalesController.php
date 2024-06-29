@@ -69,7 +69,7 @@ class SalesController extends BaseController
         $data = array();
 
         // Check If User Has Permission View  All Records
-        $Sales = Sale::with('facture', 'client', 'warehouse')
+        $Sales = Sale::with('facture', 'client', 'warehouse' , 'driver')
             ->where('deleted_at', '=', null)
             ->where(function ($query) use ($view_records) {
                 if (!$view_records) {
@@ -640,7 +640,7 @@ class SalesController extends BaseController
     public function assgin_by_selection(Request $request)
     {
 
-        $this->authorizeForUser($request->user('api'), 'delete', Sale::class);
+        // $this->authorizeForUser($request->user('api'), 'delete', Sale::class);
 
         \DB::transaction(function () use ($request) {    
        
@@ -654,6 +654,11 @@ class SalesController extends BaseController
 
                 $order =  Order::where('deleted_at' , '=' , null)->where('order_id' , $sale_id)->where('user_id' ,  $mandob_id )->first();
             
+                // driver_id
+                Sale::where('id' , $sale_id)->update([
+                    'driver_id'=> $mandob_id 
+
+                ]);
                 // current_Sale
                 if($order ){
                     return response()->json(['fail' => false]);
