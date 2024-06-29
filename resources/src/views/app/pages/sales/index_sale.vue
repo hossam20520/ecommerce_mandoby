@@ -765,7 +765,7 @@ export default {
       return [
        {
           label: this.$t("driver"),
-          field: "user.username",
+          field: "username",
           tdClass: "text-left",
           thClass: "text-left"
         },
@@ -1744,7 +1744,7 @@ export default {
         this.$bvModal.hide("Add_Payment");
       }, 500);
     });
-    
+
     Fire.$on("Delete_Facture_sale", () => {
       setTimeout(() => {
         this.Get_Payments(this.Sale_id);

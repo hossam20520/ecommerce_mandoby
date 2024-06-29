@@ -107,6 +107,7 @@ class SalesController extends BaseController
         foreach ($Sales as $Sale) {
 
             $item['id'] = $Sale['id'];
+            $item['username'] = $Sale['user']['username'];
             $item['date'] = $Sale['date'];
             $item['odoo_ref'] = $Sale['odoo_ref'];
             $item['Ref'] = $Sale['Ref'];

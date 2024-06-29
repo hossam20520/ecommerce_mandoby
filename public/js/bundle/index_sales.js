@@ -793,7 +793,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     columns: function columns() {
       return [{
         label: this.$t("driver"),
-        field: "user.username",
+        field: "username",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
