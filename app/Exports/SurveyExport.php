@@ -95,8 +95,9 @@ class SurveyExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvent
     {
         return [
             'صورة المكان',
-            'المندوب',
+           
             'اسم المكان',
+            'المندوب',
             'تاريخ الزيارة',
             'اسم العميل',
             'المدينة',
