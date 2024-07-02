@@ -21,11 +21,19 @@ class SurveyExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvent
         if ($clients->isNotEmpty()) {
 
             foreach ($clients as $client) {
+
+               
+                 $sale = "NO User";
+                if($client->task){
+                    $sale =  $client->task->user->email;
+                }else{
+                    $sale = "No User";
+                }
               
                 $item['image'] =  env('APP_URL', 'http://104.248.31.157:8082') . "/images/surveyimages/" . $client->image;
                 $item['bussiness_name'] = $client->bussiness_name;
                 $item['created_at'] = $client->created_at;
-                $item['sales'] = $client->task->user->email;
+                $item['sales'] = $sale;
                 $item['name'] = $client->name;
                 $item['city'] = $client->city;
                 $item['area'] = $client->area;
