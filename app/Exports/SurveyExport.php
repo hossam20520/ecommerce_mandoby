@@ -32,8 +32,9 @@ class SurveyExport implements FromArray, WithHeadings, ShouldAutoSize, WithEvent
               
                 $item['image'] =  env('APP_URL', 'http://104.248.31.157:8082') . "/images/surveyimages/" . $client->image;
                 $item['bussiness_name'] = $client->bussiness_name;
-                $item['created_at'] = $client->created_at;
                 $item['sales'] = $sale;
+                $item['created_at'] = $client->created_at;
+               
                 $item['name'] = $client->name;
                 $item['city'] = $client->city;
                 $item['area'] = $client->area;
