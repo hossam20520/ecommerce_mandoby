@@ -101,8 +101,20 @@ class surveyController extends Controller
     public function getGoves(Request $request){
  
         $govs = Government::where('deleted_at' ,'=' , null)->get();
+
+
         
+
+
         return response()->json(['goves' => $govs]);
+    }
+
+
+    public function getInfoDataClient(Request $request , $task_id ){
+        $client = Survey::with('task.Shop')->where('task_id' , $task_id)->first();
+        
+        return response()->json(['client' => $client ]);
+
     }
 
     public function updateSUrvey(Request $request, $task_id , $location_lat , $location_lng ){
@@ -140,6 +152,7 @@ class surveyController extends Controller
     }
 
 
+    
 
 
      public function surveyData(Request $request){
@@ -176,7 +189,7 @@ class surveyController extends Controller
             // $Survey->cheeseUsed = $surveyData['cheeseUsed'] ?? null;
             // $Survey->SelectedBatter = $surveyData['SelectedBatter'] ?? null;
             // $Survey->oilUsed = $surveyData['oilUsed'] ?? null;
-            // $Survey->teaused = $surveyData['teaused'] ?? null;
+            // $Survey->teaused = $surveyData['teaused'] ?? null;0
             // $Survey->seeeds = $surveyData['seeeds'] ?? null;
             // $Survey->sauce = $surveyData['sauce'] ?? null;
             // $Survey->sauceCompany = $surveyData['sauceCompany'] ?? null;
@@ -190,6 +203,10 @@ class surveyController extends Controller
             $Survey->task_id = $request['task_id'] ?? null;
  
             $Survey->save();
+
+
+
+
 
 
  
