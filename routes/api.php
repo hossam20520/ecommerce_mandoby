@@ -28,7 +28,7 @@ Route::get("device/cars", "device\AuthController@getCarModels");
 Route::get("device/auth/reset/code/{phone}", "device\AuthController@ResetPhone");
  
 
-Route::get("device/getClientinfo/{task_id}", "surveyController@getInfoDataClient");
+Route::get("device/getClientinfo/{task_id}", "device\surveyController@getInfoDataClient");
 
 Route::get('iot/test_api', 'device\AuthController@testiot');
 Route::post('iot/lamp_state', 'device\AuthController@reseveState');
