@@ -66,6 +66,9 @@ class AreasController extends Controller
             $Area->ar_name = $request['ar_name'];
             $Area->code = $request['code'];
             $Area->gov_id = $request['gov_id'];
+            $Area->from_time = $request['from'];
+            $Area->to_time = $request['to'];
+
             $Area->save();
 
         }, 10);
@@ -102,6 +105,8 @@ class AreasController extends Controller
                  'en_name' => $request['en_name'],
                  'code' => $request['code'],
                  'gov_id' => $request['gov_id'],
+                 'from_time' => $request['from'],
+                 'to_time' => $request['to'],
  
              ]);
  

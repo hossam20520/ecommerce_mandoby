@@ -429,6 +429,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   metaInfo: {
@@ -458,7 +499,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         id: "",
         ar_name: "",
         en_name: "",
-        code: ""
+        code: "",
+        from: "",
+        to: ""
       }
     };
   },
@@ -467,6 +510,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return [{
         label: this.$t("code"),
         field: "code",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("from"),
+        field: "from",
+        tdClass: "text-left",
+        thClass: "text-left"
+      }, {
+        label: this.$t("to"),
+        field: "to",
         tdClass: "text-left",
         thClass: "text-left"
       }, {
@@ -653,6 +706,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       self.data.append("ar_name", self.area.ar_name);
       self.data.append("en_name", self.area.en_name);
       self.data.append("code", self.area.code);
+      self.data.append("from", self.area.from);
+      self.data.append("to", self.area.to);
       self.data.append("gov_id", id);
       axios.post("areas", self.data).then(function (response) {
         self.SubmitProcessing = false;
@@ -676,6 +731,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       self.data.append("ar_name", self.area.ar_name);
       self.data.append("code", self.area.code);
       self.data.append("gov_id", id);
+      self.data.append("from", self.area.from);
+      self.data.append("to", self.area.to);
       self.data.append("_method", "put");
       axios.post("areas/" + self.area.id, self.data).then(function (response) {
         self.SubmitProcessing = false;
@@ -695,7 +752,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         ar_name: "",
         en_name: "",
         code: "",
-        gov_id: ""
+        gov_id: "",
+        from: "",
+        to: ""
       };
       this.data = new FormData();
     },
@@ -2061,7 +2120,7 @@ var render = function () {
                           _c("validation-provider", {
                             attrs: {
                               name: "code",
-                              rules: { required: true, min: 3, max: 55 },
+                              rules: { required: true, min: 1, max: 55 },
                             },
                             scopedSlots: _vm._u([
                               {
@@ -2088,6 +2147,126 @@ var render = function () {
                                               _vm.$set(_vm.area, "code", $$v)
                                             },
                                             expression: "area.code",
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-form-invalid-feedback",
+                                          { attrs: { id: "Name-feedback" } },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                validationContext.errors[0]
+                                              )
+                                            ),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "from",
+                              rules: { required: true, min: 1, max: 55 },
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (validationContext) {
+                                  return [
+                                    _c(
+                                      "b-form-group",
+                                      { attrs: { label: _vm.$t("from") } },
+                                      [
+                                        _c("b-form-input", {
+                                          attrs: {
+                                            state:
+                                              _vm.getValidationState(
+                                                validationContext
+                                              ),
+                                            "aria-describedby": "Name-feedback",
+                                            label: "from",
+                                            placeholder: _vm.$t("from"),
+                                          },
+                                          model: {
+                                            value: _vm.area.from,
+                                            callback: function ($$v) {
+                                              _vm.$set(_vm.area, "from", $$v)
+                                            },
+                                            expression: "area.from",
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "b-form-invalid-feedback",
+                                          { attrs: { id: "Name-feedback" } },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                validationContext.errors[0]
+                                              )
+                                            ),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "12" } },
+                        [
+                          _c("validation-provider", {
+                            attrs: {
+                              name: "to",
+                              rules: { required: true, min: 1, max: 55 },
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (validationContext) {
+                                  return [
+                                    _c(
+                                      "b-form-group",
+                                      { attrs: { label: _vm.$t("to") } },
+                                      [
+                                        _c("b-form-input", {
+                                          attrs: {
+                                            state:
+                                              _vm.getValidationState(
+                                                validationContext
+                                              ),
+                                            "aria-describedby": "Name-feedback",
+                                            label: "to",
+                                            placeholder: _vm.$t("to"),
+                                          },
+                                          model: {
+                                            value: _vm.area.to,
+                                            callback: function ($$v) {
+                                              _vm.$set(_vm.area, "to", $$v)
+                                            },
+                                            expression: "area.to",
                                           },
                                         }),
                                         _vm._v(" "),

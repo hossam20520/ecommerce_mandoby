@@ -112,7 +112,7 @@
             <b-col md="12">
               <validation-provider
                     name="code"
-                    :rules="{required:true , min:3 , max:55}"
+                    :rules="{required:true , min:1 , max:55}"
                     v-slot="validationContext">
                     <b-form-group :label="$t('code')">
                       <b-form-input
@@ -126,6 +126,47 @@
                     </b-form-group>
                   </validation-provider>
             </b-col>
+
+
+
+
+         <b-col md="12">
+              <validation-provider
+                    name="from"
+                    :rules="{required:true , min:1 , max:55}"
+                    v-slot="validationContext">
+                    <b-form-group :label="$t('from')">
+                      <b-form-input
+                        :state="getValidationState(validationContext)"
+                        aria-describedby="Name-feedback"
+                        label="from"
+                        :placeholder="$t('from')"
+                        v-model="area.from"
+                      ></b-form-input>
+                      <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+            </b-col>
+ 
+
+         <b-col md="12">
+              <validation-provider
+                    name="to"
+                    :rules="{required:true , min:1 , max:55}"
+                    v-slot="validationContext">
+                    <b-form-group :label="$t('to')">
+                      <b-form-input
+                        :state="getValidationState(validationContext)"
+                        aria-describedby="Name-feedback"
+                        label="to"
+                        :placeholder="$t('to')"
+                        v-model="area.to"
+                      ></b-form-input>
+                      <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+            </b-col>
+
 
             <b-col md="12" class="mt-3">
               <b-button variant="primary" type="submit"  :disabled="SubmitProcessing"> {{  $t('submit') }}</b-button>
@@ -172,7 +213,9 @@ export default {
         id: "",
         ar_name: "",
         en_name: "",
-        code: ""
+        code: "",
+        from:"",
+        to:"",
       }
     };
   },
@@ -185,6 +228,22 @@ export default {
           tdClass: "text-left",
           thClass: "text-left"
         },
+
+        {
+          label: this.$t("from"),
+          field: "from",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
+
+       {
+          label: this.$t("to"),
+          field: "to",
+          tdClass: "text-left",
+          thClass: "text-left"
+        },
+
         {
           label: this.$t("en_name"),
           field: "en_name",
@@ -366,6 +425,10 @@ export default {
       self.data.append("ar_name", self.area.ar_name);
       self.data.append("en_name", self.area.en_name);
       self.data.append("code", self.area.code);
+
+     self.data.append("from", self.area.from);
+      self.data.append("to", self.area.to);
+
       self.data.append("gov_id", id);
       axios
         .post("areas", self.data)
@@ -394,6 +457,8 @@ export default {
       self.data.append("ar_name", self.area.ar_name);
       self.data.append("code", self.area.code);
       self.data.append("gov_id", id);
+      self.data.append("from", self.area.from);
+      self.data.append("to", self.area.to);
       self.data.append("_method", "put");
 
       axios
@@ -422,6 +487,8 @@ export default {
         en_name: "",
         code: "",
         gov_id:"",
+        from:"",
+        to:"",
       };
       this.data = new FormData();
     },
