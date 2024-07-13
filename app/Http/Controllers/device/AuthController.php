@@ -23,8 +23,9 @@ use Illuminate\Support\Facades\Log;
 use App\Models\CarModel;
 use App\Models\Statelamp;
 use GuzzleHttp\Exception\RequestException;
+use App\Models\Government;
 
-
+use App\Models\Area;
 class AuthController extends Controller
 {
 
@@ -270,6 +271,27 @@ function sendSms($apiUrl, $apiKey, $senderId, $recipient, $message)
         // $User->password  = Hash::make($request['password']);
 
     }
+
+
+
+
+    
+
+    public function getGovs(Request $request){
+
+        $govs = Government::where('deleted_at', '=', null)->get();
+        return response()->json(['govs' =>   $govs    ], 200);
+
+   }
+
+
+   public function getAreaByID(Request $request , $id){
+
+    $area = Area::where(  'gov_id' , $id)->where('deleted_at', '=', null)->get();
+    return response()->json(['areas' =>   $area    ], 200);
+
+}
+
 
 
     public function getCountries(Request $request){
