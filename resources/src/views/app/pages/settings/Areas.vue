@@ -231,7 +231,7 @@ export default {
 
         {
           label: this.$t("from"),
-          field: "from",
+          field: "from_time",
           tdClass: "text-left",
           thClass: "text-left"
         },
@@ -239,7 +239,7 @@ export default {
 
        {
           label: this.$t("to"),
-          field: "to",
+          field: "to_time",
           tdClass: "text-left",
           thClass: "text-left"
         },
