@@ -17,14 +17,13 @@ use Illuminate\Support\Facades\Route;
  Route::post("/v1/sheet/save/", "GoogleSheetController@write");
 
 
-
-
  
-
  Route::get("device/dropdown/govs", "device\AuthController@getGovs");
  Route::get("device/dropdown/areas_id/{id}", "device\AuthController@getAreaByID");
  
 
+
+ 
 /*auth middleware api passport token*/
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

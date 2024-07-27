@@ -158,45 +158,19 @@ class OrdersController extends Controller
     $currentAvatar = $user->avatar;
     $oreder_ref = $request['oreder_ref'];
 
-     $image = $request->file('bill');
+    $image = $request->file('bill');
 
 
-     $directory = 'images/orders';
+    $directory = 'images/orders';
 
-   $filename = rand(11111111, 99999999) . "_" . $oreder_ref . "_" . $image->getClientOriginalName();
+    $filename = rand(11111111, 99999999) . "_" . $oreder_ref . "_" . $image->getClientOriginalName();
 
-// Save the original image to the 'public' storage disk
-    Storage::disk('public')->put("$directory/$filename", file_get_contents($image->getRealPath()));
+ 
+     Storage::disk('public')->put("$directory/$filename", file_get_contents($image->getRealPath()));
 
-// Optionally, you can get the URL of the stored image
+ 
       $imageUrl = Storage::disk('public')->url("$directory/$filename");
-    //   $imageUrl =  url(Storage::disk('public')->url("images/orders/{$filename}"));
-    //  $path = public_path() . '/images/orders';
-    //  $filename = rand(11111111, 99999999) ."_".$oreder_ref."_". $image->getClientOriginalName();
-
-
-    //  Storage::disk('public')->put("$path/$filename", file_get_contents($image->getRealPath()));
-
-     // Optionally, you can get the URL of the stored image
-    //  $imageUrl = Storage::disk('public')->url("$path/$filename");
-
-
-     //  $image_resize = Image::make($image->getRealPath());
-  
-    //  $image_resize->save(public_path('/images/orders/' . $filename));
-
-    //  $userPhoto = $path . '/' . $currentAvatar;
-    //  if (file_exists($userPhoto)) {
-    //      if ($user->avatar != 'no_avatar.png') {
-    //          @unlink($userPhoto);
-    //      }
-    //  }
-
-     // $filename = $currentAvatar;
-
-
-    // return $filename;
-
+ 
 
 Order::where( 'order_id' ,$oreder_ref)->update([
 
@@ -204,13 +178,9 @@ Order::where( 'order_id' ,$oreder_ref)->update([
 
 ]);
 
-
-
-
+ 
 return response()->json(['url' =>  "/storage/images/orders/".  $filename   ], 200);
-
-
-
+ 
   }
 
 
